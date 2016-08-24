@@ -27,11 +27,21 @@ const defaultLoaders = [{
 }, {
 	// 处理png图片
 	test: /\.png$/,
-	loader: pngLoader
+	loader: {
+		loader: pngLoader,
+		params: {
+			limit: 8000
+		}
+	}
 }, {
 	// 处理其他格式图片
 	test: /\.(jpg|jpeg|gif)$/,
-	loader: imageLoader
+	loader: {
+		loader: imageLoader,
+		params: {
+			limit: 8000
+		}
+	}
 }];
 
 export default function(path, configLoaders){
@@ -39,7 +49,7 @@ export default function(path, configLoaders){
 	// 用户自定义的加载器优先级高于默认加载器
 	const loaders = [].concat((configLoaders || []).reverse(), defaultLoaders.reverse());
 
-	return function(file){
+	return function(file, callback){
 		// 查找可处理file文件的第一个加载器配置
 		var loader = loaders.find(function(loader){
 			return loader.test(file);
@@ -63,6 +73,12 @@ export default function(path, configLoaders){
 			// 进入管道模式顺序调用loader
 			pipe(loader.loader.map(function(loader){
 				return function(content){
+					var params;
+					// 带参数的loader
+					if(typeof loader === "object"){
+						params = loader.params;
+						loader = loader.loader;
+					}
 					// 如果模块需要的不是原始数据，则一律转换为字符串
 					if(!loader.raw && typeof content !== "string"){
 						content = content.toString("utf8");
@@ -73,6 +89,8 @@ export default function(path, configLoaders){
 					var isSync = true;
 
 					var result = loader.call({
+						file: file,
+						params: params || {},
 						async: function(){
 							isSync = false;
 
@@ -90,6 +108,7 @@ export default function(path, configLoaders){
 			.start(content)
 			.end(function(content){
 				// console.log(content);
+				callback(content);
 			});
 		});
 	};

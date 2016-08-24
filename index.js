@@ -28,7 +28,7 @@ export default function main(path){
 	entries.forEach(function(entry){
 		glob(entry, {}, function(err, files){
 			files.forEach(function(file){
-				loader(file);
+				loader(file, function(content){});
 			});
 		});
 	});

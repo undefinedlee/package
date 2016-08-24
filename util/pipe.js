@@ -1,4 +1,4 @@
-/** 管道
+/** 数据处理管道
  * pipe(tasks).start(params).end(function(){...})
  * example:
  	pipe([
@@ -27,10 +27,6 @@
  	});
  */
 export default function(tasks){
-	if(!tasks || tasks.length === 0){
-		return function(){};
-	}
-
 	var onEnd;
 
 	function run(...params){
