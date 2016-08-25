@@ -1,6 +1,11 @@
 /** 数据处理管道
- * pipe(tasks).start(params).end(function(){...})
- * example:
+ * @example
+ 	pipe(tasks)
+ 	.start(params)
+ 	.end(function(){
+ 		...
+ 	})
+ * @example
  	pipe([
  		function(...params){
 			console.log(params);

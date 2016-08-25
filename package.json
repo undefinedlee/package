@@ -18,6 +18,8 @@
   "homepage": "https://github.com/undefinedlee/package#readme",
   "dependencies": {
     "babel-core": "^6.13.2",
-    "glob": "^7.0.5"
+    "colors": "^1.1.2",
+    "glob": "^7.0.5",
+    "semver": "^5.3.0"
   }
 }
