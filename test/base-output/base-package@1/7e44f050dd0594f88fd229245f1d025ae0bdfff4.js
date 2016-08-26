@@ -1,18 +1,20 @@
-// base-package@1/views/list/index.js
-define("base-package@1/384a6ca879eae6e4af6306ed5ec4b1246d510efe", function(require, exports, module, __filename, __dirname){
+// base-package@1/views/detail/index.js
+define("base-package@1/7e44f050dd0594f88fd229245f1d025ae0bdfff4", function(require, exports, module, __filename, __dirname){
 	var mods = [
-		// views/list/index.js
+		// views/detail/index.js
 		function(__inner_require__, exports, module){
-			var ListService = __inner_require__(1);
+			"use strict";
+			
+			var DetailService = __inner_require__(1);
 			var calendar = require("base-package@1/components/calendar/index.js");
 			
-			module.exports = "list";
+			module.exports = "detail";
 		},
-		// service/list.js
+		// service/detail.js
 		function(__inner_require__, exports, module){
-			var bbbLib = require("bbb@3.1.2/lib.js");
+			"use strict";
 			
-			module.exports = "list-service";
+			module.exports = "detail-service";
 		}
 	];
 

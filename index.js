@@ -111,7 +111,7 @@ export default function main(projectPath, version){
 	// 输出目录
 	const output = config.output || path.join(process.env.HOME, ".ipack");
 	// 后缀查找顺序
-	const extensions = config.extensions || ["", ".js"];
+	const extensions = config.extensions || ["", ".js", "/index.js"];
 	// 加载器列表
 	const loader = Loader(projectPath, config.loaders);
 	// 依赖项目
@@ -205,7 +205,7 @@ export default function main(projectPath, version){
 				return function(callback){
 					var existsFile = false;
 					for(let ext of extensions){
-						if(fs.existsSync(file + ext)){
+						if(fs.existsSync(file + ext) && fs.statSync(file + ext).isFile()){
 							if(ext){
 								files[index] = extensionFileHash[file] = file = file + ext;
 							}
@@ -254,7 +254,7 @@ export default function main(projectPath, version){
 		})(entries, [], function(){
 			// 需要单独打包的文件列表
 			var singleFiles = [].concat(entries);
-
+			
 			// 查找需要单独打包的文件
 			function findSingleFile(){
 				var hasNewSingleFile = false;
@@ -267,6 +267,7 @@ export default function main(projectPath, version){
 								let file = depChain[i];
 								if(singleFiles.indexOf(file) !== -1){
 									nearestDeps[file] = true;
+									break;
 								}
 							}
 						});
@@ -324,14 +325,18 @@ export default function main(projectPath, version){
 										};
 									}else{
 										let modId = path.join(packageJson.name + "@" + version, depPath.replace(projectPath, ""));
-										deps.push(modId);
+										if(deps.indexOf(modId) === -1){
+											deps.push(modId);
+										}
 										return {
 											modId: modId
 										};
 									}
 								}else{
 									let modId = parseOuterDep(depPath);
-									deps.push(modId);
+									if(deps.indexOf(modId) === -1){
+										deps.push(modId);
+									}
 									return {
 										modId: modId
 									};
@@ -380,6 +385,13 @@ export default function main(projectPath, version){
 						versions: JSON.stringify(versionHash, null, "	")
 					});
 					fs.writeFile(path.join(output, packageJson.name + "@" + version, "version.js"), code, function(err){
+						if(err){
+							console.error();
+						}
+						callback();
+					});
+				}, function(callback){
+					fs.writeFile(path.join(output, packageJson.name + "@" + version, "version.json"), JSON.stringify(versionHash, null, "	"), function(err){
 						if(err){
 							console.error();
 						}

@@ -1,5 +1,6 @@
 import fs from "fs";
 import jsLoader from "./js-loader/index";
+import babelLoader from "./babel-loader/index";
 import enjoyCssLoader from "./enjoy-css-loader/index";
 import enjoyHtmlLoader from "./enjoy-html-loader/index";
 import pngLoader from "./png-loader/index";
@@ -11,15 +12,15 @@ import pipe from "../util/pipe";
 const defaultLoaders = [{
 	// 处理普通的JS文件
 	test: /\.js$/,
-	loader: jsLoader
+	loader: [babelLoader, jsLoader]
 }, {
 	// 处理enjoy转换的css文件
 	test: /\-css\.js$/,
-	loader: enjoyCssLoader
+	loader: [babelLoader, enjoyCssLoader]
 }, {
 	// 处理enjoy转换的html文件
 	test: /\-html\.js$/,
-	loader: enjoyHtmlLoader
+	loader: [babelLoader, enjoyHtmlLoader]
 }, {
 	// 处理json文件
 	test: /\.json$/,

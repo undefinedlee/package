@@ -1,8 +1,10 @@
 // base-package@1/views/home/index.js
-define("base-package@1/33cc2e9d676831f1eae2e71c0dfe66f11252f054", function(require, exports, module, __filename, __dirname){
+define("base-package@1/83f0225d6db0dd8c96171acea9467b0ad167e532", function(require, exports, module, __filename, __dirname){
 	var mods = [
 		// views/home/index.js
 		function(__inner_require__, exports, module){
+			"use strict";
+			
 			var HomeService = __inner_require__(1);
 			var CitySelector = __inner_require__(2);
 			
@@ -10,18 +12,24 @@ define("base-package@1/33cc2e9d676831f1eae2e71c0dfe66f11252f054", function(requi
 		},
 		// service/home.js
 		function(__inner_require__, exports, module){
+			"use strict";
+			
 			var aaa = require("aaa@6/index.js");
 			
 			module.exports = "home-service";
 		},
 		// components/city-selector/index.js
 		function(__inner_require__, exports, module){
+			"use strict";
+			
 			var CommonService = __inner_require__(3);
 			
 			module.exports = "city-selector";
 		},
 		// service/common.js
 		function(__inner_require__, exports, module){
+			"use strict";
+			
 			var ccc = require("ccc@2.1/index.js");
 			
 			module.exports = "common-service";
