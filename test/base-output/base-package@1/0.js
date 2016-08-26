@@ -1,5 +1,5 @@
 // base-package@1/views/detail/index.js
-loader.define("base-package@1/c2d9540f0ccdf8d678c874761624b5c626ad8480", function(require, __filename, __dirname, __base){
+loader.define("base-package@1/0", function(require, __filename, __dirname, __base){
 	"use strict";
 	
 	return [

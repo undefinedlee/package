@@ -1,5 +1,5 @@
 // base-package@1/components/calendar/index.js
-loader.define("base-package@1/451668dd0d37c5fa17b7a6837750bd119d3461c6", function(require, __filename, __dirname, __base){
+loader.define("base-package@1/3", function(require, __filename, __dirname, __base){
 	"use strict";
 	
 	return [

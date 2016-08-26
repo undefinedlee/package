@@ -3,6 +3,7 @@ import path from "path";
 import semver from "semver";
 import console from "./util/console";
 import md5 from "./util/md5";
+import createVersion from "./package/create-version";
 import Loader from "./loader/index";
 import asyncList from "./util/async-list";
 import parseVersion from "./package/parse-version";
@@ -88,14 +89,15 @@ export default function main(projectPath, version){
 				asyncList([function(callback){
 					// 生成依赖关系文件
 					var code = JSON.stringify(depsHash, null, "	");
-					var codeMd5 = md5(code);
-					fs.writeFile(path.join(output, "deps." + codeMd5 + ".json"), code, function(err){
+					//var codeMd5 = md5(code);
+					var codeMd5 = createVersion(output, md5(code));
+					fs.writeFile(path.join(output, /*"deps." + */codeMd5 + ".json"), code, function(err){
 						if(err){
 							console.error("生成依赖关系表失败");
 						}
 						callback({
-							name: "deps.js",
-							version: codeMd5
+							name: "deps.json",
+							version: codeMd5 + ".json"
 						});
 					});
 				}, function(callback){
@@ -105,27 +107,29 @@ export default function main(projectPath, version){
 						modVersion: version,
 						versions: JSON.stringify(versionHash, null, "	")
 					});
-					var codeMd5 = md5(code);
-					fs.writeFile(path.join(output, "version." + codeMd5 + ".js"), code, function(err){
+					//var codeMd5 = md5(code);
+					var codeMd5 = createVersion(output, md5(code));
+					fs.writeFile(path.join(output, /*"version." + */codeMd5 + ".js"), code, function(err){
 						if(err){
 							console.error("生成客户端版本文件失败");
 						}
 						callback({
 							name: "version.js",
-							version: codeMd5
+							version: codeMd5 + ".js"
 						});
 					});
 				}, function(callback){
 					// 生成服务端版本文件
 					var code = JSON.stringify(versionHash, null, "	");
-					var codeMd5 = md5(code);
-					fs.writeFile(path.join(output, "version." + codeMd5 + ".json"), code, function(err){
+					//var codeMd5 = md5(code);
+					var codeMd5 = createVersion(output, md5(code));
+					fs.writeFile(path.join(output, /*"version." + */codeMd5 + ".json"), code, function(err){
 						if(err){
 							console.error("生成服务端版本文件失败");
 						}
 						callback({
 							name: "version.json",
-							version: codeMd5
+							version: codeMd5 + ".json"
 						});
 					});
 				}]).complete(function(...files){

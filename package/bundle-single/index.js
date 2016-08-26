@@ -4,6 +4,7 @@ import tpl from "../../util/tpl";
 import jsDeps from "../../util/js-deps";
 import parseOuterDep from "../parse-outer-deps";
 import md5 from "../../util/md5";
+import createVersion from "../create-version";
 import mkdirs from "../../util/mkdirs";
 import console from "../../util/console";
 
@@ -79,7 +80,8 @@ export default function(file, projectConfig, singleFiles, loadCache, extensionFi
 	});
 
 	mods = mods.join(",\n");
-	var fileMd5 = md5(mods);
+	//var fileMd5 = md5(mods);
+	var fileMd5 = createVersion(output, md5(mods));
 	file = file.replace(projectPath, "").replace(prefixSepReg, "");
 
 	var code = tpl(singleModTpl, {
