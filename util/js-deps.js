@@ -46,7 +46,7 @@ findDeps.transDeps = function(content, transFn){
 									node.callee.name === "require" &&
 									node.arguments[0] &&
 									node.arguments[0].type === "StringLiteral"){
-										modInfo = transFn(node.arguments[0].value);
+										let modInfo = transFn(node.arguments[0].value);
 										node.arguments[0].value = modInfo.modId;
 										if(modInfo.requireName){
 											node.callee.name = modInfo.requireName;

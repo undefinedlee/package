@@ -1,3 +1,4 @@
-			function(__inner_require__, exports, module){
-				#content#
-			}
+		// #file#
+		function(__inner_require__, exports, module){
+			#content#
+		}

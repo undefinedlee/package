@@ -11,10 +11,13 @@ import asyncList from "./util/async-list";
 import mkdirs from "./util/mkdirs";
 import findNodeModules from "./util/find-node-modules";
 import tpl from "./util/tpl";
-const innerModTpl = fs.readFileSync("./inner-mod-tpl", {
+const innerModTpl = fs.readFileSync(path.resolve(__dirname, "inner-mod-tpl.js"), {
 				encoding: "utf8"
 			});
-const singleModTpl = fs.readFileSync("./single-mod-tpl", {
+const singleModTpl = fs.readFileSync(path.resolve(__dirname, "single-mod-tpl.js"), {
+				encoding: "utf8"
+			});
+const versionTpl = fs.readFileSync(path.resolve(__dirname, "version-tpl.js"), {
 				encoding: "utf8"
 			});
 
@@ -53,6 +56,13 @@ const LoadStatus = {
 
 const PACKAGE_PREFIX = "__PACKAGE__:";
 const CHECK_PACKAGE = /^__PACKAGE__\:/;
+// 替换开头的分隔符
+var prefixSepReg = new RegExp("^\\" + path.sep);
+
+// 获取count个TAB键
+function getTab(count){
+	return new Array(count + 1).join("	");
+}
 
 /**
  * 打包一个项目
@@ -98,6 +108,8 @@ export default function main(projectPath, version){
 
 	// 打包入口
 	const entries = config.entry || [packageJson.main || "index.js"];
+	// 输出目录
+	const output = config.output || path.join(process.env.HOME, ".ipack");
 	// 后缀查找顺序
 	const extensions = config.extensions || ["", ".js"];
 	// 加载器列表
@@ -114,10 +126,31 @@ export default function main(projectPath, version){
 	// 转换对外依赖路径，增加版本号
 	var outerDepCache = {};
 	var modVersionCache = {};
+	var packageJsonCache = {};
+
+	function getPackageJson(modName){
+		return packageJsonCache[modName] || (function(){
+			let modPath = findNodeModules(projectPath, modName);
+			if(!modPath){
+				console.error(`从路径${projectPath}找不到模块${modName}`);
+			}else{
+				let packageJson = readJson.sync(path.resolve(modPath, "package.json"));
+				if(!packageJson){
+					console.error(`在${modPath}目录下找不到package.json文件`);
+				}
+
+				return packageJsonCache[modName] = packageJson;
+			}
+
+			return packageJsonCache[modName] = {};
+		})();
+	}
+
 	function parseOuterDep(outerUrl){
 		return outerDepCache[outerUrl] || (function(){
-			outerUrl = outerUrl.split("/");
-			var modName = outerUrl.shift();
+			var url = outerUrl.split("/");
+			var modName = url.shift();
+			url = url.join("/");
 			var version = modVersionCache[modName] || (function(){
 				var version = dependencies[modName];
 				version = parseVersion(version, "");
@@ -125,20 +158,23 @@ export default function main(projectPath, version){
 				// 暂时使用简单查找，其中有一个问题
 				// 当查找路径中存在当前模块的多个版本时，如果第一个找到的版本不是当前需要的版本，则会有问题
 				if(!version){
-					let modPath = findNodeModules(projectPath, modName);
-					if(!modPath){
-						console.error(`从路径${projectPath}找不到模块${modName}`);
-					}else{
-						let packageJson = readJson.sync(path.resolve(modPath, "package.json"));
-						if(!packageJson){
-							console.error(`在${modPath}目录下找不到package.json文件`);
-						}
-						version = packageJson.version;
-					}
+					let packageJson = getPackageJson(modName);
+
+					version = packageJson.version;
 				}
 				return modVersionCache[modName] = version;
 			})();
-			return outerDepCache[outerUrl] = [modName + "@" + version].concat(outerUrl).join("/");
+
+			url = url || (function(){
+				let packageJson = getPackageJson(modName);
+				return packageJson.main || "index.js";
+			})();
+
+			if(!/\.js$/.test(url)){
+				url += ".js";
+			}
+
+			return outerDepCache[outerUrl] = [modName + "@" + version].concat(url).join("/");
 		})();
 	}
 
@@ -151,7 +187,7 @@ export default function main(projectPath, version){
 					throw err;
 				}
 
-				callback(files);
+				callback(files.map(file => path.join(projectPath, file)));
 			});
 		};
 	})).complete(function(...params){
@@ -162,13 +198,17 @@ export default function main(projectPath, version){
 
 		var loadCache = {};
 
+		var extensionFileHash = {};
+
 		(function load(files, depChain, callback){
 			asyncList(files.map((file, index) => {
 				return function(callback){
 					var existsFile = false;
 					for(let ext of extensions){
 						if(fs.existsSync(file + ext)){
-							files[index] = file = file + ext;
+							if(ext){
+								files[index] = extensionFileHash[file] = file = file + ext;
+							}
 							existsFile = true;
 							break;
 						}
@@ -193,9 +233,10 @@ export default function main(projectPath, version){
 					loader(file, function(content){
 						var innerDeps = [];
 						var outerDeps = [];
+						var fileDir = path.dirname(file);
 						jsDeps(content).forEach(function(item){
 							if(/^\.{1,2}\//.test(item)){
-								innerDeps.push(path.resolve(file, item));
+								innerDeps.push(path.resolve(fileDir, item));
 							}else{
 								outerDeps.push(item);
 							}
@@ -247,6 +288,9 @@ export default function main(projectPath, version){
 				hasNewSingleFile = findSingleFile();
 			}while(hasNewSingleFile);
 
+			var depsHash = {};
+			var versionHash = {};
+
 			asyncList(singleFiles.map(file => {
 				return function(callback){
 					let mods = [];
@@ -265,10 +309,13 @@ export default function main(projectPath, version){
 
 					var deps = [];
 					mods = mods.map(mod => {
-						return "\n" + getTab(3) + "// " + mod.replace(projectPath, "") + "\n" + tpl(innerModTpl, {
+						let modDir = path.dirname(mod);
+						return tpl(innerModTpl, {
+							file: mod.replace(projectPath, "").replace(prefixSepReg, ""),
 							content: jsDeps.transDeps(loadCache[mod].content, function(depPath){
 								if(/^\.{1,2}\//.test(depPath)){
-									depPath = path.resolve(mod, depPath);
+									depPath = path.resolve(modDir, depPath);
+									depPath = extensionFileHash[depPath] || depPath;
 
 									if(singleFiles.indexOf(depPath) === -1){
 										return {
@@ -289,17 +336,26 @@ export default function main(projectPath, version){
 										modId: modId
 									};
 								}
-							}).split("\n").join("\n" + getTab(4))
+							}).split("\n").join("\n" + getTab(3))
 						});
 					});
 
+					mods = mods.join(",\n");
+					var fileMd5 = md5(mods);
+					file = file.replace(projectPath, "").replace(prefixSepReg, "");
+
+					versionHash[file] = fileMd5;
+					if(deps.length){
+						depsHash[file] = deps;
+					}
+
 					var code = tpl(singleModTpl, {
-						modId: path.join(packageJson.name + "@" + version, file.replace(projectPath, "")),
-						deps: deps.map(modId => `"${modId}"`).join(","),
-						mods: mods.join(",\n")
+						file: path.join(packageJson.name + "@" + version, file),
+						modId: path.join(packageJson.name + "@" + version, fileMd5),
+						mods: mods
 					});
-					var fileMd5 = md5(code);
-					var writeFile = path.join("/Users/lifan/package-test", file.replace(projectPath, "") + "." + fileMd5);
+
+					var writeFile = path.join(output, packageJson.name + "@" + version, fileMd5 + ".js");
 					mkdirs(path.dirname(writeFile), function(){
 						fs.writeFile(writeFile, code, function(err){
 							if(err){
@@ -310,7 +366,28 @@ export default function main(projectPath, version){
 					});
 				}
 			})).complete(function(){
-				console.success("打包完成");
+				asyncList([function(callback){
+					fs.writeFile(path.join(output, packageJson.name + "@" + version, "deps.json"), JSON.stringify(depsHash, null, "	"), function(err){
+						if(err){
+							console.error();
+						}
+						callback();
+					});
+				}, function(callback){
+					var code = tpl(versionTpl, {
+						modName: packageJson.name,
+						modVersion: version,
+						versions: JSON.stringify(versionHash, null, "	")
+					});
+					fs.writeFile(path.join(output, packageJson.name + "@" + version, "version.js"), code, function(err){
+						if(err){
+							console.error();
+						}
+						callback();
+					});
+				}]).complete(function(){
+					console.success("打包完成");
+				});
 			});
 		});
 	});

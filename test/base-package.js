@@ -1,5 +1,5 @@
-var fs = require("fs");
-var path = require("path");
-var pack = require("../index");
+import fs from "fs";
+import path from "path";
+import pack from "../index";
 
 pack(path.join(fs.realpathSync("."), "base"));

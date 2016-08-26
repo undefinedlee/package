@@ -52,7 +52,7 @@ export default function(path, configLoaders){
 	return function(file, callback){
 		// 查找可处理file文件的第一个加载器配置
 		var loader = loaders.find(function(loader){
-			return loader.test(file);
+			return loader.test.test(file);
 		});
 
 		if(!loader){
