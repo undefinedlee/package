@@ -53,7 +53,8 @@ export default function(file, projectConfig, singleFiles, loadCache, extensionFi
 					if(singleFiles.indexOf(depPath) === -1){
 						return {
 							requireName: "__inner_require__",
-							modId: mods.indexOf(depPath)
+							modId: mods.indexOf(depPath),
+							modIdComments: depPath.replace(projectPath, "").replace(prefixSepReg, "")
 						};
 					}else{
 						let modId = path.join(packageName, depPath.replace(projectPath, ""));
@@ -73,7 +74,7 @@ export default function(file, projectConfig, singleFiles, loadCache, extensionFi
 						modId: modId
 					};
 				}
-			}).split("\n").join("\n" + getTab(3))
+			}).replace(/^(\s*\n)+/g, "").split("\n").join("\n" + getTab(3))
 		});
 	});
 

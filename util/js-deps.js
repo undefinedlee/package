@@ -47,10 +47,27 @@ findDeps.transDeps = function(content, transFn){
 									node.arguments[0] &&
 									node.arguments[0].type === "StringLiteral"){
 										let modInfo = transFn(node.arguments[0].value);
+
 										node.arguments[0].value = modInfo.modId;
+
 										if(modInfo.requireName){
 											node.callee.name = modInfo.requireName;
 										}
+
+										if(modInfo.modIdComments){
+											//console.log(t);
+											node.arguments[0].trailingComments = [
+												t.StringLiteral(modInfo.modIdComments)
+											];
+										}
+								}
+							}
+						},
+						// 删除生成文件头部的"use strict"
+						Directive: {
+							enter(path){
+								if(path.node.value.value === "use strict"){
+									path.remove();
 								}
 							}
 						}
