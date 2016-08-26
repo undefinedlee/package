@@ -1,6 +1,5 @@
 {
-	"views/detail/index.js": "7e44f050dd0594f88fd229245f1d025ae0bdfff4",
-	"views/home/index.js": "83f0225d6db0dd8c96171acea9467b0ad167e532",
-	"views/list/index.js": "198f66a9a0f36e91e5fd1e2bbf94c11d3fbd94ba",
-	"components/calendar/index.js": "b4d38143d2fe7851f9236932f9b3b16790c3ebbe"
+	"deps.js": "59769c30e6cee9976f5295211a4b7456198ca35e",
+	"version.js": "9841f1da64f379698ea2f0aadd643472214bb88a",
+	"version.json": "6239953940bed5dcc79d531c03f92c7a16012ded"
 }

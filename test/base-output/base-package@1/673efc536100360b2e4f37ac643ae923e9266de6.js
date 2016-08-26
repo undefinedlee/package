@@ -1,5 +1,5 @@
 // base-package@1/views/home/index.js
-define("base-package@1/83f0225d6db0dd8c96171acea9467b0ad167e532", function(require, exports, module, __filename, __dirname){
+define("base-package@1/673efc536100360b2e4f37ac643ae923e9266de6", function(require, exports, module, __filename, __dirname){
 	var mods = [
 		// views/home/index.js
 		function(__inner_require__, exports, module){
@@ -30,7 +30,7 @@ define("base-package@1/83f0225d6db0dd8c96171acea9467b0ad167e532", function(requi
 		function(__inner_require__, exports, module){
 			"use strict";
 			
-			var ccc = require("ccc@2.1/index.js");
+			var ccc = require("ccc@0.1/index.js");
 			
 			module.exports = "common-service";
 		}
