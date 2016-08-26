@@ -1,6 +1,8 @@
+var path = require("path");
+
 module.exports = {
 	entry: [
 		"views/*/**.js"
 	],
-	output: "/Users/lifan/package-test"
+	output: path.join(__dirname, "../base-output")
 };

@@ -1,0 +1,13 @@
+{
+	"views/detail/index.js": [
+		"base-package@1/components/calendar/index.js"
+	],
+	"views/home/index.js": [
+		"aaa@6/index.js",
+		"ccc@2.1/index.js"
+	],
+	"views/list/index.js": [
+		"base-package@1/components/calendar/index.js",
+		"bbb@3.1.2/lib.js"
+	]
+}
