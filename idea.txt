@@ -42,3 +42,5 @@ define("dajfjalkdjlf", ["adlajdfa", "dkflad", "abc@2.1/a/c", "ddd@1.6.2/ls/dfd"]
 对应表文件需要md5版本值
 request ss.elong.com/static/??bbb@1.2@dafadf/__hash,ccc@2.1@dfadfa（如果没有依赖外部项目，则不需要这个请求，对于锁死的版本，不需要）
 loader.load([aaa@1/adfad, aaa@1/dfad, bbb@1.2/a/b/c, bbb@1.2/dd/sd, ccc@2.1/df/ee/df])
+
+以递增64进制作为版本号，替换md5版本号
