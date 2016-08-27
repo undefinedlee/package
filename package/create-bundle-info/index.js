@@ -30,11 +30,20 @@ export default function(depsHash, versionHash, output, packageName, imageSpriteM
 	}, function(callback){
 		// 生成客户端版本文件
 		var version = sortJsonKey(versionHash);
-		version[constConfig.base64ImageSpriteModId] = "__base64_image_sprite_placeholder__";
+
+		if(imageSpriteModId){
+			version[constConfig.base64ImageSpriteModId] = "__base64_image_sprite_placeholder__";
+		}
+
 		var code = tpl(versionTpl, {
 			packageName: packageName,
 			versions: JSON.stringify(version, null, "	")
-		}).replace(`"__base64_image_sprite_placeholder__"`, `[${[1,2,3].map(pixelRatio => `"${imageSpriteModId}@${pixelRatio}x.js"`).join(",")}][Math.min(3, window.devicePixelRatio || 1)]`);
+		});
+
+		if(imageSpriteModId){
+			code = code.replace(`"__base64_image_sprite_placeholder__"`, `[${[1,2,3].map(pixelRatio => `"${imageSpriteModId}@${pixelRatio}x.js"`).join(",")}][Math.min(3, window.devicePixelRatio || 1)]`);
+		}
+		
 		//var codeMd5 = md5(code);
 		var codeMd5 = createVersion(output, md5(code));
 		fs.writeFile(path.join(output, /*"version." + */codeMd5 + ".js"), code, function(err){

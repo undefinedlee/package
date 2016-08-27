@@ -1,9 +1,9 @@
 import asyncList from "../util/async-list";
 import console from "../util/console";
-import bundleImagesPlugin from "./bundle-images-plugin/index";
+import logPlugin from "./log-plugin/index";
 
 const defaultPlugins = [
-	bundleImagesPlugin
+	logPlugin
 ];
 
 export default function(configPlugins){
@@ -23,7 +23,7 @@ export default function(configPlugins){
 
 	return {
 		task: function(pointName, info){
-			console.log(pointName);
+			// console.log(pointName);
 			if(!tasks[pointName]){
 				return Promise.resolve();
 			}
