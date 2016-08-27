@@ -1,1 +1,0 @@
-loader.version("#modName#@#modVersion#", #versions#);

@@ -1,0 +1,1 @@
+loader.version("#packageName#", #versions#);

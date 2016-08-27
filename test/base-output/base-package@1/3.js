@@ -1,22 +1,20 @@
-// base-package@1/components/calendar/index.js
+// base-package@1/views/list/index.js
 loader.define("base-package@1/3", function(require, __filename, __dirname, __base){
 	"use strict";
 	
 	return [
-		// components/calendar/index.js
+		// views/list/index.js
 		function(__inner_require__, exports, module){
-			var html = __inner_require__(1 /*components/calendar/index-html.js*/);
-			var css = __inner_require__(2 /*components/calendar/index-css.js*/);
+			var ListService = __inner_require__(1 /*service/list.js*/);
+			var calendar = require("base-package@1/components/calendar/index.js");
 			
-			module.exports = "calendar";
+			module.exports = "list";
 		},
-		// components/calendar/index-html.js
+		// service/list.js
 		function(__inner_require__, exports, module){
-			module.exports = "calendar-html";
-		},
-		// components/calendar/index-css.js
-		function(__inner_require__, exports, module){
-			module.exports = "calendar-css";
+			var bbbLib = require("bbb@3.1.2/lib.js");
+			
+			module.exports = "list-service";
 		}
 	];
 });

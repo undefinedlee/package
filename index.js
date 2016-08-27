@@ -1,10 +1,8 @@
 import fs from "fs";
 import path from "path";
-import semver from "semver";
 import console from "./util/console";
-import md5 from "./util/md5";
-import createVersion from "./package/create-version";
-import Loader from "./loader/index";
+import Loader from "./loaders/index";
+import Plugin from "./plugins/index";
 import asyncList from "./util/async-list";
 import parseVersion from "./package/parse-version";
 import checkPackage from "./package/check-package";
@@ -12,18 +10,15 @@ import readEntries from "./util/read-entries";
 import loadFiles from "./package/load-files";
 import findAllSingleFiles from "./package/find-all-single-files";
 import bundleSingle from "./package/bundle-single/index";
-import tpl from "./util/tpl";
-// 客户端版本文件模板
-const versionTpl = fs.readFileSync(path.resolve(__dirname, "version-tpl.js"), {
-				encoding: "utf8"
-			});
+import createBundleInfo from "./package/create-bundle-info/index";
+import createImageSprite from "./package/create-image-sprite/index";
 
 /**
  * 打包一个项目
  * @param {string} projectPath - 项目根目录
  * @param {string} [version="^packageJson.version"] - 需要打包的版本规则
  */
-export default function main(projectPath, version){
+export default async function main(projectPath, version){
 	const packageJson = checkPackage(projectPath, version);
 
 	if(!packageJson){
@@ -47,6 +42,7 @@ export default function main(projectPath, version){
 		config = {};
 	}
 
+	// 打完包的文件夹名
 	const packageName = packageJson.name + "@" + version;
 
 	// 打包入口
@@ -55,96 +51,89 @@ export default function main(projectPath, version){
 	const output = path.join(config.output || path.join(process.env.HOME, ".ipack"), packageName);
 	// 后缀查找顺序
 	const extensions = config.extensions || ["", ".js", "/index.js"];
+	// 项目信息，提供给插件使用
+	var projectInfo = {
+		path: projectPath,
+		entries: entries,
+		output: output,
+		extensions: extensions,
+		packageJson: packageJson,
+		version: version
+	};
+	// 插件列表
+	const plugin = Plugin(config.plugins);
 	// 加载器
-	const loader = Loader(projectPath, config.loaders);
+	const loader = await Loader(config.loaders, projectInfo, plugin);
 
+	projectInfo.loader = loader;
+
+	await plugin.task("start", projectInfo);
 	// 解析出所有入口文件
-	readEntries(projectPath, entries, function(entries){
+	readEntries(projectPath, entries, async function(entries){
+		await plugin.task("parse-entries", Object.assign(projectInfo, {
+			entries: entries
+		}));
+
 		// 加载入口能访问到的所有文件进缓存
-		loadFiles(entries, extensions, loader, function(loadCache, extensionFileHash){
+		loadFiles(entries, extensions, loader, async function(loadCache, extensionFileHash){
+			await plugin.task("loader-complete", Object.assign(projectInfo, {
+				loadCache: loadCache,
+				extensionFileHash: extensionFileHash
+			}));
+
+			var imageSpriteModId = await createImageSprite(loader.base64Images, output, packageName);
+
 			// 需要单独打包的文件列表
 			var singleFiles = findAllSingleFiles(entries, loadCache);
+
+			await plugin.task("parse-single", Object.assign(projectInfo, {
+				singleFiles: singleFiles
+			}));
+
 			// 单独打包的文件依赖的模块列表
 			var depsHash = {};
 			// 单独打包的文件的md5版本号
 			var versionHash = {};
 
+			// 将每个需要单独打包的文件打包生成
 			asyncList(singleFiles.map(file => {
-				return function(callback){
+				return async function(callback){
+					await plugin.task("before-bundle", Object.assign({}, projectInfo, {
+						bundleFile: file
+					}));
 					// 打包独立文件
 					bundleSingle(file, {
 						projectPath: projectPath,
 						packageName: packageName,
 						output: output,
-						packageJson: packageJson
-					}, singleFiles, loadCache, extensionFileHash, function(relativeFile, fileMd5, deps){
-						versionHash[relativeFile] = fileMd5;
+						packageJson: packageJson,
+						plugin: plugin,
+						projectInfo
+					}, singleFiles, loadCache, extensionFileHash, async function(relativeFile, version, deps){
+						versionHash[relativeFile] = version;
 						if(deps.length){
 							depsHash[relativeFile] = deps;
 						}
+
+						await plugin.task("after-bundle", Object.assign({}, projectInfo, {
+							bundleFile: file,
+							relativeFile: relativeFile,
+							bundleVersion: version,
+							bundleDeps: deps
+						}));
+
 						callback();
 					});
 				}
-			})).complete(function(){
-				asyncList([function(callback){
-					// 生成依赖关系文件
-					var code = JSON.stringify(depsHash, null, "	");
-					//var codeMd5 = md5(code);
-					var codeMd5 = createVersion(output, md5(code));
-					fs.writeFile(path.join(output, /*"deps." + */codeMd5 + ".json"), code, function(err){
-						if(err){
-							console.error("生成依赖关系表失败");
-						}
-						callback({
-							name: "deps.json",
-							version: codeMd5 + ".json"
-						});
-					});
-				}, function(callback){
-					// 生成客户端版本文件
-					var code = tpl(versionTpl, {
-						modName: packageJson.name,
-						modVersion: version,
-						versions: JSON.stringify(versionHash, null, "	")
-					});
-					//var codeMd5 = md5(code);
-					var codeMd5 = createVersion(output, md5(code));
-					fs.writeFile(path.join(output, /*"version." + */codeMd5 + ".js"), code, function(err){
-						if(err){
-							console.error("生成客户端版本文件失败");
-						}
-						callback({
-							name: "version.js",
-							version: codeMd5 + ".js"
-						});
-					});
-				}, function(callback){
-					// 生成服务端版本文件
-					var code = JSON.stringify(versionHash, null, "	");
-					//var codeMd5 = md5(code);
-					var codeMd5 = createVersion(output, md5(code));
-					fs.writeFile(path.join(output, /*"version." + */codeMd5 + ".json"), code, function(err){
-						if(err){
-							console.error("生成服务端版本文件失败");
-						}
-						callback({
-							name: "version.json",
-							version: codeMd5 + ".json"
-						});
-					});
-				}]).complete(function(...files){
-					// 此文件中记录最新一版的deps.js、version.js、version.json的版本
-					var newestVersion = {};
-					files.forEach(file => {
-						newestVersion[file.name] = file.version;
-					});
+			})).complete(async function(){
+				await plugin.task("bundle-complete", Object.assign(projectInfo, {
+					depsHash: depsHash,
+					versionHash: versionHash
+				}));
 
-					fs.writeFile(path.join(output, "version.json"), JSON.stringify(newestVersion, null, "	"), function(err){
-						if(err){
-							console.error("生成版本最新记录文件失败");
-						}
-						console.success("打包完成");
-					});
+				// 创建入口文件依赖、版本信息等文件
+				createBundleInfo(depsHash, versionHash, output, packageName, imageSpriteModId, projectInfo, plugin, function(){
+					console.success("打包完成");
 				});
 			});
 		});

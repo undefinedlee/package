@@ -1,32 +1,18 @@
-// base-package@1/views/home/index.js
+// base-package@1/views/detail/index.js
 loader.define("base-package@1/1", function(require, __filename, __dirname, __base){
 	"use strict";
 	
 	return [
-		// views/home/index.js
+		// views/detail/index.js
 		function(__inner_require__, exports, module){
-			var HomeService = __inner_require__(1 /*service/home.js*/);
-			var CitySelector = __inner_require__(2 /*components/city-selector/index.js*/);
+			var DetailService = __inner_require__(1 /*service/detail.js*/);
+			var calendar = require("base-package@1/components/calendar/index.js");
 			
-			module.exports = "home";
+			module.exports = "detail";
 		},
-		// service/home.js
+		// service/detail.js
 		function(__inner_require__, exports, module){
-			var aaa = require("aaa@6/index.js");
-			
-			module.exports = "home-service";
-		},
-		// components/city-selector/index.js
-		function(__inner_require__, exports, module){
-			var CommonService = __inner_require__(3 /*service/common.js*/);
-			
-			module.exports = "city-selector";
-		},
-		// service/common.js
-		function(__inner_require__, exports, module){
-			var ccc = require("ccc@0.1/index.js");
-			
-			module.exports = "common-service";
+			module.exports = "detail-service";
 		}
 	];
 });

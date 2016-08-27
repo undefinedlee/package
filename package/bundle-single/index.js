@@ -7,6 +7,7 @@ import md5 from "../../util/md5";
 import createVersion from "../create-version";
 import mkdirs from "../../util/mkdirs";
 import console from "../../util/console";
+import constConfig from "../../package/const";
 
 // 替换开头的分隔符
 var prefixSepReg = new RegExp("^\\" + path.sep);
@@ -25,8 +26,8 @@ const singleModTpl = fs.readFileSync(path.resolve(__dirname, "single-mod-tpl.js"
 				encoding: "utf8"
 			});
 
-export default function(file, projectConfig, singleFiles, loadCache, extensionFileHash, callback){
-	const {projectPath, packageName, output, packageJson} = projectConfig;
+export default async function(file, projectConfig, singleFiles, loadCache, extensionFileHash, callback){
+	const {projectPath, packageName, output, packageJson, plugin, projectInfo} = projectConfig;
 	var mods = [];
 	(function parseDeps(file){
 		mods.push(file);
@@ -41,12 +42,25 @@ export default function(file, projectConfig, singleFiles, loadCache, extensionFi
 		});
 	})(file);
 
+	await plugin.task("bundle-mods", Object.assign({}, projectInfo, {
+		mods: mods
+	}));
+
 	var deps = [];
 	mods = mods.map(mod => {
 		let modDir = path.dirname(mod);
+
+		/**
+		 * 这里应该有个插件注入点，修改内部模块的生成规则
+		 */
+
 		return tpl(innerModTpl, {
 			file: mod.replace(projectPath, "").replace(prefixSepReg, ""),
 			content: jsDeps.transDeps(loadCache[mod].content, function(depPath){
+				/**
+				 * 这里应该有个插件注入点，修改引用
+				 */
+
 				if(/^\.{1,2}\//.test(depPath)){
 					depPath = path.resolve(modDir, depPath);
 					depPath = extensionFileHash[depPath] || depPath;
@@ -58,7 +72,7 @@ export default function(file, projectConfig, singleFiles, loadCache, extensionFi
 							modIdComments: depPath.replace(projectPath, "").replace(prefixSepReg, "")
 						};
 					}else{
-						let modId = path.join(packageName, depPath.replace(projectPath, ""));
+						let modId = [packageName, depPath.replace(projectPath, "").replace(prefixSepReg, "")].join("/");
 						if(deps.indexOf(modId) === -1){
 							deps.push(modId);
 						}
@@ -66,6 +80,10 @@ export default function(file, projectConfig, singleFiles, loadCache, extensionFi
 							modId: modId
 						};
 					}
+				}else if(depPath === constConfig.base64ImageSpriteModId){
+					return {
+						modId: [packageName, constConfig.base64ImageSpriteModId].join("/")
+					};
 				}else{
 					let modId = parseOuterDep(depPath, projectPath, packageJson);
 					if(deps.indexOf(modId) === -1){
@@ -84,9 +102,13 @@ export default function(file, projectConfig, singleFiles, loadCache, extensionFi
 	var fileMd5 = createVersion(output, md5(mods));
 	file = file.replace(projectPath, "").replace(prefixSepReg, "");
 
+	/**
+	 * 这里应该有个插件注入点，修改版本规则，修改打包文件
+	 */
+
 	var code = tpl(singleModTpl, {
-		file: path.join(packageName, file),
-		modId: path.join(packageName, fileMd5),
+		file: [packageName, file].join("/"),
+		modId: [packageName, fileMd5].join("/"),
 		mods: mods
 	});
 

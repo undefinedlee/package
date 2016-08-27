@@ -1,20 +1,32 @@
-// base-package@1/views/list/index.js
+// base-package@1/views/home/index.js
 loader.define("base-package@1/2", function(require, __filename, __dirname, __base){
 	"use strict";
 	
 	return [
-		// views/list/index.js
+		// views/home/index.js
 		function(__inner_require__, exports, module){
-			var ListService = __inner_require__(1 /*service/list.js*/);
-			var calendar = require("base-package@1/components/calendar/index.js");
+			var HomeService = __inner_require__(1 /*service/home.js*/);
+			var CitySelector = __inner_require__(2 /*components/city-selector/index.js*/);
 			
-			module.exports = "list";
+			module.exports = "home";
 		},
-		// service/list.js
+		// service/home.js
 		function(__inner_require__, exports, module){
-			var bbbLib = require("bbb@3.1.2/lib.js");
+			var aaa = require("aaa@6/index.js");
 			
-			module.exports = "list-service";
+			module.exports = "home-service";
+		},
+		// components/city-selector/index.js
+		function(__inner_require__, exports, module){
+			var CommonService = __inner_require__(3 /*service/common.js*/);
+			
+			module.exports = "city-selector";
+		},
+		// service/common.js
+		function(__inner_require__, exports, module){
+			var ccc = require("ccc@0.1/index.js");
+			
+			module.exports = "common-service";
 		}
 	];
 });
