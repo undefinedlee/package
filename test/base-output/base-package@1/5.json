@@ -1,4 +1,7 @@
 {
+	"components/calendar/index.js": [
+		"base-package@1/__base64_image_sprite_mod_id__"
+	],
 	"views/detail/index.js": [
 		"base-package@1/components/calendar/index.js"
 	],

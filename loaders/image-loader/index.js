@@ -5,6 +5,7 @@ import md5 from "../../util/md5";
 import console from "../../util/console";
 import asyncList from "../../util/async-list";
 import constConfig from "../../package/const";
+import mkdirs from "../../util/mkdirs";
 import images from "images";
 const tpl = fs.readFileSync(path.resolve(__dirname, "tpl.js"), {
 				encoding: "utf8"
@@ -27,6 +28,7 @@ function imageLoader(content){
 	}
 
 	const limit = this.params.limit || 0;
+	const outputPath = this.output;
 	const base64ImageSpriteModId = constConfig.base64ImageSpriteModId;
 	var base64Images = this.base64Images;
 
@@ -40,7 +42,7 @@ function imageLoader(content){
 					if(!base64Images[pixelRatio]){
 						base64Images[pixelRatio] = {};
 					}
-					base64Images[pixelRatio][fileMd5Name] = content;
+					base64Images[pixelRatio][fileMd5Name] = "data:image/" + ext.replace(".", "") + ";base64," + content;
 
 					callback({
 						type: "base64",
@@ -48,7 +50,8 @@ function imageLoader(content){
 					});
 				}else{
 					let fileMd5Name = md5(content) + ext;
-					let file = path.join(this.output, fileMd5Name);
+					let file = path.join(outputPath, fileMd5Name);
+					mkdirs.sync(outputPath);
 					fs.writeFile(file, content, function(err){
 						if(err){
 							console.error(`图片${file}写入失败`);
@@ -77,8 +80,8 @@ function imageLoader(content){
 					});
 				}else{
 					let img = images(content);
-					content = img.resize((img.width() * pixelRatio / defaultPixelRatio) | 0).encode(ext.replace(/^\./, ""));
-					output(content);
+					let newImg = img.resize((img.width() * pixelRatio / defaultPixelRatio) | 0).encode(ext.replace(/^\./, ""));
+					output(newImg);
 				}
 			}
 		};

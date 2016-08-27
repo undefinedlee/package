@@ -81,8 +81,12 @@ export default async function(file, projectConfig, singleFiles, loadCache, exten
 						};
 					}
 				}else if(depPath === constConfig.base64ImageSpriteModId){
+					let modId = [packageName, constConfig.base64ImageSpriteModId].join("/");
+					if(deps.indexOf(modId) === -1){
+						deps.push(modId);
+					}
 					return {
-						modId: [packageName, constConfig.base64ImageSpriteModId].join("/")
+						modId: modId
 					};
 				}else{
 					let modId = parseOuterDep(depPath, projectPath, packageJson);
