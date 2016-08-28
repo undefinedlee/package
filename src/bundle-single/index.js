@@ -7,7 +7,7 @@ import md5 from "../../util/md5";
 import createVersion from "../create-version";
 import mkdirs from "../../util/mkdirs";
 import console from "../../util/console";
-import constConfig from "../../package/const";
+import constConfig from "../const";
 
 // 替换开头的分隔符
 var prefixSepReg = new RegExp("^\\" + path.sep);

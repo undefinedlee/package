@@ -5,7 +5,7 @@ import asyncList from "../../util/async-list";
 import createVersion from "../create-version";
 import console from "../../util/console";
 import md5 from "../../util/md5";
-import constConfig from "../../package/const";
+import constConfig from "../const";
 import sortJsonKey from "../../util/sort-json";
 // 客户端版本文件模板
 const versionTpl = fs.readFileSync(path.resolve(__dirname, "version-tpl.js"), {

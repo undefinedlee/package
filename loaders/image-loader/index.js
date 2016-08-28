@@ -4,7 +4,7 @@ import Tpl from "../../util/tpl";
 import md5 from "../../util/md5";
 import console from "../../util/console";
 import asyncList from "../../util/async-list";
-import constConfig from "../../package/const";
+import constConfig from "../../src/const";
 import mkdirs from "../../util/mkdirs";
 import images from "images";
 const tpl = fs.readFileSync(path.resolve(__dirname, "tpl.js"), {

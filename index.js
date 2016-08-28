@@ -4,14 +4,14 @@ import console from "./util/console";
 import Loader from "./loaders/index";
 import Plugin from "./plugins/index";
 import asyncList from "./util/async-list";
-import parseVersion from "./package/parse-version";
-import checkPackage from "./package/check-package";
+import parseVersion from "./src/parse-version";
+import checkPackage from "./src/check-package";
 import readEntries from "./util/read-entries";
-import loadFiles from "./package/load-files";
-import findAllSingleFiles from "./package/find-all-single-files";
-import bundleSingle from "./package/bundle-single/index";
-import createBundleInfo from "./package/create-bundle-info/index";
-import createImageSprite from "./package/create-image-sprite/index";
+import loadFiles from "./src/load-files";
+import findAllSingleFiles from "./src/find-all-single-files";
+import bundleSingle from "./src/bundle-single/index";
+import createBundleInfo from "./src/create-bundle-info/index";
+import createImageSprite from "./src/create-image-sprite/index";
 
 /**
  * 打包一个项目
