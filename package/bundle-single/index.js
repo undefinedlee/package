@@ -102,19 +102,30 @@ export default async function(file, projectConfig, singleFiles, loadCache, exten
 	});
 
 	mods = mods.join(",\n");
-	//var fileMd5 = md5(mods);
-	var fileMd5 = createVersion(output, md5(mods));
+
 	file = file.replace(projectPath, "").replace(prefixSepReg, "");
+
+	var code = tpl(singleModTpl, {
+		file: [packageName, file].join("/"),
+		modId: "__mod_id_placeholder__",
+		mods: mods
+	});
+
+	var newCode = await plugin.task("before-write-bundle", Object.assign({}, projectInfo, {
+		content: code
+	}));
+
+	if(typeof newCode !== "undefined"){
+		code = newCode;
+	}
+
+	var fileMd5 = createVersion(output, md5(code));
 
 	/**
 	 * 这里应该有个插件注入点，修改版本规则，修改打包文件
 	 */
 
-	var code = tpl(singleModTpl, {
-		file: [packageName, file].join("/"),
-		modId: [packageName, fileMd5].join("/"),
-		mods: mods
-	});
+	code = code.replace("__mod_id_placeholder__", [packageName, fileMd5].join("/"));
 
 	var writeFile = path.join(output, fileMd5 + ".js");
 	mkdirs(path.dirname(writeFile), function(){

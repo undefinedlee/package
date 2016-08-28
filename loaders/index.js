@@ -6,31 +6,47 @@ import enjoyCssLoader from "./enjoy-css-loader/index";
 import enjoyHtmlLoader from "./enjoy-html-loader/index";
 import imageLoader from "./image-loader/index";
 import jsonLoader from "./json-loader/index";
+import emptyLoader from "./empty-loader/index";
 import pipe from "../util/pipe";
 import console from "../util/console";
+
+const defaultLoaderHash = {
+	"js": jsLoader,
+	"babel": babelLoader,
+	"enjoy-css": enjoyCssLoader,
+	"enjoy-html": enjoyHtmlLoader,
+	"json": jsonLoader,
+	"image": imageLoader,
+	"empty": emptyLoader
+};
 
 // 默认加载器列表
 const defaultLoaders = [{
 	// 处理普通的JS文件
 	test: /\.js$/,
-	loader: [babelLoader, jsLoader]
+	loader: ["babel", "js"]
 }, {
 	// 处理enjoy转换的css文件
 	test: /\-css\.js$/,
-	loader: [babelLoader, enjoyCssLoader]
+	loader: ["babel", "enjoy-css"]
 }, {
 	// 处理enjoy转换的html文件
 	test: /\-html\.js$/,
-	loader: [babelLoader, enjoyHtmlLoader]
+	loader: ["babel", {
+		loader: "enjoy-html",
+		params: {
+			elementFactory: "__dom__"
+		}
+	}]
 }, {
 	// 处理json文件
 	test: /\.json$/,
-	loader: jsonLoader
+	loader: "json"
 }, {
 	// 处理图片
 	test: /\.(png|jpg|jpeg|gif)$/,
 	loader: {
-		loader: imageLoader,
+		loader: "image",
 		params: {
 			limit: 8000
 		}
@@ -41,6 +57,42 @@ export default async function(configLoaders, projectInfo, plugin){
 	// 当前可使用的所有加载器
 	// 用户自定义的加载器优先级高于默认加载器
 	var loaders = [].concat((configLoaders || []).reverse(), defaultLoaders.reverse());
+
+	loaders.forEach(loader => {
+		// 将单个loader转换为数组
+		if(!(loader.loader instanceof Array)){
+			loader.loader = [loader.loader];
+		}
+
+		loader.loader = loader.loader.map(loader => {
+			let type = typeof loader;
+
+			if(type === "string"){
+				if(defaultLoaderHash[loader]){
+					return defaultLoaderHash[loader];
+				}else{
+					console.error(`未找到loader: ${loader}`);
+					return emptyLoader;
+				}
+			}else if(type === "object"){
+				if(typeof loader.loader === "string"){
+					if(defaultLoaderHash[loader.loader]){
+						loader.loader = defaultLoaderHash[loader.loader]
+					}else{
+						console.error(`未找到loader: ${loader.loader}`);
+						loader.loader = emptyLoader;
+					}
+				}
+				return loader;
+			}else if(type === "function"){
+				return loader;
+			}else{
+				console.error("loader必须是一个函数");
+				console.log(loader);
+				return emptyLoader;
+			}
+		});
+	});
 
 	await plugin.task("init-loader", Object.assign(projectInfo, {
 		loaders: loaders
@@ -60,11 +112,6 @@ export default async function(configLoaders, projectInfo, plugin){
 		}
 
 		var loadFile = async function(content){
-			// 将单个loader转换为数组
-			if(!(loader.loader instanceof Array)){
-				loader.loader = [loader.loader];
-			}
-			
 			await plugin.task("before-loader", Object.assign({}, projectInfo, {
 				file: file,
 				content: content,
@@ -89,19 +136,25 @@ export default async function(configLoaders, projectInfo, plugin){
 
 					var isSync = true;
 
-					var result = loader.call({
-						...projectInfo,
-						file: file,
-						params: params || {},
-						base64Images: base64Images,
-						async: function(){
-							isSync = false;
+					var result;
+					try{
+						result = loader.call({
+							...projectInfo,
+							file: file,
+							params: params || {},
+							base64Images: base64Images,
+							async: function(){
+								isSync = false;
 
-							return function(result){
-								callback(result);
-							};
-						}
-					}, content);
+								return function(result){
+									callback(result);
+								};
+							}
+						}, content);
+					}catch(e){
+						console.error(`loader file ${file} error`);
+						console.log(e);
+					}
 
 					if(isSync){
 						callback(result);

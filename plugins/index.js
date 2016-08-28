@@ -1,15 +1,26 @@
 import asyncList from "../util/async-list";
 import console from "../util/console";
 import logPlugin from "./log-plugin/index";
+import minifyPlugin from "./minify-plugin/index";
+
+const defaultPluginsHash = {
+	"log": logPlugin,
+	"min": minifyPlugin
+};
 
 const defaultPlugins = [
-	logPlugin
+	"log"
+	,"min"
 ];
 
 export default function(configPlugins){
 	var tasks = {};
 
-	(configPlugins || defaultPlugins).forEach(plugin => {
+	(configPlugins || defaultPlugins).map(plugin => {
+		if(typeof plugin === "string"){
+			return defaultPluginsHash[plugin] || function(){};
+		}
+	}).forEach(plugin => {
 		plugin.call({
 			plugin(pointName, task){
 				if(!tasks[pointName]){
@@ -33,21 +44,24 @@ export default function(configPlugins){
 					return function(callback){
 						var isSync = true;
 
-						task.call({
+						var result = task.call({
 							async: function(){
 								isSync = false;
 
-								return function(){
-									callback();
+								return function(result){
+									callback(result);
 								};
 							}
 						}, info);
 
 						if(isSync){
-							callback();
+							callback(result);
 						}
 					};
-				})).complete(resolve);
+				})).complete(function(...results){
+					// 暂时这么写，对于多插件，会有问题
+					resolve(results.find(result => result));
+				});
 			});
 		}
 	};

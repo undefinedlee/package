@@ -1,6 +1,8 @@
 const babel = require("babel-core");
 
 export default function(content){
+	const elementFactory = this.params.elementFactory || "__dom__";
+	
 	return content;
 	// var result = babel.transform(content, {
 	// 	plugins: [

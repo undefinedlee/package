@@ -23,10 +23,13 @@ export default function(){
 		console.info("parse single");
 	});
 	this.plugin("before-bundle", function(info){
-		console.info(`bundle file: info.bundleFile`);
+		console.info(`bundle file: ${info.bundleFile}`);
 	});
 	this.plugin("bundle-mods", function(info){
 		
+	});
+	this.plugin("before-write-bundle", function(info){
+
 	});
 	this.plugin("after-bundle", function(info){
 		console.info("bundle complete");

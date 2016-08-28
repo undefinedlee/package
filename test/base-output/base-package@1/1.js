@@ -1,18 +1,1 @@
-// base-package@1/views/detail/index.js
-loader.define("base-package@1/1", function(require, __filename, __dirname, __base){
-	"use strict";
-	
-	return [
-		// views/detail/index.js
-		function(__inner_require__, exports, module){
-			var DetailService = __inner_require__(1 /*service/detail.js*/);
-			var calendar = require("base-package@1/components/calendar/index.js");
-			
-			module.exports = "detail";
-		},
-		// service/detail.js
-		function(__inner_require__, exports, module){
-			module.exports = "detail-service";
-		}
-	];
-});
+loader.define("base-package@1/1",function(e,t,l,i){"use strict";return[function(t,l,i){Object.defineProperty(l,"__esModule",{value:!0});var n=ES6SyntaxPolyfill._createClass,a=t(1),o=s(a),r=e("base-package@1/components/calendar/index.js");s(r);e("babel-polyfill@6/lib/index.js");var s=ES6SyntaxPolyfill._interopRequireDefault,c=ES6SyntaxPolyfill._classCallCheck,f=ES6SyntaxPolyfill._possibleConstructorReturn,u=ES6SyntaxPolyfill._inherits,_=function(e){function t(){c(this,t);var e=f(this,(t.__proto__||Object.getPrototypeOf(t)).call(this));return e.b=1,e.items=Array.from(3),e}return u(t,e),n(t,[{key:"a",value:function(){this.b=2}}]),t}(o.default);l.default=_},function(e,t,l){l.exports="detail-service"}]});
