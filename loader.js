@@ -1,0 +1,367 @@
+/**
+ * 模块加载器
+ * loader.define
+ * loader.use
+ * loader.config
+ * loader.version
+ * require.async
+ */
+;(function(global, util){
+	if(global.loader){
+		return;
+	}
+	
+	// 设置全局命名空间
+	var loader = global.loader = {};
+	
+	// 配置
+	var config = {
+		// 加载根路径
+		base: "",
+		/**
+		 * 合并分割符号
+		 * 如：["!!", ","]
+		 * 则：["a/b/c/d", "a/b/c/e", "a/b/m/n"] => "a/b!!c/d,c/e,m/n"
+		 */
+		comboSyntax: null
+	};
+	
+	var path2version = {};
+	var version2path = {};
+	
+	/**
+	 * 模块列表
+	 */
+	var mods = {};
+	var loadings = {};
+	var waitings = [];
+	
+	// 返回模块
+	function require(id){
+		var factory = mods[path2version[id]];
+
+		if(!factory.isInitialized){
+			factory.exports = factory();
+			factory.isInitialized = true;
+		}
+
+		return factory.exports;
+	}
+
+	function parseFactory(mods){
+		return (function __inner_require__(id){
+			var factory = mods[id];
+			var module;
+
+			if(!factory.isInitialized){
+				module = {exports: {}};
+				factory(__inner_require__, module.exports, module);
+				factory.exports = module.exports;
+				factory.isInitialized = true;
+			}
+
+			return factory.exports;
+		})(0);
+	}
+	/**
+	 * 
+	 */
+	loader.define = function(id, factory, isStoreMod){
+		// 将模块存入本地
+		if(util.store && !isStoreMod){
+			util.store.set(id, version2path[id], factory);
+		}
+		// 
+		mods[id] = function(){
+			var innerMods = factory(require, [config.base, id + ".js"].join("/"), [config.base, id.split("/")[0]].join("/"), config.base);
+			return parseFactory(innerMods);
+		};
+
+		if(!isStoreMod){
+			delete loadings[id];
+			waitings = waitings.filter(function(waiting){
+				waiting.ids = waiting.ids.filter(function(id){
+					return !mods[id];
+				});
+
+				if(waiting.ids.length){
+					return true;
+				}else{
+					waiting.callback(require);
+					return false;
+				}
+			});
+		}
+	};
+
+	var doc = global.document;
+	var head = doc.head || doc.getElementsByTagName("head")[0] || doc.documentElement;
+
+	function request(requestList){
+		requestList.forEach(function(id){
+			loadings[id] = true;
+		});
+
+		var script = doc.createElement("script");
+		
+		function onload(){
+			script.onload = script.onerror = script.onreadystatechange = null;
+			head.removeChild(script);
+			script = null;
+		}
+		
+		if("onload" in script){
+			script.onload = onload;
+			script.onerror = function(){
+				//console.error(id + " load fail");
+				onload();
+			};
+		}else{
+			script.onreadystatechange = function(){
+				if(/loaded|complete/.test(script.readyState)){
+					onload();
+				}
+			};
+		}
+		
+		script.async = true;
+
+		if(requestList.length === 1){
+			script.src = [config.base, requestList[0]].join("/");
+		}else{
+			// 多个文件按规则合并路径
+			script.src = config.base + config.comboSyntax[0] + requestList.join(config.comboSyntax[1]);
+		}
+
+		head.appendChild(script);
+	}
+	/**
+	 * 
+	 */
+	loader.use = function(ids, callback){
+		var requestList;
+		var loadingMods = [];
+		if(util.store){
+			requestList = ids.filter(function(id){
+				if(mods[id]){
+					return false;
+				}else if(loadings[id]){
+					loadingMods.push(id);
+					return false;
+				}
+
+				var factory = util.store.get(id);
+				if(factory){
+					loader.define(id, factory, true);
+					return false;
+				}
+
+				return true;
+			});
+		}else{
+			requestList = ids;
+		}
+
+		if(requestList.length){
+			waitings.push({
+				ids: loadingMods.concat(requestList),
+				callback: callback
+			});
+
+			request(requestList);
+		}else{
+			callback(require);
+		}
+	};
+
+	require.async = function(ids, callback){
+		loader.use(ids.map(function(id){
+			return path2version[id];
+		}), callback);
+	};
+	
+	/**
+	 * 配置加载参数
+	 */
+	loader.config = function(_config){
+		for(var key in _config){
+			if(_config.hasOwnProperty(key)){
+				config[key] = _config[key];
+			}
+		}
+	};
+	
+	/**
+	 * 配置版本号
+	 * loader.version("modName", {
+	 * 		"path": "1",
+	 * 		"path": "2"
+	 * })
+	 */
+	loader.version = function(modName, versionHash){
+		var pathModId,
+			versionModId;
+		for(var path in versionHash){
+			pathModId = [modName, path].join("/");
+			versionModId = [modName, versionHash[path]].join("/");
+			path2version[pathModId] = versionModId + ".js";
+			version2path[versionModId] = pathModId;
+		}
+	};
+
+	/**
+	 * 本地存储
+	 */
+	loader.store = util.nativeStore;
+	
+	// 兼容seajs
+	// global.seajs = global.loader;
+	// global.mods = mods;
+})(this, (function(){
+	// 本地存储模块
+	var store,
+		win = window,
+		localStorageName = 'localStorage',
+		storage;
+	
+	if (localStorageName in win && win[localStorageName]) {
+		storage = win[localStorageName];
+		store = {
+			get: function (key) {
+				return storage.getItem(key);
+			},
+			set: function (key, val) {
+				storage.setItem(key, val);
+			},
+			remove: function (key) {
+				storage.removeItem(key);
+			}
+		};
+	}
+	
+	function parseJson(data){
+		try{
+		    return ( new Function( "return " + data.replace(/^\s+|\s+$/g, "") ) )();
+		}catch(e){
+			return null;
+		}
+	}
+
+	var ModVisitManage = (function(){
+		var modManageKey = "mod-visit-manager";
+
+		function getModManage(){
+			var config = store.get(modManageKey);
+			if(config && (config = JSON.parse(config))){
+				return config;
+			}else{
+				return {};
+			}
+		}
+		
+		function setModManage(config){
+			store.set(modManageKey, JSON.stringify(config));
+		}
+
+		// 获取当前相对于2015年1月1日所过去的天数
+		function getNow(){
+			return ((new Date() - new Date(2015, 0, 1)) / (24 * 3600 * 1000)) | 0;
+		}
+
+		return {
+			// 更新模块访问时间
+			update: function(id){
+				var config = getModManage();
+				config[id] = getNow();
+				setModManage(config);
+			},
+			// 删除模块访问时间
+			"delete": function(id){
+				var config = getModManage();
+				delete config[id];
+				setModManage(config);
+			},
+			// 清除最后访问时间超过expires天的模块
+			clear: function(expires){
+				var config = getModManage();
+				var now = getNow();
+				for(var id in config){
+					if(now - config[id] > expires){
+						delete config[id];
+						store.remove(id);
+					}
+				}
+				setModManage(config);
+			}
+		};
+	})();
+	
+	// 清除30天未访问的模块
+	setTimeout(function(){
+		ModVisitManage.clear(30);
+	}, 5000);
+
+	var ModVersionManage = (function(){
+		var modManageKey = "mod-version-manager";
+
+		function getModManage(){
+			var config = store.get(modManageKey);
+			if(config && (config = JSON.parse(config))){
+				return config;
+			}else{
+				return {};
+			}
+		}
+		
+		function setModManage(config){
+			store.set(modManageKey, JSON.stringify(config));
+		}
+
+		return {
+			update: function(path, id){
+				var config = getModManage();
+				var lastId = config[path];
+				if(lastId){
+					if(lastId !== id){
+						store.remove(lastId);
+						ModVisitManage["delete"](lastId);
+						config[path] = id;
+						setModManage(config);
+					}
+				}else{
+					config[path] = id;
+					setModManage(config);
+				}
+			}
+		};
+	})();
+
+	function noop(){}
+	
+	return {
+		nativeStore: store || {
+			get: noop,
+			set: noop,
+			remove: noop
+		},
+		store: store ? {
+			get: function(id){
+				var factory = store.get(id);
+				if(factory){
+					if(factory = parseJson(factory)){
+						ModVisitManage.update(id);
+						return factory;
+					}else{
+						store.remove(id);
+						ModVisitManage["delete"](id);
+					}
+				}
+			},
+			set: function(id, path, factory){
+				store.set(id, factory.toString());
+				ModVisitManage.update(id);
+				ModVersionManage.update(path, id);
+			}
+		} : null
+	};
+})());
