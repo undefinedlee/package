@@ -1,0 +1,1 @@
+loader.define("core-js@2/20",function(n,o,r,t){"use strict";return[function(n,o,r){r.exports=function(){return Function.call.apply(Array.prototype.pop,arguments)}}]});

@@ -1,0 +1,1 @@
+loader.define("core-js@2/cj",function(e,n,o,r){"use strict";return[function(e,n,o){e(""),o.exports=Number},function(e,n,o){}]});

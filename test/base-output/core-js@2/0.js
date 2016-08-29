@@ -1,0 +1,1 @@
+loader.define("core-js@2/0",function(e,i,n,r){"use strict";return[function(i,n,r){e("LiveScript@1.3/index.js"),r.exports=i("")}]});

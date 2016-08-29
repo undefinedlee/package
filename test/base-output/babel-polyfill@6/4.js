@@ -1,0 +1,1 @@
+loader.define("babel-polyfill@6/4",function(e,l,n,i){"use strict";return[function(l,i,o){function r(e){return n+"/../"+e}e("shelljs/global"),cp(r("dist/polyfill.min.js"),r("browser.js"))}]});

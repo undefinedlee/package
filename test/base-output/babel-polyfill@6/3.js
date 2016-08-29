@@ -1,0 +1,1 @@
+loader.define("babel-polyfill@6/3",function(e,r,n,o){"use strict";return[function(e,r,o){rm(n+"/../browser.js")}]});

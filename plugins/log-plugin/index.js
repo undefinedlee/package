@@ -9,6 +9,7 @@ export default function(){
 	});
 	this.plugin("parse-entries", function(info){
 		console.info("parse entries");
+		//console.log(info.entries);
 	});
 	this.plugin("before-loader", function(info){
 		console.info(`load file: ${info.file}`);
@@ -35,7 +36,7 @@ export default function(){
 		console.info("bundle complete");
 	});
 	this.plugin("bundle-complete", function(info){
-		console.info("all bundle complete");
+		console.info(`${info.packageJson.name} all bundle complete`);
 	});
 	this.plugin("complete", function(info){
 		

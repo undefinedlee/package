@@ -108,6 +108,7 @@ export default async function(configLoaders, projectInfo, plugin){
 
 		if(!loader){
 			console.error(`没有找到可以处理文件${file}的loader`);
+			callback("");
 			return "";
 		}
 

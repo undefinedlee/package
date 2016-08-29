@@ -30,7 +30,11 @@ export default function(files, extensions, loader, callback){
 
 				if(!existsFile){
 					console.error(`文件${file}不存在`);
+					if(depChain.length){
+						console.log(`被文件${depChain[depChain.length - 1]}依赖`);
+					}
 					callback();
+					return;
 				}
 
 				if(loadCache[file]){

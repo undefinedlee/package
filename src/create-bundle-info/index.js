@@ -57,7 +57,13 @@ export default function(depsHash, versionHash, output, packageName, imageSpriteM
 		});
 	}, function(callback){
 		// 生成服务端版本文件
-		var code = JSON.stringify(sortJsonKey(versionHash), null, "	");
+		var version = sortJsonKey(versionHash);
+
+		if(imageSpriteModId){
+			version[constConfig.base64ImageSpriteModId] = `${imageSpriteModId.split("/")[1]}@__pixel_ratio__x`;
+		}
+
+		var code = JSON.stringify(version, null, "	");
 		//var codeMd5 = md5(code);
 		var codeMd5 = createVersion(output, md5(code));
 		fs.writeFile(path.join(output, /*"version." + */codeMd5 + ".json"), code, function(err){

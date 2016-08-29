@@ -1,19 +1,15 @@
 import parseVersion from "./parse-version";
 import getPackageJson from "../util/package-json";
 import warnVersion from "./warn-version";
+import projectDeps from "./project-deps";
+import console from "../util/console";
 
 var outerDepCache = {};
 var modVersionCache = {};
 // 转换对外依赖路径，增加版本号
 export default function(outerUrl, projectPath, packageJson){
 	// 依赖项目
-	const dependencies = Object.assign(
-							{},
-							packageJson.dependencies,
-							packageJson.devDependencies,
-							packageJson.optionalDependencies,
-							packageJson.peerDependencies
-						);
+	const dependencies = projectDeps(packageJson);
 	
 	return outerDepCache[outerUrl] || (function(){
 		var url = outerUrl.split("/");
@@ -21,6 +17,11 @@ export default function(outerUrl, projectPath, packageJson){
 		url = url.join("/");
 		var version = modVersionCache[modName] || (function(){
 			var version = dependencies[modName];
+
+			if(!version){
+				console.warn(`在项目${packageJson.name}的package.json中没有发现对项目${modName}的依赖定义，这可能是一个运行在node环境下的内置模块`);
+				return null;
+			}
 
 			version = parseVersion(version, "");
 
@@ -49,6 +50,10 @@ export default function(outerUrl, projectPath, packageJson){
 
 			return modVersionCache[modName] = version;
 		})();
+
+		if(!version){
+			return null;
+		}
 
 		url = url || (function(){
 			let packageJson = getPackageJson(projectPath, modName);

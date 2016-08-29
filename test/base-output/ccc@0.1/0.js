@@ -1,0 +1,1 @@
+loader.define("ccc@0.1/0",function(e,c,n,o){"use strict";return[function(e,c,n){n.exports="ccc"}]});

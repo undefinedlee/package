@@ -1,0 +1,1 @@
+loader.define("bbb@3.1.2/0",function(e,n,o,r){"use strict";return[function(e,n,o){o.exports="bbb"}]});

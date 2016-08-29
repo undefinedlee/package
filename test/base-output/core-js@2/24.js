@@ -1,0 +1,1 @@
+loader.define("core-js@2/24",function(e,r,n,t){"use strict";return[function(e,r,n){n.exports=function(){return Function.call.apply(Array.prototype.reverse,arguments)}}]});

@@ -8,6 +8,7 @@ function findDeps(content){
 	try{
 		// 提取依赖
 		babel.transform(content, {
+			compact: false,
 			plugins: [
 				function ({ types: t }) {
 					return {
@@ -41,6 +42,7 @@ function findDeps(content){
 findDeps.transDeps = function(content, transFn){
 	try{
 		content = babel.transform(content, {
+			compact: false,
 			plugins: [
 				function ({ types: t }) {
 					return {

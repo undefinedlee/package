@@ -1,0 +1,1 @@
+loader.define("core-js@2/29",function(e,n,r,t){"use strict";return[function(e,n,r){r.exports=function(){return Function.call.apply(Array.prototype.splice,arguments)}}]});

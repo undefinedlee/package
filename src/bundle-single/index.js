@@ -26,20 +26,25 @@ const singleModTpl = fs.readFileSync(path.resolve(__dirname, "single-mod-tpl.js"
 				encoding: "utf8"
 			});
 
-export default async function(file, projectConfig, singleFiles, loadCache, extensionFileHash, callback){
+export default async function(file, projectConfig, singleFiles, loadCache, extensionFileHash, isExtractedCommon, callback){
 	const {projectPath, packageName, output, packageJson, plugin, projectInfo} = projectConfig;
+
 	var mods = [];
 	(function parseDeps(file){
-		mods.push(file);
-
 		let mod = loadCache[file];
 
-		mod.innerDeps.forEach(file => {
-			// 检测mods中是否存在，是为了避免循环依赖
-			if(singleFiles.indexOf(file) === -1 && mods.indexOf(file) === -1){
-				parseDeps(file);
-			}
-		});
+		if(mod){
+			mods.push(file);
+			
+			mod.innerDeps.forEach(file => {
+				// 检测mods中是否存在，是为了避免循环依赖
+				if((!isExtractedCommon || singleFiles.indexOf(file) === -1) && mods.indexOf(file) === -1){
+					parseDeps(file);
+				}
+			});
+		}else{
+			console.error(`没有找到加载的文件${file}`);
+		}
 	})(file);
 
 	await plugin.task("bundle-mods", Object.assign({}, projectInfo, {
@@ -65,7 +70,7 @@ export default async function(file, projectConfig, singleFiles, loadCache, exten
 					depPath = path.resolve(modDir, depPath);
 					depPath = extensionFileHash[depPath] || depPath;
 
-					if(singleFiles.indexOf(depPath) === -1){
+					if(!isExtractedCommon || singleFiles.indexOf(depPath) === -1){
 						return {
 							requireName: "__inner_require__",
 							modId: mods.indexOf(depPath),
@@ -90,12 +95,18 @@ export default async function(file, projectConfig, singleFiles, loadCache, exten
 					};
 				}else{
 					let modId = parseOuterDep(depPath, projectPath, packageJson);
-					if(deps.indexOf(modId) === -1){
-						deps.push(modId);
+					if(modId){
+						if(deps.indexOf(modId) === -1){
+							deps.push(modId);
+						}
+						return {
+							modId: modId
+						};
+					}else{
+						return {
+							modId: depPath
+						};
 					}
-					return {
-						modId: modId
-					};
 				}
 			}).replace(/^(\s*\n)+/g, "").split("\n").join("\n" + getTab(3))
 		});
