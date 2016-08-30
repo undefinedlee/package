@@ -137,7 +137,7 @@ export default async function(configLoaders, projectInfo, plugin){
 
 					var isSync = true;
 
-					var result;
+					var result = "";
 					try{
 						result = loader.call({
 							...projectInfo,
@@ -155,6 +155,10 @@ export default async function(configLoaders, projectInfo, plugin){
 					}catch(e){
 						console.error(`loader file ${file} error`);
 						console.log(e);
+
+						if(!isSync){
+							callback("");
+						}
 					}
 
 					if(isSync){
