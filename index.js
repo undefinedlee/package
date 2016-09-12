@@ -17,9 +17,20 @@ import projectDeps from "./src/project-deps";
 import semver from "semver";
 import mkdirs from "./util/mkdirs";
 
+var lock = {};
+
 async function start(projectPath, output, packageJson, config, version, callback){
 	// 打完包的文件夹名
 	const packageName = packageJson.name + "@" + version;
+
+	if(lock[packageName]){
+		setTimeout(function(){
+			start(projectPath, output, packageJson, config, version, callback);
+		}, 100);
+		return;
+	}else{
+		lock[packageName] = true;
+	}
 
 	// 打包入口
 	var entries = config.entry || ["*.js", "!(node_modules)/**/[!_]*.js"];
@@ -151,7 +162,10 @@ async function start(projectPath, output, packageJson, config, version, callback
 
 				tasks.push(function(callback){
 					// 创建入口文件依赖、版本信息等文件
-					createBundleInfo(depsHash, versionHash, projectOutput, packageName, imageSpriteModId, projectInfo, plugin, callback);
+					createBundleInfo(depsHash, versionHash, projectOutput, packageName, imageSpriteModId, projectInfo, plugin, function(){
+						lock[packageName] = false;
+						callback();
+					});
 				});
 
 				asyncList(tasks).complete(function(){

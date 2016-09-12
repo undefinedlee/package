@@ -118,7 +118,9 @@ export default async function(file, projectConfig, singleFiles, loadCache, exten
 
 	var code = tpl(singleModTpl, {
 		file: [packageName, file].join("/"),
-		modId: "__mod_id_placeholder__",
+		project: packageName,
+		path: file,
+		version: "__mod_version_placeholder__",
 		mods: mods
 	});
 
@@ -136,7 +138,7 @@ export default async function(file, projectConfig, singleFiles, loadCache, exten
 	 * 这里应该有个插件注入点，修改版本规则，修改打包文件
 	 */
 
-	code = code.replace("__mod_id_placeholder__", [packageName, fileMd5].join("/"));
+	code = code.replace("__mod_version_placeholder__", fileMd5);
 
 	var writeFile = path.join(output, fileMd5 + ".js");
 	mkdirs(path.dirname(writeFile), function(){

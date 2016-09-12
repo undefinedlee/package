@@ -23,22 +23,27 @@
 		 * 如：["!!", ","]
 		 * 则：["a/b/c/d", "a/b/c/e", "a/b/m/n"] => "a/b!!c/d,c/e,m/n"
 		 */
-		comboSyntax: null
+		comboSyntax: null,
+		/**
+		 * 文件依赖信息请求地址
+		 */
+		modParseUrl: ""
 	};
 	
-	var path2version = {};
-	var version2path = {};
+	// var path2version = {};
+	// var version2path = {};
 	
 	/**
 	 * 模块列表
 	 */
 	var mods = {};
+	var loadeds = {};
 	var loadings = {};
 	var waitings = [];
 	
 	// 返回模块
 	function require(id){
-		var factory = mods[path2version[id]];
+		var factory = mods[id];
 
 		if(!factory.isInitialized){
 			factory.exports = factory();
@@ -66,22 +71,26 @@
 	/**
 	 * 
 	 */
-	loader.define = function(id, factory, isStoreMod){
+	loader.define = function(project, path, version, factory, isStoreMod){
+		var modPathId = [project, path].join("/");
+		var modVersionId = [project, version].join("/");
 		// 将模块存入本地
 		if(util.store && !isStoreMod){
-			util.store.set(id, version2path[id], factory);
+			util.store.set(modVersionId, factory);
 		}
 		// 
-		mods[id] = function(){
-			var innerMods = factory(require, [config.base, id + ".js"].join("/"), [config.base, id.split("/")[0]].join("/"), config.base);
+		mods[modPathId] = function(){
+			var innerMods = factory(require, [config.base, modVersionId + ".js"].join("/"), [config.base, project].join("/"), config.base);
 			return parseFactory(innerMods);
 		};
 
+		loadeds[modVersionId] = true;
+
 		if(!isStoreMod){
-			delete loadings[id];
+			delete loadings[modVersionId];
 			waitings = waitings.filter(function(waiting){
 				waiting.ids = waiting.ids.filter(function(id){
-					return !mods[id];
+					return !loadeds[id];
 				});
 
 				if(waiting.ids.length){
@@ -94,73 +103,46 @@
 		}
 	};
 
-	var doc = global.document;
-	var head = doc.head || doc.getElementsByTagName("head")[0] || doc.documentElement;
-
 	function request(requestList){
 		requestList.forEach(function(id){
 			loadings[id] = true;
 		});
 
-		var script = doc.createElement("script");
-		
-		function onload(){
-			script.onload = script.onerror = script.onreadystatechange = null;
-			head.removeChild(script);
-			script = null;
-		}
-		
-		if("onload" in script){
-			script.onload = onload;
-			script.onerror = function(){
-				//console.error(id + " load fail");
-				onload();
-			};
-		}else{
-			script.onreadystatechange = function(){
-				if(/loaded|complete/.test(script.readyState)){
-					onload();
-				}
-			};
-		}
-		
-		script.async = true;
-
+		var url;
 		if(requestList.length === 1){
-			script.src = [config.base, requestList[0]].join("/");
+			url = [config.base, requestList[0]].join("/");
 		}else{
 			// 多个文件按规则合并路径
-			script.src = config.base + config.comboSyntax[0] + requestList.join(config.comboSyntax[1]);
+			url = config.base + config.comboSyntax[0] + requestList.join(config.comboSyntax[1]);
 		}
 
-		head.appendChild(script);
+		util.request(url);
 	}
 	/**
 	 * 
 	 */
 	loader.use = function(ids, callback){
-		var requestList;
 		var loadingMods = [];
-		if(util.store){
-			requestList = ids.filter(function(id){
-				if(mods[id]){
-					return false;
-				}else if(loadings[id]){
-					loadingMods.push(id);
-					return false;
-				}
 
-				var factory = util.store.get(id);
+		var requestList = ids.filter(function(id){
+			if(loadeds[id]){
+				return false;
+			}else if(loadings[id]){
+				loadingMods.push(id);
+				return false;
+			}
+
+			var factory;
+			if(util.store){
+				factory = util.store.get(id);
 				if(factory){
 					loader.define(id, factory, true);
 					return false;
 				}
+			}
 
-				return true;
-			});
-		}else{
-			requestList = ids;
-		}
+			return true;
+		});
 
 		if(requestList.length){
 			waitings.push({
@@ -174,11 +156,35 @@
 		}
 	};
 
+	function parseUrl(urls, callback){
+		var count = urls.length;
+		var list = [];
+		if(count === 0){
+			callback(list);
+		}else{
+			urls.forEach(function(url){
+				util.jsonp(config.modParseUrl + "?url=" + url, url, function(_list){
+					_list.forEach(function(item){
+						if(list.indexOf(item) === -1){
+							list.push(item);
+						}
+					});
+
+					if(--count === 0){
+						callback(list);
+					}
+				});
+			});
+		}
+	}
+
 	require.async = function(ids, callback){
-		loader.use(ids.map(function(id){
-			return path2version[id];
-		}), callback);
+		parseUrl(ids, function(ids){
+			loader.use(ids, callback);
+		});
 	};
+
+	loader.require = require;
 	
 	/**
 	 * 配置加载参数
@@ -198,21 +204,23 @@
 	 * 		"path": "2"
 	 * })
 	 */
-	loader.version = function(modName, versionHash){
-		var pathModId,
-			versionModId;
-		for(var path in versionHash){
-			pathModId = [modName, path].join("/");
-			versionModId = [modName, versionHash[path]].join("/");
-			path2version[pathModId] = versionModId + ".js";
-			version2path[versionModId] = pathModId;
-		}
-	};
+	// loader.version = function(modName, versionHash){
+	// 	var pathModId,
+	// 		versionModId;
+	// 	for(var path in versionHash){
+	// 		pathModId = [modName, path].join("/");
+	// 		versionModId = [modName, versionHash[path]].join("/");
+	// 		path2version[pathModId] = versionModId + ".js";
+	// 		version2path[versionModId] = pathModId;
+	// 	}
+	// };
 
 	/**
 	 * 本地存储
 	 */
 	loader.store = util.nativeStore;
+
+	loader.jsonp = {};
 	
 	// 兼容seajs
 	// global.seajs = global.loader;
@@ -301,42 +309,45 @@
 		ModVisitManage.clear(30);
 	}, 5000);
 
-	var ModVersionManage = (function(){
-		var modManageKey = "mod-version-manager";
+	// var ModVersionManage = (function(){
+	// 	var modManageKey = "mod-version-manager";
 
-		function getModManage(){
-			var config = store.get(modManageKey);
-			if(config && (config = JSON.parse(config))){
-				return config;
-			}else{
-				return {};
-			}
-		}
+	// 	function getModManage(){
+	// 		var config = store.get(modManageKey);
+	// 		if(config && (config = JSON.parse(config))){
+	// 			return config;
+	// 		}else{
+	// 			return {};
+	// 		}
+	// 	}
 		
-		function setModManage(config){
-			store.set(modManageKey, JSON.stringify(config));
-		}
+	// 	function setModManage(config){
+	// 		store.set(modManageKey, JSON.stringify(config));
+	// 	}
 
-		return {
-			update: function(path, id){
-				var config = getModManage();
-				var lastId = config[path];
-				if(lastId){
-					if(lastId !== id){
-						store.remove(lastId);
-						ModVisitManage["delete"](lastId);
-						config[path] = id;
-						setModManage(config);
-					}
-				}else{
-					config[path] = id;
-					setModManage(config);
-				}
-			}
-		};
-	})();
+	// 	return {
+	// 		update: function(path, id){
+	// 			var config = getModManage();
+	// 			var lastId = config[path];
+	// 			if(lastId){
+	// 				if(lastId !== id){
+	// 					store.remove(lastId);
+	// 					ModVisitManage["delete"](lastId);
+	// 					config[path] = id;
+	// 					setModManage(config);
+	// 				}
+	// 			}else{
+	// 				config[path] = id;
+	// 				setModManage(config);
+	// 			}
+	// 		}
+	// 	};
+	// })();
 
 	function noop(){}
+
+	var doc = window.document;
+	var head = doc.head || doc.getElementsByTagName("head")[0] || doc.documentElement;
 	
 	return {
 		nativeStore: store || {
@@ -357,11 +368,48 @@
 					}
 				}
 			},
-			set: function(id, path, factory){
+			set: function(id, factory){
 				store.set(id, factory.toString());
 				ModVisitManage.update(id);
-				ModVersionManage.update(path, id);
+				// ModVersionManage.update(path, id);
 			}
-		} : null
+		} : null,
+		request: function(url){
+			var script = doc.createElement("script");
+			
+			function onload(){
+				script.onload = script.onerror = script.onreadystatechange = null;
+				head.removeChild(script);
+				script = null;
+			}
+			
+			if("onload" in script){
+				script.onload = onload;
+				script.onerror = function(){
+					//console.error(id + " load fail");
+					onload();
+				};
+			}else{
+				script.onreadystatechange = function(){
+					if(/loaded|complete/.test(script.readyState)){
+						onload();
+					}
+				};
+			}
+			
+			script.async = true;
+
+			script.src = url;
+
+			head.appendChild(script);
+		},
+		jsonp: function(url, id, callback){
+			loader.jsonp[id] = function(list){
+				delete loader.jsonp[id];
+				callback(list);
+			};
+
+			this.request(url);
+		}
 	};
 })());

@@ -7,15 +7,20 @@ import console from "../../util/console";
 import md5 from "../../util/md5";
 import constConfig from "../const";
 import sortJsonKey from "../../util/sort-json";
+import readJson from "../../util/read-json";
 // 客户端版本文件模板
 const versionTpl = fs.readFileSync(path.resolve(__dirname, "version-tpl.js"), {
 				encoding: "utf8"
 			});
 
 export default function(depsHash, versionHash, output, packageName, imageSpriteModId, projectInfo, plugin, callback){
+	let vJson = readJson.sync(path.join(output, "version.json"));
+	let depsJson = vJson ? readJson.sync(path.join(output, vJson["deps.json"])) : null;
+	let versionJson = vJson ? readJson.sync(path.join(output, vJson["version.json"])) : null;
+
 	asyncList([function(callback){
 		// 生成依赖关系文件
-		var code = JSON.stringify(sortJsonKey(depsHash), null, "	");
+		var code = JSON.stringify(sortJsonKey(Object.assign(depsJson || {}, depsHash)), null, "	");
 		//var codeMd5 = md5(code);
 		var codeMd5 = createVersion(output, md5(code));
 		fs.writeFile(path.join(output, /*"deps." + */codeMd5 + ".json"), code, function(err){
@@ -29,7 +34,7 @@ export default function(depsHash, versionHash, output, packageName, imageSpriteM
 		});
 	}, function(callback){
 		// 生成客户端版本文件
-		var version = sortJsonKey(versionHash);
+		var version = sortJsonKey(Object.assign(versionJson || {}, versionHash));
 
 		if(imageSpriteModId){
 			version[constConfig.base64ImageSpriteModId] = "__base64_image_sprite_placeholder__";
@@ -57,7 +62,7 @@ export default function(depsHash, versionHash, output, packageName, imageSpriteM
 		});
 	}, function(callback){
 		// 生成服务端版本文件
-		var version = sortJsonKey(versionHash);
+		var version = sortJsonKey(Object.assign(versionJson || {}, versionHash));
 
 		if(imageSpriteModId){
 			version[constConfig.base64ImageSpriteModId] = `${imageSpriteModId.split("/")[1]}@__pixel_ratio__x`;
