@@ -112,34 +112,49 @@ async function start(projectPath, output, packageJson, config, version, callback
 					versionHash: versionHash
 				}));
 
-				let depsProjects = [];
+				let depsProjects = {};
 				let currentProjectName = packageJson.name;
 				for(let key in depsHash){
 					depsHash[key].forEach(file => {
-						let projectName = file.split("@")[0];
-						if(projectName !== currentProjectName && depsProjects.indexOf(projectName) === -1){
-							depsProjects.push(projectName);
+						file = file.split("@");
+
+						let projectName = file[0];
+
+						let path = file[1];
+						path = path.slice(path.indexOf("/") + 1);
+
+						if(projectName !== currentProjectName){
+							if(depsProjects[projectName]){
+								if(depsProjects[projectName].indexOf(path) === -1){
+									depsProjects[projectName].push(path);
+								}
+							}else{
+								depsProjects[projectName] = [path];
+							}
 						}
 					});
 				}
 
-				depsProjects = depsProjects.map(projectName => {
+				var tasks = Object.keys(depsProjects).map(projectName => {
 					return function(callback){
 						var depProjectPath = findNodeModules(projectPath, projectName);
 						if(depProjectPath){
-							main(depProjectPath, projectDeps(packageJson)[projectName], output, callback, true);
+							main(depProjectPath, projectDeps(packageJson)[projectName], output, callback, {
+								isInner: true,
+								entries: depsProjects[projectName]
+							});
 						}else{
 							callback();
 						}
 					};
 				});
 
-				depsProjects.push(function(callback){
+				tasks.push(function(callback){
 					// 创建入口文件依赖、版本信息等文件
 					createBundleInfo(depsHash, versionHash, projectOutput, packageName, imageSpriteModId, projectInfo, plugin, callback);
 				});
 
-				asyncList(depsProjects).complete(function(){
+				asyncList(tasks).complete(function(){
 					console.success(`${packageJson.name}打包完成`);
 					callback && callback();
 				});
@@ -175,7 +190,9 @@ function updatePackageInfo(output, modId, version){
  * @param {string} projectPath - 项目根目录
  * @param {string} [version="^packageJson.version"] - 需要打包的版本规则
  */
-export default function main(projectPath, version, output, callback, isInner){
+export default function main(projectPath, version, output, callback, options){
+	options = options || {};
+
 	const packageJson = checkPackage(projectPath, version);
 
 	if(!packageJson){
@@ -194,19 +211,28 @@ export default function main(projectPath, version, output, callback, isInner){
 	// 打包配置
 	const configPath = path.resolve(projectPath, "pack.config.js");
 	var config;
+	var hasConfig;
 	if(fs.existsSync(configPath)){
 		config = require(configPath);
+		hasConfig = true;
 	}else{
-		config = {};
+		config = {
+			entry: options.entries
+		};
+		hasConfig = false;
 	}
 
 	// 输出目录
 	output = config.output || output || path.join(process.env.HOME, ".ipack");
 
-	if(isInner && hasPackaged(output, packageJson.name + "@" + version, packageJson.version)){
+	if(options.isInner && hasPackaged(output, packageJson.name + "@" + version, packageJson.version)){
 		callback && callback();
 	}else{
-		updatePackageInfo(output, packageJson.name + "@" + version, packageJson.version);
+		// 只有配置了config的项目，才会更新打包版本
+		// 因为对于没有配置config的项目，无法判断入口有哪些，所以不能进行完全打包
+		if(hasConfig){
+			updatePackageInfo(output, packageJson.name + "@" + version, packageJson.version);
+		}
 		// 开始打包
 		start(projectPath, output, packageJson, config, version, callback);
 	}
