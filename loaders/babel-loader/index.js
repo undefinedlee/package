@@ -30,18 +30,27 @@ export default function(content){
 								if(node.id &&
 									node.id.type === "Identifier" &&
 									["_classCallCheck", "_inherits", "_possibleConstructorReturn", "_interopRequireDefault", "_asyncToGenerator"].indexOf(node.id.name) !== -1){
-									path.replaceWith(t.VariableDeclaration(
-										"var",
-										[
-											t.VariableDeclarator(
-												node.id,
-												t.memberExpression(
-													t.identifier("ES6SyntaxPolyfill"),
-													node.id
+									let newNode = t.VariableDeclaration(
+											"var",
+											[
+												t.VariableDeclarator(
+													node.id,
+													t.memberExpression(
+														t.identifier("ES6SyntaxPolyfill"),
+														node.id
+													)
 												)
-											)
-										]
-									));
+											]
+										);
+								
+									let parentPath = path.parentPath;
+
+									if(parentPath && parentPath.node && (parentPath.node.body instanceof Array)){
+										parentPath.node.body.unshift(newNode);
+										path.remove();
+									}else{
+										path.replaceWith(newNode);
+									}
 								}
 							}
 						}

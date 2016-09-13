@@ -27,7 +27,11 @@ const singleModTpl = fs.readFileSync(path.resolve(__dirname, "single-mod-tpl.js"
 			});
 
 export default async function(file, projectConfig, singleFiles, loadCache, extensionFileHash, isExtractedCommon, callback){
-	const {projectPath, packageName, output, packageJson, plugin, projectInfo} = projectConfig;
+	const {projectPath, packagePath, packageName, output, packageJson, plugin, projectInfo} = projectConfig;
+
+	function parseModId(file){
+		return file.replace(packagePath, "").replace(prefixSepReg, "");
+	}
 
 	var mods = [];
 	(function parseDeps(file){
@@ -52,7 +56,7 @@ export default async function(file, projectConfig, singleFiles, loadCache, exten
 	}));
 
 	var deps = [];
-	mods = mods.map(mod => {
+	var codes = mods.map(mod => {
 		let modDir = path.dirname(mod);
 
 		/**
@@ -60,7 +64,7 @@ export default async function(file, projectConfig, singleFiles, loadCache, exten
 		 */
 
 		return tpl(innerModTpl, {
-			file: mod.replace(projectPath, "").replace(prefixSepReg, ""),
+			file: parseModId(mod),
 			content: jsDeps.transDeps(loadCache[mod].content, function(depPath){
 				/**
 				 * 这里应该有个插件注入点，修改引用
@@ -74,10 +78,10 @@ export default async function(file, projectConfig, singleFiles, loadCache, exten
 						return {
 							requireName: "__inner_require__",
 							modId: mods.indexOf(depPath),
-							modIdComments: depPath.replace(projectPath, "").replace(prefixSepReg, "")
+							modIdComments: parseModId(depPath)
 						};
 					}else{
-						let modId = [packageName, depPath.replace(projectPath, "").replace(prefixSepReg, "")].join("/");
+						let modId = [packageName, parseModId(depPath)].join("/");
 						if(deps.indexOf(modId) === -1){
 							deps.push(modId);
 						}
@@ -112,16 +116,16 @@ export default async function(file, projectConfig, singleFiles, loadCache, exten
 		});
 	});
 
-	mods = mods.join(",\n");
+	codes = codes.join(",\n");
 
-	file = file.replace(projectPath, "").replace(prefixSepReg, "");
+	file = parseModId(file);
 
 	var code = tpl(singleModTpl, {
 		file: [packageName, file].join("/"),
 		project: packageName,
 		path: file,
 		version: "__mod_version_placeholder__",
-		mods: mods
+		mods: codes
 	});
 
 	var newCode = await plugin.task("before-write-bundle", Object.assign({}, projectInfo, {

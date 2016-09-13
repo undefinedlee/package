@@ -9,7 +9,7 @@ const defaultPluginsHash = {
 };
 
 const defaultPlugins = [
-	"log"
+	//"log"
 	,"min"
 ];
 

@@ -32,6 +32,8 @@ async function start(projectPath, output, packageJson, config, version, callback
 		lock[packageName] = true;
 	}
 
+	var packagePath = config.relativePath ? path.join(projectPath, config.relativePath) : projectPath;
+
 	// 打包入口
 	var entries = config.entry || ["*.js", "!(node_modules)/**/[!_]*.js"];
 	if(!(entries instanceof Array)){
@@ -46,6 +48,7 @@ async function start(projectPath, output, packageJson, config, version, callback
 	// 项目信息，提供给插件使用
 	var projectInfo = {
 		path: projectPath,
+		packagePath: packagePath,
 		entries: entries,
 		output: projectOutput,
 		extensions: extensions,
@@ -61,7 +64,7 @@ async function start(projectPath, output, packageJson, config, version, callback
 
 	await plugin.task("start", projectInfo);
 	// 解析出所有入口文件
-	readEntries(projectPath, entries, async function(entries){
+	readEntries(packagePath, entries, async function(entries){
 		await plugin.task("parse-entries", Object.assign(projectInfo, {
 			entries: entries
 		}));
@@ -97,6 +100,7 @@ async function start(projectPath, output, packageJson, config, version, callback
 					bundleSingle(file, {
 						projectPath: projectPath,
 						packageName: packageName,
+						packagePath: packagePath,
 						output: projectOutput,
 						packageJson: packageJson,
 						plugin: plugin,
@@ -230,6 +234,10 @@ export default function main(projectPath, version, output, callback, options){
 		config = require(configPath);
 		hasConfig = true;
 	}else{
+		if(packageJson.name === "react"){
+			options.entries = [ "lib/ReactDOM.js", "react.js" ];
+		}
+
 		config = {
 			entry: options.entries
 		};

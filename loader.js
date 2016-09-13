@@ -57,15 +57,16 @@
 		return (function __inner_require__(id){
 			var factory = mods[id];
 			var module;
-
+			
 			if(!factory.isInitialized){
-				module = {exports: {}};
+				mods[id] = module = {
+					exports: {},
+					isInitialized: true
+				};
 				factory(__inner_require__, module.exports, module);
-				factory.exports = module.exports;
-				factory.isInitialized = true;
 			}
 
-			return factory.exports;
+			return (module || factory).exports;
 		})(0);
 	}
 	/**
@@ -76,11 +77,14 @@
 		var modVersionId = [project, version].join("/");
 		// 将模块存入本地
 		if(util.store && !isStoreMod){
-			util.store.set(modVersionId, factory);
+			util.store.set(modVersionId, {
+				path: path,
+				factory: factory
+			});
 		}
 		// 
 		mods[modPathId] = function(){
-			var innerMods = factory(require, [config.base, modVersionId + ".js"].join("/"), [config.base, project].join("/"), config.base);
+			var innerMods = factory(require, global, [config.base, modVersionId + ".js"].join("/"), [config.base, project].join("/"), config.base);
 			return parseFactory(innerMods);
 		};
 
@@ -132,12 +136,17 @@
 				return false;
 			}
 
-			var factory;
+			var mod, project, version, sepIndex;
 			if(util.store){
-				factory = util.store.get(id);
-				if(factory){
-					loader.define(id, factory, true);
-					return false;
+				mod = util.store.get(id);
+				if(mod){
+					sepIndex = id.indexOf("/");
+					if(sepIndex !== -1){
+						project = id.substring(0, sepIndex);
+						version = id.slice(sepIndex + 1);
+						loader.define(project, mod.path, version, mod.factory, true);
+						return false;
+					}
 				}
 			}
 
@@ -243,6 +252,14 @@
 			},
 			remove: function (key) {
 				storage.removeItem(key);
+			},
+			size: function(){
+				var size = 0;
+				for(var i = 0, l = localStorage.length, key; i < l; i ++){
+					key = localStorage.key(i);
+					size += key.length;
+					size += localStorage.getItem(key).length;
+				}
 			}
 		};
 	}
@@ -309,40 +326,40 @@
 		ModVisitManage.clear(30);
 	}, 5000);
 
-	// var ModVersionManage = (function(){
-	// 	var modManageKey = "mod-version-manager";
+	var ModVersionManage = (function(){
+		var modManageKey = "mod-version-manager";
 
-	// 	function getModManage(){
-	// 		var config = store.get(modManageKey);
-	// 		if(config && (config = JSON.parse(config))){
-	// 			return config;
-	// 		}else{
-	// 			return {};
-	// 		}
-	// 	}
+		function getModManage(){
+			var config = store.get(modManageKey);
+			if(config && (config = JSON.parse(config))){
+				return config;
+			}else{
+				return {};
+			}
+		}
 		
-	// 	function setModManage(config){
-	// 		store.set(modManageKey, JSON.stringify(config));
-	// 	}
+		function setModManage(config){
+			store.set(modManageKey, JSON.stringify(config));
+		}
 
-	// 	return {
-	// 		update: function(path, id){
-	// 			var config = getModManage();
-	// 			var lastId = config[path];
-	// 			if(lastId){
-	// 				if(lastId !== id){
-	// 					store.remove(lastId);
-	// 					ModVisitManage["delete"](lastId);
-	// 					config[path] = id;
-	// 					setModManage(config);
-	// 				}
-	// 			}else{
-	// 				config[path] = id;
-	// 				setModManage(config);
-	// 			}
-	// 		}
-	// 	};
-	// })();
+		return {
+			update: function(path, id){
+				var config = getModManage();
+				var lastId = config[path];
+				if(lastId){
+					if(lastId !== id){
+						store.remove(lastId);
+						ModVisitManage["delete"](lastId);
+						config[path] = id;
+						setModManage(config);
+					}
+				}else{
+					config[path] = id;
+					setModManage(config);
+				}
+			}
+		};
+	})();
 
 	function noop(){}
 
@@ -355,23 +372,34 @@
 			set: noop,
 			remove: noop
 		},
-		store: store ? {
+		store: store && false ? {
 			get: function(id){
-				var factory = store.get(id);
-				if(factory){
-					if(factory = parseJson(factory)){
-						ModVisitManage.update(id);
-						return factory;
-					}else{
-						store.remove(id);
-						ModVisitManage["delete"](id);
+				var mod = store.get(id);
+				if(mod){
+					try{
+						mod = JSON.parse(mod);
+					}catch(e){
+						mod = null;
+					}
+
+					if(mod){
+						mod.factory = parseJson(mod.factory);
+
+						if(mod.factory){
+							ModVisitManage.update(id);
+							return mod;
+						}else{
+							store.remove(id);
+							ModVisitManage["delete"](id);
+						}
 					}
 				}
 			},
-			set: function(id, factory){
-				store.set(id, factory.toString());
+			set: function(id, mod){
+				mod.factory = mod.factory.toString();
+				store.set(id, JSON.stringify(mod));
 				ModVisitManage.update(id);
-				// ModVersionManage.update(path, id);
+				ModVersionManage.update(mod.path, id);
 			}
 		} : null,
 		request: function(url){
@@ -413,3 +441,20 @@
 		}
 	};
 })());
+
+window.ES6SyntaxPolyfill = {
+	_createClass: function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(),
+	_get: function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } },
+	_classCallCheck: function(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } },
+	_inherits: function(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; },
+	_possibleConstructorReturn: function(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; },
+	_interopRequireDefault: function(obj) { return obj && obj.__esModule ? obj : { default: obj }; },
+	_asyncToGenerator: function(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
+};
+
+window.process = {
+	env: {
+		NODE_ENV: 'production'
+		// NODE_ENV: "dev"
+	}
+};
