@@ -136,15 +136,13 @@
 				return false;
 			}
 
-			var mod, project, version, sepIndex;
+			var mod, modInfo;
 			if(util.store){
 				mod = util.store.get(id);
 				if(mod){
-					sepIndex = id.indexOf("/");
-					if(sepIndex !== -1){
-						project = id.substring(0, sepIndex);
-						version = id.slice(sepIndex + 1);
-						loader.define(project, mod.path, version, mod.factory, true);
+					modInfo = util.parseModId(id);
+					if(modInfo){
+						loader.define(modInfo.project, mod.path, modInfo.version, mod.factory, true);
 						return false;
 					}
 				}
@@ -363,6 +361,18 @@
 
 	function noop(){}
 
+	function parseModId(id){
+		sepIndex = id.indexOf("/");
+		if(sepIndex !== -1){
+			return {
+				project: id.substring(0, sepIndex),
+				version: id.slice(sepIndex + 1)
+			};
+		}
+
+		return null;
+	}
+
 	var doc = window.document;
 	var head = doc.head || doc.getElementsByTagName("head")[0] || doc.documentElement;
 	
@@ -372,6 +382,7 @@
 			set: noop,
 			remove: noop
 		},
+		parseModId: parseModId,
 		store: store && false ? {
 			get: function(id){
 				var mod = store.get(id);
@@ -399,7 +410,10 @@
 				mod.factory = mod.factory.toString();
 				store.set(id, JSON.stringify(mod));
 				ModVisitManage.update(id);
-				ModVersionManage.update(mod.path, id);
+				var modInfo = parseModId(id);
+				if(modInfo){
+					ModVersionManage.update([modInfo.project, mod.path].join("/"), modInfo.version);
+				}
 			}
 		} : null,
 		request: function(url){
