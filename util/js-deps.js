@@ -57,21 +57,25 @@ findDeps.transDeps = function(content, transFn){
 										node.arguments[0].type === "StringLiteral"){
 											let modInfo = transFn(node.arguments[0].value);
 
-											if(typeof modInfo.modId === "number"){
-												node.arguments[0] = t.NumericLiteral(modInfo.modId);
-											}else if(typeof modInfo.modId === "string"){
-												node.arguments[0].value = modInfo.modId;
-											}
+											if(modInfo instanceof Array){
+												path.node = t.NullLiteral();
+											}else{
+												if(typeof modInfo.modId === "number"){
+													node.arguments[0] = t.NumericLiteral(modInfo.modId);
+												}else if(typeof modInfo.modId === "string"){
+													node.arguments[0].value = modInfo.modId;
+												}
 
-											if(modInfo.requireName){
-												node.callee.name = modInfo.requireName;
-											}
+												if(modInfo.requireName){
+													node.callee.name = modInfo.requireName;
+												}
 
-											if(modInfo.modIdComments){
-												//console.log(t);
-												node.arguments[0].trailingComments = [
-													t.StringLiteral(modInfo.modIdComments)
-												];
+												if(modInfo.modIdComments){
+													//console.log(t);
+													node.arguments[0].trailingComments = [
+														t.StringLiteral(modInfo.modIdComments)
+													];
+												}
 											}
 									}
 								}

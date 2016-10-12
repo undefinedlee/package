@@ -89,7 +89,7 @@ function imageLoader(content){
 		images.gc();
 
 		callback(Tpl(tpl, {
-			images: "__base64_image_sprite_mod_id__",
+			images: base64ImageSpriteModId,
 			content: imgs.map(img => {
 				if(img.type === "base64"){
 					return `images["${img.content}"]`;

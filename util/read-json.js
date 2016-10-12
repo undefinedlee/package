@@ -1,4 +1,5 @@
 import fs from "fs";
+import console from "./console";
 
 function parseJson(content, file){
 	// 删除注释
@@ -15,10 +16,11 @@ function parseJson(content, file){
 	try{
 		content = JSON.parse(content.trim());
 	}catch(e){
-		console.log("解析json文件错误");
+		console.error("解析json文件错误");
 		console.log(file);
 		console.log(content);
-		throw e;
+		content = null;
+		//throw e;
 	}
 
 	return content;
@@ -32,7 +34,11 @@ function readJson(file, callback){
 				encoding: "utf8"
 			}, function(err, content){
 				if(err){
-					throw err;
+					console.error(`读取文件${file}失败`);
+					console.log(err);
+					//throw err;
+					callback(null);
+					return;
 				}
 
 				callback(parseJson(content, file));

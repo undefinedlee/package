@@ -4,6 +4,7 @@ import createVersion from "../create-version";
 import console from "../../util/console";
 import sortJson from "../../util/sort-json";
 import md5 from "../../util/md5";
+import constConfig from "../const";
 import Tpl from "../../util/tpl";
 import asyncList from "../../util/async-list";
 const tpl = fs.readFileSync(path.resolve(__dirname, "tpl.js"), {
@@ -29,7 +30,9 @@ export default function(base64Images, output, packageName){
 
 		let writeFileList = [function(callback){
 			fs.writeFile(path.join(output, version + "@1x.js"), Tpl(tpl, {
-				modId: modId,
+				project: packageName,
+				path: constConfig.base64ImageSpriteModId,
+				version: version + "@1x",
 				content: pixelRatio1Images
 			}), function(err){
 				if(err){
@@ -44,6 +47,9 @@ export default function(base64Images, output, packageName){
 			var content = JSON.stringify(sortJson(base64Images[pixelRatio]));
 			return function(callback){
 				fs.writeFile(path.join(output, version + "@" + pixelRatio + "x.js"), Tpl(tpl, {
+					project: packageName,
+					path: constConfig.base64ImageSpriteModId,
+					version: version + "@" + pixelRatio + "x",
 					modId: modId,
 					content: content
 				}), function(err){

@@ -74,20 +74,30 @@ export default async function(file, projectConfig, singleFiles, loadCache, exten
 					depPath = path.resolve(modDir, depPath);
 					depPath = extensionFileHash[depPath] || depPath;
 
-					if(!isExtractedCommon || singleFiles.indexOf(depPath) === -1){
-						return {
-							requireName: "__inner_require__",
-							modId: mods.indexOf(depPath),
-							modIdComments: parseModId(depPath)
-						};
-					}else{
-						let modId = [packageName, parseModId(depPath)].join("/");
-						if(deps.indexOf(modId) === -1){
-							deps.push(modId);
+					let parse = function(depPath){
+						if(!isExtractedCommon || singleFiles.indexOf(depPath) === -1){
+							return {
+								requireName: "__inner_require__",
+								modId: mods.indexOf(depPath),
+								modIdComments: parseModId(depPath)
+							};
+						}else{
+							let modId = [packageName, parseModId(depPath)].join("/");
+							if(deps.indexOf(modId) === -1){
+								deps.push(modId);
+							}
+							return {
+								modId: modId
+							};
 						}
-						return {
-							modId: modId
-						};
+					};
+
+					if(depPath instanceof Array){
+						return depPath.map(depPath => {
+							return parse(depPath);
+						});
+					}else{
+						return parse(depPath);
 					}
 				}else if(depPath === constConfig.base64ImageSpriteModId){
 					let modId = [packageName, constConfig.base64ImageSpriteModId].join("/");

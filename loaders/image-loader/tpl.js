@@ -1,2 +1,2 @@
 var images = require("#images#");
-module.exports = [#content#][Math.min(3, window.devicePixelRatio || 1)];
+module.exports = ["",#content#][__pixel_ratio];

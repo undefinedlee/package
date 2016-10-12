@@ -3,6 +3,7 @@ import path from "path";
 import asyncList from "../util/async-list";
 import console from "../util/console";
 import jsDeps from "../util/js-deps";
+import glob from "glob";
 
 const LoadStatus = {
 	loading: 1,
@@ -54,7 +55,32 @@ export default function(files, extensions, loader, callback){
 					var fileDir = path.dirname(file);
 					jsDeps(content).forEach(function(item){
 						if(/^\.{1,2}\//.test(item)){
-							innerDeps.push(path.resolve(fileDir, item));
+							if(/\.(png|jpg|gif|js|json)$/.test(item)){
+								// 暂时写死这几个类型支持多匹配
+								try{
+									let prefix = item.match(/^(\.{1,2}\/)+/)[0];
+									item = item.replace(/^(\.{1,2}\/)+/, "");
+									let relativePath = path.resolve(fileDir, prefix);
+
+									let files = glob.sync(item, {
+										cwd: relativePath
+									}).map(function(file){
+										return path.join(relativePath, file);
+									});
+
+									if(files.length === 1){
+										extensionFileHash[path.join(relativePath, item)] = files[0];
+										innerDeps.push(files[0]);
+									}else if(files.length > 1){
+										extensionFileHash[path.join(relativePath, item)] = files;
+										innerDeps = innerDeps.concat(files);
+									}
+								}catch(e){
+									console.error(e);
+								}
+							}else{
+								innerDeps.push(path.resolve(fileDir, item));
+							}
 						}else{
 							outerDeps.push(item);
 						}

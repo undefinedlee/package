@@ -45,6 +45,10 @@
 	function require(id){
 		var factory = mods[id];
 
+		if(!factory){
+			return;
+		}
+
 		if(!factory.isInitialized){
 			factory.exports = factory();
 			factory.isInitialized = true;
@@ -69,6 +73,8 @@
 			return (module || factory).exports;
 		})(0);
 	}
+
+	var devicePixelRatio = Math.min(3, window.devicePixelRatio || 1);
 	/**
 	 * 
 	 */
@@ -84,8 +90,12 @@
 		}
 		// 
 		mods[modPathId] = function(){
-			var innerMods = factory(require, global, [config.base, modVersionId + ".js"].join("/"), [config.base, project].join("/"), config.base);
-			return parseFactory(innerMods);
+			var innerMods = factory(require, global, project, [config.base, modVersionId + ".js"].join("/"), [config.base, project].join("/"), config.base, devicePixelRatio);
+			if(innerMods instanceof Array){
+				return parseFactory(innerMods);
+			}else{
+				return innerMods;
+			}
 		};
 
 		loadeds[modVersionId] = true;
@@ -128,7 +138,9 @@
 	loader.use = function(ids, callback){
 		var loadingMods = [];
 
-		var requestList = ids.filter(function(id){
+		var requestList = ids.map(function(id){
+			return id.replace("__pixel_ratio__", devicePixelRatio);
+		}).filter(function(id){
 			if(loadeds[id]){
 				return false;
 			}else if(loadings[id]){
@@ -186,6 +198,10 @@
 	}
 
 	require.async = function(ids, callback){
+		ids = ids.filter(function(id){
+			return !mods[id];
+		});
+		
 		parseUrl(ids, function(ids){
 			loader.use(ids, callback);
 		});
