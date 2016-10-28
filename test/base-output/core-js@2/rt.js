@@ -1,1 +1,0 @@
-loader.define("core-js@2/rt",function(t,e,i,r){"use strict";return[function(t,e,i){t("");for(var r=t(""),o=t(""),n=t(""),a=t("")("toStringTag"),d=["NodeList","DOMTokenList","MediaList","StyleSheetList","CSSRuleList"],s=0;s<5;s++){var _=d[s],l=r[_],u=l&&l.prototype;u&&!u[a]&&o(u,a,_),n[_]=n.Array}}]});

@@ -1,1 +1,0 @@
-loader.define("core-js@2/25",function(t,n,r,e){"use strict";return[function(t,n,r){r.exports=function(){return Function.call.apply(Array.prototype.shift,arguments)}}]});

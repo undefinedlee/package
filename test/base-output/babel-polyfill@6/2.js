@@ -1,1 +1,3 @@
-loader.define("babel-polyfill@6/2",function(e,i,r,n){"use strict";return[function(i,r,n){function l(e,i,r){e[i]||Object[o](e,i,{writable:!0,configurable:!0,value:r})}if(e("core-js@2/shim.js"),e("regenerator-runtime@0.9/runtime.js"),e("core-js@2/fn/regexp/escape.js"),global._babelPolyfill)throw new Error("only one instance of babel-polyfill is allowed");global._babelPolyfill=!0;var o="defineProperty";l(String.prototype,"padLeft","".padStart),l(String.prototype,"padRight","".padEnd),"pop,reverse,shift,keys,values,entries,indexOf,every,some,forEach,map,filter,find,findIndex,includes,join,slice,concat,push,splice,unshift,sort,lastIndexOf,reduce,reduceRight,copyWithin,fill".split(",").forEach(function(e){[][e]&&l(Array,e,Function.call.bind([][e]))})}]});
+loader.version("babel-polyfill@6", {
+	"lib/index.js": "0"
+});

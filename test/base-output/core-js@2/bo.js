@@ -1,1 +1,0 @@
-loader.define("core-js@2/bo",function(n,e,i,o){"use strict";return[function(n,e,i){n("")},function(n,e,i){}]});

@@ -1,9 +1,0 @@
-{
-	"Gruntfile.js": [
-		"LiveScript@1.3/index.js"
-	],
-	"build/index.js": [
-		"webpack@1.13/index.js",
-		"temp@0.8/index.js"
-	]
-}

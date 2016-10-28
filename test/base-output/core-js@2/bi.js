@@ -1,1 +1,0 @@
-loader.define("core-js@2/bi",function(t,n,e,o){"use strict";return[function(t,n,e){t("");var o=Date.prototype.toString;e.exports=function(t){return o.call(t)}},function(t,n,e){}]});

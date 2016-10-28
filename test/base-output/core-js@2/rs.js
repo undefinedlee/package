@@ -1,1 +1,0 @@
-loader.define("core-js@2/rs",function(n,e,t,i){"use strict";return[function(n,e,t){n("")("RegExp")},function(n,e,t){var i=n(""),o=n(""),r=n(""),c=n(""),f=n("")("species");t.exports=function(n){var e="function"==typeof o[n]?o[n]:i[n];c&&e&&!e[f]&&r.f(e,f,{configurable:!0,get:function(){return this}})}}]});

@@ -1,1 +1,20 @@
-loader.define("base-package@1/3",function(e,n,i,s){"use strict";return[function(n,i,s){n(1),e("base-package@1/components/calendar/index.js");s.exports="list"},function(n,i,s){e("bbb@3.1.2/lib.js");s.exports="list-service"}]});
+// base-package@1/views/list/index.js
+loader.define("base-package@1", "views/list/index.js", "3", function(require, global, __project, __filename, __dirname, __base, __pixel_ratio){
+	"use strict";
+	
+	return [
+		// views/list/index.js
+		function(__inner_require__, exports, module){
+			var ListService = __inner_require__(1 /*service/list.js*/);
+			var calendar = require("base-package@1/components/calendar/index.js");
+			
+			module.exports = "list";
+		},
+		// service/list.js
+		function(__inner_require__, exports, module){
+			var bbbLib = require("bbb@3.1.2/lib.js");
+			
+			module.exports = "list-service";
+		}
+	];
+});

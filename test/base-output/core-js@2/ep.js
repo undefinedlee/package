@@ -1,1 +1,0 @@
-loader.define("core-js@2/ep",function(t,n,e,o){"use strict";return[function(t,n,e){t(""),e.exports=function(t){return RegExp.prototype.toString.call(t)}},function(t,n,e){}]});

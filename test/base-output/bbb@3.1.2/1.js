@@ -1,0 +1,1 @@
+loader.version("bbb@3.1.2", {});

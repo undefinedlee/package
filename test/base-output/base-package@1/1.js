@@ -1,1 +1,52 @@
-loader.define("base-package@1/1",function(e,t,l,i){"use strict";return[function(t,l,i){Object.defineProperty(l,"__esModule",{value:!0});var n=ES6SyntaxPolyfill._createClass,a=t(1),o=s(a),r=e("base-package@1/components/calendar/index.js");s(r);e("babel-polyfill@6/lib/index.js");var s=ES6SyntaxPolyfill._interopRequireDefault,c=ES6SyntaxPolyfill._classCallCheck,f=ES6SyntaxPolyfill._possibleConstructorReturn,u=ES6SyntaxPolyfill._inherits,_=function(e){function t(){c(this,t);var e=f(this,(t.__proto__||Object.getPrototypeOf(t)).call(this));return e.b=1,e.items=Array.from(3),e}return u(t,e),n(t,[{key:"a",value:function(){this.b=2}}]),t}(o.default);l.default=_},function(e,t,l){l.exports="detail-service"}]});
+// base-package@1/views/detail/index.js
+loader.define("base-package@1", "views/detail/index.js", "1", function(require, global, __project, __filename, __dirname, __base, __pixel_ratio){
+	"use strict";
+	
+	return [
+		// views/detail/index.js
+		function(__inner_require__, exports, module){
+			Object.defineProperty(exports, "__esModule", {
+				value: true
+			});
+			
+			var _detail = __inner_require__(1 /*service/detail.js*/);
+			
+			var _detail2 = babelHelpers.interopRequireDefault(_detail);
+			
+			var _index = require("base-package@1/components/calendar/index.js");
+			
+			var _index2 = babelHelpers.interopRequireDefault(_index);
+			
+			require("babel-polyfill@6/lib/index.js");
+			
+			var Detail = function (_DetailService) {
+				babelHelpers.inherits(Detail, _DetailService);
+			
+				function Detail() {
+					babelHelpers.classCallCheck(this, Detail);
+			
+					var _this = babelHelpers.possibleConstructorReturn(this, (Detail.__proto__ || Object.getPrototypeOf(Detail)).call(this));
+			
+					_this.b = 1;
+			
+					_this.items = Array.from(3);
+					return _this;
+				}
+			
+				babelHelpers.createClass(Detail, [{
+					key: "a",
+					value: function a() {
+						this.b = 2;
+					}
+				}]);
+				return Detail;
+			}(_detail2.default);
+			
+			exports.default = Detail;
+		},
+		// service/detail.js
+		function(__inner_require__, exports, module){
+			module.exports = "detail-service";
+		}
+	];
+});
