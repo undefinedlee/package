@@ -18,11 +18,11 @@ function getTab(count){
 }
 
 // 内部模块模板
-const innerModTpl = fs.readFileSync(path.resolve(__dirname, "inner-mod-tpl.js"), {
+const innerModTpl = fs.readFileSync(path.resolve(__dirname, "inner-mod.tpl"), {
 				encoding: "utf8"
 			});
 // 独立模块模板
-const singleModTpl = fs.readFileSync(path.resolve(__dirname, "single-mod-tpl.js"), {
+const singleModTpl = fs.readFileSync(path.resolve(__dirname, "single-mod.tpl"), {
 				encoding: "utf8"
 			});
 

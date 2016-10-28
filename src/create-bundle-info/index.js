@@ -9,7 +9,7 @@ import constConfig from "../const";
 import sortJsonKey from "../../util/sort-json";
 import readJson from "../../util/read-json";
 // 客户端版本文件模板
-const versionTpl = fs.readFileSync(path.resolve(__dirname, "version-tpl.js"), {
+const versionTpl = fs.readFileSync(path.resolve(__dirname, "version.tpl"), {
 				encoding: "utf8"
 			});
 

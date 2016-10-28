@@ -7,7 +7,7 @@ import asyncList from "../../util/async-list";
 import constConfig from "../../src/const";
 import mkdirs from "../../util/mkdirs";
 import images from "images";
-const tpl = fs.readFileSync(path.resolve(__dirname, "tpl.js"), {
+const tpl = fs.readFileSync(path.resolve(__dirname, "index.tpl"), {
 				encoding: "utf8"
 			});
 

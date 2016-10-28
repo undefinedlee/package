@@ -7,7 +7,7 @@ import md5 from "../../util/md5";
 import constConfig from "../const";
 import Tpl from "../../util/tpl";
 import asyncList from "../../util/async-list";
-const tpl = fs.readFileSync(path.resolve(__dirname, "tpl.js"), {
+const tpl = fs.readFileSync(path.resolve(__dirname, "index.tpl"), {
 				encoding: "utf8"
 			});
 

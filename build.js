@@ -125,9 +125,11 @@ var ignores = [
 	path.join(__dirname, "loader.js")
 ];
 
+var isTest = !!process.argv[2];
+
 readFiles(__dirname, ".js", true, function(files){
 	files.forEach(function(file){
-		if(ignores.indexOf(file) === -1 && file.indexOf("/node_modules/") === -1 && !/\-tpl\.js$/.test(file)){
+		if(ignores.indexOf(file) === -1 && file.indexOf("/node_modules/") === -1 && file.indexOf("/test/") === -1){
 			babel.transformFile(file, {
 				presets: ['es2015', 'stage-0']
 			}, function(err, result){
@@ -135,7 +137,9 @@ readFiles(__dirname, ".js", true, function(files){
 					throw err;
 				}
 
-				write(file, result.code);
+				if(!isTest){
+					write(file, result.code);
+				}
 			});
 		}
 	});
