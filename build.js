@@ -129,7 +129,7 @@ var isTest = !!process.argv[2];
 
 readFiles(__dirname, ".js", true, function(files){
 	files.forEach(function(file){
-		if(ignores.indexOf(file) === -1 && file.indexOf("/node_modules/") === -1 && file.indexOf("/test/") === -1){
+		if(ignores.indexOf(file) === -1 && !/^\/(node_modules|test)\//.test(file.replace(__dirname, ""))){
 			babel.transformFile(file, {
 				presets: ['es2015', 'stage-0']
 			}, function(err, result){
