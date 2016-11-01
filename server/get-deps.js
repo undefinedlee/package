@@ -2,12 +2,17 @@ import fs from "fs";
 import path from "path";
 import readJson from "../util/read-json";
 
-var vJsonCache = {};
-var depsJsonCache = {};
-var versionJsonCache = {};
+var vJsonCache;
+var depsJsonCache;
+var versionJsonCache;
 
 export default function parse(modId, root, status){
-	status = status || {};
+	if(!status){
+		status = {};
+		vJsonCache = {};
+		depsJsonCache = {};
+		versionJsonCache = {};
+	}
 
 	let sepIndex = modId.indexOf("/");
 	let projectName = modId.substring(0, sepIndex);

@@ -35,7 +35,8 @@ async function start(projectPath, output, packageJson, config, version, callback
 	var packagePath = config.relativePath ? path.join(projectPath, config.relativePath) : projectPath;
 
 	// 打包入口
-	var entries = config.entry || ["*.js", "!(node_modules)/**/[!_]*.js"];
+	// var entries = config.entry || ["*.js", "!(node_modules)/**/[!_]*.js"];
+	var entries = config.entry || "**/[!_]*.js";
 	if(!(entries instanceof Array)){
 		entries = [entries];
 	}
@@ -181,16 +182,26 @@ async function start(projectPath, output, packageJson, config, version, callback
 	});
 }
 
-function hasPackaged(output, modId, version){
+function hasPackaged(output, modId, version, entries){
 	if(!fs.existsSync(path.resolve(output, ".package-list.json"))){
 		return false;
 	}else{
 		let lastVersion = require(path.resolve(output, ".package-list.json"))[modId];
-		return lastVersion && !semver.gt(lastVersion, version);
+		if(lastVersion){
+			if(typeof lastVersion === "string"){
+				return !semver.gt(lastVersion, version);
+			}else{
+				return !semver.gt(lastVersion.version, version) && (!entries || entries.every(function(entry){
+					return lastVersion.entries.indexOf(entry) !== -1;
+				}));
+			}
+		}else{
+			return false;
+		}
 	}
 }
 
-function updatePackageInfo(output, modId, version){
+function updatePackageInfo(output, modId, version, entries){
 	var file = path.resolve(output, ".package-list.json");
 	var hash;
 	if(fs.existsSync(file)){
@@ -198,7 +209,24 @@ function updatePackageInfo(output, modId, version){
 	}else{
 		hash = {};
 	}
-	hash[modId] = version;
+
+	if(entries){
+		let mod = hash[modId];
+		if(mod){
+			mod.entries.forEach(function(entry){
+				if(entries.indexOf(entry) === -1){
+					entries.push(entry);
+				}
+			});
+		}
+		hash[modId] = {
+			version: version,
+			entries: entries
+		};
+	}else{
+		hash[modId] = version;
+	}
+
 	mkdirs.sync(path.dirname(file));
 	fs.writeFileSync(file, JSON.stringify(hash));
 }
@@ -211,11 +239,27 @@ function updatePackageInfo(output, modId, version){
 export default function main(projectPath, version, output, callback, options){
 	options = options || {};
 
-	const packageJson = checkPackage(projectPath, version);
+	var packageJson = checkPackage(projectPath, version, options.isInner);
 
 	if(!packageJson){
-		callback && callback();
-		return;
+		if(!options.isInner){
+			packageJson = {};
+			["name", "version", "dependencies", "devDependencies", "optionalDependencies", "peerDependencies"].forEach(function(key){
+				if(options[key]){
+					packageJson[key] = options[key];
+				}
+			});
+
+			if(!packageJson.name){
+				packageJson.name = "project-name";
+			}
+			if(!packageJson.version){
+				packageJson.version = "0.0.1";
+			}
+		}else{
+			callback && callback();
+			return;
+		}
 	}
 
 	// 如果没有指定打包的版本规则，则设置默认版本规则
@@ -247,13 +291,15 @@ export default function main(projectPath, version, output, callback, options){
 	// 输出目录
 	output = config.output || output || path.join(process.env.HOME, ".ipack");
 
-	if(options.isInner && hasPackaged(output, packageJson.name + "@" + version, packageJson.version)){
+	if(options.isInner && hasPackaged(output, packageJson.name + "@" + version, packageJson.version, options.entries)){
 		callback && callback();
 	}else{
 		// 只有配置了config的项目，才会更新打包版本
 		// 因为对于没有配置config的项目，无法判断入口有哪些，所以不能进行完全打包
 		if(hasConfig){
 			updatePackageInfo(output, packageJson.name + "@" + version, packageJson.version);
+		}else{
+			updatePackageInfo(output, packageJson.name + "@" + version, packageJson.version, options.entries);
 		}
 		// 开始打包
 		start(projectPath, output, packageJson, config, version, callback);

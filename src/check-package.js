@@ -3,11 +3,15 @@ import semver from "semver";
 import console from "../util/console";
 import readJson from "../util/read-json";
 
-export default function(projectPath, version){
+export default function(projectPath, version, isInner){
 	// 项目配置
 	const packageJson = readJson.sync(path.resolve(projectPath, "package.json"));
 	if(!packageJson){
-		console.error(`在${projectPath}目录下找不到package.json文件`);
+		if(isInner){
+			console.error(`在${projectPath}目录下找不到package.json文件`);
+		}else{
+			console.warn(`在${projectPath}目录下找不到package.json文件`);
+		}
 		return;
 	}
 

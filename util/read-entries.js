@@ -6,7 +6,8 @@ export default function(projectPath, entries, callback){
 	asyncList(entries.map(entry => {
 		return function(callback){
 			glob(entry, {
-				cwd: projectPath
+				cwd: projectPath,
+				ignore: "node_modules/**/*"
 			}, function(err, files){
 				if(err){
 					throw err;
