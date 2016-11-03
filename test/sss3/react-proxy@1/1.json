@@ -1,0 +1,8 @@
+{
+	"modules/index.js": [
+		"react-deep-force-update@1/lib/index.js",
+		"lodash@4/find.js",
+		"lodash@4/assign.js",
+		"lodash@4/difference.js"
+	]
+}

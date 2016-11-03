@@ -79,9 +79,22 @@ async function start(projectPath, output, packageJson, config, version, callback
 
 			var imageSpriteModId = await createImageSprite(loader.base64Images, projectOutput, packageName);
 
+			await plugin.task("before-parse-single", Object.assign(projectInfo, {
+				entries: entries
+			}));
+
+			if(projectInfo.packageJson.name === "react-native"){
+				console.log(entries);
+				console.log(isExtractedCommon);
+			}
+
 			// 需要单独打包的文件列表
 			var singleFiles = isExtractedCommon ? findAllSingleFiles(entries, loadCache) : entries;
 
+
+			if(projectInfo.packageJson.name === "react-native"){
+				console.log(singleFiles);
+			}
 			await plugin.task("parse-single", Object.assign(projectInfo, {
 				singleFiles: singleFiles
 			}));
@@ -236,6 +249,7 @@ function updatePackageInfo(output, modId, version, entries){
  * @param {string} projectPath - 项目根目录
  * @param {string} [version="^packageJson.version"] - 需要打包的版本规则
  */
+var plugins = [];
 export default function main(projectPath, version, output, callback, options){
 	options = options || {};
 
@@ -243,12 +257,12 @@ export default function main(projectPath, version, output, callback, options){
 
 	if(!packageJson){
 		if(!options.isInner){
-			packageJson = {};
-			["name", "version", "dependencies", "devDependencies", "optionalDependencies", "peerDependencies"].forEach(function(key){
-				if(options[key]){
-					packageJson[key] = options[key];
-				}
-			});
+			packageJson = options.packageJson || {};
+			// ["name", "version", "dependencies", "devDependencies", "optionalDependencies", "peerDependencies"].forEach(function(key){
+			// 	if(options[key]){
+			// 		packageJson[key] = options[key];
+			// 	}
+			// });
 
 			if(!packageJson.name){
 				packageJson.name = "project-name";
@@ -271,21 +285,33 @@ export default function main(projectPath, version, output, callback, options){
 	version = parseVersion(version, packageJson.version);
 
 	// 打包配置
-	const configPath = path.resolve(projectPath, "pack.config.js");
 	var config;
 	var hasConfig;
-	if(fs.existsSync(configPath)){
-		config = require(configPath);
+
+	if(options.config){
+		config = options.config;
 		hasConfig = true;
 	}else{
-		if(packageJson.name === "react"){
-			options.entries = [ "lib/ReactDOM.js", "react.js" ];
-		}
+		let configPath = path.resolve(projectPath, "pack.config.js");
+		if(fs.existsSync(configPath)){
+			config = require(configPath);
+			hasConfig = true;
+		}else{
+			if(packageJson.name === "react"){
+				options.entries = [ "lib/ReactDOM.js", "react.js" ];
+			}
 
-		config = {
-			entry: options.entries
-		};
-		hasConfig = false;
+			config = {
+				entry: options.entries
+			};
+			hasConfig = false;
+		}
+	}
+
+	if(options.isInner){
+		config.plugins = plugins;
+	}else{
+		plugins = config.plugins;
 	}
 
 	// 输出目录

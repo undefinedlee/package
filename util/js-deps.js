@@ -20,7 +20,8 @@ function findDeps(content){
 									if(node.callee.type === "Identifier" &&
 										node.callee.name === "require" &&
 										node.arguments[0] &&
-										node.arguments[0].type === "StringLiteral"){
+										node.arguments[0].type === "StringLiteral" &&
+										!path.scope.hasBinding("require")){
 											deps.push(node.arguments[0].value);
 									}
 								}
@@ -54,7 +55,8 @@ findDeps.transDeps = function(content, transFn){
 									if(node.callee.type === "Identifier" &&
 										node.callee.name === "require" &&
 										node.arguments[0] &&
-										node.arguments[0].type === "StringLiteral"){
+										node.arguments[0].type === "StringLiteral" &&
+										!path.scope.hasBinding("require")){
 											let modInfo = transFn(node.arguments[0].value);
 
 											if(modInfo instanceof Array){

@@ -1,0 +1,6 @@
+{
+	"lib/index.js": [
+		"react-proxy@1/modules/index.js",
+		"global@4/window.js"
+	]
+}

@@ -15,10 +15,16 @@ const defaultPlugins = [
 
 export default function(configPlugins){
 	var tasks = {};
-
+	
 	(configPlugins || defaultPlugins).map(plugin => {
 		if(typeof plugin === "string"){
 			return defaultPluginsHash[plugin] || function(){};
+		}else if(typeof plugin === "function"){
+			return plugin;
+		}else{
+			console.error(`插件类型错误:`);
+			console.log(plugin);
+			return function(){};
 		}
 	}).forEach(plugin => {
 		plugin.call({

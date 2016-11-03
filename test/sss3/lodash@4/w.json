@@ -1,0 +1,112 @@
+{
+	"_ListCache.js": [
+		"lodash@4/eq.js"
+	],
+	"_Map.js": [
+		"lodash@4/_getNative.js",
+		"lodash@4/_root.js"
+	],
+	"_MapCache.js": [
+		"lodash@4/_ListCache.js",
+		"lodash@4/_Map.js",
+		"lodash@4/_getNative.js"
+	],
+	"_SetCache.js": [
+		"lodash@4/_MapCache.js"
+	],
+	"_Symbol.js": [
+		"lodash@4/_root.js"
+	],
+	"_baseRest.js": [
+		"lodash@4/identity.js",
+		"lodash@4/_defineProperty.js"
+	],
+	"_defineProperty.js": [
+		"lodash@4/_getNative.js"
+	],
+	"_getNative.js": [
+		"lodash@4/isFunction.js",
+		"lodash@4/isObject.js",
+		"lodash@4/_toSource.js",
+		"lodash@4/_root.js"
+	],
+	"_root.js": [
+		"lodash@4/_freeGlobal.js"
+	],
+	"assign.js": [
+		"lodash@4/isArrayLike.js",
+		"lodash@4/_isPrototype.js",
+		"lodash@4/keys.js",
+		"lodash@4/eq.js",
+		"lodash@4/_defineProperty.js",
+		"lodash@4/_baseRest.js",
+		"lodash@4/_isIndex.js",
+		"lodash@4/isObject.js"
+	],
+	"difference.js": [
+		"lodash@4/_baseRest.js",
+		"lodash@4/_SetCache.js",
+		"lodash@4/_arrayMap.js",
+		"lodash@4/_baseUnary.js",
+		"lodash@4/_cacheHas.js",
+		"lodash@4/_baseFindIndex.js",
+		"lodash@4/_Symbol.js",
+		"lodash@4/isArguments.js",
+		"lodash@4/isArray.js",
+		"lodash@4/isArrayLike.js",
+		"lodash@4/isObjectLike.js"
+	],
+	"find.js": [
+		"lodash@4/isArrayLike.js",
+		"lodash@4/keys.js",
+		"lodash@4/identity.js",
+		"lodash@4/isArray.js",
+		"lodash@4/_ListCache.js",
+		"lodash@4/_Map.js",
+		"lodash@4/_MapCache.js",
+		"lodash@4/isObject.js",
+		"lodash@4/isObjectLike.js",
+		"lodash@4/isBuffer.js",
+		"lodash@4/isTypedArray.js",
+		"lodash@4/_SetCache.js",
+		"lodash@4/_cacheHas.js",
+		"lodash@4/_Symbol.js",
+		"lodash@4/eq.js",
+		"lodash@4/_root.js",
+		"lodash@4/_toSource.js",
+		"lodash@4/_getNative.js",
+		"lodash@4/_arrayMap.js",
+		"lodash@4/isArguments.js",
+		"lodash@4/_isIndex.js",
+		"lodash@4/isLength.js",
+		"lodash@4/_baseFindIndex.js"
+	],
+	"isArguments.js": [
+		"lodash@4/isObjectLike.js"
+	],
+	"isArrayLike.js": [
+		"lodash@4/isFunction.js",
+		"lodash@4/isLength.js"
+	],
+	"isBuffer.js": [
+		"lodash@4/_root.js"
+	],
+	"isFunction.js": [
+		"lodash@4/isObject.js"
+	],
+	"isTypedArray.js": [
+		"lodash@4/_baseUnary.js",
+		"lodash@4/isLength.js",
+		"lodash@4/isObjectLike.js",
+		"lodash@4/_freeGlobal.js"
+	],
+	"keys.js": [
+		"lodash@4/isArrayLike.js",
+		"lodash@4/isArguments.js",
+		"lodash@4/isArray.js",
+		"lodash@4/isBuffer.js",
+		"lodash@4/_isIndex.js",
+		"lodash@4/isTypedArray.js",
+		"lodash@4/_isPrototype.js"
+	]
+}

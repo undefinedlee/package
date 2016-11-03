@@ -1,0 +1,11 @@
+{
+	"setimmediate/done.js": [
+		"promise@7/setimmediate/core.js"
+	],
+	"setimmediate/es6-extensions.js": [
+		"promise@7/setimmediate/core.js"
+	],
+	"setimmediate/rejection-tracking.js": [
+		"promise@7/setimmediate/core.js"
+	]
+}
