@@ -1,0 +1,20 @@
+{
+	"components/app-event.js": "c",
+	"components/city-selector/data.js": "f",
+	"components/city-selector/index.js": "9",
+	"components/loading/index.js": "e",
+	"components/theme-selector/index.js": "a",
+	"components/tool-bar.js": "d",
+	"index.js": "1",
+	"service/common.js": "b",
+	"service/mapi.js": "g",
+	"views/home/banner/index.js": "2",
+	"views/home/hotel-section/index.js": "3",
+	"views/home/index.js": "4",
+	"views/home/pic/logo@2x.png": "h",
+	"views/home/theme-list/index.js": "5",
+	"views/list/index.js": "6",
+	"views/list/trap.js": "7",
+	"views/test/index.js": "8",
+	"__base64_image_sprite_mod_id__": "0@__pixel_ratio__x"
+}

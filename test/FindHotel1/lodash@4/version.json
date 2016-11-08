@@ -1,0 +1,5 @@
+{
+	"deps.json": "t.json",
+	"version.js": "u.js",
+	"version.json": "v.json"
+}

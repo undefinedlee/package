@@ -1,0 +1,47 @@
+// lodash@4/eq.js
+loader.define("lodash@4", "eq.js", "7", function(require, global, __project, __filename, __dirname, __base, __pixel_ratio){
+	"use strict";
+	
+	return [
+		// eq.js
+		function(__inner_require__, exports, module){
+			/**
+			 * Performs a
+			 * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
+			 * comparison between two values to determine if they are equivalent.
+			 *
+			 * @static
+			 * @memberOf _
+			 * @since 4.0.0
+			 * @category Lang
+			 * @param {*} value The value to compare.
+			 * @param {*} other The other value to compare.
+			 * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+			 * @example
+			 *
+			 * var object = { 'user': 'fred' };
+			 * var other = { 'user': 'fred' };
+			 *
+			 * _.eq(object, object);
+			 * // => true
+			 *
+			 * _.eq(object, other);
+			 * // => false
+			 *
+			 * _.eq('a', 'a');
+			 * // => true
+			 *
+			 * _.eq('a', Object('a'));
+			 * // => false
+			 *
+			 * _.eq(NaN, NaN);
+			 * // => true
+			 */
+			function eq(value, other) {
+			  return value === other || value !== value && other !== other;
+			}
+			
+			module.exports = eq;
+		}
+	];
+});

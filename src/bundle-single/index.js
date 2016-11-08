@@ -27,7 +27,7 @@ const singleModTpl = fs.readFileSync(path.resolve(__dirname, "single-mod.tpl"), 
 			});
 
 export default async function(file, projectConfig, singleFiles, loadCache, extensionFileHash, isExtractedCommon, callback){
-	const {projectPath, packagePath, packageName, output, packageJson, plugin, projectInfo} = projectConfig;
+	const {projectPath, packagePath, packageName, output, packageJson, plugin, useVersion, projectInfo} = projectConfig;
 
 	function parseModId(file){
 		return file.replace(packagePath, "").replace(prefixSepReg, "");
@@ -126,17 +126,25 @@ export default async function(file, projectConfig, singleFiles, loadCache, exten
 		});
 	});
 
-	codes = codes.join(",\n");
-
 	file = parseModId(file);
 
-	var code = tpl(singleModTpl, {
-		file: [packageName, file].join("/"),
+	var code = await plugin.task("before-render-code", Object.assign({}, projectInfo, {
 		project: packageName,
 		path: file,
-		version: "__mod_version_placeholder__",
-		mods: codes
-	});
+		versionPlaceholder: "__mod_version_placeholder__",
+		codes: codes,
+		deps: deps
+	}));
+
+	if(typeof code !== "string"){
+		code = tpl(singleModTpl, {
+			file: [packageName, file].join("/"),
+			project: packageName,
+			path: file,
+			version: "__mod_version_placeholder__",
+			mods: codes.join(",\n")
+		});
+	}
 
 	var newCode = await plugin.task("before-write-bundle", Object.assign({}, projectInfo, {
 		content: code
@@ -146,21 +154,35 @@ export default async function(file, projectConfig, singleFiles, loadCache, exten
 		code = newCode;
 	}
 
-	var fileMd5 = createVersion(output, md5(code));
+	if(useVersion){
+		let fileMd5 = createVersion(output, md5(code));
 
-	/**
-	 * 这里应该有个插件注入点，修改版本规则，修改打包文件
-	 */
+		/**
+		 * 这里应该有个插件注入点，修改版本规则，修改打包文件
+		 */
 
-	code = code.replace("__mod_version_placeholder__", fileMd5);
+		code = code.replace("__mod_version_placeholder__", fileMd5);
 
-	var writeFile = path.join(output, fileMd5 + ".js");
-	mkdirs(path.dirname(writeFile), function(){
-		fs.writeFile(writeFile, code, function(err){
-			if(err){
-				console.error(`文件${writeFile}写入失败`);
-			}
-			callback(file, fileMd5, deps);
+		let writeFile = path.join(output, fileMd5 + ".js");
+		mkdirs(path.dirname(writeFile), function(){
+			fs.writeFile(writeFile, code, function(err){
+				if(err){
+					console.error(`文件${writeFile}写入失败`);
+				}
+				callback(file, fileMd5, deps);
+			});
 		});
-	});
+	}else{
+		code = code.replace("__mod_version_placeholder__", "");
+
+		let writeFile = path.join(output, file);
+		mkdirs(path.dirname(writeFile), function(){
+			fs.writeFile(writeFile, code, function(err){
+				if(err){
+					console.error(`文件${writeFile}写入失败`);
+				}
+				callback(file, "", deps);
+			});
+		});
+	}
 };

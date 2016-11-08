@@ -1,6 +1,0 @@
-{
-	"dist/index.js": [
-		"react-native@0.21/Libraries/react-native/react-native.js",
-		"enjoy-common-support@0.2/dist/index.js"
-	]
-}

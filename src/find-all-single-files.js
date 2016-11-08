@@ -3,8 +3,6 @@ import console from "../util/console";
 export default function(entries, loadCache){
 	// 需要单独打包的文件列表
 	var singleFiles = [].concat(entries);
-
-	console.log(loadCache["/Users/lifan/work-test/sss3/rn/node_modules/"])
 	
 	// 查找需要单独打包的文件
 	function findSingleFile(){
@@ -30,7 +28,7 @@ export default function(entries, loadCache){
 						hasNewSingleFile = true;
 					}
 				}else{
-					console.warn(`没有入口文件可以访问到文件${file}`);
+					// console.warn(`没有入口文件可以访问到文件${file}`);
 				}
 			}
 		}

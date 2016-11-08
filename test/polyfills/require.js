@@ -53,6 +53,48 @@ function require(id){
   return factory.exports;
 }
 
+var loadings = {};
+
+function request(id, callback){}
+
+require.async = function(ids, callback){
+  if(typeof ids === "string"){
+    ids = [ids];
+  }
+
+  function ready(){
+    callback && callback.apply(global, ids.map(function(id){
+      return require(id);
+    }));
+  }
+
+  var _ids = ids.filter(function(id){
+    if(!mods[id]){
+      if(!loadings[id]){
+        loadings[id] = [];
+        request(id, function(){
+          loadings[id].forEach(function(fn){
+            fn(id);
+          });
+          delete loadings[id];
+        });
+      }
+      loadings[id].push(function(id){
+        if(!(_ids = _ids.filter(function(_id){
+          return _id !== id;
+        })).length){
+          ready();
+        }
+      });
+      return true;
+    }
+  });
+
+  if(!_ids.length){
+    ready();
+  }
+};
+
 function parseFactory(mods){
   return (function __inner_require__(id){
     var factory = mods[id];
@@ -74,12 +116,24 @@ var devicePixelRatio = 2;
 /**
  * 
  */
-loader.define = function(project, path, version, factory, isStoreMod){
-  var modPathId = [project, path].join("/");
-  var modVersionId = [project, version].join("/");
+// loader.define = function(project, path, version, factory, isStoreMod){
+//   var modPathId = path ? [project, path].join("/") : project;
+//   var modVersionId = [project, version].join("/");
+//   // 
+//   mods[modPathId] = function(){
+//     var innerMods = factory(require, global, project, [config.base, modVersionId + ".js"].join("/"), [config.base, project].join("/"), config.base, devicePixelRatio);
+//     if(innerMods instanceof Array){
+//       return parseFactory(innerMods);
+//     }else{
+//       return innerMods;
+//     }
+//   };
+// };
+loader.define = function(id, deps, factory){
+  var project = id.split("/")[0];
   // 
-  mods[modPathId] = function(){
-    var innerMods = factory(require, global, project, [config.base, modVersionId + ".js"].join("/"), [config.base, project].join("/"), config.base, devicePixelRatio);
+  mods[id] = function(){
+    var innerMods = factory(require, global, project, null, [config.base, project].join("/"), config.base, devicePixelRatio);
     if(innerMods instanceof Array){
       return parseFactory(innerMods);
     }else{
@@ -88,4 +142,50 @@ loader.define = function(project, path, version, factory, isStoreMod){
   };
 };
 
+
 loader.require = require;
+
+// (function checkBridge(){
+//   if(!global.__fbBatchedBridge){
+//     setTimeout(checkBridge, 100);
+//     return;
+//   }
+//   global.__fbBatchedBridge.registerCallableModule("NativeMessage", {
+//     emit: function(message){
+//       console.log("&&&&&&&&&&&&&&&&&&&&&");
+//       console.log(message);
+//       sendMessage("load-business", {
+//         value: "business.js"
+//       });
+//     }
+//   });
+// })();
+
+var nativeMessages = {};
+global.NativeMessage = {
+  emit: function(messageName, e){
+    if(nativeMessages[messageName]){
+      nativeMessages[messageName].forEach(function(fn){
+        fn(null, e);
+      });
+    }
+  }
+};
+global.onNativeMessage = function(messageName, callback){
+  if(!nativeMessages[messageName]){
+    nativeMessages[messageName] = [];
+  }
+
+  nativeMessages[messageName].push(callback);
+};
+
+// global.caches = {};
+// global.readFile = function(file, callback){
+//   callback(null, global.caches[file]);
+// };
+
+global.onNativeMessage("load-business", function(err, msg){
+  global.readFile(msg.value, function(err, code){
+    (new Function(code))();
+  });
+});

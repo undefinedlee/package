@@ -83,18 +83,9 @@ async function start(projectPath, output, packageJson, config, version, callback
 				entries: entries
 			}));
 
-			if(projectInfo.packageJson.name === "react-native"){
-				console.log(entries);
-				console.log(isExtractedCommon);
-			}
-
 			// 需要单独打包的文件列表
 			var singleFiles = isExtractedCommon ? findAllSingleFiles(entries, loadCache) : entries;
 
-
-			if(projectInfo.packageJson.name === "react-native"){
-				console.log(singleFiles);
-			}
 			await plugin.task("parse-single", Object.assign(projectInfo, {
 				singleFiles: singleFiles
 			}));
@@ -118,6 +109,7 @@ async function start(projectPath, output, packageJson, config, version, callback
 						output: projectOutput,
 						packageJson: packageJson,
 						plugin: plugin,
+						useVersion: config.useVersion,
 						projectInfo
 					}, singleFiles, loadCache, extensionFileHash, isExtractedCommon, async function(relativeFile, version, deps){
 						versionHash[relativeFile] = version;
@@ -178,13 +170,15 @@ async function start(projectPath, output, packageJson, config, version, callback
 					};
 				});
 
-				tasks.push(function(callback){
-					// 创建入口文件依赖、版本信息等文件
-					createBundleInfo(depsHash, versionHash, projectOutput, packageName, imageSpriteModId, projectInfo, plugin, function(){
-						lock[packageName] = false;
-						callback();
+				if(config.useVersion){
+					tasks.push(function(callback){
+						// 创建入口文件依赖、版本信息等文件
+						createBundleInfo(depsHash, versionHash, projectOutput, packageName, imageSpriteModId, projectInfo, plugin, function(){
+							lock[packageName] = false;
+							callback();
+						});
 					});
-				});
+				}
 
 				asyncList(tasks).complete(function(){
 					console.success(`${packageJson.name}打包完成`);
@@ -250,6 +244,7 @@ function updatePackageInfo(output, modId, version, entries){
  * @param {string} [version="^packageJson.version"] - 需要打包的版本规则
  */
 var plugins = [];
+var useVersion;
 export default function main(projectPath, version, output, callback, options){
 	options = options || {};
 
@@ -310,8 +305,10 @@ export default function main(projectPath, version, output, callback, options){
 
 	if(options.isInner){
 		config.plugins = plugins;
+		config.useVersion = useVersion;
 	}else{
 		plugins = config.plugins;
+		useVersion = config.useVersion = config.useVersion === false ? false : true;
 	}
 
 	// 输出目录
