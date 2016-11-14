@@ -10,15 +10,15 @@ var tpl = `loader.define("#id#", [#deps#], function(require, global, __project, 
 	];
 });`
 
-pack("/Users/lifan/work-test/sss3/rn", null, null, function(){
+pack("/Users/lifan/work-test/sss7/rn", null, null, function(){
 }, {
 	config: {
-		relativePath: "build",
+		relativePath: "_build",
 		entry: [
 			"index.js",
 			"views/**/!(*-css|*-html).js"
 		],
-		output: path.join(__dirname, "sss3"),
+		output: path.join(__dirname, "sss7"),
 		useVersion: false,
 		plugins: [packageReactNative("ios"), function(){
 			this.plugin("before-render-code", function(info){

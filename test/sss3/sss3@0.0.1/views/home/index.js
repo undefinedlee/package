@@ -57,7 +57,10 @@ loader.define("sss3@0.0.1/views/home/index.js", ["react-native@0.21/Libraries/re
 			
 					_this.state = {
 						user: null,
-						date: ""
+						date: "",
+						height: "100px",
+						height1: "150px",
+						text: "111"
 					};
 			
 					if (Home.__start_list__) {
@@ -89,6 +92,14 @@ loader.define("sss3@0.0.1/views/home/index.js", ["react-native@0.21/Libraries/re
 								});
 							});
 						});
+			
+						setTimeout(function () {
+							_this2.setState({
+								height: "400px",
+								height1: "450px",
+								text: "222"
+							});
+						}, 2000);
 					}
 				}, {
 					key: "loadUserInfo",
@@ -495,6 +506,7 @@ loader.define("sss3@0.0.1/views/home/index.js", ["react-native@0.21/Libraries/re
 			var Box = _enjoyRnSupport2.default.Box;
 			var A = _enjoyRnSupport2.default.A;
 			var Body = _enjoyRnSupport2.default.Body;
+			var Swiper = _enjoyRnSupport2.default.Swiper;
 			var Util = _enjoyRnSupport2.default.Util;
 			var document = _enjoyRnSupport2.default.document;
 			
@@ -581,10 +593,37 @@ loader.define("sss3@0.0.1/views/home/index.js", ["react-native@0.21/Libraries/re
 						_styles: this._styles,
 						css: [".rn-body"],
 						_id: __getKey__()
-					}, __dom__(Box, {
-						css: [".rn-p"],
+					}, this.state.height === "400px" ? __dom__(Box, {
+						style: {
+							height: this.state.height1
+						}, css: [".rn-div", ".container"],
 						_id: __getKey__()
-					}, "Hello Enjoy!"), components);
+					}, __dom__(Swiper, {
+						loop: true,
+						autoplay: true,
+						style: {
+							height: this.state.height
+						}, css: [".rn-swiper", ".banner"],
+						_id: __getKey__()
+					}, __dom__(A, {
+						style: {
+							height: this.state.height
+						}, css: [".rn-a", ".item"],
+						_id: __getKey__()
+					}, "1"), __dom__(A, {
+						style: {
+							height: this.state.height
+						}, css: [".rn-a", ".item"],
+						_id: __getKey__()
+					}, "2"), __dom__(A, {
+						style: {
+							height: this.state.height
+						}, css: [".rn-a", ".item"],
+						_id: __getKey__()
+					}, "3"))) : null, __dom__(Box, {
+						css: [".rn-p", ".text"],
+						_id: __getKey__()
+					}, this.state.text), components);
 				}.bind(this);
 			
 				return __view__;
@@ -603,8 +642,6 @@ loader.define("sss3@0.0.1/views/home/index.js", ["react-native@0.21/Libraries/re
 			exports.default = new StyleSheet({
 				rules: {
 					"0": {
-						justifyContent: "center",
-						alignItems: "center",
 						backgroundColor: "#fcfcfc"
 					},
 					"1": {
@@ -623,10 +660,21 @@ loader.define("sss3@0.0.1/views/home/index.js", ["react-native@0.21/Libraries/re
 						color: "#999"
 					},
 					"5": {
+						position: "relative",
+						backgroundColor: "#00f",
+						marginTop: "100px"
+					},
+					"6": {
+						backgroundColor: "#f00"
+					},
+					"7": {
+						display: "block",
+						backgroundColor: "#0f0"
+					},
+					"8": {
+						marginTop: "200px",
 						fontSize: "60px",
-						fontWeight: "100",
-						color: "#aaa",
-						textAlign: "center"
+						color: "#333"
 					}
 				},
 				index: {
@@ -646,8 +694,17 @@ loader.define("sss3@0.0.1/views/home/index.js", ["react-native@0.21/Libraries/re
 					".logining": [{
 						key: "4"
 					}],
-					".rn-p": [{
+					".container": [{
 						key: "5"
+					}],
+					".banner": [{
+						key: "6"
+					}],
+					".item": [{
+						key: "7"
+					}],
+					".text": [{
+						key: "8"
 					}]
 				}
 			});

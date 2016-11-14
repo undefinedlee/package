@@ -6,7 +6,9 @@ export default function(content){
 		env: "production",
 		presets: ['es2015', 'stage-0'],
 		plugins: [
-			require("babel-plugin-external-helpers")
+			require("babel-plugin-external-helpers"),
+			require("babel-plugin-transform-react-jsx"),
+			require("babel-plugin-transform-decorators-legacy").default
 		]
 	}).code;
 };

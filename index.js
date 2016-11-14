@@ -165,6 +165,7 @@ async function start(projectPath, output, packageJson, config, version, callback
 								entries: depsProjects[projectName]
 							});
 						}else{
+							console.warn(`从${projectPath}找不到依赖的模块${projectName}`);
 							callback();
 						}
 					};
@@ -178,6 +179,8 @@ async function start(projectPath, output, packageJson, config, version, callback
 							callback();
 						});
 					});
+				}else{
+					lock[packageName] = false;
 				}
 
 				asyncList(tasks).complete(function(){
@@ -293,7 +296,18 @@ export default function main(projectPath, version, output, callback, options){
 			hasConfig = true;
 		}else{
 			if(packageJson.name === "react"){
-				options.entries = [ "lib/ReactDOM.js", "react.js" ];
+				if(!options.entries){
+					options.entries = [];
+				}
+
+				[ "lib/ReactDOM.js", "react.js" ].forEach(function(item){
+					if(options.entries.indexOf(item) === -1){
+						options.entries.push(item);
+					}
+				});
+			}else if(packageJson.name === "react-native"){
+				// react-native模块入口在react-native打包插件里设置
+				options.entries = [];
 			}
 
 			config = {

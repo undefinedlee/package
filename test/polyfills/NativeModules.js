@@ -1,3 +1,3 @@
-loader.define("NativeModules", null, null, function(require){
-	return require("react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js");
+loader.define("NativeModules", [], function(require){
+	return require("react-native@0.37/Libraries/BatchedBridge/NativeModules.js");
 });

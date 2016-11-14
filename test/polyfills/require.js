@@ -145,22 +145,6 @@ loader.define = function(id, deps, factory){
 
 loader.require = require;
 
-// (function checkBridge(){
-//   if(!global.__fbBatchedBridge){
-//     setTimeout(checkBridge, 100);
-//     return;
-//   }
-//   global.__fbBatchedBridge.registerCallableModule("NativeMessage", {
-//     emit: function(message){
-//       console.log("&&&&&&&&&&&&&&&&&&&&&");
-//       console.log(message);
-//       sendMessage("load-business", {
-//         value: "business.js"
-//       });
-//     }
-//   });
-// })();
-
 var nativeMessages = {};
 global.NativeMessage = {
   emit: function(messageName, e){
@@ -179,11 +163,18 @@ global.onNativeMessage = function(messageName, callback){
   nativeMessages[messageName].push(callback);
 };
 
-// global.caches = {};
-// global.readFile = function(file, callback){
-//   callback(null, global.caches[file]);
-// };
+global.__loadNativeModules = function(nativeModules){
+  // global.onNativeMessage("load-business", function(err, msg){
+  //   nativeModules.ElongReactPackage.readFile([msg.value], function(err, code){
+  //     (new Function(code))();
+  //   });
+  // });
+};
 
+global.caches = {};
+global.readFile = function(file, callback){
+  callback(null, global.caches[file]);
+};
 global.onNativeMessage("load-business", function(err, msg){
   global.readFile(msg.value, function(err, code){
     (new Function(code))();

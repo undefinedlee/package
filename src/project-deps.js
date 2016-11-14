@@ -1,9 +1,9 @@
 export default function(packageJson){
 	return Object.assign(
 		{},
-		packageJson.dependencies,
-		packageJson.devDependencies,
+		packageJson.peerDependencies,
 		packageJson.optionalDependencies,
-		packageJson.peerDependencies
+		packageJson.devDependencies,
+		packageJson.dependencies
 	);
 }

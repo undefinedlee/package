@@ -3,14 +3,14 @@ import path from "path";
 const babel = require("babel-core");
 import glob from "glob";
 
-const root = path.join(__dirname, "sss3");
+const root = path.join(__dirname, "sss7");
 const output = path.join(root, "business.js");
 const initCode = `
-loader.require("sss3@0.0.1/index.js");
-loader.require("react-native@0.21/Libraries/react-native/react-native.js").AppRegistry.runApplication("sss3", { rootTag: 1, initialProps: {} });
+loader.require("sss7@0.0.1/index.js");
+loader.require("react-native@0.37/Libraries/react-native/react-native.js").AppRegistry.runApplication("sss7", { rootTag: 1, initialProps: {} });
 `;
 
-const businessRoot = path.join(root, "sss3@0.0.1");
+const businessRoot = path.join(root, "sss7@0.0.1");
 const entries = glob.sync("**/*.js", {
 	cwd: businessRoot
 }).map(function(file){
@@ -18,8 +18,9 @@ const entries = glob.sync("**/*.js", {
 });
 
 const ignores = [
-	"react-native@0.21/Libraries/react-native/react-native.js",
-	"enjoy-rn-support@0.2/dist/index.js"
+	"react-native@0.37/Libraries/react-native/react-native.js",
+	/^react@15\.3\//,
+	"enjoy-rn-support@0.2/index.js"
 ];
 
 var codes = {};
@@ -63,7 +64,15 @@ entries.forEach(function(entry){
 		if(id && deps){
 			codes[id] = code;
 			deps.forEach(function(id){
-				if(!codes[id] && ignores.indexOf(id) === -1){
+				if(!codes[id] && ignores.every(function(ignore){
+					if(typeof ignore === "string"){
+						return id !== ignore;
+					}else if(ignore instanceof RegExp){
+						return !ignore.test(id);
+					}else{
+						true;
+					}
+				})){
 					read(path.join(root, id));
 				}
 			});
@@ -75,11 +84,11 @@ entries.forEach(function(entry){
 
 codes = Object.keys(codes).map(id => codes[id]).join("\n");
 
-// fs.writeFileSync(output, "caches['business.js']='" + [codes, initCode].join("\n").replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/\/(?:\\\/|[^/\r\n])+\/(?=[^\/])|\/\/.*/g, function(match){
-// 	if(/^\/\//.test(match)){
-// 		return "";
-// 	}
-// 	return match;
-// }).replace(/\n/g, "") + "';");
+fs.writeFileSync(output, "caches['business.js']='" + [codes, initCode].join("\n").replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/\/(?:\\\/|[^/\r\n])+\/(?=[^\/])|\/\/.*/g, function(match){
+	if(/^\/\//.test(match)){
+		return "";
+	}
+	return match;
+}).replace(/\n/g, "") + "';");
 
-fs.writeFileSync(output, [codes, initCode].join("\n"));
+// fs.writeFileSync(output, [codes, initCode].join("\n"));

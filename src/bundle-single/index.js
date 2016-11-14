@@ -30,7 +30,35 @@ export default async function(file, projectConfig, singleFiles, loadCache, exten
 	const {projectPath, packagePath, packageName, output, packageJson, plugin, useVersion, projectInfo} = projectConfig;
 
 	function parseModId(file){
-		return file.replace(packagePath, "").replace(prefixSepReg, "");
+		if(file.indexOf(packagePath) === 0){
+			file = file.replace(packagePath, "").replace(prefixSepReg, "");
+		}else{
+			// 非当前npm包以内的相对依赖
+			// 常用于一些特殊模块打包，如react-native，会把react、fbjs模块作为相对模块打进来
+			let projectDir = path.dirname(projectPath);
+			if(file.indexOf(projectDir) === 0){
+				file = file.replace(projectDir, "");
+			}else{
+				let projectPaths = projectPath.split("/");
+				let filePaths = file.split("/");
+				for(let i = 0; i < projectPaths.length; i ++){
+					if(filePaths[i] === projectPaths[i]){
+						filePaths[i] = null;
+					}else{
+						break;
+					}
+				}
+				file = filePaths.filter(item => item).join("/");
+			}
+
+			file = file.replace(prefixSepReg, "");
+
+			file = file.split("/");
+			file[0] = "__" + file[0] + "__";
+			file = file.join("/");
+		}
+
+		return file;
 	}
 
 	var mods = [];
@@ -70,6 +98,20 @@ export default async function(file, projectConfig, singleFiles, loadCache, exten
 				 * 这里应该有个插件注入点，修改引用
 				 */
 
+				// 如果绝对依赖的是当前项目，则转为相对依赖
+				var _depPath = depPath.split("/");
+				if(_depPath.shift() === packageJson.name){
+					if(_depPath.length === 0){
+						_depPath[0] = packageJson.main || index.js;
+					}
+
+					_depPath = path.join(projectPath, _depPath.join("/"));
+					depPath = path.relative(path.dirname(mod), _depPath);
+					if(!/^\.{1,2}\//.test(depPath)){
+						depPath = "./" + depPath;
+					}
+				}
+
 				if(/^\.{1,2}\//.test(depPath)){
 					depPath = path.resolve(modDir, depPath);
 					depPath = extensionFileHash[depPath] || depPath;
@@ -108,7 +150,7 @@ export default async function(file, projectConfig, singleFiles, loadCache, exten
 						modId: modId
 					};
 				}else{
-					let modId = parseOuterDep(depPath, projectPath, packageJson);
+					let modId = parseOuterDep(depPath, projectPath, packageJson, mod);
 					if(modId){
 						if(deps.indexOf(modId) === -1){
 							deps.push(modId);

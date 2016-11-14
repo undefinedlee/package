@@ -1405,22 +1405,6 @@ loader.define = function(id, deps, factory){
 
 loader.require = require;
 
-// (function checkBridge(){
-//   if(!global.__fbBatchedBridge){
-//     setTimeout(checkBridge, 100);
-//     return;
-//   }
-//   global.__fbBatchedBridge.registerCallableModule("NativeMessage", {
-//     emit: function(message){
-//       console.log("&&&&&&&&&&&&&&&&&&&&&");
-//       console.log(message);
-//       sendMessage("load-business", {
-//         value: "business.js"
-//       });
-//     }
-//   });
-// })();
-
 var nativeMessages = {};
 global.NativeMessage = {
   emit: function(messageName, e){
@@ -1439,16 +1423,24 @@ global.onNativeMessage = function(messageName, callback){
   nativeMessages[messageName].push(callback);
 };
 
+global.__loadNativeModules = function(nativeModules){
+  // global.onNativeMessage("load-business", function(err, msg){
+  //   nativeModules.ElongReactPackage.readFile([msg.value], function(err, code){
+  //     (new Function(code))();
+  //   });
+  // });
+};
+
 global.caches = {};
 global.readFile = function(file, callback){
   callback(null, global.caches[file]);
 };
-
 global.onNativeMessage("load-business", function(err, msg){
   global.readFile(msg.value, function(err, code){
     (new Function(code))();
   });
 });
+
 						})(typeof global !== 'undefined' ? global: typeof self !== 'undefined' ? self: this);
 (function(global) {
 							/**
@@ -1541,11 +1533,11 @@ if (!String.prototype.includes) {
 
 						})(typeof global !== 'undefined' ? global: typeof self !== 'undefined' ? self: this);
 (function(global) {
-							loader.define("NativeModules", null, null, function(require){
+							loader.define("NativeModules", [], function(require){
 	return require("react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js");
 });
 						})(typeof global !== 'undefined' ? global: typeof self !== 'undefined' ? self: this);
-loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["react-native@0.21/Libraries/Utilities/Alert.js", "react-native@0.21/Libraries/Utilities/AlertIOS.js", "react-native@0.21/Libraries/Utilities/UIManager.js", "react-native@0.21/Libraries/Device/RCTDeviceEventEmitter.js", "react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js", "react-native@0.21/Libraries/Utilities/Platform.ios.js", "react-native@0.21/Libraries/StyleSheet/processColor.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdates.js", "react-native@0.21/Libraries/ReactNative/findNodeHandle.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js", "react-native@0.21/Libraries/StyleSheet/flattenStyle.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypeLocationNames.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyFunction.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCurrentOwner.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceHandles.js", "react-native@0.21/Libraries/ReactNative/ReactNativeMount.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactReconciler.js", "react-native@0.21/Libraries/ReactNative/ReactNativeTextComponent.js", "react-native@0.21/Libraries/JavaScriptAppEngine/Initialization/InitializeJavaScriptAppEngine.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactComponentEnvironment.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactEmptyComponent.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactNativeComponent.js", "react-native@0.21/Libraries/JavaScriptAppEngine/System/JSTimers/JSTimersExecution.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyMirror.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/PooledClass.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Transaction.js", "react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPerf.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/CallbackQueue.js", "react-native@0.21/Libraries/BatchedBridge/BatchedBridge.js", "react-native@0.21/Libraries/vendor/emitter/EventEmitter.js", "react-native@0.21/Libraries/vendor/core/Set.js", "react-native@0.21/Libraries/vendor/core/setImmediate.js", "react-native@0.21/Libraries/Utilities/ErrorUtils.js", "react-native@0.21/Libraries/StyleSheet/normalizeColor.js", "react-native@0.21/Libraries/Utilities/stringifySafe.js", "react-native@0.21/Libraries/StyleSheet/StyleSheetRegistry.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypeLocations.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/instantiateReactComponent.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/shouldUpdateReactComponent.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyObject.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/canDefineProperty.js", "art@0.10/core/color.js", "art@0.10/core/transform.js", "art@0.10/core/class.js", "art@0.10/core/path.js", "react-timer-mixin@0.13/TimerMixin.js", "rebound@0.0.13/rebound.js", "immutable@3/dist/immutable.js", "react-native@0.21/Libraries/vendor/core/guid.js", "react-native@0.21/Libraries/Utilities/logError.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceMap.js", "react-native@0.21/Libraries/Inspector/InspectorUtils.js", "react-native@0.21/Libraries/Utilities/PerformanceLogger.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/performanceNow.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactEmptyComponentRegistry.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdateQueue.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/ExecutionEnvironment.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/isNode.js", "react-native@0.21/Libraries/vendor/core/Map.js", "react-native@0.21/Libraries/react-native/react-native.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCompositeComponent.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["react-native@0.21/Libraries/Utilities/Alert.js", "react-native@0.21/Libraries/Utilities/AlertIOS.js", "react-native@0.21/Libraries/Utilities/UIManager.js", "react-native@0.21/Libraries/Device/RCTDeviceEventEmitter.js", "react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js", "react-native@0.21/Libraries/Utilities/Platform.ios.js", "react-native@0.21/Libraries/StyleSheet/processColor.js", "react-native@0.21/__react__/lib/ReactUpdates.js", "react-native@0.21/Libraries/ReactNative/findNodeHandle.js", "react-native@0.21/__fbjs__/lib/invariant.js", "react-native@0.21/Libraries/StyleSheet/flattenStyle.js", "react-native@0.21/__react__/lib/ReactElement.js", "react-native@0.21/__react__/lib/ReactPropTypeLocationNames.js", "react-native@0.21/__fbjs__/lib/emptyFunction.js", "react-native@0.21/__react__/lib/ReactCurrentOwner.js", "react-native@0.21/__react__/lib/ReactInstanceHandles.js", "react-native@0.21/Libraries/ReactNative/ReactNativeMount.js", "react-native@0.21/__fbjs__/lib/warning.js", "react-native@0.21/__react__/lib/ReactReconciler.js", "react-native@0.21/Libraries/ReactNative/ReactNativeTextComponent.js", "react-native@0.21/Libraries/JavaScriptAppEngine/Initialization/InitializeJavaScriptAppEngine.js", "react-native@0.21/__react__/lib/ReactComponentEnvironment.js", "react-native@0.21/__react__/lib/ReactEmptyComponent.js", "react-native@0.21/__react__/lib/ReactNativeComponent.js", "react-native@0.21/Libraries/JavaScriptAppEngine/System/JSTimers/JSTimersExecution.js", "react-native@0.21/__fbjs__/lib/keyMirror.js", "react-native@0.21/__react__/lib/PooledClass.js", "react-native@0.21/__react__/lib/Object.assign.js", "react-native@0.21/__react__/lib/Transaction.js", "react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js", "react-native@0.21/__react__/lib/ReactPerf.js", "react-native@0.21/__react__/lib/CallbackQueue.js", "react-native@0.21/Libraries/BatchedBridge/BatchedBridge.js", "react-native@0.21/Libraries/vendor/emitter/EventEmitter.js", "react-native@0.21/Libraries/vendor/core/Set.js", "react-native@0.21/Libraries/vendor/core/setImmediate.js", "react-native@0.21/Libraries/Utilities/ErrorUtils.js", "react-native@0.21/Libraries/StyleSheet/normalizeColor.js", "react-native@0.21/Libraries/Utilities/stringifySafe.js", "react-native@0.21/Libraries/StyleSheet/StyleSheetRegistry.js", "react-native@0.21/__react__/lib/ReactPropTypeLocations.js", "react-native@0.21/__react__/lib/instantiateReactComponent.js", "react-native@0.21/__react__/lib/shouldUpdateReactComponent.js", "react-native@0.21/__fbjs__/lib/emptyObject.js", "react-native@0.21/__react__/lib/canDefineProperty.js", "art@0.10/core/color.js", "art@0.10/core/transform.js", "art@0.10/core/class.js", "art@0.10/core/path.js", "react-timer-mixin@0.13/TimerMixin.js", "rebound@0.0.13/rebound.js", "immutable@3/dist/immutable.js", "react-native@0.21/Libraries/vendor/core/guid.js", "react-native@0.21/Libraries/Utilities/logError.js", "react-native@0.21/__react__/lib/ReactInstanceMap.js", "react-native@0.21/Libraries/Inspector/InspectorUtils.js", "react-native@0.21/Libraries/Utilities/PerformanceLogger.js", "react-native@0.21/__fbjs__/lib/performanceNow.js", "react-native@0.21/__react__/lib/ReactEmptyComponentRegistry.js", "react-native@0.21/__react__/lib/ReactUpdateQueue.js", "react-native@0.21/__fbjs__/lib/ExecutionEnvironment.js", "react-native@0.21/__fbjs__/lib/isNode.js", "react-native@0.21/Libraries/vendor/core/Map.js", "react-native@0.21/Libraries/react-native/react-native.js", "react-native@0.21/__react__/lib/ReactCompositeComponent.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/react-native/react-native.js
@@ -1801,40 +1793,40 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 
 			addons: {
 				get LinkedStateMixin() {
-					return __inner_require__(237 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/LinkedStateMixin.js*/);
+					return __inner_require__(237 /*__react__/lib/LinkedStateMixin.js*/);
 				},
 				Perf: undefined,
 				get PureRenderMixin() {
-					return __inner_require__(245 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactComponentWithPureRenderMixin.js*/);
+					return __inner_require__(245 /*__react__/lib/ReactComponentWithPureRenderMixin.js*/);
 				},
 				get TestModule() {
 					return require('react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js').TestModule;
 				},
 				TestUtils: undefined,
 				get batchedUpdates() {
-					return require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdates.js').batchedUpdates;
+					return require('react-native@0.21/__react__/lib/ReactUpdates.js').batchedUpdates;
 				},
 				get cloneWithProps() {
-					return __inner_require__(248 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/cloneWithProps.js*/);
+					return __inner_require__(248 /*__react__/lib/cloneWithProps.js*/);
 				},
 				get createFragment() {
-					return __inner_require__(251 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactFragment.js*/).create;
+					return __inner_require__(251 /*__react__/lib/ReactFragment.js*/).create;
 				},
 				get update() {
-					return __inner_require__(252 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/update.js*/);
+					return __inner_require__(252 /*__react__/lib/update.js*/);
 				} } }, __inner_require__(9 /*Libraries/ReactNative/React.js*/));
 
 		if (__DEV__) {
 			Object.defineProperty(ReactNative.addons, 'Perf', {
 				enumerable: true,
 				get: function get() {
-					return __inner_require__(192 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactDefaultPerf.js*/);
+					return __inner_require__(192 /*__react__/lib/ReactDefaultPerf.js*/);
 				} });
 
 			Object.defineProperty(ReactNative.addons, 'TestUtils', {
 				enumerable: true,
 				get: function get() {
-					return __inner_require__(253 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactTestUtils.js*/);
+					return __inner_require__(253 /*__react__/lib/ReactTestUtils.js*/);
 				} });
 		}
 
@@ -1842,7 +1834,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	}, // Libraries/Components/ActivityIndicatorIOS/ActivityIndicatorIOS.ios.js
 	function (__inner_require__, exports, module) {
 		var NativeMethodsMixin = __inner_require__(2 /*Libraries/ReactIOS/NativeMethodsMixin.js*/);
-		var PropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var PropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 		var React = __inner_require__(9 /*Libraries/ReactNative/React.js*/);
 		var StyleSheet = __inner_require__(66 /*Libraries/StyleSheet/StyleSheet.js*/);
 		var View = __inner_require__(46 /*Libraries/Components/View/View.js*/);
@@ -1908,7 +1900,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var UIManager = require('react-native@0.21/Libraries/Utilities/UIManager.js');
 
 		var findNodeHandle = require('react-native@0.21/Libraries/ReactNative/findNodeHandle.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		function warnForStyleProps(props, validAttributes) {
 			for (var key in validAttributes.style) {
@@ -2273,13 +2265,13 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} };
 
 		module.exports = TextInputState;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js
+	}, // __react__/lib/ReactPropTypes.js
 	function (__inner_require__, exports, module) {
-		var ReactElement = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js');
-		var ReactPropTypeLocationNames = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypeLocationNames.js');
+		var ReactElement = require('react-native@0.21/__react__/lib/ReactElement.js');
+		var ReactPropTypeLocationNames = require('react-native@0.21/__react__/lib/ReactPropTypeLocationNames.js');
 
-		var emptyFunction = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyFunction.js');
-		var getIteratorFn = __inner_require__(8 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/getIteratorFn.js*/);
+		var emptyFunction = require('react-native@0.21/__fbjs__/lib/emptyFunction.js');
+		var getIteratorFn = __inner_require__(8 /*__react__/lib/getIteratorFn.js*/);
 
 		var ANONYMOUS = '<<anonymous>>';
 
@@ -2561,7 +2553,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		}
 
 		module.exports = ReactPropTypes;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/getIteratorFn.js
+	}, // __react__/lib/getIteratorFn.js
 	function (__inner_require__, exports, module) {
 		var ITERATOR_SYMBOL = typeof Symbol === 'function' && (typeof Symbol === 'function' ? Symbol.iterator : '@@iterator');
 		var FAUX_ITERATOR_SYMBOL = '@@iterator';
@@ -2581,21 +2573,21 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	function (__inner_require__, exports, module) {
 		var ReactNativeDefaultInjection = __inner_require__(11 /*Libraries/ReactNative/ReactNativeDefaultInjection.js*/);
 
-		var ReactChildren = __inner_require__(83 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactChildren.js*/);
-		var ReactClass = __inner_require__(84 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactClass.js*/);
-		var ReactComponent = __inner_require__(85 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactComponent.js*/);
-		var ReactCurrentOwner = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCurrentOwner.js');
-		var ReactElement = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js');
-		var ReactElementValidator = __inner_require__(87 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElementValidator.js*/);
-		var ReactInstanceHandles = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceHandles.js');
+		var ReactChildren = __inner_require__(83 /*__react__/lib/ReactChildren.js*/);
+		var ReactClass = __inner_require__(84 /*__react__/lib/ReactClass.js*/);
+		var ReactComponent = __inner_require__(85 /*__react__/lib/ReactComponent.js*/);
+		var ReactCurrentOwner = require('react-native@0.21/__react__/lib/ReactCurrentOwner.js');
+		var ReactElement = require('react-native@0.21/__react__/lib/ReactElement.js');
+		var ReactElementValidator = __inner_require__(87 /*__react__/lib/ReactElementValidator.js*/);
+		var ReactInstanceHandles = require('react-native@0.21/__react__/lib/ReactInstanceHandles.js');
 		var ReactNativeMount = require('react-native@0.21/Libraries/ReactNative/ReactNativeMount.js');
-		var ReactPropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
-		var ReactUpdates = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdates.js');
+		var ReactPropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
+		var ReactUpdates = require('react-native@0.21/__react__/lib/ReactUpdates.js');
 
 		var findNodeHandle = require('react-native@0.21/Libraries/ReactNative/findNodeHandle.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var onlyChild = __inner_require__(88 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/onlyChild.js*/);
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var onlyChild = __inner_require__(88 /*__react__/lib/onlyChild.js*/);
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		ReactNativeDefaultInjection.inject();
 
@@ -2673,7 +2665,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 				CurrentOwner: ReactCurrentOwner,
 				InstanceHandles: ReactInstanceHandles,
 				Mount: ReactNativeMount,
-				Reconciler: require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactReconciler.js'),
+				Reconciler: require('react-native@0.21/__react__/lib/ReactReconciler.js'),
 				TextComponent: require('react-native@0.21/Libraries/ReactNative/ReactNativeTextComponent.js') });
 		}
 
@@ -2682,27 +2674,27 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	function (__inner_require__, exports, module) {
 		require('react-native@0.21/Libraries/JavaScriptAppEngine/Initialization/InitializeJavaScriptAppEngine.js');
 
-		var EventPluginHub = __inner_require__(12 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventPluginHub.js*/);
-		var EventPluginUtils = __inner_require__(14 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventPluginUtils.js*/);
+		var EventPluginHub = __inner_require__(12 /*__react__/lib/EventPluginHub.js*/);
+		var EventPluginUtils = __inner_require__(14 /*__react__/lib/EventPluginUtils.js*/);
 		var IOSDefaultEventPluginOrder = __inner_require__(19 /*Libraries/ReactIOS/IOSDefaultEventPluginOrder.js*/);
 		var IOSNativeBridgeEventPlugin = __inner_require__(20 /*Libraries/ReactIOS/IOSNativeBridgeEventPlugin.js*/);
 		var NodeHandle = __inner_require__(26 /*Libraries/vendor/react/platform/NodeHandle.js*/);
-		var ReactElement = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js');
-		var ReactComponentEnvironment = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactComponentEnvironment.js');
-		var ReactDefaultBatchingStrategy = __inner_require__(27 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactDefaultBatchingStrategy.js*/);
-		var ReactEmptyComponent = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactEmptyComponent.js');
-		var ReactInstanceHandles = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceHandles.js');
+		var ReactElement = require('react-native@0.21/__react__/lib/ReactElement.js');
+		var ReactComponentEnvironment = require('react-native@0.21/__react__/lib/ReactComponentEnvironment.js');
+		var ReactDefaultBatchingStrategy = __inner_require__(27 /*__react__/lib/ReactDefaultBatchingStrategy.js*/);
+		var ReactEmptyComponent = require('react-native@0.21/__react__/lib/ReactEmptyComponent.js');
+		var ReactInstanceHandles = require('react-native@0.21/__react__/lib/ReactInstanceHandles.js');
 		var ReactNativeComponentEnvironment = __inner_require__(28 /*Libraries/ReactNative/ReactNativeBaseComponentEnvironment.js*/);
 		var ReactNativeGlobalInteractionHandler = __inner_require__(32 /*Libraries/ReactNative/ReactNativeGlobalInteractionHandler.js*/);
 		var ReactNativeGlobalResponderHandler = __inner_require__(35 /*Libraries/ReactNative/ReactNativeGlobalResponderHandler.js*/);
 		var ReactNativeMount = require('react-native@0.21/Libraries/ReactNative/ReactNativeMount.js');
 		var ReactNativeTextComponent = require('react-native@0.21/Libraries/ReactNative/ReactNativeTextComponent.js');
-		var ReactNativeComponent = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactNativeComponent.js');
-		var ReactUpdates = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdates.js');
-		var ResponderEventPlugin = __inner_require__(36 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ResponderEventPlugin.js*/);
+		var ReactNativeComponent = require('react-native@0.21/__react__/lib/ReactNativeComponent.js');
+		var ReactUpdates = require('react-native@0.21/__react__/lib/ReactUpdates.js');
+		var ResponderEventPlugin = __inner_require__(36 /*__react__/lib/ResponderEventPlugin.js*/);
 		var UniversalWorkerNodeHandle = __inner_require__(41 /*Libraries/vendor/react/platformImplementations/universal/worker/UniversalWorkerNodeHandle.js*/);
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		__inner_require__(42 /*Libraries/BatchedBridge/BatchedBridgedModules/RCTEventEmitter.js*/);
 		__inner_require__(45 /*Libraries/Utilities/RCTLog.js*/);
@@ -2754,16 +2746,16 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 
 		module.exports = {
 			inject: inject };
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventPluginHub.js
+	}, // __react__/lib/EventPluginHub.js
 	function (__inner_require__, exports, module) {
-		var EventPluginRegistry = __inner_require__(13 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventPluginRegistry.js*/);
-		var EventPluginUtils = __inner_require__(14 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventPluginUtils.js*/);
-		var ReactErrorUtils = __inner_require__(16 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactErrorUtils.js*/);
+		var EventPluginRegistry = __inner_require__(13 /*__react__/lib/EventPluginRegistry.js*/);
+		var EventPluginUtils = __inner_require__(14 /*__react__/lib/EventPluginUtils.js*/);
+		var ReactErrorUtils = __inner_require__(16 /*__react__/lib/ReactErrorUtils.js*/);
 
-		var accumulateInto = __inner_require__(17 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/accumulateInto.js*/);
-		var forEachAccumulated = __inner_require__(18 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/forEachAccumulated.js*/);
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var accumulateInto = __inner_require__(17 /*__react__/lib/accumulateInto.js*/);
+		var forEachAccumulated = __inner_require__(18 /*__react__/lib/forEachAccumulated.js*/);
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		var listenerBank = {};
 
@@ -2910,9 +2902,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} };
 
 		module.exports = EventPluginHub;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventPluginRegistry.js
+	}, // __react__/lib/EventPluginRegistry.js
 	function (__inner_require__, exports, module) {
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var EventPluginOrder = null;
 
@@ -3042,13 +3034,13 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} };
 
 		module.exports = EventPluginRegistry;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventPluginUtils.js
+	}, // __react__/lib/EventPluginUtils.js
 	function (__inner_require__, exports, module) {
-		var EventConstants = __inner_require__(15 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventConstants.js*/);
-		var ReactErrorUtils = __inner_require__(16 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactErrorUtils.js*/);
+		var EventConstants = __inner_require__(15 /*__react__/lib/EventConstants.js*/);
+		var ReactErrorUtils = __inner_require__(16 /*__react__/lib/ReactErrorUtils.js*/);
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		var injection = {
 			Mount: null,
@@ -3187,9 +3179,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			injection: injection };
 
 		module.exports = EventPluginUtils;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventConstants.js
+	}, // __react__/lib/EventConstants.js
 	function (__inner_require__, exports, module) {
-		var keyMirror = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyMirror.js');
+		var keyMirror = require('react-native@0.21/__fbjs__/lib/keyMirror.js');
 
 		var PropagationPhases = keyMirror({ bubbled: null, captured: null });
 
@@ -3263,7 +3255,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			PropagationPhases: PropagationPhases };
 
 		module.exports = EventConstants;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactErrorUtils.js
+	}, // __react__/lib/ReactErrorUtils.js
 	function (__inner_require__, exports, module) {
 		var caughtError = null;
 
@@ -3308,9 +3300,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		}
 
 		module.exports = ReactErrorUtils;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/accumulateInto.js
+	}, // __react__/lib/accumulateInto.js
 	function (__inner_require__, exports, module) {
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		function accumulateInto(current, next) {
 			!(next != null) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'accumulateInto(...): Accumulated items must not be null or undefined.') : invariant(false) : undefined;
@@ -3340,7 +3332,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		}
 
 		module.exports = accumulateInto;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/forEachAccumulated.js
+	}, // __react__/lib/forEachAccumulated.js
 	function (__inner_require__, exports, module) {
 		var forEachAccumulated = function forEachAccumulated(arr, cb, scope) {
 			if (Array.isArray(arr)) {
@@ -3358,12 +3350,12 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = IOSDefaultEventPluginOrder;
 	}, // Libraries/ReactIOS/IOSNativeBridgeEventPlugin.js
 	function (__inner_require__, exports, module) {
-		var EventPropagators = __inner_require__(21 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventPropagators.js*/);
-		var SyntheticEvent = __inner_require__(22 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/SyntheticEvent.js*/);
+		var EventPropagators = __inner_require__(21 /*__react__/lib/EventPropagators.js*/);
+		var SyntheticEvent = __inner_require__(22 /*__react__/lib/SyntheticEvent.js*/);
 		var UIManager = require('react-native@0.21/Libraries/Utilities/UIManager.js');
 
 		var merge = __inner_require__(23 /*Libraries/vendor/core/merge.js*/);
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		var customBubblingEventTypes = UIManager.customBubblingEventTypes;
 		var customDirectEventTypes = UIManager.customDirectEventTypes;
@@ -3400,15 +3392,15 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} };
 
 		module.exports = IOSNativeBridgeEventPlugin;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventPropagators.js
+	}, // __react__/lib/EventPropagators.js
 	function (__inner_require__, exports, module) {
-		var EventConstants = __inner_require__(15 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventConstants.js*/);
-		var EventPluginHub = __inner_require__(12 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventPluginHub.js*/);
+		var EventConstants = __inner_require__(15 /*__react__/lib/EventConstants.js*/);
+		var EventPluginHub = __inner_require__(12 /*__react__/lib/EventPluginHub.js*/);
 
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
-		var accumulateInto = __inner_require__(17 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/accumulateInto.js*/);
-		var forEachAccumulated = __inner_require__(18 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/forEachAccumulated.js*/);
+		var accumulateInto = __inner_require__(17 /*__react__/lib/accumulateInto.js*/);
+		var forEachAccumulated = __inner_require__(18 /*__react__/lib/forEachAccumulated.js*/);
 
 		var PropagationPhases = EventConstants.PropagationPhases;
 		var getListener = EventPluginHub.getListener;
@@ -3482,13 +3474,13 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			accumulateEnterLeaveDispatches: accumulateEnterLeaveDispatches };
 
 		module.exports = EventPropagators;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/SyntheticEvent.js
+	}, // __react__/lib/SyntheticEvent.js
 	function (__inner_require__, exports, module) {
-		var PooledClass = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/PooledClass.js');
+		var PooledClass = require('react-native@0.21/__react__/lib/PooledClass.js');
 
-		var assign = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js');
-		var emptyFunction = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyFunction.js');
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var assign = require('react-native@0.21/__react__/lib/Object.assign.js');
+		var emptyFunction = require('react-native@0.21/__fbjs__/lib/emptyFunction.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		var EventInterface = {
 			type: null,
@@ -3642,8 +3634,8 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = mergeInto;
 	}, // Libraries/vendor/core/mergeHelpers.js
 	function (__inner_require__, exports, module) {
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var keyMirror = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyMirror.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var keyMirror = require('react-native@0.21/__fbjs__/lib/keyMirror.js');
 
 		var MAX_MERGE_DEPTH = 36;
 
@@ -3707,13 +3699,13 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} };
 
 		module.exports = NodeHandle;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactDefaultBatchingStrategy.js
+	}, // __react__/lib/ReactDefaultBatchingStrategy.js
 	function (__inner_require__, exports, module) {
-		var ReactUpdates = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdates.js');
-		var Transaction = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Transaction.js');
+		var ReactUpdates = require('react-native@0.21/__react__/lib/ReactUpdates.js');
+		var Transaction = require('react-native@0.21/__react__/lib/Transaction.js');
 
-		var assign = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js');
-		var emptyFunction = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyFunction.js');
+		var assign = require('react-native@0.21/__react__/lib/Object.assign.js');
+		var emptyFunction = require('react-native@0.21/__fbjs__/lib/emptyFunction.js');
 
 		var RESET_BATCHED_UPDATES = {
 			initialize: emptyFunction,
@@ -3775,8 +3767,8 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	}, // Libraries/ReactNative/ReactNativeDOMIDOperations.js
 	function (__inner_require__, exports, module) {
 		var ReactNativeTagHandles = require('react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js');
-		var ReactMultiChildUpdateTypes = __inner_require__(30 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactMultiChildUpdateTypes.js*/);
-		var ReactPerf = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPerf.js');
+		var ReactMultiChildUpdateTypes = __inner_require__(30 /*__react__/lib/ReactMultiChildUpdateTypes.js*/);
+		var ReactPerf = require('react-native@0.21/__react__/lib/ReactPerf.js');
 		var UIManager = require('react-native@0.21/Libraries/Utilities/UIManager.js');
 
 		var dangerouslyProcessChildrenUpdates = function dangerouslyProcessChildrenUpdates(childrenUpdates, markupList) {
@@ -3821,9 +3813,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			}) };
 
 		module.exports = ReactNativeDOMIDOperations;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactMultiChildUpdateTypes.js
+	}, // __react__/lib/ReactMultiChildUpdateTypes.js
 	function (__inner_require__, exports, module) {
-		var keyMirror = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyMirror.js');
+		var keyMirror = require('react-native@0.21/__fbjs__/lib/keyMirror.js');
 
 		var ReactMultiChildUpdateTypes = keyMirror({
 			INSERT_MARKUP: null,
@@ -3835,9 +3827,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = ReactMultiChildUpdateTypes;
 	}, // Libraries/ReactNative/ReactNativeReconcileTransaction.js
 	function (__inner_require__, exports, module) {
-		var CallbackQueue = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/CallbackQueue.js');
-		var PooledClass = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/PooledClass.js');
-		var Transaction = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Transaction.js');
+		var CallbackQueue = require('react-native@0.21/__react__/lib/CallbackQueue.js');
+		var PooledClass = require('react-native@0.21/__react__/lib/PooledClass.js');
+		var Transaction = require('react-native@0.21/__react__/lib/Transaction.js');
 
 		var ON_DOM_READY_QUEUEING = {
 
@@ -3902,8 +3894,8 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var Set = require('react-native@0.21/Libraries/vendor/core/Set.js');
 		var TaskQueue = __inner_require__(34 /*Libraries/Interaction/TaskQueue.js*/);
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var keyMirror = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyMirror.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var keyMirror = require('react-native@0.21/__fbjs__/lib/keyMirror.js');
 		var setImmediate = require('react-native@0.21/Libraries/vendor/core/setImmediate.js');
 
 		var _emitter = new EventEmitter();
@@ -4004,7 +3996,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	function (__inner_require__, exports, module) {
 		var ErrorUtils = require('react-native@0.21/Libraries/Utilities/ErrorUtils.js');
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');var TaskQueue = function () {
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');var TaskQueue = function () {
 
 			function TaskQueue(_ref) {
 				var onMoreTasks = _ref.onMoreTasks;babelHelpers.classCallCheck(this, TaskQueue);
@@ -4074,18 +4066,18 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} };
 
 		module.exports = ReactNativeGlobalResponderHandler;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ResponderEventPlugin.js
+	}, // __react__/lib/ResponderEventPlugin.js
 	function (__inner_require__, exports, module) {
-		var EventConstants = __inner_require__(15 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventConstants.js*/);
-		var EventPluginUtils = __inner_require__(14 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventPluginUtils.js*/);
-		var EventPropagators = __inner_require__(21 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventPropagators.js*/);
-		var ReactInstanceHandles = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceHandles.js');
-		var ResponderSyntheticEvent = __inner_require__(37 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ResponderSyntheticEvent.js*/);
-		var ResponderTouchHistoryStore = __inner_require__(38 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ResponderTouchHistoryStore.js*/);
+		var EventConstants = __inner_require__(15 /*__react__/lib/EventConstants.js*/);
+		var EventPluginUtils = __inner_require__(14 /*__react__/lib/EventPluginUtils.js*/);
+		var EventPropagators = __inner_require__(21 /*__react__/lib/EventPropagators.js*/);
+		var ReactInstanceHandles = require('react-native@0.21/__react__/lib/ReactInstanceHandles.js');
+		var ResponderSyntheticEvent = __inner_require__(37 /*__react__/lib/ResponderSyntheticEvent.js*/);
+		var ResponderTouchHistoryStore = __inner_require__(38 /*__react__/lib/ResponderTouchHistoryStore.js*/);
 
-		var accumulate = __inner_require__(39 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/accumulate.js*/);
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var keyOf = __inner_require__(40 /*Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyOf.js*/);
+		var accumulate = __inner_require__(39 /*__react__/lib/accumulate.js*/);
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var keyOf = __inner_require__(40 /*__fbjs__/lib/keyOf.js*/);
 
 		var isStartish = EventPluginUtils.isStartish;
 		var isMoveish = EventPluginUtils.isMoveish;
@@ -4287,9 +4279,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 				} } };
 
 		module.exports = ResponderEventPlugin;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ResponderSyntheticEvent.js
+	}, // __react__/lib/ResponderSyntheticEvent.js
 	function (__inner_require__, exports, module) {
-		var SyntheticEvent = __inner_require__(22 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/SyntheticEvent.js*/);
+		var SyntheticEvent = __inner_require__(22 /*__react__/lib/SyntheticEvent.js*/);
 
 		var ResponderEventInterface = {
 			touchHistory: function touchHistory(nativeEvent) {
@@ -4303,11 +4295,11 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		SyntheticEvent.augmentClass(ResponderSyntheticEvent, ResponderEventInterface);
 
 		module.exports = ResponderSyntheticEvent;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ResponderTouchHistoryStore.js
+	}, // __react__/lib/ResponderTouchHistoryStore.js
 	function (__inner_require__, exports, module) {
-		var EventPluginUtils = __inner_require__(14 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventPluginUtils.js*/);
+		var EventPluginUtils = __inner_require__(14 /*__react__/lib/EventPluginUtils.js*/);
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var isMoveish = EventPluginUtils.isMoveish;
 		var isStartish = EventPluginUtils.isStartish;
@@ -4445,9 +4437,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			touchHistory: touchHistory };
 
 		module.exports = ResponderTouchHistoryStore;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/accumulate.js
+	}, // __react__/lib/accumulate.js
 	function (__inner_require__, exports, module) {
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		function accumulate(current, next) {
 			!(next != null) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'accumulate(...): Accumulated items must be not be null or undefined.') : invariant(false) : undefined;
@@ -4470,7 +4462,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		}
 
 		module.exports = accumulate;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyOf.js
+	}, // __fbjs__/lib/keyOf.js
 	function (__inner_require__, exports, module) {
 		var keyOf = function keyOf(oneKeyObj) {
 			var key;
@@ -4488,7 +4480,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	function (__inner_require__, exports, module) {
 		var ReactNativeTagHandles = require('react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js');
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var UniversalWorkerNodeHandle = {
 			getRootNodeID: function getRootNodeID(nodeHandle) {
@@ -4508,14 +4500,14 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = ReactNativeEventEmitter;
 	}, // Libraries/ReactNative/ReactNativeEventEmitter.js
 	function (__inner_require__, exports, module) {
-		var EventPluginHub = __inner_require__(12 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventPluginHub.js*/);
-		var ReactEventEmitterMixin = __inner_require__(44 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactEventEmitterMixin.js*/);
+		var EventPluginHub = __inner_require__(12 /*__react__/lib/EventPluginHub.js*/);
+		var ReactEventEmitterMixin = __inner_require__(44 /*__react__/lib/ReactEventEmitterMixin.js*/);
 		var ReactNativeTagHandles = require('react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js');
 		var NodeHandle = __inner_require__(26 /*Libraries/vendor/react/platform/NodeHandle.js*/);
-		var EventConstants = __inner_require__(15 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventConstants.js*/);
+		var EventConstants = __inner_require__(15 /*__react__/lib/EventConstants.js*/);
 
 		var merge = __inner_require__(23 /*Libraries/vendor/core/merge.js*/);
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		var topLevelTypes = EventConstants.topLevelTypes;
 
@@ -4596,9 +4588,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} });
 
 		module.exports = ReactNativeEventEmitter;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactEventEmitterMixin.js
+	}, // __react__/lib/ReactEventEmitterMixin.js
 	function (__inner_require__, exports, module) {
-		var EventPluginHub = __inner_require__(12 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventPluginHub.js*/);
+		var EventPluginHub = __inner_require__(12 /*__react__/lib/EventPluginHub.js*/);
 
 		function runEventQueueInBatch(events) {
 			EventPluginHub.enqueueEvents(events);
@@ -4617,7 +4609,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	function (__inner_require__, exports, module) {
 		var BatchedBridge = require('react-native@0.21/Libraries/BatchedBridge/BatchedBridge.js');
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var levelsMap = {
 			log: 'log',
@@ -4647,7 +4639,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	}, // Libraries/Components/View/View.js
 	function (__inner_require__, exports, module) {
 		var NativeMethodsMixin = __inner_require__(2 /*Libraries/ReactIOS/NativeMethodsMixin.js*/);
-		var PropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var PropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 		var React = __inner_require__(9 /*Libraries/ReactNative/React.js*/);
 		var ReactNativeStyleAttributes = __inner_require__(47 /*Libraries/Components/View/ReactNativeStyleAttributes.js*/);
 		var ReactNativeViewAttributes = __inner_require__(61 /*Libraries/Components/View/ReactNativeViewAttributes.js*/);
@@ -4760,7 +4752,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var TextStylePropTypes = __inner_require__(55 /*Libraries/Text/TextStylePropTypes.js*/);
 		var ViewStylePropTypes = __inner_require__(56 /*Libraries/Components/View/ViewStylePropTypes.js*/);
 
-		var keyMirror = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyMirror.js');
+		var keyMirror = require('react-native@0.21/__fbjs__/lib/keyMirror.js');
 		var matricesDiffer = __inner_require__(57 /*Libraries/Utilities/differ/matricesDiffer.js*/);
 		var processColor = require('react-native@0.21/Libraries/StyleSheet/processColor.js');
 		var processTransform = __inner_require__(58 /*Libraries/StyleSheet/processTransform.js*/);
@@ -4793,7 +4785,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	function (__inner_require__, exports, module) {
 		var ImageResizeMode = __inner_require__(49 /*Libraries/Image/ImageResizeMode.js*/);
 		var LayoutPropTypes = __inner_require__(50 /*Libraries/StyleSheet/LayoutPropTypes.js*/);
-		var ReactPropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var ReactPropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 		var ColorPropType = __inner_require__(51 /*Libraries/StyleSheet/ColorPropType.js*/);
 		var ShadowPropTypesIOS = __inner_require__(52 /*Libraries/Components/View/ShadowPropTypesIOS.js*/);
 		var TransformPropTypes = __inner_require__(53 /*Libraries/StyleSheet/TransformPropTypes.js*/);
@@ -4815,7 +4807,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = ImageStylePropTypes;
 	}, // Libraries/Image/ImageResizeMode.js
 	function (__inner_require__, exports, module) {
-		var keyMirror = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyMirror.js');
+		var keyMirror = require('react-native@0.21/__fbjs__/lib/keyMirror.js');
 
 		var ImageResizeMode = keyMirror({
 
@@ -4828,7 +4820,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = ImageResizeMode;
 	}, // Libraries/StyleSheet/LayoutPropTypes.js
 	function (__inner_require__, exports, module) {
-		var ReactPropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var ReactPropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 
 		var LayoutPropTypes = {
 			width: ReactPropTypes.number,
@@ -4874,8 +4866,8 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = LayoutPropTypes;
 	}, // Libraries/StyleSheet/ColorPropType.js
 	function (__inner_require__, exports, module) {
-		var ReactPropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
-		var ReactPropTypeLocationNames = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypeLocationNames.js');
+		var ReactPropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
+		var ReactPropTypeLocationNames = require('react-native@0.21/__react__/lib/ReactPropTypeLocationNames.js');
 
 		var normalizeColor = require('react-native@0.21/Libraries/StyleSheet/normalizeColor.js');
 
@@ -4907,7 +4899,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	}, // Libraries/Components/View/ShadowPropTypesIOS.js
 	function (__inner_require__, exports, module) {
 		var ColorPropType = __inner_require__(51 /*Libraries/StyleSheet/ColorPropType.js*/);
-		var ReactPropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var ReactPropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 
 		var ShadowPropTypesIOS = {
 
@@ -4922,7 +4914,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = ShadowPropTypesIOS;
 	}, // Libraries/StyleSheet/TransformPropTypes.js
 	function (__inner_require__, exports, module) {
-		var ReactPropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var ReactPropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 		var deprecatedPropType = __inner_require__(54 /*Libraries/Utilities/deprecatedPropType.js*/);
 
 		var ArrayOfNumberPropType = ReactPropTypes.arrayOf(ReactPropTypes.number);
@@ -4964,7 +4956,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = deprecatedPropType;
 	}, // Libraries/Text/TextStylePropTypes.js
 	function (__inner_require__, exports, module) {
-		var ReactPropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var ReactPropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 		var ColorPropType = __inner_require__(51 /*Libraries/StyleSheet/ColorPropType.js*/);
 		var ViewStylePropTypes = __inner_require__(56 /*Libraries/Components/View/ViewStylePropTypes.js*/);
 
@@ -5000,7 +4992,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	}, // Libraries/Components/View/ViewStylePropTypes.js
 	function (__inner_require__, exports, module) {
 		var LayoutPropTypes = __inner_require__(50 /*Libraries/StyleSheet/LayoutPropTypes.js*/);
-		var ReactPropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var ReactPropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 		var ColorPropType = __inner_require__(51 /*Libraries/StyleSheet/ColorPropType.js*/);
 		var ShadowPropTypesIOS = __inner_require__(52 /*Libraries/Components/View/ShadowPropTypesIOS.js*/);
 		var TransformPropTypes = __inner_require__(53 /*Libraries/StyleSheet/TransformPropTypes.js*/);
@@ -5045,7 +5037,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var MatrixMath = __inner_require__(59 /*Libraries/Utilities/MatrixMath.js*/);
 		var Platform = require('react-native@0.21/Libraries/Utilities/Platform.ios.js');
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 		var stringifySafe = require('react-native@0.21/Libraries/Utilities/stringifySafe.js');
 
 		function processTransform(transform) {
@@ -5160,7 +5152,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = processTransform;
 	}, // Libraries/Utilities/MatrixMath.js
 	function (__inner_require__, exports, module) {
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var MatrixMath = {
 			createIdentityMatrix: function createIdentityMatrix() {
@@ -5633,9 +5625,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = StyleSheetPropType;
 	}, // Libraries/Utilities/createStrictShapeTypeChecker.js
 	function (__inner_require__, exports, module) {
-		var ReactPropTypeLocationNames = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypeLocationNames.js');
+		var ReactPropTypeLocationNames = require('react-native@0.21/__react__/lib/ReactPropTypeLocationNames.js');
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 		var merge = __inner_require__(23 /*Libraries/vendor/core/merge.js*/);
 
 		function createStrictShapeTypeChecker(shapeTypes) {
@@ -5688,7 +5680,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var resolveAssetSource = __inner_require__(79 /*Libraries/Image/resolveAssetSource.js*/);
 		var sizesDiffer = __inner_require__(60 /*Libraries/Utilities/differ/sizesDiffer.js*/);
 		var verifyPropTypes = __inner_require__(82 /*Libraries/ReactIOS/verifyPropTypes.js*/);
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		function requireNativeComponent(viewName, componentInterface, extraConfig) {
 			var viewConfig = UIManager[viewName];
@@ -5823,7 +5815,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var Platform = require('react-native@0.21/Libraries/Utilities/Platform.ios.js');
 		var UIManager = require('react-native@0.21/Libraries/Utilities/UIManager.js');
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var dimensions = UIManager.Dimensions;
 
@@ -5869,11 +5861,11 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	}, // Libraries/StyleSheet/StyleSheetValidation.js
 	function (__inner_require__, exports, module) {
 		var ImageStylePropTypes = __inner_require__(48 /*Libraries/Image/ImageStylePropTypes.js*/);
-		var ReactPropTypeLocations = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypeLocations.js');
+		var ReactPropTypeLocations = require('react-native@0.21/__react__/lib/ReactPropTypeLocations.js');
 		var TextStylePropTypes = __inner_require__(55 /*Libraries/Text/TextStylePropTypes.js*/);
 		var ViewStylePropTypes = __inner_require__(56 /*Libraries/Components/View/ViewStylePropTypes.js*/);
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');var StyleSheetValidation = function () {
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');var StyleSheetValidation = function () {
 			function StyleSheetValidation() {
 				babelHelpers.classCallCheck(this, StyleSheetValidation);
 			}babelHelpers.createClass(StyleSheetValidation, null, [{ key: 'validateStyleProp', value: function validateStyleProp(prop, style, caller) {
@@ -5942,12 +5934,12 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var ReactNativeAttributePayload = __inner_require__(3 /*Libraries/ReactNative/ReactNativeAttributePayload.js*/);
 		var ReactNativeEventEmitter = __inner_require__(43 /*Libraries/ReactNative/ReactNativeEventEmitter.js*/);
 		var ReactNativeTagHandles = require('react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js');
-		var ReactMultiChild = __inner_require__(72 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactMultiChild.js*/);
+		var ReactMultiChild = __inner_require__(72 /*__react__/lib/ReactMultiChild.js*/);
 		var UIManager = require('react-native@0.21/Libraries/Utilities/UIManager.js');
 
 		var deepFreezeAndThrowOnMutationInDev = __inner_require__(76 /*Libraries/Utilities/deepFreezeAndThrowOnMutationInDev.js*/);
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		var registrationNames = ReactNativeEventEmitter.registrationNames;
 		var putListener = ReactNativeEventEmitter.putListener;
@@ -6071,16 +6063,16 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		babelHelpers.extends(ReactNativeBaseComponent.prototype, ReactMultiChild.Mixin, ReactNativeBaseComponent.Mixin, NativeMethodsMixin);
 
 		module.exports = ReactNativeBaseComponent;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactMultiChild.js
+	}, // __react__/lib/ReactMultiChild.js
 	function (__inner_require__, exports, module) {
-		var ReactComponentEnvironment = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactComponentEnvironment.js');
-		var ReactMultiChildUpdateTypes = __inner_require__(30 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactMultiChildUpdateTypes.js*/);
+		var ReactComponentEnvironment = require('react-native@0.21/__react__/lib/ReactComponentEnvironment.js');
+		var ReactMultiChildUpdateTypes = __inner_require__(30 /*__react__/lib/ReactMultiChildUpdateTypes.js*/);
 
-		var ReactCurrentOwner = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCurrentOwner.js');
-		var ReactReconciler = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactReconciler.js');
-		var ReactChildReconciler = __inner_require__(73 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactChildReconciler.js*/);
+		var ReactCurrentOwner = require('react-native@0.21/__react__/lib/ReactCurrentOwner.js');
+		var ReactReconciler = require('react-native@0.21/__react__/lib/ReactReconciler.js');
+		var ReactChildReconciler = __inner_require__(73 /*__react__/lib/ReactChildReconciler.js*/);
 
-		var flattenChildren = __inner_require__(75 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/flattenChildren.js*/);
+		var flattenChildren = __inner_require__(75 /*__react__/lib/flattenChildren.js*/);
 
 		var updateDepth = 0;
 
@@ -6368,14 +6360,14 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 				} } };
 
 		module.exports = ReactMultiChild;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactChildReconciler.js
+	}, // __react__/lib/ReactChildReconciler.js
 	function (__inner_require__, exports, module) {
-		var ReactReconciler = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactReconciler.js');
+		var ReactReconciler = require('react-native@0.21/__react__/lib/ReactReconciler.js');
 
-		var instantiateReactComponent = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/instantiateReactComponent.js');
-		var shouldUpdateReactComponent = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/shouldUpdateReactComponent.js');
-		var traverseAllChildren = __inner_require__(74 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/traverseAllChildren.js*/);
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var instantiateReactComponent = require('react-native@0.21/__react__/lib/instantiateReactComponent.js');
+		var shouldUpdateReactComponent = require('react-native@0.21/__react__/lib/shouldUpdateReactComponent.js');
+		var traverseAllChildren = __inner_require__(74 /*__react__/lib/traverseAllChildren.js*/);
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		function instantiateChild(childInstances, child, name) {
 
@@ -6443,15 +6435,15 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} };
 
 		module.exports = ReactChildReconciler;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/traverseAllChildren.js
+	}, // __react__/lib/traverseAllChildren.js
 	function (__inner_require__, exports, module) {
-		var ReactCurrentOwner = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCurrentOwner.js');
-		var ReactElement = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js');
-		var ReactInstanceHandles = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceHandles.js');
+		var ReactCurrentOwner = require('react-native@0.21/__react__/lib/ReactCurrentOwner.js');
+		var ReactElement = require('react-native@0.21/__react__/lib/ReactElement.js');
+		var ReactInstanceHandles = require('react-native@0.21/__react__/lib/ReactInstanceHandles.js');
 
-		var getIteratorFn = __inner_require__(8 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/getIteratorFn.js*/);
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var getIteratorFn = __inner_require__(8 /*__react__/lib/getIteratorFn.js*/);
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		var SEPARATOR = ReactInstanceHandles.SEPARATOR;
 		var SUBSEPARATOR = ':';
@@ -6568,10 +6560,10 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		}
 
 		module.exports = traverseAllChildren;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/flattenChildren.js
+	}, // __react__/lib/flattenChildren.js
 	function (__inner_require__, exports, module) {
-		var traverseAllChildren = __inner_require__(74 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/traverseAllChildren.js*/);
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var traverseAllChildren = __inner_require__(74 /*__react__/lib/traverseAllChildren.js*/);
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		function flattenSingleChildIntoContext(traverseContext, child, name) {
 
@@ -6853,13 +6845,13 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		}
 
 		module.exports = verifyPropTypes;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactChildren.js
+	}, // __react__/lib/ReactChildren.js
 	function (__inner_require__, exports, module) {
-		var PooledClass = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/PooledClass.js');
-		var ReactElement = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js');
+		var PooledClass = require('react-native@0.21/__react__/lib/PooledClass.js');
+		var ReactElement = require('react-native@0.21/__react__/lib/ReactElement.js');
 
-		var emptyFunction = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyFunction.js');
-		var traverseAllChildren = __inner_require__(74 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/traverseAllChildren.js*/);
+		var emptyFunction = require('react-native@0.21/__fbjs__/lib/emptyFunction.js');
+		var traverseAllChildren = __inner_require__(74 /*__react__/lib/traverseAllChildren.js*/);
 
 		var twoArgumentPooler = PooledClass.twoArgumentPooler;
 		var fourArgumentPooler = PooledClass.fourArgumentPooler;
@@ -6971,20 +6963,20 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			toArray: toArray };
 
 		module.exports = ReactChildren;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactClass.js
+	}, // __react__/lib/ReactClass.js
 	function (__inner_require__, exports, module) {
-		var ReactComponent = __inner_require__(85 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactComponent.js*/);
-		var ReactElement = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js');
-		var ReactPropTypeLocations = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypeLocations.js');
-		var ReactPropTypeLocationNames = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypeLocationNames.js');
-		var ReactNoopUpdateQueue = __inner_require__(86 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactNoopUpdateQueue.js*/);
+		var ReactComponent = __inner_require__(85 /*__react__/lib/ReactComponent.js*/);
+		var ReactElement = require('react-native@0.21/__react__/lib/ReactElement.js');
+		var ReactPropTypeLocations = require('react-native@0.21/__react__/lib/ReactPropTypeLocations.js');
+		var ReactPropTypeLocationNames = require('react-native@0.21/__react__/lib/ReactPropTypeLocationNames.js');
+		var ReactNoopUpdateQueue = __inner_require__(86 /*__react__/lib/ReactNoopUpdateQueue.js*/);
 
-		var assign = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js');
-		var emptyObject = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyObject.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var keyMirror = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyMirror.js');
-		var keyOf = __inner_require__(40 /*Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyOf.js*/);
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var assign = require('react-native@0.21/__react__/lib/Object.assign.js');
+		var emptyObject = require('react-native@0.21/__fbjs__/lib/emptyObject.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var keyMirror = require('react-native@0.21/__fbjs__/lib/keyMirror.js');
+		var keyOf = __inner_require__(40 /*__fbjs__/lib/keyOf.js*/);
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		var MIXINS_KEY = keyOf({ mixins: null });
 
@@ -7378,14 +7370,14 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 				} } };
 
 		module.exports = ReactClass;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactComponent.js
+	}, // __react__/lib/ReactComponent.js
 	function (__inner_require__, exports, module) {
-		var ReactNoopUpdateQueue = __inner_require__(86 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactNoopUpdateQueue.js*/);
+		var ReactNoopUpdateQueue = __inner_require__(86 /*__react__/lib/ReactNoopUpdateQueue.js*/);
 
-		var canDefineProperty = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/canDefineProperty.js');
-		var emptyObject = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyObject.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var canDefineProperty = require('react-native@0.21/__react__/lib/canDefineProperty.js');
+		var emptyObject = require('react-native@0.21/__fbjs__/lib/emptyObject.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		function ReactComponent(props, context, updater) {
 			this.props = props;
@@ -7440,9 +7432,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		}
 
 		module.exports = ReactComponent;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactNoopUpdateQueue.js
+	}, // __react__/lib/ReactNoopUpdateQueue.js
 	function (__inner_require__, exports, module) {
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		function warnTDZ(publicInstance, callerName) {
 			if (process.env.NODE_ENV !== 'production') {
@@ -7479,17 +7471,17 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} };
 
 		module.exports = ReactNoopUpdateQueue;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElementValidator.js
+	}, // __react__/lib/ReactElementValidator.js
 	function (__inner_require__, exports, module) {
-		var ReactElement = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js');
-		var ReactPropTypeLocations = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypeLocations.js');
-		var ReactPropTypeLocationNames = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypeLocationNames.js');
-		var ReactCurrentOwner = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCurrentOwner.js');
+		var ReactElement = require('react-native@0.21/__react__/lib/ReactElement.js');
+		var ReactPropTypeLocations = require('react-native@0.21/__react__/lib/ReactPropTypeLocations.js');
+		var ReactPropTypeLocationNames = require('react-native@0.21/__react__/lib/ReactPropTypeLocationNames.js');
+		var ReactCurrentOwner = require('react-native@0.21/__react__/lib/ReactCurrentOwner.js');
 
-		var canDefineProperty = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/canDefineProperty.js');
-		var getIteratorFn = __inner_require__(8 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/getIteratorFn.js*/);
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var canDefineProperty = require('react-native@0.21/__react__/lib/canDefineProperty.js');
+		var getIteratorFn = __inner_require__(8 /*__react__/lib/getIteratorFn.js*/);
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		function getDeclarationErrorAddendum() {
 			if (ReactCurrentOwner.current) {
@@ -7674,11 +7666,11 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} };
 
 		module.exports = ReactElementValidator;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/onlyChild.js
+	}, // __react__/lib/onlyChild.js
 	function (__inner_require__, exports, module) {
-		var ReactElement = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js');
+		var ReactElement = require('react-native@0.21/__react__/lib/ReactElement.js');
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		function onlyChild(children) {
 			!ReactElement.isValidElement(children) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'onlyChild must be passed a children with exactly one child.') : invariant(false) : undefined;
@@ -8218,7 +8210,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	}, // Libraries/Components/DatePicker/DatePickerIOS.ios.js
 	function (__inner_require__, exports, module) {
 		var NativeMethodsMixin = __inner_require__(2 /*Libraries/ReactIOS/NativeMethodsMixin.js*/);
-		var PropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var PropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 		var React = __inner_require__(9 /*Libraries/ReactNative/React.js*/);
 		var RCTDatePickerIOSConsts = require('react-native@0.21/Libraries/Utilities/UIManager.js').RCTDatePicker.Constants;
 		var StyleSheet = __inner_require__(66 /*Libraries/StyleSheet/StyleSheet.js*/);
@@ -8303,7 +8295,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var ImageResizeMode = __inner_require__(49 /*Libraries/Image/ImageResizeMode.js*/);
 		var ImageStylePropTypes = __inner_require__(48 /*Libraries/Image/ImageStylePropTypes.js*/);
 		var NativeMethodsMixin = __inner_require__(2 /*Libraries/ReactIOS/NativeMethodsMixin.js*/);
-		var PropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var PropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 		var React = __inner_require__(9 /*Libraries/ReactNative/React.js*/);
 		var ReactNativeViewAttributes = __inner_require__(61 /*Libraries/Components/View/ReactNativeViewAttributes.js*/);
 		var View = __inner_require__(46 /*Libraries/Components/View/View.js*/);
@@ -8311,10 +8303,10 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var StyleSheetPropType = __inner_require__(62 /*Libraries/StyleSheet/StyleSheetPropType.js*/);
 
 		var flattenStyle = require('react-native@0.21/Libraries/StyleSheet/flattenStyle.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 		var requireNativeComponent = __inner_require__(64 /*Libraries/ReactIOS/requireNativeComponent.js*/);
 		var resolveAssetSource = __inner_require__(79 /*Libraries/Image/resolveAssetSource.js*/);
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');var _require = require('react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js'),
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');var _require = require('react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js'),
 		    ImageViewManager = _require.ImageViewManager,
 		    NetworkImageViewManager = _require.NetworkImageViewManager;
 
@@ -8408,7 +8400,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = Image;
 	}, // Libraries/StyleSheet/EdgeInsetsPropType.js
 	function (__inner_require__, exports, module) {
-		var PropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var PropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 
 		var createStrictShapeTypeChecker = __inner_require__(63 /*Libraries/Utilities/createStrictShapeTypeChecker.js*/);
 
@@ -8847,9 +8839,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = ListView;
 	}, // Libraries/CustomComponents/ListView/ListViewDataSource.js
 	function (__inner_require__, exports, module) {
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 		var isEmpty = __inner_require__(99 /*Libraries/vendor/core/isEmpty.js*/);
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		function defaultGetRowData(dataBlob, sectionID, rowID) {
 			return dataBlob[sectionID][rowID];
@@ -9056,7 +9048,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var dismissKeyboard = __inner_require__(104 /*Libraries/Utilities/dismissKeyboard.js*/);
 		var flattenStyle = require('react-native@0.21/Libraries/StyleSheet/flattenStyle.js');
 		var insetsDiffer = __inner_require__(77 /*Libraries/Utilities/differ/insetsDiffer.js*/);
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 		var pointsDiffer = __inner_require__(78 /*Libraries/Utilities/differ/pointsDiffer.js*/);
 		var requireNativeComponent = __inner_require__(64 /*Libraries/ReactIOS/requireNativeComponent.js*/);
 		var processDecelerationRate = __inner_require__(105 /*Libraries/Components/ScrollView/processDecelerationRate.js*/);
@@ -9335,7 +9327,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = ScrollView;
 	}, // Libraries/StyleSheet/PointPropType.js
 	function (__inner_require__, exports, module) {
-		var PropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var PropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 
 		var createStrictShapeTypeChecker = __inner_require__(63 /*Libraries/Utilities/createStrictShapeTypeChecker.js*/);
 
@@ -9355,8 +9347,8 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var UIManager = require('react-native@0.21/Libraries/Utilities/UIManager.js');var _require = require('react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js'),
 		    ScrollViewManager = _require.ScrollViewManager;
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		var IS_ANIMATING_TOUCH_START_THRESHOLD_MS = 16;
 
@@ -9923,7 +9915,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = MapView;
 	}, // Libraries/Modal/Modal.js
 	function (__inner_require__, exports, module) {
-		var PropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var PropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 		var React = __inner_require__(9 /*Libraries/ReactNative/React.js*/);
 		var StyleSheet = __inner_require__(66 /*Libraries/StyleSheet/StyleSheet.js*/);
 		var View = __inner_require__(46 /*Libraries/Components/View/View.js*/);
@@ -9987,7 +9979,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var clamp = __inner_require__(124 /*Libraries/vendor/react/core/clamp.js*/);
 		var deprecatedPropType = __inner_require__(54 /*Libraries/Utilities/deprecatedPropType.js*/);
 		var flattenStyle = require('react-native@0.21/Libraries/StyleSheet/flattenStyle.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 		var rebound = require('rebound@0.0.13/rebound.js');
 
 		var PropTypes = React.PropTypes;
@@ -10871,8 +10863,8 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 
 		var Set = require('react-native@0.21/Libraries/vendor/core/Set.js');
 
-		var emptyFunction = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyFunction.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');var AT_TARGET = NavigationEvent.AT_TARGET,
+		var emptyFunction = require('react-native@0.21/__fbjs__/lib/emptyFunction.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');var AT_TARGET = NavigationEvent.AT_TARGET,
 		    BUBBLING_PHASE = NavigationEvent.BUBBLING_PHASE,
 		    CAPTURING_PHASE = NavigationEvent.CAPTURING_PHASE;
 
@@ -11030,7 +11022,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = NavigationContext;
 	}, // Libraries/CustomComponents/Navigator/Navigation/NavigationEvent.js
 	function (__inner_require__, exports, module) {
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');var NavigationEventPool = function () {
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');var NavigationEventPool = function () {
 
 			function NavigationEventPool() {
 				babelHelpers.classCallCheck(this, NavigationEventPool);
@@ -11167,7 +11159,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = NavigationEventEmitter;
 	}, // Libraries/CustomComponents/Navigator/Navigation/NavigationTreeNode.js
 	function (__inner_require__, exports, module) {
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 		var immutable = require('immutable@3/dist/immutable.js');var List = immutable.List;var NavigationTreeNode = function () {
 
 			function NavigationTreeNode(value) {
@@ -11221,7 +11213,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		    Map = _require.Map;
 
 		var guid = require('react-native@0.21/Libraries/vendor/core/guid.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var Interpolators = NavigatorBreadcrumbNavigationBarStyles.Interpolators;
 		var NavigatorNavigationBarStyles = Platform.OS === 'android' ? NavigatorNavigationBarStylesAndroid : NavigatorNavigationBarStylesIOS;
@@ -11750,7 +11742,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			Stages: Stages };
 	}, // Libraries/Utilities/buildStyleInterpolator.js
 	function (__inner_require__, exports, module) {
-		var keyOf = __inner_require__(40 /*Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyOf.js*/);
+		var keyOf = __inner_require__(40 /*__fbjs__/lib/keyOf.js*/);
 
 		var X_DIM = keyOf({ x: null });
 		var Y_DIM = keyOf({ y: null });
@@ -13179,7 +13171,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var StyleSheet = __inner_require__(66 /*Libraries/StyleSheet/StyleSheet.js*/);
 		var View = __inner_require__(46 /*Libraries/Components/View/View.js*/);
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 		var logError = require('react-native@0.21/Libraries/Utilities/logError.js');
 		var requireNativeComponent = __inner_require__(64 /*Libraries/ReactIOS/requireNativeComponent.js*/);
 		var resolveAssetSource = __inner_require__(79 /*Libraries/Image/resolveAssetSource.js*/);
@@ -13567,7 +13559,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	function (__inner_require__, exports, module) {
 		var React = __inner_require__(9 /*Libraries/ReactNative/React.js*/);
 
-		var onlyChild = __inner_require__(88 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/onlyChild.js*/);var StaticContainer = function (_React$Component) {
+		var onlyChild = __inner_require__(88 /*__react__/lib/onlyChild.js*/);var StaticContainer = function (_React$Component) {
 			babelHelpers.inherits(StaticContainer, _React$Component);function StaticContainer() {
 				babelHelpers.classCallCheck(this, StaticContainer);return babelHelpers.possibleConstructorReturn(this, (StaticContainer.__proto__ || Object.getPrototypeOf(StaticContainer)).apply(this, arguments));
 			}babelHelpers.createClass(StaticContainer, [{ key: 'shouldComponentUpdate', value: function shouldComponentUpdate(nextProps) {
@@ -13663,7 +13655,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	function (__inner_require__, exports, module) {
 		var NativeMethodsMixin = __inner_require__(2 /*Libraries/ReactIOS/NativeMethodsMixin.js*/);
 		var React = __inner_require__(9 /*Libraries/ReactNative/React.js*/);
-		var ReactChildren = __inner_require__(83 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactChildren.js*/);
+		var ReactChildren = __inner_require__(83 /*__react__/lib/ReactChildren.js*/);
 		var RCTPickerIOSConsts = require('react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js').UIManager.RCTPicker.Constants;
 		var StyleSheet = __inner_require__(66 /*Libraries/StyleSheet/StyleSheet.js*/);
 		var StyleSheetPropType = __inner_require__(62 /*Libraries/StyleSheet/StyleSheetPropType.js*/);
@@ -13762,7 +13754,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var Image = __inner_require__(93 /*Libraries/Image/Image.ios.js*/);
 		var NativeMethodsMixin = __inner_require__(2 /*Libraries/ReactIOS/NativeMethodsMixin.js*/);
 		var NativeModules = require('react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js');
-		var PropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var PropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 		var React = __inner_require__(9 /*Libraries/ReactNative/React.js*/);
 		var StyleSheet = __inner_require__(66 /*Libraries/StyleSheet/StyleSheet.js*/);
 		var View = __inner_require__(46 /*Libraries/Components/View/View.js*/);
@@ -13802,7 +13794,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	function (__inner_require__, exports, module) {
 		var NativeMethodsMixin = __inner_require__(2 /*Libraries/ReactIOS/NativeMethodsMixin.js*/);
 		var NativeModules = require('react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js');
-		var PropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var PropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 		var React = __inner_require__(9 /*Libraries/ReactNative/React.js*/);
 		var StyleSheet = __inner_require__(66 /*Libraries/StyleSheet/StyleSheet.js*/);
 		var View = __inner_require__(46 /*Libraries/Components/View/View.js*/);
@@ -13859,7 +13851,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	function (__inner_require__, exports, module) {
 		var Image = __inner_require__(93 /*Libraries/Image/Image.ios.js*/);
 		var NativeMethodsMixin = __inner_require__(2 /*Libraries/ReactIOS/NativeMethodsMixin.js*/);
-		var PropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var PropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 		var React = __inner_require__(9 /*Libraries/ReactNative/React.js*/);
 		var StyleSheet = __inner_require__(66 /*Libraries/StyleSheet/StyleSheet.js*/);
 		var View = __inner_require__(46 /*Libraries/Components/View/View.js*/);
@@ -14212,7 +14204,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	function (__inner_require__, exports, module) {
 		var ColorPropType = __inner_require__(51 /*Libraries/StyleSheet/ColorPropType.js*/);
 		var NativeMethodsMixin = __inner_require__(2 /*Libraries/ReactIOS/NativeMethodsMixin.js*/);
-		var PropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var PropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 		var React = __inner_require__(9 /*Libraries/ReactNative/React.js*/);
 		var StyleSheet = __inner_require__(66 /*Libraries/StyleSheet/StyleSheet.js*/);
 		var View = __inner_require__(46 /*Libraries/Components/View/View.js*/);
@@ -14388,7 +14380,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var NativeMethodsMixin = __inner_require__(2 /*Libraries/ReactIOS/NativeMethodsMixin.js*/);
 		var Platform = require('react-native@0.21/Libraries/Utilities/Platform.ios.js');
 		var React = __inner_require__(9 /*Libraries/ReactNative/React.js*/);
-		var ReactInstanceMap = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceMap.js');
+		var ReactInstanceMap = require('react-native@0.21/__react__/lib/ReactInstanceMap.js');
 		var ReactNativeViewAttributes = __inner_require__(61 /*Libraries/Components/View/ReactNativeViewAttributes.js*/);
 		var StyleSheetPropType = __inner_require__(62 /*Libraries/StyleSheet/StyleSheetPropType.js*/);
 		var TextStylePropTypes = __inner_require__(55 /*Libraries/Text/TextStylePropTypes.js*/);
@@ -14544,9 +14536,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	function (__inner_require__, exports, module) {
 		var BoundingDimensions = __inner_require__(146 /*Libraries/Components/Touchable/BoundingDimensions.js*/);
 		var Position = __inner_require__(147 /*Libraries/Components/Touchable/Position.js*/);
-		var TouchEventUtils = __inner_require__(148 /*Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/TouchEventUtils.js*/);
+		var TouchEventUtils = __inner_require__(148 /*__fbjs__/lib/TouchEventUtils.js*/);
 
-		var keyMirror = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyMirror.js');
+		var keyMirror = require('react-native@0.21/__fbjs__/lib/keyMirror.js');
 		var queryLayoutByID = __inner_require__(149 /*Libraries/RKBackendNode/queryLayoutByID.js*/);
 
 		var States = keyMirror({
@@ -14884,7 +14876,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = Touchable;
 	}, // Libraries/Components/Touchable/BoundingDimensions.js
 	function (__inner_require__, exports, module) {
-		var PooledClass = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/PooledClass.js');
+		var PooledClass = require('react-native@0.21/__react__/lib/PooledClass.js');
 
 		var twoArgumentPooler = PooledClass.twoArgumentPooler;
 
@@ -14907,7 +14899,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = BoundingDimensions;
 	}, // Libraries/Components/Touchable/Position.js
 	function (__inner_require__, exports, module) {
-		var PooledClass = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/PooledClass.js');
+		var PooledClass = require('react-native@0.21/__react__/lib/PooledClass.js');
 
 		var twoArgumentPooler = PooledClass.twoArgumentPooler;
 
@@ -14924,7 +14916,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		PooledClass.addPoolingTo(Position, twoArgumentPooler);
 
 		module.exports = Position;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/TouchEventUtils.js
+	}, // __fbjs__/lib/TouchEventUtils.js
 	function (__inner_require__, exports, module) {
 		var TouchEventUtils = {
 
@@ -14955,9 +14947,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var EventEmitter = require('react-native@0.21/Libraries/vendor/emitter/EventEmitter.js');
 		var NativeMethodsMixin = __inner_require__(2 /*Libraries/ReactIOS/NativeMethodsMixin.js*/);
 		var Platform = require('react-native@0.21/Libraries/Utilities/Platform.ios.js');
-		var PropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var PropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 		var React = __inner_require__(9 /*Libraries/ReactNative/React.js*/);
-		var ReactChildren = __inner_require__(83 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactChildren.js*/);
+		var ReactChildren = __inner_require__(83 /*__react__/lib/ReactChildren.js*/);
 		var StyleSheet = __inner_require__(66 /*Libraries/StyleSheet/StyleSheet.js*/);
 		var Text = __inner_require__(144 /*Libraries/Text/Text.js*/);
 		var TextInputState = __inner_require__(6 /*Libraries/Components/TextInput/TextInputState.js*/);
@@ -14967,8 +14959,8 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var View = __inner_require__(46 /*Libraries/Components/View/View.js*/);
 
 		var createReactNativeComponentClass = __inner_require__(70 /*Libraries/ReactNative/createReactNativeComponentClass.js*/);
-		var emptyFunction = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyFunction.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var emptyFunction = require('react-native@0.21/__fbjs__/lib/emptyFunction.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 		var requireNativeComponent = __inner_require__(64 /*Libraries/ReactIOS/requireNativeComponent.js*/);
 
 		var onlyMultiline = {
@@ -15370,8 +15362,8 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var EventValidator = __inner_require__(155 /*Libraries/vendor/emitter/EventValidator.js*/);
 
 		var copyProperties = __inner_require__(156 /*Libraries/vendor/core/copyProperties.js*/);
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var keyOf = __inner_require__(40 /*Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyOf.js*/);
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var keyOf = __inner_require__(40 /*__fbjs__/lib/keyOf.js*/);
 
 		var TYPES_KEY = keyOf({ __types: true });
 
@@ -15499,7 +15491,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = EventEmitterWithHolding;
 	}, // Libraries/vendor/emitter/EventHolder.js
 	function (__inner_require__, exports, module) {
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');var EventHolder = function () {
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');var EventHolder = function () {
 			function EventHolder() {
 				babelHelpers.classCallCheck(this, EventHolder);
 				this._heldEvents = {};
@@ -15679,8 +15671,8 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var Touchable = __inner_require__(145 /*Libraries/Components/Touchable/Touchable.js*/);
 		var View = __inner_require__(46 /*Libraries/Components/View/View.js*/);
 		var ensurePositiveDelayProps = __inner_require__(158 /*Libraries/Components/Touchable/ensurePositiveDelayProps.js*/);
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var onlyChild = __inner_require__(88 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/onlyChild.js*/);
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var onlyChild = __inner_require__(88 /*__react__/lib/onlyChild.js*/);
 
 		var PRESS_RETENTION_OFFSET = { top: 20, left: 20, right: 20, bottom: 30 };
 
@@ -15772,7 +15764,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = TouchableWithoutFeedback;
 	}, // Libraries/Components/Touchable/ensurePositiveDelayProps.js
 	function (__inner_require__, exports, module) {
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var ensurePositiveDelayProps = function ensurePositiveDelayProps(props) {
 			invariant(!(props.delayPressIn < 0 || props.delayPressOut < 0 || props.delayLongPress < 0), 'Touchable components cannot have negative delay properties');
@@ -15781,7 +15773,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = ensurePositiveDelayProps;
 	}, // Libraries/Components/ToastAndroid/ToastAndroid.ios.js
 	function (__inner_require__, exports, module) {
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		var ToastAndroid = {
 
@@ -15807,9 +15799,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 
 		var ensureComponentIsNative = __inner_require__(162 /*Libraries/Components/Touchable/ensureComponentIsNative.js*/);
 		var ensurePositiveDelayProps = __inner_require__(158 /*Libraries/Components/Touchable/ensurePositiveDelayProps.js*/);
-		var keyOf = __inner_require__(40 /*Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyOf.js*/);
+		var keyOf = __inner_require__(40 /*__fbjs__/lib/keyOf.js*/);
 		var merge = __inner_require__(23 /*Libraries/vendor/core/merge.js*/);
-		var onlyChild = __inner_require__(88 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/onlyChild.js*/);
+		var onlyChild = __inner_require__(88 /*__react__/lib/onlyChild.js*/);
 
 		var DEFAULT_PROPS = {
 			activeOpacity: 0.8,
@@ -15969,7 +15961,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = TouchableHighlight;
 	}, // Libraries/Components/Touchable/ensureComponentIsNative.js
 	function (__inner_require__, exports, module) {
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var ensureComponentIsNative = function ensureComponentIsNative(component) {
 			invariant(component && typeof component.setNativeProps === 'function', 'Touchable child must either be native or forward setNativeProps to a ' + 'native component');
@@ -16140,8 +16132,8 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var ViewStylePropTypes = __inner_require__(56 /*Libraries/Components/View/ViewStylePropTypes.js*/);
 
 		var flattenStyle = require('react-native@0.21/Libraries/StyleSheet/flattenStyle.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var requestAnimationFrame = __inner_require__(171 /*Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/requestAnimationFrame.js*/);var Animated = function () {
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var requestAnimationFrame = __inner_require__(171 /*__fbjs__/lib/requestAnimationFrame.js*/);var Animated = function () {
 			function Animated() {
 				babelHelpers.classCallCheck(this, Animated);
 			}babelHelpers.createClass(Animated, [{ key: '__attach', value: function __attach() {} }, { key: '__detach', value: function __detach() {} }, { key: '__getValue', value: function __getValue() {} }, { key: '__getAnimatedValue', value: function __getAnimatedValue() {
@@ -17480,10 +17472,10 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = {
 			fromOrigamiTensionAndFriction: fromOrigamiTensionAndFriction,
 			fromBouncinessAndSpeed: fromBouncinessAndSpeed };
-	}, // Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/requestAnimationFrame.js
+	}, // __fbjs__/lib/requestAnimationFrame.js
 	function (__inner_require__, exports, module) {
-		var emptyFunction = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyFunction.js');
-		var nativeRequestAnimationFrame = __inner_require__(172 /*Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/nativeRequestAnimationFrame.js*/);
+		var emptyFunction = require('react-native@0.21/__fbjs__/lib/emptyFunction.js');
+		var nativeRequestAnimationFrame = __inner_require__(172 /*__fbjs__/lib/nativeRequestAnimationFrame.js*/);
 
 		var lastTime = 0;
 
@@ -17499,7 +17491,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		requestAnimationFrame(emptyFunction);
 
 		module.exports = requestAnimationFrame;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/nativeRequestAnimationFrame.js
+	}, // __fbjs__/lib/nativeRequestAnimationFrame.js
 	function (__inner_require__, exports, module) {
 		var nativeRequestAnimationFrame = global.requestAnimationFrame || global.webkitRequestAnimationFrame || global.mozRequestAnimationFrame || global.oRequestAnimationFrame || global.msRequestAnimationFrame;
 
@@ -17519,8 +17511,8 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var ScrollView = __inner_require__(100 /*Libraries/Components/ScrollView/ScrollView.js*/);
 
 		var deprecatedPropType = __inner_require__(54 /*Libraries/Utilities/deprecatedPropType.js*/);
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var keyMirror = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyMirror.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var keyMirror = require('react-native@0.21/__fbjs__/lib/keyMirror.js');
 		var processDecelerationRate = __inner_require__(105 /*Libraries/Components/ScrollView/processDecelerationRate.js*/);
 		var requireNativeComponent = __inner_require__(64 /*Libraries/ReactIOS/requireNativeComponent.js*/);
 		var resolveAssetSource = __inner_require__(79 /*Libraries/Image/resolveAssetSource.js*/);
@@ -17791,7 +17783,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	function (__inner_require__, exports, module) {
 		var RCTActionSheetManager = require('react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js').ActionSheetManager;
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 		var processColor = require('react-native@0.21/Libraries/StyleSheet/processColor.js');
 
 		var ActionSheetIOS = {
@@ -17831,7 +17823,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var BatchedBridge = require('react-native@0.21/Libraries/BatchedBridge/BatchedBridge.js');
 		var ReactNative = __inner_require__(10 /*Libraries/ReactNative/ReactNative.js*/);
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 		var renderApplication = __inner_require__(178 /*Libraries/ReactIOS/renderApplication.ios.js*/);
 
 		if (__DEV__) {
@@ -17895,7 +17887,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var Subscribable = __inner_require__(103 /*Libraries/Components/Subscribable.js*/);
 		var View = __inner_require__(46 /*Libraries/Components/View/View.js*/);
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var Inspector = __DEV__ ? __inner_require__(179 /*Libraries/Inspector/Inspector.js*/) : null;
 		var YellowBox = __DEV__ ? __inner_require__(190 /*Libraries/ReactIOS/YellowBox.js*/) : null;
@@ -18350,7 +18342,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	}, // Libraries/Inspector/ElementProperties.js
 	function (__inner_require__, exports, module) {
 		var BoxInspector = __inner_require__(186 /*Libraries/Inspector/BoxInspector.js*/);
-		var PropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var PropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 		var React = __inner_require__(9 /*Libraries/ReactNative/React.js*/);
 		var StyleInspector = __inner_require__(187 /*Libraries/Inspector/StyleInspector.js*/);
 		var StyleSheet = __inner_require__(66 /*Libraries/StyleSheet/StyleSheet.js*/);
@@ -18873,9 +18865,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = YellowBox;
 	}, // Libraries/Utilities/RCTRenderingPerf.js
 	function (__inner_require__, exports, module) {
-		var ReactDefaultPerf = __inner_require__(192 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactDefaultPerf.js*/);
+		var ReactDefaultPerf = __inner_require__(192 /*__react__/lib/ReactDefaultPerf.js*/);
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var perfModules = [];
 		var enabled = false;
@@ -18933,14 +18925,14 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} };
 
 		module.exports = RCTRenderingPerf;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactDefaultPerf.js
+	}, // __react__/lib/ReactDefaultPerf.js
 	function (__inner_require__, exports, module) {
-		var DOMProperty = __inner_require__(193 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/DOMProperty.js*/);
-		var ReactDefaultPerfAnalysis = __inner_require__(194 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactDefaultPerfAnalysis.js*/);
-		var ReactMount = __inner_require__(195 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactMount.js*/);
-		var ReactPerf = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPerf.js');
+		var DOMProperty = __inner_require__(193 /*__react__/lib/DOMProperty.js*/);
+		var ReactDefaultPerfAnalysis = __inner_require__(194 /*__react__/lib/ReactDefaultPerfAnalysis.js*/);
+		var ReactMount = __inner_require__(195 /*__react__/lib/ReactMount.js*/);
+		var ReactPerf = require('react-native@0.21/__react__/lib/ReactPerf.js');
 
-		var performanceNow = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/performanceNow.js');
+		var performanceNow = require('react-native@0.21/__fbjs__/lib/performanceNow.js');
 
 		function roundFloat(val) {
 			return Math.floor(val * 100) / 100;
@@ -19146,9 +19138,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} };
 
 		module.exports = ReactDefaultPerf;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/DOMProperty.js
+	}, // __react__/lib/DOMProperty.js
 	function (__inner_require__, exports, module) {
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		function checkMask(value, bitmask) {
 			return (value & bitmask) === bitmask;
@@ -19266,9 +19258,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			injection: DOMPropertyInjection };
 
 		module.exports = DOMProperty;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactDefaultPerfAnalysis.js
+	}, // __react__/lib/ReactDefaultPerfAnalysis.js
 	function (__inner_require__, exports, module) {
-		var assign = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js');
+		var assign = require('react-native@0.21/__react__/lib/Object.assign.js');
 
 		var DONT_CARE_THRESHOLD = 1.2;
 		var DOM_OPERATION_TYPES = {
@@ -19440,31 +19432,31 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			getTotalTime: getTotalTime };
 
 		module.exports = ReactDefaultPerfAnalysis;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactMount.js
+	}, // __react__/lib/ReactMount.js
 	function (__inner_require__, exports, module) {
-		var DOMProperty = __inner_require__(193 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/DOMProperty.js*/);
-		var ReactBrowserEventEmitter = __inner_require__(196 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactBrowserEventEmitter.js*/);
-		var ReactCurrentOwner = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCurrentOwner.js');
-		var ReactDOMFeatureFlags = __inner_require__(199 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactDOMFeatureFlags.js*/);
-		var ReactElement = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js');
-		var ReactEmptyComponentRegistry = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactEmptyComponentRegistry.js');
-		var ReactInstanceHandles = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceHandles.js');
-		var ReactInstanceMap = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceMap.js');
-		var ReactMarkupChecksum = __inner_require__(200 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactMarkupChecksum.js*/);
-		var ReactPerf = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPerf.js');
-		var ReactReconciler = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactReconciler.js');
-		var ReactUpdateQueue = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdateQueue.js');
-		var ReactUpdates = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdates.js');
+		var DOMProperty = __inner_require__(193 /*__react__/lib/DOMProperty.js*/);
+		var ReactBrowserEventEmitter = __inner_require__(196 /*__react__/lib/ReactBrowserEventEmitter.js*/);
+		var ReactCurrentOwner = require('react-native@0.21/__react__/lib/ReactCurrentOwner.js');
+		var ReactDOMFeatureFlags = __inner_require__(199 /*__react__/lib/ReactDOMFeatureFlags.js*/);
+		var ReactElement = require('react-native@0.21/__react__/lib/ReactElement.js');
+		var ReactEmptyComponentRegistry = require('react-native@0.21/__react__/lib/ReactEmptyComponentRegistry.js');
+		var ReactInstanceHandles = require('react-native@0.21/__react__/lib/ReactInstanceHandles.js');
+		var ReactInstanceMap = require('react-native@0.21/__react__/lib/ReactInstanceMap.js');
+		var ReactMarkupChecksum = __inner_require__(200 /*__react__/lib/ReactMarkupChecksum.js*/);
+		var ReactPerf = require('react-native@0.21/__react__/lib/ReactPerf.js');
+		var ReactReconciler = require('react-native@0.21/__react__/lib/ReactReconciler.js');
+		var ReactUpdateQueue = require('react-native@0.21/__react__/lib/ReactUpdateQueue.js');
+		var ReactUpdates = require('react-native@0.21/__react__/lib/ReactUpdates.js');
 
-		var assign = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js');
-		var emptyObject = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyObject.js');
-		var containsNode = __inner_require__(202 /*Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/containsNode.js*/);
-		var instantiateReactComponent = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/instantiateReactComponent.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var setInnerHTML = __inner_require__(204 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/setInnerHTML.js*/);
-		var shouldUpdateReactComponent = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/shouldUpdateReactComponent.js');
-		var validateDOMNesting = __inner_require__(205 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/validateDOMNesting.js*/);
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var assign = require('react-native@0.21/__react__/lib/Object.assign.js');
+		var emptyObject = require('react-native@0.21/__fbjs__/lib/emptyObject.js');
+		var containsNode = __inner_require__(202 /*__fbjs__/lib/containsNode.js*/);
+		var instantiateReactComponent = require('react-native@0.21/__react__/lib/instantiateReactComponent.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var setInnerHTML = __inner_require__(204 /*__react__/lib/setInnerHTML.js*/);
+		var shouldUpdateReactComponent = require('react-native@0.21/__react__/lib/shouldUpdateReactComponent.js');
+		var validateDOMNesting = __inner_require__(205 /*__react__/lib/validateDOMNesting.js*/);
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		var ATTR_NAME = DOMProperty.ID_ATTRIBUTE_NAME;
 		var nodeCache = {};
@@ -19997,17 +19989,17 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			_mountImageIntoNode: '_mountImageIntoNode' });
 
 		module.exports = ReactMount;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactBrowserEventEmitter.js
+	}, // __react__/lib/ReactBrowserEventEmitter.js
 	function (__inner_require__, exports, module) {
-		var EventConstants = __inner_require__(15 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventConstants.js*/);
-		var EventPluginHub = __inner_require__(12 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventPluginHub.js*/);
-		var EventPluginRegistry = __inner_require__(13 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventPluginRegistry.js*/);
-		var ReactEventEmitterMixin = __inner_require__(44 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactEventEmitterMixin.js*/);
-		var ReactPerf = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPerf.js');
-		var ViewportMetrics = __inner_require__(197 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ViewportMetrics.js*/);
+		var EventConstants = __inner_require__(15 /*__react__/lib/EventConstants.js*/);
+		var EventPluginHub = __inner_require__(12 /*__react__/lib/EventPluginHub.js*/);
+		var EventPluginRegistry = __inner_require__(13 /*__react__/lib/EventPluginRegistry.js*/);
+		var ReactEventEmitterMixin = __inner_require__(44 /*__react__/lib/ReactEventEmitterMixin.js*/);
+		var ReactPerf = require('react-native@0.21/__react__/lib/ReactPerf.js');
+		var ViewportMetrics = __inner_require__(197 /*__react__/lib/ViewportMetrics.js*/);
 
-		var assign = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js');
-		var isEventSupported = __inner_require__(198 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/isEventSupported.js*/);
+		var assign = require('react-native@0.21/__react__/lib/Object.assign.js');
+		var isEventSupported = __inner_require__(198 /*__react__/lib/isEventSupported.js*/);
 
 		var alreadyListeningTo = {};
 		var isMonitoringScrollValue = false;
@@ -20187,7 +20179,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			deleteListener: 'deleteListener' });
 
 		module.exports = ReactBrowserEventEmitter;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ViewportMetrics.js
+	}, // __react__/lib/ViewportMetrics.js
 	function (__inner_require__, exports, module) {
 		var ViewportMetrics = {
 
@@ -20201,9 +20193,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} };
 
 		module.exports = ViewportMetrics;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/isEventSupported.js
+	}, // __react__/lib/isEventSupported.js
 	function (__inner_require__, exports, module) {
-		var ExecutionEnvironment = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/ExecutionEnvironment.js');
+		var ExecutionEnvironment = require('react-native@0.21/__fbjs__/lib/ExecutionEnvironment.js');
 
 		var useHasFeature;
 		if (ExecutionEnvironment.canUseDOM) {
@@ -20247,15 +20239,15 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		}
 
 		module.exports = isEventSupported;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactDOMFeatureFlags.js
+	}, // __react__/lib/ReactDOMFeatureFlags.js
 	function (__inner_require__, exports, module) {
 		var ReactDOMFeatureFlags = {
 			useCreateElement: false };
 
 		module.exports = ReactDOMFeatureFlags;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactMarkupChecksum.js
+	}, // __react__/lib/ReactMarkupChecksum.js
 	function (__inner_require__, exports, module) {
-		var adler32 = __inner_require__(201 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/adler32.js*/);
+		var adler32 = __inner_require__(201 /*__react__/lib/adler32.js*/);
 
 		var TAG_END = /\/?>/;
 
@@ -20276,7 +20268,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} };
 
 		module.exports = ReactMarkupChecksum;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/adler32.js
+	}, // __react__/lib/adler32.js
 	function (__inner_require__, exports, module) {
 		var MOD = 65521;
 
@@ -20302,9 +20294,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		}
 
 		module.exports = adler32;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/containsNode.js
+	}, // __fbjs__/lib/containsNode.js
 	function (__inner_require__, exports, module) {
-		var isTextNode = __inner_require__(203 /*Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/isTextNode.js*/);
+		var isTextNode = __inner_require__(203 /*__fbjs__/lib/isTextNode.js*/);
 
 		function containsNode(_x, _x2) {
 			var _again = true;
@@ -20336,18 +20328,18 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		}
 
 		module.exports = containsNode;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/isTextNode.js
+	}, // __fbjs__/lib/isTextNode.js
 	function (__inner_require__, exports, module) {
-		var isNode = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/isNode.js');
+		var isNode = require('react-native@0.21/__fbjs__/lib/isNode.js');
 
 		function isTextNode(object) {
 			return isNode(object) && object.nodeType == 3;
 		}
 
 		module.exports = isTextNode;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/setInnerHTML.js
+	}, // __react__/lib/setInnerHTML.js
 	function (__inner_require__, exports, module) {
-		var ExecutionEnvironment = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/ExecutionEnvironment.js');
+		var ExecutionEnvironment = require('react-native@0.21/__fbjs__/lib/ExecutionEnvironment.js');
 
 		var WHITESPACE_TEST = /^[ \r\n\t\f]/;
 		var NONVISIBLE_TEST = /<(!--|link|noscript|meta|script|style)[ \r\n\t\f\/>]/;
@@ -20393,11 +20385,11 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		}
 
 		module.exports = setInnerHTML;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/validateDOMNesting.js
+	}, // __react__/lib/validateDOMNesting.js
 	function (__inner_require__, exports, module) {
-		var assign = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js');
-		var emptyFunction = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyFunction.js');
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var assign = require('react-native@0.21/__react__/lib/Object.assign.js');
+		var emptyFunction = require('react-native@0.21/__fbjs__/lib/emptyFunction.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		var validateDOMNesting = emptyFunction;
 
@@ -20693,7 +20685,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var RCTAppState = NativeModules.AppState;
 
 		var logError = require('react-native@0.21/Libraries/Utilities/logError.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var _eventHandlers = {
 			change: new Map(),
@@ -20741,7 +20733,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var RCTAppState = NativeModules.AppState;
 
 		var logError = require('react-native@0.21/Libraries/Utilities/logError.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var _eventHandlers = {
 			change: new Map(),
@@ -21019,12 +21011,12 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = BackAndroid;
 	}, // Libraries/CameraRoll/CameraRoll.js
 	function (__inner_require__, exports, module) {
-		var ReactPropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var ReactPropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 		var RCTCameraRollManager = require('react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js').CameraRollManager;
 
 		var createStrictShapeTypeChecker = __inner_require__(63 /*Libraries/Utilities/createStrictShapeTypeChecker.js*/);
 		var deepFreezeAndThrowOnMutationInDev = __inner_require__(76 /*Libraries/Utilities/deepFreezeAndThrowOnMutationInDev.js*/);
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var GROUP_TYPES_OPTIONS = ['Album', 'All', 'Event', 'Faces', 'Library', 'PhotoStream', 'SavedPhotos'];
 
@@ -21132,7 +21124,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} };
 	}, // Libraries/Components/DatePickerAndroid/DatePickerAndroid.ios.js
 	function (__inner_require__, exports, module) {
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		var DatePickerAndroid = {
 			open: function open(options) {
@@ -21181,11 +21173,11 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} };
 	}, // Libraries/LayoutAnimation/LayoutAnimation.js
 	function (__inner_require__, exports, module) {
-		var PropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
+		var PropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
 		var UIManager = require('react-native@0.21/Libraries/Utilities/UIManager.js');
 
 		var createStrictShapeTypeChecker = __inner_require__(63 /*Libraries/Utilities/createStrictShapeTypeChecker.js*/);
-		var keyMirror = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyMirror.js');
+		var keyMirror = require('react-native@0.21/__fbjs__/lib/keyMirror.js');
 
 		var TypesEnum = {
 			spring: true,
@@ -21272,7 +21264,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		    IntentAndroid = _require.IntentAndroid,
 		    LinkingManagerIOS = _require.LinkingManager;
 		var LinkingManager = Platform.OS === 'android' ? IntentAndroid : LinkingManagerIOS;
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 		var Map = require('react-native@0.21/Libraries/vendor/core/Map.js');
 
 		var _notifHandlers = new Map();
@@ -21327,7 +21319,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	function (__inner_require__, exports, module) {
 		var Linking = __inner_require__(216 /*Libraries/Linking/Linking.js*/);
 		var RCTLinkingManager = require('react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js').LinkingManager;
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var _initialURL = RCTLinkingManager && RCTLinkingManager.initialURL;var LinkingIOS = function () {
 			function LinkingIOS() {
@@ -21508,7 +21500,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = NavigationAnimatedView;
 	}, // Libraries/NavigationExperimental/NavigationState.js
 	function (__inner_require__, exports, module) {
-		Object.defineProperty(exports, "__esModule", { value: true });exports.getParent = getParent;exports.get = get;exports.indexOf = indexOf;exports.push = push;exports.pop = pop;exports.reset = reset;exports.set = set;exports.jumpToIndex = jumpToIndex;exports.jumpTo = jumpTo;exports.replaceAt = replaceAt;exports.replaceAtIndex = replaceAtIndex;var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');function getParent(state) {
+		Object.defineProperty(exports, "__esModule", { value: true });exports.getParent = getParent;exports.get = get;exports.indexOf = indexOf;exports.push = push;exports.pop = pop;exports.reset = reset;exports.set = set;exports.jumpToIndex = jumpToIndex;exports.jumpTo = jumpTo;exports.replaceAt = replaceAt;exports.replaceAtIndex = replaceAtIndex;var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');function getParent(state) {
 			if (state instanceof Object && state.children instanceof Array && state.children[0] !== undefined && typeof state.index === 'number' && state.children[state.index] !== undefined) {
 				return state;
 			}return null;
@@ -22231,7 +22223,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	function (__inner_require__, exports, module) {
 		var RCTDeviceEventEmitter = require('react-native@0.21/Libraries/Device/RCTDeviceEventEmitter.js');
 		var RCTPushNotificationManager = require('react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js').PushNotificationManager;
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var _notifHandlers = new Map();
 		var _initialNotification = RCTPushNotificationManager && RCTPushNotificationManager.initialNotification;
@@ -22338,7 +22330,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		var RCTDeviceEventEmitter = require('react-native@0.21/Libraries/Device/RCTDeviceEventEmitter.js');
 		var RCTSettingsManager = require('react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js').SettingsManager;
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var subscriptions = [];
 
@@ -22415,7 +22407,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		module.exports = StatusBarIOS;
 	}, // Libraries/Components/TimePickerAndroid/TimePickerAndroid.ios.js
 	function (__inner_require__, exports, module) {
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		var TimePickerAndroid = {
 			open: function open(options) {
@@ -22434,7 +22426,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 	function (__inner_require__, exports, module) {
 		var RCTVibration = require('react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js').Vibration;
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var VibrationIOS = {
 			vibrate: function vibrate() {
@@ -22454,10 +22446,10 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		BatchedBridge.registerCallableModule('RCTNativeAppEventEmitter', RCTNativeAppEventEmitter);
 
 		module.exports = RCTNativeAppEventEmitter;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/LinkedStateMixin.js
+	}, // __react__/lib/LinkedStateMixin.js
 	function (__inner_require__, exports, module) {
-		var ReactLink = __inner_require__(238 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactLink.js*/);
-		var ReactStateSetters = __inner_require__(244 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactStateSetters.js*/);
+		var ReactLink = __inner_require__(238 /*__react__/lib/ReactLink.js*/);
+		var ReactStateSetters = __inner_require__(244 /*__react__/lib/ReactStateSetters.js*/);
 
 		var LinkedStateMixin = {
 
@@ -22466,9 +22458,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} };
 
 		module.exports = LinkedStateMixin;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactLink.js
+	}, // __react__/lib/ReactLink.js
 	function (__inner_require__, exports, module) {
-		var React = __inner_require__(239 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/React.native.js*/);
+		var React = __inner_require__(239 /*__react__/lib/React.native.js*/);
 
 		function ReactLink(value, requestChange) {
 			this.value = value;
@@ -22487,22 +22479,22 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			link: createLinkTypeChecker };
 
 		module.exports = ReactLink;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/React.native.js
+	}, // __react__/lib/React.native.js
 	function (__inner_require__, exports, module) {
-		module.exports = __inner_require__(240 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactIsomorphic.js*/);
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactIsomorphic.js
+		module.exports = __inner_require__(240 /*__react__/lib/ReactIsomorphic.js*/);
+	}, // __react__/lib/ReactIsomorphic.js
 	function (__inner_require__, exports, module) {
-		var ReactChildren = __inner_require__(83 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactChildren.js*/);
-		var ReactComponent = __inner_require__(85 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactComponent.js*/);
-		var ReactClass = __inner_require__(84 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactClass.js*/);
-		var ReactDOMFactories = __inner_require__(241 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactDOMFactories.js*/);
-		var ReactElement = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js');
-		var ReactElementValidator = __inner_require__(87 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElementValidator.js*/);
-		var ReactPropTypes = __inner_require__(7 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypes.js*/);
-		var ReactVersion = __inner_require__(243 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactVersion.js*/);
+		var ReactChildren = __inner_require__(83 /*__react__/lib/ReactChildren.js*/);
+		var ReactComponent = __inner_require__(85 /*__react__/lib/ReactComponent.js*/);
+		var ReactClass = __inner_require__(84 /*__react__/lib/ReactClass.js*/);
+		var ReactDOMFactories = __inner_require__(241 /*__react__/lib/ReactDOMFactories.js*/);
+		var ReactElement = require('react-native@0.21/__react__/lib/ReactElement.js');
+		var ReactElementValidator = __inner_require__(87 /*__react__/lib/ReactElementValidator.js*/);
+		var ReactPropTypes = __inner_require__(7 /*__react__/lib/ReactPropTypes.js*/);
+		var ReactVersion = __inner_require__(243 /*__react__/lib/ReactVersion.js*/);
 
-		var assign = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js');
-		var onlyChild = __inner_require__(88 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/onlyChild.js*/);
+		var assign = require('react-native@0.21/__react__/lib/Object.assign.js');
+		var onlyChild = __inner_require__(88 /*__react__/lib/onlyChild.js*/);
 
 		var createElement = ReactElement.createElement;
 		var createFactory = ReactElement.createFactory;
@@ -22544,12 +22536,12 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			__spread: assign };
 
 		module.exports = React;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactDOMFactories.js
+	}, // __react__/lib/ReactDOMFactories.js
 	function (__inner_require__, exports, module) {
-		var ReactElement = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js');
-		var ReactElementValidator = __inner_require__(87 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElementValidator.js*/);
+		var ReactElement = require('react-native@0.21/__react__/lib/ReactElement.js');
+		var ReactElementValidator = __inner_require__(87 /*__react__/lib/ReactElementValidator.js*/);
 
-		var mapObject = __inner_require__(242 /*Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/mapObject.js*/);
+		var mapObject = __inner_require__(242 /*__fbjs__/lib/mapObject.js*/);
 
 		function createDOMFactory(tag) {
 			if (process.env.NODE_ENV !== 'production') {
@@ -22694,7 +22686,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			tspan: 'tspan' }, createDOMFactory);
 
 		module.exports = ReactDOMFactories;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/mapObject.js
+	}, // __fbjs__/lib/mapObject.js
 	function (__inner_require__, exports, module) {
 		var hasOwnProperty = Object.prototype.hasOwnProperty;
 
@@ -22712,10 +22704,10 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		}
 
 		module.exports = mapObject;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactVersion.js
+	}, // __react__/lib/ReactVersion.js
 	function (__inner_require__, exports, module) {
 		module.exports = '0.14.8';
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactStateSetters.js
+	}, // __react__/lib/ReactStateSetters.js
 	function (__inner_require__, exports, module) {
 		var ReactStateSetters = {
 
@@ -22754,9 +22746,9 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} };
 
 		module.exports = ReactStateSetters;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactComponentWithPureRenderMixin.js
+	}, // __react__/lib/ReactComponentWithPureRenderMixin.js
 	function (__inner_require__, exports, module) {
-		var shallowCompare = __inner_require__(246 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/shallowCompare.js*/);
+		var shallowCompare = __inner_require__(246 /*__react__/lib/shallowCompare.js*/);
 
 		var ReactComponentWithPureRenderMixin = {
 			shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
@@ -22764,16 +22756,16 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} };
 
 		module.exports = ReactComponentWithPureRenderMixin;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/shallowCompare.js
+	}, // __react__/lib/shallowCompare.js
 	function (__inner_require__, exports, module) {
-		var shallowEqual = __inner_require__(247 /*Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/shallowEqual.js*/);
+		var shallowEqual = __inner_require__(247 /*__fbjs__/lib/shallowEqual.js*/);
 
 		function shallowCompare(instance, nextProps, nextState) {
 			return !shallowEqual(instance.props, nextProps) || !shallowEqual(instance.state, nextState);
 		}
 
 		module.exports = shallowCompare;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/shallowEqual.js
+	}, // __fbjs__/lib/shallowEqual.js
 	function (__inner_require__, exports, module) {
 		var hasOwnProperty = Object.prototype.hasOwnProperty;
 
@@ -22804,13 +22796,13 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		}
 
 		module.exports = shallowEqual;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/cloneWithProps.js
+	}, // __react__/lib/cloneWithProps.js
 	function (__inner_require__, exports, module) {
-		var ReactElement = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js');
-		var ReactPropTransferer = __inner_require__(249 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTransferer.js*/);
+		var ReactElement = require('react-native@0.21/__react__/lib/ReactElement.js');
+		var ReactPropTransferer = __inner_require__(249 /*__react__/lib/ReactPropTransferer.js*/);
 
-		var keyOf = __inner_require__(40 /*Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyOf.js*/);
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var keyOf = __inner_require__(40 /*__fbjs__/lib/keyOf.js*/);
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		var CHILDREN_PROP = keyOf({ children: null });
 
@@ -22833,11 +22825,11 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		}
 
 		module.exports = cloneWithProps;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTransferer.js
+	}, // __react__/lib/ReactPropTransferer.js
 	function (__inner_require__, exports, module) {
-		var assign = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js');
-		var emptyFunction = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyFunction.js');
-		var joinClasses = __inner_require__(250 /*Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/joinClasses.js*/);
+		var assign = require('react-native@0.21/__react__/lib/Object.assign.js');
+		var emptyFunction = require('react-native@0.21/__fbjs__/lib/emptyFunction.js');
+		var joinClasses = __inner_require__(250 /*__fbjs__/lib/joinClasses.js*/);
 
 		function createTransferStrategy(mergeStrategy) {
 			return function (props, key, value) {
@@ -22886,7 +22878,7 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} };
 
 		module.exports = ReactPropTransferer;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/joinClasses.js
+	}, // __fbjs__/lib/joinClasses.js
 	function (__inner_require__, exports, module) {
 		function joinClasses(className) {
 			if (!className) {
@@ -22906,14 +22898,14 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		}
 
 		module.exports = joinClasses;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactFragment.js
+	}, // __react__/lib/ReactFragment.js
 	function (__inner_require__, exports, module) {
-		var ReactChildren = __inner_require__(83 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactChildren.js*/);
-		var ReactElement = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js');
+		var ReactChildren = __inner_require__(83 /*__react__/lib/ReactChildren.js*/);
+		var ReactElement = require('react-native@0.21/__react__/lib/ReactElement.js');
 
-		var emptyFunction = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyFunction.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var emptyFunction = require('react-native@0.21/__fbjs__/lib/emptyFunction.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		var numericPropertyRegex = /^\d+$/;
 
@@ -22949,11 +22941,11 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 			} };
 
 		module.exports = ReactFragment;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/update.js
+	}, // __react__/lib/update.js
 	function (__inner_require__, exports, module) {
-		var assign = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js');
-		var keyOf = __inner_require__(40 /*Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyOf.js*/);
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var assign = require('react-native@0.21/__react__/lib/Object.assign.js');
+		var keyOf = __inner_require__(40 /*__fbjs__/lib/keyOf.js*/);
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 		var hasOwnProperty = {}.hasOwnProperty;
 
 		function shallowCopy(x) {
@@ -23043,26 +23035,26 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		}
 
 		module.exports = update;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactTestUtils.js
+	}, // __react__/lib/ReactTestUtils.js
 	function (__inner_require__, exports, module) {
-		var EventConstants = __inner_require__(15 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventConstants.js*/);
-		var EventPluginHub = __inner_require__(12 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventPluginHub.js*/);
-		var EventPropagators = __inner_require__(21 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/EventPropagators.js*/);
-		var React = __inner_require__(239 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/React.native.js*/);
-		var ReactDOM = __inner_require__(254 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactDOM.native.js*/);
-		var ReactElement = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js');
-		var ReactBrowserEventEmitter = __inner_require__(196 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactBrowserEventEmitter.js*/);
-		var ReactCompositeComponent = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCompositeComponent.js');
-		var ReactInstanceHandles = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceHandles.js');
-		var ReactInstanceMap = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceMap.js');
-		var ReactMount = __inner_require__(195 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactMount.js*/);
-		var ReactUpdates = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdates.js');
-		var SyntheticEvent = __inner_require__(22 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/SyntheticEvent.js*/);
+		var EventConstants = __inner_require__(15 /*__react__/lib/EventConstants.js*/);
+		var EventPluginHub = __inner_require__(12 /*__react__/lib/EventPluginHub.js*/);
+		var EventPropagators = __inner_require__(21 /*__react__/lib/EventPropagators.js*/);
+		var React = __inner_require__(239 /*__react__/lib/React.native.js*/);
+		var ReactDOM = __inner_require__(254 /*__react__/lib/ReactDOM.native.js*/);
+		var ReactElement = require('react-native@0.21/__react__/lib/ReactElement.js');
+		var ReactBrowserEventEmitter = __inner_require__(196 /*__react__/lib/ReactBrowserEventEmitter.js*/);
+		var ReactCompositeComponent = require('react-native@0.21/__react__/lib/ReactCompositeComponent.js');
+		var ReactInstanceHandles = require('react-native@0.21/__react__/lib/ReactInstanceHandles.js');
+		var ReactInstanceMap = require('react-native@0.21/__react__/lib/ReactInstanceMap.js');
+		var ReactMount = __inner_require__(195 /*__react__/lib/ReactMount.js*/);
+		var ReactUpdates = require('react-native@0.21/__react__/lib/ReactUpdates.js');
+		var SyntheticEvent = __inner_require__(22 /*__react__/lib/SyntheticEvent.js*/);
 
-		var assign = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js');
-		var emptyObject = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyObject.js');
-		var findDOMNode = __inner_require__(255 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/findDOMNode.js*/);
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var assign = require('react-native@0.21/__react__/lib/Object.assign.js');
+		var emptyObject = require('react-native@0.21/__fbjs__/lib/emptyObject.js');
+		var findDOMNode = __inner_require__(255 /*__react__/lib/findDOMNode.js*/);
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var topLevelTypes = EventConstants.topLevelTypes;
 
@@ -23396,20 +23388,20 @@ loader.define("react-native@0.21/Libraries/react-native/react-native.js", ["reac
 		});
 
 		module.exports = ReactTestUtils;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactDOM.native.js
+	}, // __react__/lib/ReactDOM.native.js
 	function (__inner_require__, exports, module) {
-		var ReactUpdates = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdates.js');
+		var ReactUpdates = require('react-native@0.21/__react__/lib/ReactUpdates.js');
 
 		module.exports = {
 			unstable_batchedUpdates: ReactUpdates.batchedUpdates };
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/findDOMNode.js
+	}, // __react__/lib/findDOMNode.js
 	function (__inner_require__, exports, module) {
-		var ReactCurrentOwner = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCurrentOwner.js');
-		var ReactInstanceMap = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceMap.js');
-		var ReactMount = __inner_require__(195 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactMount.js*/);
+		var ReactCurrentOwner = require('react-native@0.21/__react__/lib/ReactCurrentOwner.js');
+		var ReactInstanceMap = require('react-native@0.21/__react__/lib/ReactInstanceMap.js');
+		var ReactMount = __inner_require__(195 /*__react__/lib/ReactMount.js*/);
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		function findDOMNode(componentOrElement) {
 			if (process.env.NODE_ENV !== 'production') {
@@ -23656,7 +23648,7 @@ loader.define("react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/N
 		module.exports = NativeModules;
 	}];
 });
-loader.define("react-native@0.21/Libraries/BatchedBridge/BatchedBridge.js", ["react-native@0.21/Libraries/Utilities/Systrace.js", "react-native@0.21/Libraries/JavaScriptAppEngine/System/JSTimers/JSTimersExecution.js", "react-native@0.21/Libraries/Utilities/HMRClient.js", "react-native@0.21/Libraries/Utilities/ErrorUtils.js", "react-native@0.21/Libraries/Utilities/Platform.ios.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyMirror.js", "react-native@0.21/Libraries/Utilities/stringifySafe.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/Libraries/BatchedBridge/BatchedBridge.js", ["react-native@0.21/Libraries/Utilities/Systrace.js", "react-native@0.21/Libraries/JavaScriptAppEngine/System/JSTimers/JSTimersExecution.js", "react-native@0.21/Libraries/Utilities/HMRClient.js", "react-native@0.21/Libraries/Utilities/ErrorUtils.js", "react-native@0.21/Libraries/Utilities/Platform.ios.js", "react-native@0.21/__fbjs__/lib/invariant.js", "react-native@0.21/__fbjs__/lib/keyMirror.js", "react-native@0.21/Libraries/Utilities/stringifySafe.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/BatchedBridge/BatchedBridge.js
@@ -23685,8 +23677,8 @@ loader.define("react-native@0.21/Libraries/BatchedBridge/BatchedBridge.js", ["re
 		var JSTimersExecution = require('react-native@0.21/Libraries/JavaScriptAppEngine/System/JSTimers/JSTimersExecution.js');
 		var Platform = require('react-native@0.21/Libraries/Utilities/Platform.ios.js');
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var keyMirror = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyMirror.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var keyMirror = require('react-native@0.21/__fbjs__/lib/keyMirror.js');
 		var stringifySafe = require('react-native@0.21/Libraries/Utilities/stringifySafe.js');
 
 		var MODULE_IDS = 0;
@@ -23986,7 +23978,7 @@ loader.define("react-native@0.21/Libraries/BatchedBridge/BatchedBridge.js", ["re
 		module.exports = MessageQueue;
 	}];
 });
-loader.define("react-native@0.21/Libraries/Utilities/Systrace.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPerf.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/Libraries/Utilities/Systrace.js", ["react-native@0.21/__react__/lib/ReactPerf.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/Utilities/Systrace.js
@@ -24000,7 +23992,7 @@ loader.define("react-native@0.21/Libraries/Utilities/Systrace.js", ["react-nativ
 		var _ReactPerf = null;
 		function ReactPerf() {
 			if (!_ReactPerf) {
-				_ReactPerf = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPerf.js');
+				_ReactPerf = require('react-native@0.21/__react__/lib/ReactPerf.js');
 			}
 			return _ReactPerf;
 		}
@@ -24126,10 +24118,10 @@ loader.define("react-native@0.21/Libraries/Utilities/Systrace.js", ["react-nativ
 		module.exports = Systrace;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPerf.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/ReactPerf.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPerf.js
+	// __react__/lib/ReactPerf.js
 	function (__inner_require__, exports, module) {
 		var ReactPerf = {
 
@@ -24179,15 +24171,15 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = ReactPerf;
 	}];
 });
-loader.define("react-native@0.21/Libraries/JavaScriptAppEngine/System/JSTimers/JSTimersExecution.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyMirror.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/performanceNow.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js", "react-native@0.21/Libraries/Utilities/Systrace.js", "react-native@0.21/Libraries/JavaScriptAppEngine/System/JSTimers/JSTimers.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/Libraries/JavaScriptAppEngine/System/JSTimers/JSTimersExecution.js", ["react-native@0.21/__fbjs__/lib/invariant.js", "react-native@0.21/__fbjs__/lib/keyMirror.js", "react-native@0.21/__fbjs__/lib/performanceNow.js", "react-native@0.21/__fbjs__/lib/warning.js", "react-native@0.21/Libraries/Utilities/Systrace.js", "react-native@0.21/Libraries/JavaScriptAppEngine/System/JSTimers/JSTimers.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/JavaScriptAppEngine/System/JSTimers/JSTimersExecution.js
 	function (__inner_require__, exports, module) {
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var keyMirror = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyMirror.js');
-		var performanceNow = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/performanceNow.js');
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var keyMirror = require('react-native@0.21/__fbjs__/lib/keyMirror.js');
+		var performanceNow = require('react-native@0.21/__fbjs__/lib/performanceNow.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 		var Systrace = require('react-native@0.21/Libraries/Utilities/Systrace.js');
 
 		var JSTimersExecution = {
@@ -24293,10 +24285,10 @@ loader.define("react-native@0.21/Libraries/JavaScriptAppEngine/System/JSTimers/J
 		module.exports = JSTimersExecution;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__fbjs__/lib/invariant.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js
+	// __fbjs__/lib/invariant.js
 	function (__inner_require__, exports, module) {
 		function invariant(condition, format, a, b, c, d, e, f) {
 			if (process.env.NODE_ENV !== 'production') {
@@ -24326,12 +24318,12 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs
 		module.exports = invariant;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyMirror.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__fbjs__/lib/keyMirror.js", ["react-native@0.21/__fbjs__/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyMirror.js
+	// __fbjs__/lib/keyMirror.js
 	function (__inner_require__, exports, module) {
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var keyMirror = function keyMirror(obj) {
 			var ret = {};
@@ -24349,12 +24341,12 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs
 		module.exports = keyMirror;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/performanceNow.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/ExecutionEnvironment.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__fbjs__/lib/performanceNow.js", ["react-native@0.21/__fbjs__/lib/ExecutionEnvironment.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/performanceNow.js
+	// __fbjs__/lib/performanceNow.js
 	function (__inner_require__, exports, module) {
-		var performance = __inner_require__(1 /*Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/performance.js*/);
+		var performance = __inner_require__(1 /*__fbjs__/lib/performance.js*/);
 
 		var performanceNow;
 
@@ -24369,9 +24361,9 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs
 		}
 
 		module.exports = performanceNow;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/performance.js
+	}, // __fbjs__/lib/performance.js
 	function (__inner_require__, exports, module) {
-		var ExecutionEnvironment = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/ExecutionEnvironment.js');
+		var ExecutionEnvironment = require('react-native@0.21/__fbjs__/lib/ExecutionEnvironment.js');
 
 		var performance;
 
@@ -24382,10 +24374,10 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs
 		module.exports = performance || {};
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/ExecutionEnvironment.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__fbjs__/lib/ExecutionEnvironment.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/ExecutionEnvironment.js
+	// __fbjs__/lib/ExecutionEnvironment.js
 	function (__inner_require__, exports, module) {
 		var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
@@ -24404,12 +24396,12 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs
 		module.exports = ExecutionEnvironment;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyFunction.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__fbjs__/lib/warning.js", ["react-native@0.21/__fbjs__/lib/emptyFunction.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js
+	// __fbjs__/lib/warning.js
 	function (__inner_require__, exports, module) {
-		var emptyFunction = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyFunction.js');
+		var emptyFunction = require('react-native@0.21/__fbjs__/lib/emptyFunction.js');
 
 		var warning = emptyFunction;
 
@@ -24446,10 +24438,10 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs
 		module.exports = warning;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyFunction.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__fbjs__/lib/emptyFunction.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyFunction.js
+	// __fbjs__/lib/emptyFunction.js
 	function (__inner_require__, exports, module) {
 		function makeEmptyFunction(arg) {
 			return function () {
@@ -24583,13 +24575,13 @@ loader.define("react-native@0.21/Libraries/JavaScriptAppEngine/System/JSTimers/J
 		module.exports = JSTimers;
 	}];
 });
-loader.define("react-native@0.21/Libraries/Utilities/HMRClient.js", ["react-native@0.21/Libraries/Utilities/Platform.ios.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js", "react-native@0.21/Libraries/StyleSheet/processColor.js", "react-native@0.21/Libraries/WebSocket/WebSocket.js", "react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js", "react-native@0.21/Libraries/JavaScriptAppEngine/Initialization/SourceMapsCache.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/Libraries/Utilities/HMRClient.js", ["react-native@0.21/Libraries/Utilities/Platform.ios.js", "react-native@0.21/__fbjs__/lib/invariant.js", "react-native@0.21/Libraries/StyleSheet/processColor.js", "react-native@0.21/Libraries/WebSocket/WebSocket.js", "react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js", "react-native@0.21/Libraries/JavaScriptAppEngine/Initialization/SourceMapsCache.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/Utilities/HMRClient.js
 	function (__inner_require__, exports, module) {
 		var Platform = require('react-native@0.21/Libraries/Utilities/Platform.ios.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 		var processColor = require('react-native@0.21/Libraries/StyleSheet/processColor.js');
 
 		var HMRClient = {
@@ -25201,7 +25193,7 @@ loader.define("react-native@0.21/Libraries/Device/RCTDeviceEventEmitter.js", ["r
 		module.exports = RCTDeviceEventEmitter;
 	}];
 });
-loader.define("react-native@0.21/Libraries/vendor/emitter/EventEmitter.js", ["react-native@0.21/Libraries/Utilities/ErrorUtils.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyFunction.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/Libraries/vendor/emitter/EventEmitter.js", ["react-native@0.21/Libraries/Utilities/ErrorUtils.js", "react-native@0.21/__fbjs__/lib/emptyFunction.js", "react-native@0.21/__fbjs__/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/vendor/emitter/EventEmitter.js
@@ -25209,8 +25201,8 @@ loader.define("react-native@0.21/Libraries/vendor/emitter/EventEmitter.js", ["re
 		var EmitterSubscription = __inner_require__(1 /*Libraries/vendor/emitter/EmitterSubscription.js*/);
 		var ErrorUtils = require('react-native@0.21/Libraries/Utilities/ErrorUtils.js');
 		var EventSubscriptionVendor = __inner_require__(3 /*Libraries/vendor/emitter/EventSubscriptionVendor.js*/);
-		var emptyFunction = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyFunction.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');var EventEmitter = function () {
+		var emptyFunction = require('react-native@0.21/__fbjs__/lib/emptyFunction.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');var EventEmitter = function () {
 
 			function EventEmitter() {
 				babelHelpers.classCallCheck(this, EventEmitter);
@@ -25281,7 +25273,7 @@ loader.define("react-native@0.21/Libraries/vendor/emitter/EventEmitter.js", ["re
 		module.exports = EventSubscription;
 	}, // Libraries/vendor/emitter/EventSubscriptionVendor.js
 	function (__inner_require__, exports, module) {
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');var EventSubscriptionVendor = function () {
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');var EventSubscriptionVendor = function () {
 
 			function EventSubscriptionVendor() {
 				babelHelpers.classCallCheck(this, EventSubscriptionVendor);
@@ -28092,19 +28084,19 @@ loader.define("react-native@0.21/Libraries/Utilities/UIManager.js", ["react-nati
 		module.exports = UIManager;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdates.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/CallbackQueue.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/PooledClass.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPerf.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactReconciler.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Transaction.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/ReactUpdates.js", ["react-native@0.21/__react__/lib/CallbackQueue.js", "react-native@0.21/__react__/lib/PooledClass.js", "react-native@0.21/__react__/lib/ReactPerf.js", "react-native@0.21/__react__/lib/ReactReconciler.js", "react-native@0.21/__react__/lib/Transaction.js", "react-native@0.21/__react__/lib/Object.assign.js", "react-native@0.21/__fbjs__/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdates.js
+	// __react__/lib/ReactUpdates.js
 	function (__inner_require__, exports, module) {
-		var CallbackQueue = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/CallbackQueue.js');
-		var PooledClass = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/PooledClass.js');
-		var ReactPerf = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPerf.js');
-		var ReactReconciler = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactReconciler.js');
-		var Transaction = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Transaction.js');
+		var CallbackQueue = require('react-native@0.21/__react__/lib/CallbackQueue.js');
+		var PooledClass = require('react-native@0.21/__react__/lib/PooledClass.js');
+		var ReactPerf = require('react-native@0.21/__react__/lib/ReactPerf.js');
+		var ReactReconciler = require('react-native@0.21/__react__/lib/ReactReconciler.js');
+		var Transaction = require('react-native@0.21/__react__/lib/Transaction.js');
 
-		var assign = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var assign = require('react-native@0.21/__react__/lib/Object.assign.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var dirtyComponents = [];
 		var asapCallbackQueue = CallbackQueue.getPooled();
@@ -28262,15 +28254,15 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = ReactUpdates;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/CallbackQueue.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/PooledClass.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/CallbackQueue.js", ["react-native@0.21/__react__/lib/PooledClass.js", "react-native@0.21/__react__/lib/Object.assign.js", "react-native@0.21/__fbjs__/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/CallbackQueue.js
+	// __react__/lib/CallbackQueue.js
 	function (__inner_require__, exports, module) {
-		var PooledClass = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/PooledClass.js');
+		var PooledClass = require('react-native@0.21/__react__/lib/PooledClass.js');
 
-		var assign = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var assign = require('react-native@0.21/__react__/lib/Object.assign.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		function CallbackQueue() {
 			this._callbacks = null;
@@ -28315,12 +28307,12 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = CallbackQueue;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/PooledClass.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/PooledClass.js", ["react-native@0.21/__fbjs__/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/PooledClass.js
+	// __react__/lib/PooledClass.js
 	function (__inner_require__, exports, module) {
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var oneArgumentPooler = function oneArgumentPooler(copyFieldsFrom) {
 			var Klass = this;
@@ -28411,10 +28403,10 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = PooledClass;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/Object.assign.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js
+	// __react__/lib/Object.assign.js
 	function (__inner_require__, exports, module) {
 		function assign(target, sources) {
 			if (target == null) {
@@ -28445,12 +28437,12 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = assign;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactReconciler.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/ReactReconciler.js", ["react-native@0.21/__fbjs__/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactReconciler.js
+	// __react__/lib/ReactReconciler.js
 	function (__inner_require__, exports, module) {
-		var ReactRef = __inner_require__(1 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactRef.js*/);
+		var ReactRef = __inner_require__(1 /*__react__/lib/ReactRef.js*/);
 
 		function attachRefs() {
 			ReactRef.attachRefs(this, this._currentElement);
@@ -28497,9 +28489,9 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 			} };
 
 		module.exports = ReactReconciler;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactRef.js
+	}, // __react__/lib/ReactRef.js
 	function (__inner_require__, exports, module) {
-		var ReactOwner = __inner_require__(2 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactOwner.js*/);
+		var ReactOwner = __inner_require__(2 /*__react__/lib/ReactOwner.js*/);
 
 		var ReactRef = {};
 
@@ -28550,9 +28542,9 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		};
 
 		module.exports = ReactRef;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactOwner.js
+	}, // __react__/lib/ReactOwner.js
 	function (__inner_require__, exports, module) {
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var ReactOwner = {
 
@@ -28576,12 +28568,12 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = ReactOwner;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Transaction.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/Transaction.js", ["react-native@0.21/__fbjs__/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/Transaction.js
+	// __react__/lib/Transaction.js
 	function (__inner_require__, exports, module) {
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var Mixin = {
 
@@ -28686,17 +28678,17 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = Transaction;
 	}];
 });
-loader.define("react-native@0.21/Libraries/ReactNative/findNodeHandle.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCurrentOwner.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceMap.js", "react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/Libraries/ReactNative/findNodeHandle.js", ["react-native@0.21/__react__/lib/ReactCurrentOwner.js", "react-native@0.21/__react__/lib/ReactInstanceMap.js", "react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js", "react-native@0.21/__fbjs__/lib/invariant.js", "react-native@0.21/__fbjs__/lib/warning.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/ReactNative/findNodeHandle.js
 	function (__inner_require__, exports, module) {
-		var ReactCurrentOwner = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCurrentOwner.js');
-		var ReactInstanceMap = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceMap.js');
+		var ReactCurrentOwner = require('react-native@0.21/__react__/lib/ReactCurrentOwner.js');
+		var ReactInstanceMap = require('react-native@0.21/__react__/lib/ReactInstanceMap.js');
 		var ReactNativeTagHandles = require('react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js');
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		function findNodeHandle(componentOrHandle) {
 			if (__DEV__) {
@@ -28735,10 +28727,10 @@ loader.define("react-native@0.21/Libraries/ReactNative/findNodeHandle.js", ["rea
 		module.exports = findNodeHandle;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCurrentOwner.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/ReactCurrentOwner.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCurrentOwner.js
+	// __react__/lib/ReactCurrentOwner.js
 	function (__inner_require__, exports, module) {
 		var ReactCurrentOwner = {
 
@@ -28747,10 +28739,10 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = ReactCurrentOwner;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceMap.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/ReactInstanceMap.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceMap.js
+	// __react__/lib/ReactInstanceMap.js
 	function (__inner_require__, exports, module) {
 		var ReactInstanceMap = {
 
@@ -28773,13 +28765,13 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = ReactInstanceMap;
 	}];
 });
-loader.define("react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js", ["react-native@0.21/__fbjs__/lib/invariant.js", "react-native@0.21/__fbjs__/lib/warning.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/ReactNative/ReactNativeTagHandles.js
 	function (__inner_require__, exports, module) {
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		var INITIAL_TAG_COUNT = 1;
 		var NATIVE_TOP_ROOT_ID_SEPARATOR = '{TOP_LEVEL}';
@@ -28838,13 +28830,13 @@ loader.define("react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js"
 		module.exports = ReactNativeTagHandles;
 	}];
 });
-loader.define("react-native@0.21/Libraries/StyleSheet/flattenStyle.js", ["react-native@0.21/Libraries/StyleSheet/StyleSheetRegistry.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/Libraries/StyleSheet/flattenStyle.js", ["react-native@0.21/Libraries/StyleSheet/StyleSheetRegistry.js", "react-native@0.21/__fbjs__/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/StyleSheet/flattenStyle.js
 	function (__inner_require__, exports, module) {
 		var StyleSheetRegistry = require('react-native@0.21/Libraries/StyleSheet/StyleSheetRegistry.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		function getStyle(style) {
 			if (typeof style === 'number') {
@@ -28917,15 +28909,15 @@ loader.define("react-native@0.21/Libraries/StyleSheet/StyleSheetRegistry.js", []
 		module.exports = StyleSheetRegistry;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCurrentOwner.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/canDefineProperty.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/ReactElement.js", ["react-native@0.21/__react__/lib/ReactCurrentOwner.js", "react-native@0.21/__react__/lib/Object.assign.js", "react-native@0.21/__react__/lib/canDefineProperty.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js
+	// __react__/lib/ReactElement.js
 	function (__inner_require__, exports, module) {
-		var ReactCurrentOwner = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCurrentOwner.js');
+		var ReactCurrentOwner = require('react-native@0.21/__react__/lib/ReactCurrentOwner.js');
 
-		var assign = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js');
-		var canDefineProperty = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/canDefineProperty.js');
+		var assign = require('react-native@0.21/__react__/lib/Object.assign.js');
+		var canDefineProperty = require('react-native@0.21/__react__/lib/canDefineProperty.js');
 
 		var REACT_ELEMENT_TYPE = typeof Symbol === 'function' && Symbol['for'] && Symbol['for']('react.element') || 0xeac7;
 
@@ -29103,10 +29095,10 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = ReactElement;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/canDefineProperty.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/canDefineProperty.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/canDefineProperty.js
+	// __react__/lib/canDefineProperty.js
 	function (__inner_require__, exports, module) {
 		var canDefineProperty = false;
 		if (process.env.NODE_ENV !== 'production') {
@@ -29119,10 +29111,10 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = canDefineProperty;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypeLocationNames.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/ReactPropTypeLocationNames.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypeLocationNames.js
+	// __react__/lib/ReactPropTypeLocationNames.js
 	function (__inner_require__, exports, module) {
 		var ReactPropTypeLocationNames = {};
 
@@ -29136,14 +29128,14 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = ReactPropTypeLocationNames;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceHandles.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/ReactInstanceHandles.js", ["react-native@0.21/__fbjs__/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceHandles.js
+	// __react__/lib/ReactInstanceHandles.js
 	function (__inner_require__, exports, module) {
-		var ReactRootIndex = __inner_require__(1 /*Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactRootIndex.js*/);
+		var ReactRootIndex = __inner_require__(1 /*__react__/lib/ReactRootIndex.js*/);
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var SEPARATOR = '.';
 		var SEPARATOR_LENGTH = SEPARATOR.length;
@@ -29283,7 +29275,7 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 			SEPARATOR: SEPARATOR };
 
 		module.exports = ReactInstanceHandles;
-	}, // Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactRootIndex.js
+	}, // __react__/lib/ReactRootIndex.js
 	function (__inner_require__, exports, module) {
 		var ReactRootIndexInjection = {
 
@@ -29298,22 +29290,22 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = ReactRootIndex;
 	}];
 });
-loader.define("react-native@0.21/Libraries/ReactNative/ReactNativeMount.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js", "react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPerf.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactReconciler.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdateQueue.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdates.js", "react-native@0.21/Libraries/Utilities/UIManager.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyObject.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/instantiateReactComponent.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/shouldUpdateReactComponent.js", "react-native@0.21/Libraries/ReactNative/findNodeHandle.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/Libraries/ReactNative/ReactNativeMount.js", ["react-native@0.21/__react__/lib/ReactElement.js", "react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js", "react-native@0.21/__react__/lib/ReactPerf.js", "react-native@0.21/__react__/lib/ReactReconciler.js", "react-native@0.21/__react__/lib/ReactUpdateQueue.js", "react-native@0.21/__react__/lib/ReactUpdates.js", "react-native@0.21/Libraries/Utilities/UIManager.js", "react-native@0.21/__fbjs__/lib/emptyObject.js", "react-native@0.21/__react__/lib/instantiateReactComponent.js", "react-native@0.21/__react__/lib/shouldUpdateReactComponent.js", "react-native@0.21/Libraries/ReactNative/findNodeHandle.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/ReactNative/ReactNativeMount.js
 	function (__inner_require__, exports, module) {
-		var ReactElement = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js');
+		var ReactElement = require('react-native@0.21/__react__/lib/ReactElement.js');
 		var ReactNativeTagHandles = require('react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js');
-		var ReactPerf = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPerf.js');
-		var ReactReconciler = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactReconciler.js');
-		var ReactUpdateQueue = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdateQueue.js');
-		var ReactUpdates = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdates.js');
+		var ReactPerf = require('react-native@0.21/__react__/lib/ReactPerf.js');
+		var ReactReconciler = require('react-native@0.21/__react__/lib/ReactReconciler.js');
+		var ReactUpdateQueue = require('react-native@0.21/__react__/lib/ReactUpdateQueue.js');
+		var ReactUpdates = require('react-native@0.21/__react__/lib/ReactUpdates.js');
 		var UIManager = require('react-native@0.21/Libraries/Utilities/UIManager.js');
 
-		var emptyObject = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyObject.js');
-		var instantiateReactComponent = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/instantiateReactComponent.js');
-		var shouldUpdateReactComponent = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/shouldUpdateReactComponent.js');
+		var emptyObject = require('react-native@0.21/__fbjs__/lib/emptyObject.js');
+		var instantiateReactComponent = require('react-native@0.21/__react__/lib/instantiateReactComponent.js');
+		var shouldUpdateReactComponent = require('react-native@0.21/__react__/lib/shouldUpdateReactComponent.js');
 
 		function instanceNumberToChildRootID(rootNodeID, instanceNumber) {
 			return rootNodeID + '[' + instanceNumber + ']';
@@ -29445,19 +29437,19 @@ loader.define("react-native@0.21/Libraries/ReactNative/ReactNativeMount.js", ["r
 		module.exports = ReactNativeMount;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdateQueue.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCurrentOwner.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceMap.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdates.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/ReactUpdateQueue.js", ["react-native@0.21/__react__/lib/ReactCurrentOwner.js", "react-native@0.21/__react__/lib/ReactElement.js", "react-native@0.21/__react__/lib/ReactInstanceMap.js", "react-native@0.21/__react__/lib/ReactUpdates.js", "react-native@0.21/__react__/lib/Object.assign.js", "react-native@0.21/__fbjs__/lib/invariant.js", "react-native@0.21/__fbjs__/lib/warning.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdateQueue.js
+	// __react__/lib/ReactUpdateQueue.js
 	function (__inner_require__, exports, module) {
-		var ReactCurrentOwner = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCurrentOwner.js');
-		var ReactElement = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js');
-		var ReactInstanceMap = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceMap.js');
-		var ReactUpdates = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdates.js');
+		var ReactCurrentOwner = require('react-native@0.21/__react__/lib/ReactCurrentOwner.js');
+		var ReactElement = require('react-native@0.21/__react__/lib/ReactElement.js');
+		var ReactInstanceMap = require('react-native@0.21/__react__/lib/ReactInstanceMap.js');
+		var ReactUpdates = require('react-native@0.21/__react__/lib/ReactUpdates.js');
 
-		var assign = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var assign = require('react-native@0.21/__react__/lib/Object.assign.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		function enqueueUpdate(internalInstance) {
 			ReactUpdates.enqueueUpdate(internalInstance);
@@ -29611,10 +29603,10 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = ReactUpdateQueue;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyObject.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__fbjs__/lib/emptyObject.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyObject.js
+	// __fbjs__/lib/emptyObject.js
 	function (__inner_require__, exports, module) {
 		var emptyObject = {};
 
@@ -29625,18 +29617,18 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs
 		module.exports = emptyObject;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/instantiateReactComponent.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCompositeComponent.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactEmptyComponent.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactNativeComponent.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/instantiateReactComponent.js", ["react-native@0.21/__react__/lib/ReactCompositeComponent.js", "react-native@0.21/__react__/lib/ReactEmptyComponent.js", "react-native@0.21/__react__/lib/ReactNativeComponent.js", "react-native@0.21/__react__/lib/Object.assign.js", "react-native@0.21/__fbjs__/lib/invariant.js", "react-native@0.21/__fbjs__/lib/warning.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/instantiateReactComponent.js
+	// __react__/lib/instantiateReactComponent.js
 	function (__inner_require__, exports, module) {
-		var ReactCompositeComponent = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCompositeComponent.js');
-		var ReactEmptyComponent = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactEmptyComponent.js');
-		var ReactNativeComponent = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactNativeComponent.js');
+		var ReactCompositeComponent = require('react-native@0.21/__react__/lib/ReactCompositeComponent.js');
+		var ReactEmptyComponent = require('react-native@0.21/__react__/lib/ReactEmptyComponent.js');
+		var ReactNativeComponent = require('react-native@0.21/__react__/lib/ReactNativeComponent.js');
 
-		var assign = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var assign = require('react-native@0.21/__react__/lib/Object.assign.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		var ReactCompositeComponentWrapper = function ReactCompositeComponentWrapper() {};
 		assign(ReactCompositeComponentWrapper.prototype, ReactCompositeComponent.Mixin, {
@@ -29705,26 +29697,26 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = instantiateReactComponent;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCompositeComponent.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactComponentEnvironment.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCurrentOwner.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceMap.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPerf.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypeLocations.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypeLocationNames.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactReconciler.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdateQueue.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyObject.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/shouldUpdateReactComponent.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/ReactCompositeComponent.js", ["react-native@0.21/__react__/lib/ReactComponentEnvironment.js", "react-native@0.21/__react__/lib/ReactCurrentOwner.js", "react-native@0.21/__react__/lib/ReactElement.js", "react-native@0.21/__react__/lib/ReactInstanceMap.js", "react-native@0.21/__react__/lib/ReactPerf.js", "react-native@0.21/__react__/lib/ReactPropTypeLocations.js", "react-native@0.21/__react__/lib/ReactPropTypeLocationNames.js", "react-native@0.21/__react__/lib/ReactReconciler.js", "react-native@0.21/__react__/lib/ReactUpdateQueue.js", "react-native@0.21/__react__/lib/Object.assign.js", "react-native@0.21/__fbjs__/lib/emptyObject.js", "react-native@0.21/__fbjs__/lib/invariant.js", "react-native@0.21/__react__/lib/shouldUpdateReactComponent.js", "react-native@0.21/__fbjs__/lib/warning.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCompositeComponent.js
+	// __react__/lib/ReactCompositeComponent.js
 	function (__inner_require__, exports, module) {
-		var ReactComponentEnvironment = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactComponentEnvironment.js');
-		var ReactCurrentOwner = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCurrentOwner.js');
-		var ReactElement = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js');
-		var ReactInstanceMap = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceMap.js');
-		var ReactPerf = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPerf.js');
-		var ReactPropTypeLocations = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypeLocations.js');
-		var ReactPropTypeLocationNames = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypeLocationNames.js');
-		var ReactReconciler = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactReconciler.js');
-		var ReactUpdateQueue = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactUpdateQueue.js');
+		var ReactComponentEnvironment = require('react-native@0.21/__react__/lib/ReactComponentEnvironment.js');
+		var ReactCurrentOwner = require('react-native@0.21/__react__/lib/ReactCurrentOwner.js');
+		var ReactElement = require('react-native@0.21/__react__/lib/ReactElement.js');
+		var ReactInstanceMap = require('react-native@0.21/__react__/lib/ReactInstanceMap.js');
+		var ReactPerf = require('react-native@0.21/__react__/lib/ReactPerf.js');
+		var ReactPropTypeLocations = require('react-native@0.21/__react__/lib/ReactPropTypeLocations.js');
+		var ReactPropTypeLocationNames = require('react-native@0.21/__react__/lib/ReactPropTypeLocationNames.js');
+		var ReactReconciler = require('react-native@0.21/__react__/lib/ReactReconciler.js');
+		var ReactUpdateQueue = require('react-native@0.21/__react__/lib/ReactUpdateQueue.js');
 
-		var assign = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js');
-		var emptyObject = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/emptyObject.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
-		var shouldUpdateReactComponent = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/shouldUpdateReactComponent.js');
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var assign = require('react-native@0.21/__react__/lib/Object.assign.js');
+		var emptyObject = require('react-native@0.21/__fbjs__/lib/emptyObject.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
+		var shouldUpdateReactComponent = require('react-native@0.21/__react__/lib/shouldUpdateReactComponent.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		function getDeclarationErrorAddendum(component) {
 			var owner = component._currentElement._owner || null;
@@ -30170,12 +30162,12 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = ReactCompositeComponent;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactComponentEnvironment.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/ReactComponentEnvironment.js", ["react-native@0.21/__fbjs__/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactComponentEnvironment.js
+	// __react__/lib/ReactComponentEnvironment.js
 	function (__inner_require__, exports, module) {
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var injected = false;
 
@@ -30199,12 +30191,12 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = ReactComponentEnvironment;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypeLocations.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyMirror.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/ReactPropTypeLocations.js", ["react-native@0.21/__fbjs__/lib/keyMirror.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactPropTypeLocations.js
+	// __react__/lib/ReactPropTypeLocations.js
 	function (__inner_require__, exports, module) {
-		var keyMirror = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/keyMirror.js');
+		var keyMirror = require('react-native@0.21/__fbjs__/lib/keyMirror.js');
 
 		var ReactPropTypeLocations = keyMirror({
 			prop: null,
@@ -30214,10 +30206,10 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = ReactPropTypeLocations;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/shouldUpdateReactComponent.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/shouldUpdateReactComponent.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/shouldUpdateReactComponent.js
+	// __react__/lib/shouldUpdateReactComponent.js
 	function (__inner_require__, exports, module) {
 		function shouldUpdateReactComponent(prevElement, nextElement) {
 			var prevEmpty = prevElement === null || prevElement === false;
@@ -30239,16 +30231,16 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = shouldUpdateReactComponent;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactEmptyComponent.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactEmptyComponentRegistry.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactReconciler.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/ReactEmptyComponent.js", ["react-native@0.21/__react__/lib/ReactElement.js", "react-native@0.21/__react__/lib/ReactEmptyComponentRegistry.js", "react-native@0.21/__react__/lib/ReactReconciler.js", "react-native@0.21/__react__/lib/Object.assign.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactEmptyComponent.js
+	// __react__/lib/ReactEmptyComponent.js
 	function (__inner_require__, exports, module) {
-		var ReactElement = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactElement.js');
-		var ReactEmptyComponentRegistry = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactEmptyComponentRegistry.js');
-		var ReactReconciler = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactReconciler.js');
+		var ReactElement = require('react-native@0.21/__react__/lib/ReactElement.js');
+		var ReactEmptyComponentRegistry = require('react-native@0.21/__react__/lib/ReactEmptyComponentRegistry.js');
+		var ReactReconciler = require('react-native@0.21/__react__/lib/ReactReconciler.js');
 
-		var assign = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js');
+		var assign = require('react-native@0.21/__react__/lib/Object.assign.js');
 
 		var placeholderElement;
 
@@ -30286,10 +30278,10 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = ReactEmptyComponent;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactEmptyComponentRegistry.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/ReactEmptyComponentRegistry.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactEmptyComponentRegistry.js
+	// __react__/lib/ReactEmptyComponentRegistry.js
 	function (__inner_require__, exports, module) {
 		var nullComponentIDsRegistry = {};
 
@@ -30313,13 +30305,13 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = ReactEmptyComponentRegistry;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactNativeComponent.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__react__/lib/ReactNativeComponent.js", ["react-native@0.21/__react__/lib/Object.assign.js", "react-native@0.21/__fbjs__/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactNativeComponent.js
+	// __react__/lib/ReactNativeComponent.js
 	function (__inner_require__, exports, module) {
-		var assign = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var assign = require('react-native@0.21/__react__/lib/Object.assign.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var autoGenerateWrapperClass = null;
 		var genericComponentClass = null;
@@ -30376,7 +30368,7 @@ loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/reac
 		module.exports = ReactNativeComponent;
 	}];
 });
-loader.define("react-native@0.21/Libraries/ReactNative/ReactNativeTextComponent.js", ["react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js", "react-native@0.21/Libraries/Utilities/UIManager.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/Libraries/ReactNative/ReactNativeTextComponent.js", ["react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js", "react-native@0.21/Libraries/Utilities/UIManager.js", "react-native@0.21/__react__/lib/Object.assign.js", "react-native@0.21/__fbjs__/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/ReactNative/ReactNativeTextComponent.js
@@ -30384,8 +30376,8 @@ loader.define("react-native@0.21/Libraries/ReactNative/ReactNativeTextComponent.
 		var ReactNativeTagHandles = require('react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js');
 		var UIManager = require('react-native@0.21/Libraries/Utilities/UIManager.js');
 
-		var assign = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/Object.assign.js');
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var assign = require('react-native@0.21/__react__/lib/Object.assign.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 
 		var ReactNativeTextComponent = function ReactNativeTextComponent(props) {};
 
@@ -30431,7 +30423,7 @@ loader.define("react-native@0.21/Libraries/ReactNative/ReactNativeTextComponent.
 		module.exports = ReactNativeTextComponent;
 	}];
 });
-loader.define("react-native@0.21/Libraries/JavaScriptAppEngine/Initialization/InitializeJavaScriptAppEngine.js", ["regenerator@0.8/runtime.js", "react-native@0.21/Libraries/Utilities/ErrorUtils.js", "react-native@0.21/Libraries/JavaScriptAppEngine/System/JSTimers/JSTimers.js", "react-native@0.21/Libraries/Utilities/Alert.js", "react-native@0.21/Libraries/Promise.js", "react-native@0.21/Libraries/vendor/core/Map.js", "react-native@0.21/Libraries/vendor/core/Set.js", "react-native@0.21/Libraries/WebSocket/WebSocket.js", "react-native@0.21/Libraries/Utilities/Systrace.js", "react-native@0.21/Libraries/Utilities/Platform.ios.js", "react-native@0.21/Libraries/Device/RCTDeviceEventEmitter.js", "react-native@0.21/Libraries/Utilities/PerformanceLogger.js", "react-transform-hmr@1/lib/index.js", "react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js", "react-native@0.21/Libraries/JavaScriptAppEngine/Initialization/SourceMapsCache.js", "react-native@0.21/Libraries/Utilities/stringifySafe.js", "stacktrace-parser@0.1/index.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js", "react-native@0.21/Libraries/Utilities/logError.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js", "react-native@0.21/Libraries/StyleSheet/flattenStyle.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCurrentOwner.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceHandles.js", "react-native@0.21/Libraries/ReactNative/ReactNativeMount.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactReconciler.js", "react-native@0.21/Libraries/ReactNative/ReactNativeTextComponent.js", "react-native@0.21/Libraries/BatchedBridge/BatchedBridge.js", "react-native@0.21/Libraries/Inspector/InspectorUtils.js", "react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/Libraries/JavaScriptAppEngine/Initialization/InitializeJavaScriptAppEngine.js", ["regenerator@0.8/runtime.js", "react-native@0.21/Libraries/Utilities/ErrorUtils.js", "react-native@0.21/Libraries/JavaScriptAppEngine/System/JSTimers/JSTimers.js", "react-native@0.21/Libraries/Utilities/Alert.js", "react-native@0.21/Libraries/Promise.js", "react-native@0.21/Libraries/vendor/core/Map.js", "react-native@0.21/Libraries/vendor/core/Set.js", "react-native@0.21/Libraries/WebSocket/WebSocket.js", "react-native@0.21/Libraries/Utilities/Systrace.js", "react-native@0.21/Libraries/Utilities/Platform.ios.js", "react-native@0.21/Libraries/Device/RCTDeviceEventEmitter.js", "react-native@0.21/Libraries/Utilities/PerformanceLogger.js", "react-transform-hmr@1/lib/index.js", "react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js", "react-native@0.21/Libraries/JavaScriptAppEngine/Initialization/SourceMapsCache.js", "react-native@0.21/Libraries/Utilities/stringifySafe.js", "stacktrace-parser@0.1/index.js", "react-native@0.21/__fbjs__/lib/invariant.js", "react-native@0.21/Libraries/Utilities/logError.js", "react-native@0.21/__fbjs__/lib/warning.js", "react-native@0.21/Libraries/StyleSheet/flattenStyle.js", "react-native@0.21/__react__/lib/ReactCurrentOwner.js", "react-native@0.21/__react__/lib/ReactInstanceHandles.js", "react-native@0.21/Libraries/ReactNative/ReactNativeMount.js", "react-native@0.21/__react__/lib/ReactReconciler.js", "react-native@0.21/Libraries/ReactNative/ReactNativeTextComponent.js", "react-native@0.21/Libraries/BatchedBridge/BatchedBridge.js", "react-native@0.21/Libraries/Inspector/InspectorUtils.js", "react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/JavaScriptAppEngine/Initialization/InitializeJavaScriptAppEngine.js
@@ -31378,9 +31370,9 @@ loader.define("react-native@0.21/Libraries/JavaScriptAppEngine/Initialization/In
 		var RCTDeviceEventEmitter = require('react-native@0.21/Libraries/Device/RCTDeviceEventEmitter.js');
 		var RCTLocationObserver = require('react-native@0.21/Libraries/BatchedBridge/BatchedBridgedModules/NativeModules.js').LocationObserver;
 
-		var invariant = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/invariant.js');
+		var invariant = require('react-native@0.21/__fbjs__/lib/invariant.js');
 		var logError = require('react-native@0.21/Libraries/Utilities/logError.js');
-		var warning = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/warning.js');
+		var warning = require('react-native@0.21/__fbjs__/lib/warning.js');
 
 		var subscriptions = [];
 
@@ -31503,10 +31495,10 @@ loader.define("react-native@0.21/Libraries/JavaScriptAppEngine/Initialization/In
 					return;
 				}
 				window.__REACT_DEVTOOLS_GLOBAL_HOOK__.inject({
-					CurrentOwner: require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactCurrentOwner.js'),
-					InstanceHandles: require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceHandles.js'),
+					CurrentOwner: require('react-native@0.21/__react__/lib/ReactCurrentOwner.js'),
+					InstanceHandles: require('react-native@0.21/__react__/lib/ReactInstanceHandles.js'),
 					Mount: require('react-native@0.21/Libraries/ReactNative/ReactNativeMount.js'),
-					Reconciler: require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactReconciler.js'),
+					Reconciler: require('react-native@0.21/__react__/lib/ReactReconciler.js'),
 					TextComponent: require('react-native@0.21/Libraries/ReactNative/ReactNativeTextComponent.js') });
 
 				ws.onmessage = handleMessage;
@@ -32239,13 +32231,13 @@ loader.define("regenerator-runtime@0.9/runtime.js", [], function(require, global
 		}
 	];
 });
-loader.define("react-native@0.21/Libraries/vendor/core/Map.js", ["react-native@0.21/Libraries/vendor/core/guid.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/isNode.js", "react-native@0.21/Libraries/vendor/core/toIterator.js", "react-native@0.21/Libraries/vendor/core/_shouldPolyfillES6Collection.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/Libraries/vendor/core/Map.js", ["react-native@0.21/Libraries/vendor/core/guid.js", "react-native@0.21/__fbjs__/lib/isNode.js", "react-native@0.21/Libraries/vendor/core/toIterator.js", "react-native@0.21/Libraries/vendor/core/_shouldPolyfillES6Collection.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/vendor/core/Map.js
 	function (__inner_require__, exports, module) {
 		var guid = require('react-native@0.21/Libraries/vendor/core/guid.js');
-		var isNode = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/isNode.js');
+		var isNode = require('react-native@0.21/__fbjs__/lib/isNode.js');
 		var toIterator = require('react-native@0.21/Libraries/vendor/core/toIterator.js');
 		var _shouldPolyfillES6Collection = require('react-native@0.21/Libraries/vendor/core/_shouldPolyfillES6Collection.js');
 
@@ -32591,10 +32583,10 @@ loader.define("react-native@0.21/Libraries/vendor/core/guid.js", [], function (r
 		module.exports = guid;
 	}];
 });
-loader.define("react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/isNode.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/__fbjs__/lib/isNode.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
-	// Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/isNode.js
+	// __fbjs__/lib/isNode.js
 	function (__inner_require__, exports, module) {
 		function isNode(object) {
 			return !!(object && (typeof Node === 'function' ? object instanceof Node : typeof object === 'object' && typeof object.nodeType === 'number' && typeof object.nodeName === 'string'));
@@ -32830,14 +32822,14 @@ loader.define("react-native@0.21/Libraries/vendor/core/Set.js", ["react-native@0
 		}(Function('return this')());
 	}];
 });
-loader.define("react-native@0.21/Libraries/Utilities/PerformanceLogger.js", ["react-native@0.21/Libraries/BatchedBridge/BatchedBridge.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/performanceNow.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/Libraries/Utilities/PerformanceLogger.js", ["react-native@0.21/Libraries/BatchedBridge/BatchedBridge.js", "react-native@0.21/__fbjs__/lib/performanceNow.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/Utilities/PerformanceLogger.js
 	function (__inner_require__, exports, module) {
 		var BatchedBridge = require('react-native@0.21/Libraries/BatchedBridge/BatchedBridge.js');
 
-		var performanceNow = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/fbjs/lib/performanceNow.js');
+		var performanceNow = require('react-native@0.21/__fbjs__/lib/performanceNow.js');
 
 		var timespans = {};
 		var extras = {};
@@ -38205,13 +38197,13 @@ loader.define("react-native@0.21/Libraries/Utilities/logError.js", [], function 
 		module.exports = logError;
 	}];
 });
-loader.define("react-native@0.21/Libraries/Inspector/InspectorUtils.js", ["react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceHandles.js", "react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceMap.js", "react-native@0.21/Libraries/ReactNative/ReactNativeMount.js", "react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+loader.define("react-native@0.21/Libraries/Inspector/InspectorUtils.js", ["react-native@0.21/__react__/lib/ReactInstanceHandles.js", "react-native@0.21/__react__/lib/ReactInstanceMap.js", "react-native@0.21/Libraries/ReactNative/ReactNativeMount.js", "react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/Inspector/InspectorUtils.js
 	function (__inner_require__, exports, module) {
-		var ReactInstanceHandles = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceHandles.js');
-		var ReactInstanceMap = require('react-native@0.21/Users/lifan/work-test/sss3/rn/node_modules/react/lib/ReactInstanceMap.js');
+		var ReactInstanceHandles = require('react-native@0.21/__react__/lib/ReactInstanceHandles.js');
+		var ReactInstanceMap = require('react-native@0.21/__react__/lib/ReactInstanceMap.js');
 		var ReactNativeMount = require('react-native@0.21/Libraries/ReactNative/ReactNativeMount.js');
 		var ReactNativeTagHandles = require('react-native@0.21/Libraries/ReactNative/ReactNativeTagHandles.js');
 
@@ -55182,5 +55174,5 @@ loader.define("enjoy-common-support@0.2/dist/index.js", [], function(require, gl
 });
 
 loader.require("react-native@0.21/Libraries/JavaScriptAppEngine/Initialization/InitializeJavaScriptAppEngine.js");
-
+__loadNativeModules(loader.require("NativeModules"));
 __fbBatchedBridge.registerCallableModule("NativeMessage", NativeMessage);

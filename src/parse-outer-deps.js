@@ -7,19 +7,28 @@ import console from "../util/console";
 var outerDepCache = {};
 var modVersionCache = {};
 // 转换对外依赖路径，增加版本号
-export default function(outerUrl, projectPath, packageJson){
-	// 依赖项目
-	const dependencies = projectDeps(packageJson);
+export default function(outerUrl, projectPath, packageJson, fromMod){
+	if(!outerDepCache[projectPath]){
+		outerDepCache[projectPath] = {};
+	}
 	
-	return outerDepCache[outerUrl] || (function(){
+	return outerDepCache[projectPath][outerUrl] || (function(){
 		var url = outerUrl.split("/");
 		var modName = url.shift();
 		url = url.join("/");
-		var version = modVersionCache[modName] || (function(){
+
+		if(!modVersionCache[projectPath]){
+			modVersionCache[projectPath] = {};
+		}
+
+		var version = modVersionCache[projectPath][modName] || (function(){
+			// 依赖项目
+			const dependencies = projectDeps(packageJson);
+
 			var version = dependencies[modName];
 
 			if(!version){
-				console.warn(`在项目${packageJson.name}的package.json中没有发现对项目${modName}的依赖定义，这可能是一个运行在node环境下的内置模块`);
+				console.warn(`在项目${packageJson.name}的package.json中没有发现对项目${modName}的依赖定义，这可能是一个运行在node环境下的内置模块. 来自模块${fromMod}的依赖.`);
 				return null;
 			}
 
@@ -48,10 +57,11 @@ export default function(outerUrl, projectPath, packageJson){
 			}
 
 
-			return modVersionCache[modName] = version;
+			return modVersionCache[projectPath][modName] = version;
 		})();
 
 		if(!version){
+			// console.error(`在项目${projectPath}中找不到对模块${modName}的依赖信息，来自文件${fromMod}`);
 			return null;
 		}
 
@@ -64,6 +74,6 @@ export default function(outerUrl, projectPath, packageJson){
 			url += ".js";
 		}
 
-		return outerDepCache[outerUrl] = [modName + "@" + version].concat(url).join("/");
+		return outerDepCache[projectPath][outerUrl] = [modName + "@" + version].concat(url).join("/");
 	})();
 }
