@@ -1,4 +1,4 @@
-loader.define("react-native@0.37/Libraries/Core/Timers/JSTimers.js", ["react-native@0.37/Libraries/BatchedBridge/NativeModules.js", "react-native@0.37/Libraries/Core/Timers/JSTimersExecution.js", "react-native@0.37/Libraries/Core/Devtools/parseErrorStack.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+__d("react-native@0.37/Libraries/Core/Timers/JSTimers.js", ["react-native@0.37/Libraries/BatchedBridge/NativeModules.js", "react-native@0.37/Libraries/Core/Timers/JSTimersExecution.js", "react-native@0.37/Libraries/Core/Devtools/parseErrorStack.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/Core/Timers/JSTimers.js

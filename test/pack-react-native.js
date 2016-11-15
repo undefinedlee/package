@@ -2,7 +2,7 @@ import path from "path";
 import pack from "../index";
 import packageReactNative from "../../package-react-native/index";
 
-var tpl = `loader.define("#id#", [#deps#], function(require, global, __project, __filename, __dirname, __base, __pixel_ratio){
+var tpl = `__d("#id#", [#deps#], function(require, global, __project, __filename, __dirname, __base, __pixel_ratio){
 	"use strict";
 	
 	return [

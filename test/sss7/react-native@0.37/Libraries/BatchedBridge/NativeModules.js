@@ -1,4 +1,4 @@
-loader.define("react-native@0.37/Libraries/BatchedBridge/NativeModules.js", ["react-native@0.37/Libraries/BatchedBridge/BatchedBridge.js", "react-native@0.37/Libraries/Utilities/defineLazyObjectProperty.js", "fbjs@0.8/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+__d("react-native@0.37/Libraries/BatchedBridge/NativeModules.js", ["react-native@0.37/Libraries/BatchedBridge/BatchedBridge.js", "react-native@0.37/Libraries/Utilities/defineLazyObjectProperty.js", "fbjs@0.8/lib/invariant.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/BatchedBridge/NativeModules.js

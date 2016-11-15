@@ -19,7 +19,8 @@ const entries = glob.sync("**/*.js", {
 
 const ignores = [
 	"react-native@0.37/Libraries/react-native/react-native.js",
-	/^react@15\.3\//,
+	"NativeModules",
+	"react@15.3/react.js",
 	"enjoy-rn-support@0.2/index.js"
 ];
 
@@ -40,11 +41,8 @@ entries.forEach(function(entry){
 								enter(path){
 									let node = path.node;
 									// 匹配require(string)
-									if(node.callee.type === "MemberExpression" &&
-										node.callee.object.type === "Identifier" &&
-										node.callee.object.name === "loader" &&
-										node.callee.property.type === "Identifier" &&
-										node.callee.property.name === "define" &&
+									if(node.callee.type === "Identifier" &&
+										node.callee.name === "__d" &&
 										node.arguments.length === 3 &&
 										node.arguments[0].type === "StringLiteral" &&
 										node.arguments[1].type === "ArrayExpression"){

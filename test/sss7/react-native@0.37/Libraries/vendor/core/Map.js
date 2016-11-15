@@ -1,4 +1,4 @@
-loader.define("react-native@0.37/Libraries/vendor/core/Map.js", ["react-native@0.37/Libraries/vendor/core/guid.js", "fbjs@0.8/lib/isNode.js", "react-native@0.37/Libraries/vendor/core/toIterator.js", "react-native@0.37/Libraries/vendor/core/_shouldPolyfillES6Collection.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+__d("react-native@0.37/Libraries/vendor/core/Map.js", ["react-native@0.37/Libraries/vendor/core/guid.js", "fbjs@0.8/lib/isNode.js", "react-native@0.37/Libraries/vendor/core/toIterator.js", "react-native@0.37/Libraries/vendor/core/_shouldPolyfillES6Collection.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/vendor/core/Map.js

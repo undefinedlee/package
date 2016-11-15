@@ -50,11 +50,8 @@ entries.forEach(function(entry){
 								enter(path){
 									let node = path.node;
 									// 匹配require(string)
-									if(node.callee.type === "MemberExpression" &&
-										node.callee.object.type === "Identifier" &&
-										node.callee.object.name === "loader" &&
-										node.callee.property.type === "Identifier" &&
-										node.callee.property.name === "define" &&
+									if(node.callee.type === "Identifier" &&
+										node.callee.name === "__d" &&
 										node.arguments.length === 3 &&
 										node.arguments[0].type === "StringLiteral" &&
 										node.arguments[1].type === "ArrayExpression"){
@@ -88,89 +85,118 @@ codes = Object.keys(codes).map(id => codes[id]).join("\n");
 var preCode = pres
 				.map(function(file){
 					var code = fs.readFileSync(file).toString("utf8");
-					code = `(function(global) {
-							${code}
-						})(typeof global !== 'undefined' ? global: typeof self !== 'undefined' ? self: this);`;
-					return babel.transform(code, {
+					code = babel.transform(code, {
 						compact: false,
 						env: "production",
 						presets: ['es2015', 'stage-0'],
-						plugins: [function({ types: t }){
-							return {
-								visitor: {
-									IfStatement: {
-										enter(path){
-											let node = path.node;
-											if(node.test.type === "Identifier" &&
-												node.test.name === "__DEV__"){
-												if(node.alternate){
-													path.replaceWith(node.alternate);
-												}else{
-													path.remove();
-												}
-											}
-										}
-									},
-									ConditionalExpression: {
-										enter(path){
-											let node = path.node;
-											if(node.test.type === "Identifier" &&
-												node.test.name === "__DEV__"){
-												if(node.alternate){
-													path.replaceWith(node.alternate);
-												}else{
+						plugins: [
+							function ({ types: t }) {
+								return {
+									visitor: {
+										// 删除生成文件头部的"use strict"
+										Directive: {
+											enter(path){
+												if(path.node.value.value === "use strict"){
 													path.remove();
 												}
 											}
 										}
 									}
-								}
-							};
-						}]
+								};
+							}
+						]
 					}).code;
+					code = `(function(global) {
+							${code}
+						})(typeof global !== 'undefined' ? global: typeof self !== 'undefined' ? self: this);`;
+					return code;
 				}).join("\n");
 
 var code = [preCode, codes, initCode].join("\n");
 
+// 框架打包文件需要对外暴露的模块
+var exports = [
+	"react-native@0.37/Libraries/react-native/react-native.js",
+	"NativeModules",
+	"react@15.3/react.js",
+	"enjoy-rn-support@0.2/index.js"
+];
 var modIndex = [];
 code = babel.transform(code, {
 	compact: false,
 	plugins: [function({types: t}){
 		return {
 			visitor: {
+				// 移除__DEV__判断分支
+				IfStatement: {
+					enter(path){
+						let node = path.node;
+						if(node.test.type === "Identifier" &&
+							node.test.name === "__DEV__"){
+							if(node.alternate){
+								path.replaceWith(node.alternate);
+							}else{
+								path.remove();
+							}
+						}else if(node.test.type === "UnaryExpression" &&
+							node.test.operator === "!" &&
+							node.test.argument.type === "Identifier" &&
+							node.test.argument.name === "__DEV__"){
+							path.replaceWith(node.consequent);
+						}
+					}
+				},
+				// 移除__DEV__判断三元运算
+				ConditionalExpression: {
+					enter(path){
+						let node = path.node;
+						if(node.test.type === "Identifier" &&
+							node.test.name === "__DEV__"){
+							if(node.alternate){
+								path.replaceWith(node.alternate);
+							}else{
+								path.remove();
+							}
+						}
+					}
+				},
+				// 压缩非对外暴露模块的模块ID
 				CallExpression(path){
 					let node = path.node;
-					if((node.callee.type === "MemberExpression" &&
-						node.callee.object.type === "Identifier" &&
-						node.callee.object.name === "loader" &&
-						node.callee.property.type === "Identifier" &&
-						node.callee.property.name === "define" ||
-						node.callee.type === "Identifier" &&
-						node.callee.name === "require") &&
+					if((node.callee.type === "Identifier" &&
+						(node.callee.name === "__d" || node.callee.name === "require")) &&
 						node.arguments[0].type === "StringLiteral" &&
 						/^[a-zA-Z0-9\-]+@/.test(node.arguments[0].value)){
+						// 转换__d("xxx", require("xxx"模块ID
 						let modId = node.arguments[0].value;
-						let index = modIndex.indexOf(modId);
-						if(index === -1){
-							node.arguments[0] = t.NumericLiteral(modIndex.push(modId) - 1);
-						}else{
-							node.arguments[0] = t.NumericLiteral(index);
+						if(exports.indexOf(modId) === -1){
+							let index = modIndex.indexOf(modId);
+							if(index === -1){
+								node.arguments[0] = t.NumericLiteral(modIndex.push(modId) - 1);
+							}else{
+								node.arguments[0] = t.NumericLiteral(index);
+							}
 						}
-
+						// 删除模块的deps
 						if(node.arguments[1] && node.arguments[1].type === "ArrayExpression"){
-							node.arguments[1].elements = node.arguments[1].elements.map(function(element){
-								if(element.type === "StringLiteral"){
-									let modId = element.value;
-									let index = modIndex.indexOf(modId);
-									if(index === -1){
-										return t.NumericLiteral(modIndex.push(modId) - 1);
-									}else{
-										return t.NumericLiteral(index);
-									}
-								}else{
-									return element;
-								}
-							});
+							node.arguments.splice(1,1);
+							// node.arguments[1].elements = node.arguments[1].elements.map(function(element){
+							// 	if(element.type === "StringLiteral"){
+							// 		let modId = element.value;
+							// 		if(exports.indexOf(modId) === -1){
+							// 			let index = modIndex.indexOf(modId);
+							// 			if(index === -1){
+							// 				return t.NumericLiteral(modIndex.push(modId) - 1);
+							// 			}else{
+							// 				return t.NumericLiteral(index);
+							// 			}
+							// 		}else{
+							// 			return element;
+							// 		}
+							// 	}else{
+							// 		return element;
+							// 	}
+							// });
 						}
 					}
 				}
@@ -179,6 +205,7 @@ code = babel.transform(code, {
 	}]
 }).code;
 
+// 压缩js
 code = uglify.minify(code, {
 	fromString: true
 }).code;

@@ -1,4 +1,4 @@
-loader.define("react@15.3/lib/ReactInstrumentation.js", ["react@15.3/lib/ReactComponentTreeHook.js", "fbjs@0.8/lib/ExecutionEnvironment.js", "fbjs@0.8/lib/performanceNow.js", "fbjs@0.8/lib/warning.js"], function(require, global, __project, __filename, __dirname, __base, __pixel_ratio){
+__d("react@15.3/lib/ReactInstrumentation.js", ["react@15.3/lib/ReactComponentTreeHook.js", "fbjs@0.8/lib/ExecutionEnvironment.js", "fbjs@0.8/lib/performanceNow.js", "fbjs@0.8/lib/warning.js"], function(require, global, __project, __filename, __dirname, __base, __pixel_ratio){
 	"use strict";
 	
 	return [

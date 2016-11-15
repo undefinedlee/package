@@ -1,4 +1,4 @@
-loader.define("react-native@0.37/Libraries/Core/Timers/JSTimersExecution.js", ["react-native@0.37/Libraries/Performance/Systrace.js", "fbjs@0.8/lib/invariant.js", "fbjs@0.8/lib/performanceNow.js", "fbjs@0.8/lib/warning.js", "react-native@0.37/Libraries/Core/Timers/JSTimers.js", "react-native@0.37/Libraries/BatchedBridge/NativeModules.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+__d("react-native@0.37/Libraries/Core/Timers/JSTimersExecution.js", ["react-native@0.37/Libraries/Performance/Systrace.js", "fbjs@0.8/lib/invariant.js", "fbjs@0.8/lib/performanceNow.js", "fbjs@0.8/lib/warning.js", "react-native@0.37/Libraries/Core/Timers/JSTimers.js", "react-native@0.37/Libraries/BatchedBridge/NativeModules.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/Core/Timers/JSTimersExecution.js

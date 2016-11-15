@@ -1,4 +1,4 @@
-loader.define("react-native@0.37/Libraries/Performance/Systrace.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+__d("react-native@0.37/Libraries/Performance/Systrace.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/Performance/Systrace.js

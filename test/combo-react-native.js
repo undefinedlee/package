@@ -13,11 +13,11 @@ var code = files.map(function(file){
 	return fs.readFileSync(file).toString("utf8");
 }).join("\n");
 
-code = uglify.minify(code, {
-	fromString: true
-}).code;
+// code = uglify.minify(code, {
+// 	fromString: true
+// }).code;
 
-fs.writeFile(path.join(__dirname, "sss7", "combo.min.js"), code, function(err){
+fs.writeFile(path.join(__dirname, "sss7", "combo.js"), code, function(err){
 	if(err){
 		throw err;
 	}
