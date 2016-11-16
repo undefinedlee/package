@@ -41,6 +41,11 @@ __d("react-native@0.37/Libraries/Core/Timers/JSTimersExecution.js", ["react-nati
 					return;
 				}
 
+				if (__DEV__) {
+					var identifier = JSTimersExecution.identifiers[timerIndex] || {};
+					Systrace.beginEvent('Systrace.callTimer: ' + identifier.methodName);
+				}
+
 				if (type === 'setTimeout' || type === 'setImmediate' || type === 'requestAnimationFrame' || type === 'requestIdleCallback') {
 					JSTimersExecution._clearIndex(timerIndex);
 				}
@@ -66,6 +71,10 @@ __d("react-native@0.37/Libraries/Core/Timers/JSTimersExecution.js", ["react-nati
 					} else {
 						JSTimersExecution.errors.push(e);
 					}
+				}
+
+				if (__DEV__) {
+					Systrace.endEvent();
 				}
 			},
 

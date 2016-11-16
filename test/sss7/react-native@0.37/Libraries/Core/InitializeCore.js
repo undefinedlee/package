@@ -1,4 +1,4 @@
-__d("react-native@0.37/Libraries/Core/InitializeCore.js", ["react-native@0.37/Libraries/Utilities/defineLazyObjectProperty.js", "react-native@0.37/Libraries/Performance/Systrace.js", "react-native@0.37/Libraries/Core/ErrorUtils.js", "react-native@0.37/Libraries/Core/Timers/JSTimers.js", "react-native@0.37/Libraries/Alert/Alert.js", "regenerator-runtime@0.9/runtime.js", "react-native@0.37/Libraries/vendor/core/Map.js", "react-native@0.37/Libraries/vendor/core/Set.js", "react-native@0.37/Libraries/EventEmitter/RCTDeviceEventEmitter.js", "react-native@0.37/Libraries/EventEmitter/RCTNativeAppEventEmitter.js", "react-native@0.37/Libraries/BatchedBridge/NativeModules.js", "react-native@0.37/Libraries/Core/Devtools/parseErrorStack.js", "react-native@0.37/Libraries/Utilities/stringifySafe.js", "react-native@0.37/Libraries/BatchedBridge/BatchedBridge.js", "fbjs@0.8/lib/invariant.js", "fbjs@0.8/lib/Promise.native.js", "event-target-shim@1/lib/event-target.js", "base64-js@1/index.js", "fbjs@0.8/lib/warning.js", "react-native@0.37/Libraries/EventEmitter/NativeEventEmitter.js", "whatwg-fetch@1/fetch.js", "react-native@0.37/Libraries/Utilities/Platform.ios.js", "react-native@0.37/Libraries/Utilities/logError.js", "fbjs@0.8/lib/performanceNow.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+__d("react-native@0.37/Libraries/Core/InitializeCore.js", ["react-native@0.37/Libraries/Utilities/defineLazyObjectProperty.js", "react-native@0.37/Libraries/Performance/Systrace.js", "react-native@0.37/Libraries/Core/ErrorUtils.js", "react-native@0.37/Libraries/Core/Timers/JSTimers.js", "react-native@0.37/Libraries/Alert/Alert.js", "regenerator-runtime@0.9/runtime.js", "react-native@0.37/Libraries/Network/XMLHttpRequest.js", "react-native@0.37/Libraries/Network/FormData.js", "react-native@0.37/Libraries/Network/fetch.js", "react-native@0.37/Libraries/WebSocket/WebSocket.js", "react-native@0.37/Libraries/vendor/core/Map.js", "react-native@0.37/Libraries/vendor/core/Set.js", "react-transform-hmr@1/lib/index.js", "react-native@0.37/Libraries/EventEmitter/RCTDeviceEventEmitter.js", "react-native@0.37/Libraries/EventEmitter/RCTNativeAppEventEmitter.js", "react-native@0.37/Libraries/Utilities/PerformanceLogger.js", "react-native@0.37/Libraries/BatchedBridge/NativeModules.js", "react-native@0.37/Libraries/Core/Devtools/parseErrorStack.js", "react-native@0.37/Libraries/Core/Devtools/symbolicateStackTrace.js", "react-native@0.37/Libraries/Utilities/stringifySafe.js", "react-native@0.37/Libraries/BatchedBridge/BatchedBridge.js", "fbjs@0.8/lib/invariant.js", "fbjs@0.8/lib/Promise.native.js", "promise@7/setimmediate/rejection-tracking.js", "react-native@0.37/Libraries/EventEmitter/NativeEventEmitter.js", "react-native@0.37/Libraries/Utilities/logError.js", "fbjs@0.8/lib/warning.js", "react-native@0.37/Libraries/Utilities/Platform.ios.js", "react-native@0.37/Libraries/StyleSheet/flattenStyle.js", "react@15.3/lib/ReactNativeComponentTree.js", "react@15.3/lib/ReactNativeMount.js", "react@15.3/lib/ReactReconciler.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/Core/InitializeCore.js
@@ -45,7 +45,7 @@ __d("react-native@0.37/Libraries/Core/InitializeCore.js", ["react-native@0.37/Li
 		global.process = global.process || {};
 		global.process.env = global.process.env || {};
 		if (!global.process.env.NODE_ENV) {
-			global.process.env.NODE_ENV = 'production';
+			global.process.env.NODE_ENV = __DEV__ ? 'development' : 'production';
 		}
 
 		var Systrace = require('react-native@0.37/Libraries/Performance/Systrace.js');
@@ -109,26 +109,26 @@ __d("react-native@0.37/Libraries/Core/InitializeCore.js", ["react-native@0.37/Li
 		});
 
 		defineProperty(global, 'XMLHttpRequest', function () {
-			return __inner_require__(4 /*Libraries/Network/XMLHttpRequest.js*/);
+			return require('react-native@0.37/Libraries/Network/XMLHttpRequest.js');
 		});
 		defineProperty(global, 'FormData', function () {
-			return __inner_require__(6 /*Libraries/Network/FormData.js*/);
+			return require('react-native@0.37/Libraries/Network/FormData.js');
 		});
 
 		defineProperty(global, 'fetch', function () {
-			return __inner_require__(7 /*Libraries/Network/fetch.js*/).fetch;
+			return require('react-native@0.37/Libraries/Network/fetch.js').fetch;
 		});
 		defineProperty(global, 'Headers', function () {
-			return __inner_require__(7 /*Libraries/Network/fetch.js*/).Headers;
+			return require('react-native@0.37/Libraries/Network/fetch.js').Headers;
 		});
 		defineProperty(global, 'Request', function () {
-			return __inner_require__(7 /*Libraries/Network/fetch.js*/).Request;
+			return require('react-native@0.37/Libraries/Network/fetch.js').Request;
 		});
 		defineProperty(global, 'Response', function () {
-			return __inner_require__(7 /*Libraries/Network/fetch.js*/).Response;
+			return require('react-native@0.37/Libraries/Network/fetch.js').Response;
 		});
 		defineProperty(global, 'WebSocket', function () {
-			return __inner_require__(8 /*Libraries/WebSocket/WebSocket.js*/);
+			return require('react-native@0.37/Libraries/WebSocket/WebSocket.js');
 		});
 
 		var navigator = global.navigator;
@@ -137,7 +137,7 @@ __d("react-native@0.37/Libraries/Core/InitializeCore.js", ["react-native@0.37/Li
 		}
 		navigator.product = 'ReactNative';
 		defineProperty(navigator, 'geolocation', function () {
-			return __inner_require__(10 /*Libraries/Geolocation/Geolocation.js*/);
+			return __inner_require__(4 /*Libraries/Geolocation/Geolocation.js*/);
 		});
 
 		defineProperty(global, 'Map', function () {
@@ -147,9 +147,20 @@ __d("react-native@0.37/Libraries/Core/InitializeCore.js", ["react-native@0.37/Li
 			return require('react-native@0.37/Libraries/vendor/core/Set.js');
 		}, true);
 
+		if (__DEV__) {
+
+			if (!window.document) {
+				var setupDevtools = __inner_require__(5 /*Libraries/Core/Devtools/setupDevtools.js*/);
+				setupDevtools();
+			}
+
+			__inner_require__(6 /*Libraries/DebugComponentHierarchy/RCTDebugComponentOwnership.js*/);
+			require('react-transform-hmr@1/lib/index.js');
+		}
+
 		require('react-native@0.37/Libraries/EventEmitter/RCTDeviceEventEmitter.js');
 		require('react-native@0.37/Libraries/EventEmitter/RCTNativeAppEventEmitter.js');
-		__inner_require__(11 /*Libraries/Utilities/PerformanceLogger.js*/);
+		require('react-native@0.37/Libraries/Utilities/PerformanceLogger.js');
 	}, // Libraries/Core/ExceptionsManager.js
 	function (__inner_require__, exports, module) {
 		var exceptionID = 0;
@@ -165,6 +176,18 @@ __d("react-native@0.37/Libraries/Core/InitializeCore.js", ["react-native@0.37/Li
 						ExceptionsManager.reportFatalException(e.message, stack, currentExceptionID);
 					} else {
 						ExceptionsManager.reportSoftException(e.message, stack, currentExceptionID);
+					}
+					if (__DEV__) {
+						var symbolicateStackTrace = require('react-native@0.37/Libraries/Core/Devtools/symbolicateStackTrace.js');
+						symbolicateStackTrace(stack).then(function (prettyStack) {
+							if (prettyStack) {
+								ExceptionsManager.updateExceptionMessage(e.message, prettyStack, currentExceptionID);
+							} else {
+								throw new Error('The stack is null');
+							}
+						}).catch(function (error) {
+							return console.warn('Unable to symbolicate stack trace: ' + error.message);
+						});
 					}
 				})();
 			}
@@ -254,489 +277,24 @@ __d("react-native@0.37/Libraries/Core/InitializeCore.js", ["react-native@0.37/Li
 	function (__inner_require__, exports, module) {
 		var Promise = require('fbjs@0.8/lib/Promise.native.js');
 
+		if (__DEV__) {
+			require('promise@7/setimmediate/rejection-tracking.js').enable({
+				allRejections: true,
+				onUnhandled: function onUnhandled(id) {
+					var error = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};var _error$message = error.message,
+					    message = _error$message === undefined ? null : _error$message,
+					    _error$stack = error.stack,
+					    stack = _error$stack === undefined ? null : _error$stack;
+					var warning = 'Possible Unhandled Promise Rejection (id: ' + id + '):\n' + (message == null ? '' : message + '\n') + (stack == null ? '' : stack);
+					console.warn(warning);
+				},
+				onHandled: function onHandled(id) {
+					var warning = 'Promise Rejection Handled (id: ' + id + ')\n' + 'This means you can ignore any previous messages of the form ' + ('"Possible Unhandled Promise Rejection (id: ' + id + '):"');
+					console.warn(warning);
+				} });
+		}
+
 		module.exports = Promise;
-	}, // Libraries/Network/XMLHttpRequest.js
-	function (__inner_require__, exports, module) {
-		var RCTNetworking = __inner_require__(5 /*Libraries/Network/RCTNetworking.ios.js*/);
-
-		var EventTarget = require('event-target-shim@1/lib/event-target.js');
-		var base64 = require('base64-js@1/index.js');
-		var invariant = require('fbjs@0.8/lib/invariant.js');
-		var warning = require('fbjs@0.8/lib/warning.js');
-
-		var UNSENT = 0;
-		var OPENED = 1;
-		var HEADERS_RECEIVED = 2;
-		var LOADING = 3;
-		var DONE = 4;
-
-		var SUPPORTED_RESPONSE_TYPES = {
-			arraybuffer: typeof global.ArrayBuffer === 'function',
-			blob: typeof global.Blob === 'function',
-			document: false,
-			json: true,
-			text: true,
-			'': true };
-
-		var REQUEST_EVENTS = ['abort', 'error', 'load', 'loadstart', 'progress', 'timeout', 'loadend'];
-
-		var XHR_EVENTS = REQUEST_EVENTS.concat('readystatechange');var XMLHttpRequestEventTarget = function (_EventTarget) {
-			babelHelpers.inherits(XMLHttpRequestEventTarget, _EventTarget);function XMLHttpRequestEventTarget() {
-				babelHelpers.classCallCheck(this, XMLHttpRequestEventTarget);return babelHelpers.possibleConstructorReturn(this, (XMLHttpRequestEventTarget.__proto__ || Object.getPrototypeOf(XMLHttpRequestEventTarget)).apply(this, arguments));
-			}return XMLHttpRequestEventTarget;
-		}(EventTarget.apply(undefined, REQUEST_EVENTS));var XMLHttpRequest = function (_EventTarget2) {
-			babelHelpers.inherits(XMLHttpRequest, _EventTarget2);
-
-			function XMLHttpRequest() {
-				babelHelpers.classCallCheck(this, XMLHttpRequest);var _this2 = babelHelpers.possibleConstructorReturn(this, (XMLHttpRequest.__proto__ || Object.getPrototypeOf(XMLHttpRequest)).call(this));_this2.UNSENT = UNSENT;_this2.OPENED = OPENED;_this2.HEADERS_RECEIVED = HEADERS_RECEIVED;_this2.LOADING = LOADING;_this2.DONE = DONE;_this2.readyState = UNSENT;_this2.status = 0;_this2.timeout = 0;_this2.upload = new XMLHttpRequestEventTarget();_this2._aborted = false;_this2._hasError = false;_this2._method = null;_this2._response = '';_this2._url = null;_this2._timedOut = false;_this2._trackingName = 'unknown';_this2._incrementalEvents = false;
-
-				_this2._reset();return _this2;
-			}babelHelpers.createClass(XMLHttpRequest, [{ key: '_reset', value: function _reset() {
-					this.readyState = this.UNSENT;
-					this.responseHeaders = undefined;
-					this.status = 0;
-					delete this.responseURL;
-
-					this._requestId = null;
-
-					this._cachedResponse = undefined;
-					this._hasError = false;
-					this._headers = {};
-					this._response = '';
-					this._responseType = '';
-					this._sent = false;
-					this._lowerCaseResponseHeaders = {};
-
-					this._clearSubscriptions();
-					this._timedOut = false;
-				} }, { key: '__didCreateRequest', value: function __didCreateRequest(requestId) {
-					this._requestId = requestId;
-				} }, { key: '__didUploadProgress', value: function __didUploadProgress(requestId, progress, total) {
-					if (requestId === this._requestId) {
-						this.upload.dispatchEvent({
-							type: 'progress',
-							lengthComputable: true,
-							loaded: progress,
-							total: total });
-					}
-				} }, { key: '__didReceiveResponse', value: function __didReceiveResponse(requestId, status, responseHeaders, responseURL) {
-					if (requestId === this._requestId) {
-						this.status = status;
-						this.setResponseHeaders(responseHeaders);
-						this.setReadyState(this.HEADERS_RECEIVED);
-						if (responseURL || responseURL === '') {
-							this.responseURL = responseURL;
-						} else {
-							delete this.responseURL;
-						}
-					}
-				} }, { key: '__didReceiveData', value: function __didReceiveData(requestId, response) {
-					if (requestId !== this._requestId) {
-						return;
-					}
-					this._response = response;
-					this._cachedResponse = undefined;
-					this.setReadyState(this.LOADING);
-				} }, { key: '__didReceiveIncrementalData', value: function __didReceiveIncrementalData(requestId, responseText, progress, total) {
-					if (requestId !== this._requestId) {
-						return;
-					}
-					if (!this._response) {
-						this._response = responseText;
-					} else {
-						this._response += responseText;
-					}
-					this.setReadyState(this.LOADING);
-					this.__didReceiveDataProgress(requestId, progress, total);
-				} }, { key: '__didReceiveDataProgress', value: function __didReceiveDataProgress(requestId, loaded, total) {
-					if (requestId !== this._requestId) {
-						return;
-					}
-					this.dispatchEvent({
-						type: 'progress',
-						lengthComputable: total >= 0,
-						loaded: loaded,
-						total: total });
-				} }, { key: '__didCompleteResponse', value: function __didCompleteResponse(requestId, error, timeOutError) {
-					if (requestId === this._requestId) {
-						if (error) {
-							if (this._responseType === '' || this._responseType === 'text') {
-								this._response = error;
-							}
-							this._hasError = true;
-							if (timeOutError) {
-								this._timedOut = true;
-							}
-						}
-						this._clearSubscriptions();
-						this._requestId = null;
-						this.setReadyState(this.DONE);
-					}
-				} }, { key: '_clearSubscriptions', value: function _clearSubscriptions() {
-					(this._subscriptions || []).forEach(function (sub) {
-						sub.remove();
-					});
-					this._subscriptions = [];
-				} }, { key: 'getAllResponseHeaders', value: function getAllResponseHeaders() {
-					if (!this.responseHeaders) {
-
-						return null;
-					}
-					var headers = this.responseHeaders || {};
-					return Object.keys(headers).map(function (headerName) {
-						return headerName + ': ' + headers[headerName];
-					}).join('\r\n');
-				} }, { key: 'getResponseHeader', value: function getResponseHeader(header) {
-					var value = this._lowerCaseResponseHeaders[header.toLowerCase()];
-					return value !== undefined ? value : null;
-				} }, { key: 'setRequestHeader', value: function setRequestHeader(header, value) {
-					if (this.readyState !== this.OPENED) {
-						throw new Error('Request has not been opened');
-					}
-					this._headers[header.toLowerCase()] = value;
-				} }, { key: 'setTrackingName', value: function setTrackingName(trackingName) {
-					this._trackingName = trackingName;
-					return this;
-				} }, { key: 'open', value: function open(method, url, async) {
-
-					if (this.readyState !== this.UNSENT) {
-						throw new Error('Cannot open, already sending');
-					}
-					if (async !== undefined && !async) {
-
-						throw new Error('Synchronous http requests are not supported');
-					}
-					if (!url) {
-						throw new Error('Cannot load an empty url');
-					}
-					this._method = method.toUpperCase();
-					this._url = url;
-					this._aborted = false;
-					this.setReadyState(this.OPENED);
-				} }, { key: 'send', value: function send(data) {
-					var _this3 = this;
-					if (this.readyState !== this.OPENED) {
-						throw new Error('Request has not been opened');
-					}
-					if (this._sent) {
-						throw new Error('Request has already been sent');
-					}
-					this._sent = true;
-					var incrementalEvents = this._incrementalEvents || !!this.onreadystatechange || !!this.onprogress;
-
-					this._subscriptions.push(RCTNetworking.addListener('didSendNetworkData', function (args) {
-						return _this3.__didUploadProgress.apply(_this3, babelHelpers.toConsumableArray(args));
-					}));
-
-					this._subscriptions.push(RCTNetworking.addListener('didReceiveNetworkResponse', function (args) {
-						return _this3.__didReceiveResponse.apply(_this3, babelHelpers.toConsumableArray(args));
-					}));
-
-					this._subscriptions.push(RCTNetworking.addListener('didReceiveNetworkData', function (args) {
-						return _this3.__didReceiveData.apply(_this3, babelHelpers.toConsumableArray(args));
-					}));
-
-					this._subscriptions.push(RCTNetworking.addListener('didReceiveNetworkIncrementalData', function (args) {
-						return _this3.__didReceiveIncrementalData.apply(_this3, babelHelpers.toConsumableArray(args));
-					}));
-
-					this._subscriptions.push(RCTNetworking.addListener('didReceiveNetworkDataProgress', function (args) {
-						return _this3.__didReceiveDataProgress.apply(_this3, babelHelpers.toConsumableArray(args));
-					}));
-
-					this._subscriptions.push(RCTNetworking.addListener('didCompleteNetworkResponse', function (args) {
-						return _this3.__didCompleteResponse.apply(_this3, babelHelpers.toConsumableArray(args));
-					}));
-
-					var nativeResponseType = 'text';
-					if (this._responseType === 'arraybuffer' || this._responseType === 'blob') {
-						nativeResponseType = 'base64';
-					}
-
-					invariant(this._method, 'Request method needs to be defined.');
-					invariant(this._url, 'Request URL needs to be defined.');
-					RCTNetworking.sendRequest(this._method, this._trackingName, this._url, this._headers, data, nativeResponseType, incrementalEvents, this.timeout, this.__didCreateRequest.bind(this));
-				} }, { key: 'abort', value: function abort() {
-					this._aborted = true;
-					if (this._requestId) {
-						RCTNetworking.abortRequest(this._requestId);
-					}
-
-					if (!(this.readyState === this.UNSENT || this.readyState === this.OPENED && !this._sent || this.readyState === this.DONE)) {
-						this._reset();
-						this.setReadyState(this.DONE);
-					}
-
-					this._reset();
-				} }, { key: 'setResponseHeaders', value: function setResponseHeaders(responseHeaders) {
-					this.responseHeaders = responseHeaders || null;
-					var headers = responseHeaders || {};
-					this._lowerCaseResponseHeaders = Object.keys(headers).reduce(function (lcaseHeaders, headerName) {
-						lcaseHeaders[headerName.toLowerCase()] = headers[headerName];
-						return lcaseHeaders;
-					}, {});
-				} }, { key: 'setReadyState', value: function setReadyState(newState) {
-					this.readyState = newState;
-					this.dispatchEvent({ type: 'readystatechange' });
-					if (newState === this.DONE) {
-						if (this._aborted) {
-							this.dispatchEvent({ type: 'abort' });
-						} else if (this._hasError) {
-							if (this._timedOut) {
-								this.dispatchEvent({ type: 'timeout' });
-							} else {
-								this.dispatchEvent({ type: 'error' });
-							}
-						} else {
-							this.dispatchEvent({ type: 'load' });
-						}
-						this.dispatchEvent({ type: 'loadend' });
-					}
-				} }, { key: 'addEventListener', value: function addEventListener(type, listener) {
-
-					if (type === 'readystatechange' || type === 'progress') {
-						this._incrementalEvents = true;
-					}
-					babelHelpers.get(XMLHttpRequest.prototype.__proto__ || Object.getPrototypeOf(XMLHttpRequest.prototype), 'addEventListener', this).call(this, type, listener);
-				} }, { key: 'responseType', get: function get() {
-					return this._responseType;
-				}, set: function set(responseType) {
-					if (this._sent) {
-						throw new Error('Failed to set the \'responseType\' property on \'XMLHttpRequest\': The ' + 'response type cannot be set after the request has been sent.');
-					}if (!SUPPORTED_RESPONSE_TYPES.hasOwnProperty(responseType)) {
-						warning(false, 'The provided value \'' + responseType + '\' is not a valid \'responseType\'.');return;
-					}invariant(SUPPORTED_RESPONSE_TYPES[responseType] || responseType === 'document', 'The provided value \'' + responseType + '\' is unsupported in this environment.');this._responseType = responseType;
-				} }, { key: 'responseText', get: function get() {
-					if (this._responseType !== '' && this._responseType !== 'text') {
-						throw new Error("The 'responseText' property is only available if 'responseType' " + ('is set to \'\' or \'text\', but it is \'' + this._responseType + '\'.'));
-					}if (this.readyState < LOADING) {
-						return '';
-					}return this._response;
-				} }, { key: 'response', get: function get() {
-					var responseType = this.responseType;if (responseType === '' || responseType === 'text') {
-						return this.readyState < LOADING || this._hasError ? '' : this._response;
-					}if (this.readyState !== DONE) {
-						return null;
-					}if (this._cachedResponse !== undefined) {
-						return this._cachedResponse;
-					}switch (responseType) {case 'document':
-							this._cachedResponse = null;break;case 'arraybuffer':
-							this._cachedResponse = base64.toByteArray(this._response).buffer;break;case 'blob':
-							this._cachedResponse = new global.Blob([base64.toByteArray(this._response).buffer], { type: this.getResponseHeader('content-type') || '' });break;case 'json':
-							try {
-								this._cachedResponse = JSON.parse(this._response);
-							} catch (_) {
-								this._cachedResponse = null;
-							}break;default:
-							this._cachedResponse = null;}return this._cachedResponse;
-				} }]);return XMLHttpRequest;
-		}(EventTarget.apply(undefined, babelHelpers.toConsumableArray(XHR_EVENTS)));XMLHttpRequest.UNSENT = UNSENT;XMLHttpRequest.OPENED = OPENED;XMLHttpRequest.HEADERS_RECEIVED = HEADERS_RECEIVED;XMLHttpRequest.LOADING = LOADING;XMLHttpRequest.DONE = DONE;
-
-		module.exports = XMLHttpRequest;
-	}, // Libraries/Network/RCTNetworking.ios.js
-	function (__inner_require__, exports, module) {
-		var FormData = __inner_require__(6 /*Libraries/Network/FormData.js*/);
-		var NativeEventEmitter = require('react-native@0.37/Libraries/EventEmitter/NativeEventEmitter.js');
-		var RCTNetworkingNative = require('react-native@0.37/Libraries/BatchedBridge/NativeModules.js').Networking;var RCTNetworking = function (_NativeEventEmitter) {
-			babelHelpers.inherits(RCTNetworking, _NativeEventEmitter);
-
-			function RCTNetworking() {
-				babelHelpers.classCallCheck(this, RCTNetworking);return babelHelpers.possibleConstructorReturn(this, (RCTNetworking.__proto__ || Object.getPrototypeOf(RCTNetworking)).call(this, RCTNetworkingNative));
-			}babelHelpers.createClass(RCTNetworking, [{ key: 'sendRequest', value: function sendRequest(method, trackingName, url, headers, data, responseType, incrementalUpdates, timeout, callback) {
-					var body = typeof data === 'string' ? { string: data } : data instanceof FormData ? { formData: data.getParts() } : data;
-					RCTNetworkingNative.sendRequest({
-						method: method,
-						url: url,
-						data: babelHelpers.extends({}, body, { trackingName: trackingName }),
-						headers: headers,
-						responseType: responseType,
-						incrementalUpdates: incrementalUpdates,
-						timeout: timeout }, callback);
-				} }, { key: 'abortRequest', value: function abortRequest(requestId) {
-					RCTNetworkingNative.abortRequest(requestId);
-				} }, { key: 'clearCookies', value: function clearCookies(callback) {
-					RCTNetworkingNative.clearCookies(callback);
-				} }]);return RCTNetworking;
-		}(NativeEventEmitter);
-
-		module.exports = new RCTNetworking();
-	}, // Libraries/Network/FormData.js
-	function (__inner_require__, exports, module) {
-		var FormData = function () {
-
-			function FormData() {
-				babelHelpers.classCallCheck(this, FormData);
-				this._parts = [];
-			}babelHelpers.createClass(FormData, [{ key: 'append', value: function append(key, value) {
-
-					this._parts.push([key, value]);
-				} }, { key: 'getParts', value: function getParts() {
-					return this._parts.map(function (_ref) {
-						var _ref2 = babelHelpers.slicedToArray(_ref, 2),
-						    name = _ref2[0],
-						    value = _ref2[1];
-						var contentDisposition = 'form-data; name="' + name + '"';
-
-						var headers = { 'content-disposition': contentDisposition };
-
-						if (typeof value === 'object') {
-							if (typeof value.name === 'string') {
-								headers['content-disposition'] += '; filename="' + value.name + '"';
-							}
-							if (typeof value.type === 'string') {
-								headers['content-type'] = value.type;
-							}
-							return babelHelpers.extends({}, value, { headers: headers, fieldName: name });
-						}
-
-						return { string: String(value), headers: headers, fieldName: name };
-					});
-				} }]);return FormData;
-		}();
-
-		module.exports = FormData;
-	}, // Libraries/Network/fetch.js
-	function (__inner_require__, exports, module) {
-		require('whatwg-fetch@1/fetch.js');
-
-		module.exports = { fetch: fetch, Headers: Headers, Request: Request, Response: Response };
-	}, // Libraries/WebSocket/WebSocket.js
-	function (__inner_require__, exports, module) {
-		var NativeEventEmitter = require('react-native@0.37/Libraries/EventEmitter/NativeEventEmitter.js');
-		var Platform = require('react-native@0.37/Libraries/Utilities/Platform.ios.js');
-		var RCTWebSocketModule = require('react-native@0.37/Libraries/BatchedBridge/NativeModules.js').WebSocketModule;
-		var WebSocketEvent = __inner_require__(9 /*Libraries/WebSocket/WebSocketEvent.js*/);
-
-		var EventTarget = require('event-target-shim@1/lib/event-target.js');
-		var base64 = require('base64-js@1/index.js');
-
-		var CONNECTING = 0;
-		var OPEN = 1;
-		var CLOSING = 2;
-		var CLOSED = 3;
-
-		var CLOSE_NORMAL = 1000;
-
-		var WEBSOCKET_EVENTS = ['close', 'error', 'message', 'open'];
-
-		var nextWebSocketId = 0;var WebSocket = function (_EventTarget) {
-			babelHelpers.inherits(WebSocket, _EventTarget);
-
-			function WebSocket(url, protocols, options) {
-				babelHelpers.classCallCheck(this, WebSocket);var _this = babelHelpers.possibleConstructorReturn(this, (WebSocket.__proto__ || Object.getPrototypeOf(WebSocket)).call(this));_this.CONNECTING = CONNECTING;_this.OPEN = OPEN;_this.CLOSING = CLOSING;_this.CLOSED = CLOSED;_this.readyState = CONNECTING;
-
-				if (typeof protocols === 'string') {
-					protocols = [protocols];
-				}
-
-				if (!Array.isArray(protocols)) {
-					protocols = null;
-				}
-
-				_this._eventEmitter = new NativeEventEmitter(RCTWebSocketModule);
-				_this._socketId = nextWebSocketId++;
-				RCTWebSocketModule.connect(url, protocols, options, _this._socketId);
-				_this._registerEvents();return _this;
-			}babelHelpers.createClass(WebSocket, [{ key: 'close', value: function close(code, reason) {
-					if (this.readyState === this.CLOSING || this.readyState === this.CLOSED) {
-						return;
-					}
-
-					this.readyState = this.CLOSING;
-					this._close(code, reason);
-				} }, { key: 'send', value: function send(data) {
-					if (this.readyState === this.CONNECTING) {
-						throw new Error('INVALID_STATE_ERR');
-					}
-
-					if (typeof data === 'string') {
-						RCTWebSocketModule.send(data, this._socketId);
-						return;
-					}
-
-					if (ArrayBuffer.isView(data)) {
-
-						data = data.buffer;
-					}
-					if (data instanceof ArrayBuffer) {
-						data = base64.fromByteArray(new Uint8Array(data));
-						RCTWebSocketModule.sendBinary(data, this._socketId);
-						return;
-					}
-
-					throw new Error('Unsupported data type');
-				} }, { key: 'ping', value: function ping() {
-					if (this.readyState === this.CONNECTING) {
-						throw new Error('INVALID_STATE_ERR');
-					}
-
-					RCTWebSocketModule.ping(this._socketId);
-				} }, { key: '_close', value: function _close(code, reason) {
-					if (Platform.OS === 'android') {
-
-						var statusCode = typeof code === 'number' ? code : CLOSE_NORMAL;
-						var closeReason = typeof reason === 'string' ? reason : '';
-						RCTWebSocketModule.close(statusCode, closeReason, this._socketId);
-					} else {
-						RCTWebSocketModule.close(this._socketId);
-					}
-				} }, { key: '_unregisterEvents', value: function _unregisterEvents() {
-					this._subscriptions.forEach(function (e) {
-						return e.remove();
-					});
-					this._subscriptions = [];
-				} }, { key: '_registerEvents', value: function _registerEvents() {
-					var _this2 = this;
-					this._subscriptions = [this._eventEmitter.addListener('websocketMessage', function (ev) {
-						if (ev.id !== _this2._socketId) {
-							return;
-						}
-						_this2.dispatchEvent(new WebSocketEvent('message', {
-							data: ev.type === 'binary' ? base64.toByteArray(ev.data).buffer : ev.data }));
-					}), this._eventEmitter.addListener('websocketOpen', function (ev) {
-						if (ev.id !== _this2._socketId) {
-							return;
-						}
-						_this2.readyState = _this2.OPEN;
-						_this2.dispatchEvent(new WebSocketEvent('open'));
-					}), this._eventEmitter.addListener('websocketClosed', function (ev) {
-						if (ev.id !== _this2._socketId) {
-							return;
-						}
-						_this2.readyState = _this2.CLOSED;
-						_this2.dispatchEvent(new WebSocketEvent('close', {
-							code: ev.code,
-							reason: ev.reason }));
-
-						_this2._unregisterEvents();
-						_this2.close();
-					}), this._eventEmitter.addListener('websocketFailed', function (ev) {
-						if (ev.id !== _this2._socketId) {
-							return;
-						}
-						_this2.readyState = _this2.CLOSED;
-						_this2.dispatchEvent(new WebSocketEvent('error', {
-							message: ev.message }));
-
-						_this2.dispatchEvent(new WebSocketEvent('close', {
-							message: ev.message }));
-
-						_this2._unregisterEvents();
-						_this2.close();
-					})];
-				} }]);return WebSocket;
-		}(EventTarget.apply(undefined, WEBSOCKET_EVENTS));WebSocket.CONNECTING = CONNECTING;WebSocket.OPEN = OPEN;WebSocket.CLOSING = CLOSING;WebSocket.CLOSED = CLOSED;
-
-		module.exports = WebSocket;
-	}, // Libraries/WebSocket/WebSocketEvent.js
-	function (__inner_require__, exports, module) {
-		var WebSocketEvent = function WebSocketEvent(type, eventInitDict) {
-			babelHelpers.classCallCheck(this, WebSocketEvent);
-			this.type = type.toString();
-			babelHelpers.extends(this, eventInitDict);
-		};
-
-		module.exports = WebSocketEvent;
 	}, // Libraries/Geolocation/Geolocation.js
 	function (__inner_require__, exports, module) {
 		var NativeEventEmitter = require('react-native@0.37/Libraries/EventEmitter/NativeEventEmitter.js');
@@ -810,98 +368,142 @@ __d("react-native@0.37/Libraries/Core/InitializeCore.js", ["react-native@0.37/Li
 			} };
 
 		module.exports = Geolocation;
-	}, // Libraries/Utilities/PerformanceLogger.js
+	}, // Libraries/Core/Devtools/setupDevtools.js
+	function (__inner_require__, exports, module) {
+		var NativeModules = require('react-native@0.37/Libraries/BatchedBridge/NativeModules.js');
+		var Platform = require('react-native@0.37/Libraries/Utilities/Platform.ios.js');
+
+		function setupDevtools() {
+			var messageListeners = [];
+			var closeListeners = [];
+			var hostname = 'localhost';
+			if (Platform.OS === 'android' && NativeModules.AndroidConstants) {
+				hostname = NativeModules.AndroidConstants.ServerHost.split(':')[0];
+			}
+			var ws = new window.WebSocket('ws://' + hostname + ':8097/devtools');
+
+			var FOR_BACKEND = {
+				resolveRNStyle: require('react-native@0.37/Libraries/StyleSheet/flattenStyle.js'),
+				wall: {
+					listen: function listen(fn) {
+						messageListeners.push(fn);
+					},
+					onClose: function onClose(fn) {
+						closeListeners.push(fn);
+					},
+					send: function send(data) {
+						ws.send(JSON.stringify(data));
+					} } };
+
+			ws.onclose = handleClose;
+			ws.onerror = handleClose;
+			ws.onopen = function () {
+				tryToConnect();
+			};
+
+			var hasClosed = false;
+			function handleClose() {
+				if (!hasClosed) {
+					hasClosed = true;
+					setTimeout(setupDevtools, 2000);
+					closeListeners.forEach(function (fn) {
+						return fn();
+					});
+				}
+			}
+
+			function tryToConnect() {
+				ws.send('attach:agent');
+				var _interval = setInterval(function () {
+					return ws.send('attach:agent');
+				}, 500);
+				ws.onmessage = function (evt) {
+					if (evt.data.indexOf('eval:') === 0) {
+						clearInterval(_interval);
+						initialize(evt.data.slice('eval:'.length));
+					}
+				};
+			}
+
+			function initialize(text) {
+				try {
+
+					eval(text);
+				} catch (e) {
+					console.error('Failed to eval: ' + e.message);
+					return;
+				}
+
+				var ReactNativeComponentTree = require('react@15.3/lib/ReactNativeComponentTree.js');
+				window.__REACT_DEVTOOLS_GLOBAL_HOOK__.inject({
+					ComponentTree: {
+						getClosestInstanceFromNode: function getClosestInstanceFromNode(node) {
+							return ReactNativeComponentTree.getClosestInstanceFromNode(node);
+						},
+						getNodeFromInstance: function getNodeFromInstance(inst) {
+
+							while (inst._renderedComponent) {
+								inst = inst._renderedComponent;
+							}
+							if (inst) {
+								return ReactNativeComponentTree.getNodeFromInstance(inst);
+							} else {
+								return null;
+							}
+						} },
+
+					Mount: require('react@15.3/lib/ReactNativeMount.js'),
+					Reconciler: require('react@15.3/lib/ReactReconciler.js') });
+
+				ws.onmessage = handleMessage;
+			}
+
+			function handleMessage(evt) {
+
+				var data;
+				try {
+					data = JSON.parse(evt.data);
+				} catch (e) {
+					return console.error('failed to parse json: ' + evt.data);
+				}
+
+				if (data.$close || data.$error) {
+					closeListeners.forEach(function (fn) {
+						return fn();
+					});
+					window.__REACT_DEVTOOLS_GLOBAL_HOOK__.emit('shutdown');
+					tryToConnect();
+					return;
+				}
+				if (data.$open) {
+					return;
+				}
+				messageListeners.forEach(function (fn) {
+					try {
+						fn(data);
+					} catch (e) {
+
+						console.log(data);
+						throw e;
+					}
+				});
+			}
+		}
+
+		module.exports = setupDevtools;
+	}, // Libraries/DebugComponentHierarchy/RCTDebugComponentOwnership.js
 	function (__inner_require__, exports, module) {
 		var BatchedBridge = require('react-native@0.37/Libraries/BatchedBridge/BatchedBridge.js');
-		var performanceNow = global.nativePerformanceNow || require('fbjs@0.8/lib/performanceNow.js');
 
-		var timespans = {};
-		var extras = {};
+		var RCTDebugComponentOwnership = {
 
-		var PerformanceLogger = {
-			addTimespan: function addTimespan(key, lengthInMs, description) {
-				if (timespans[key]) {
-					return;
-				}
+			getOwnerHierarchy: function getOwnerHierarchy(requestID, tag) {
 
-				timespans[key] = {
-					description: description,
-					totalTime: lengthInMs };
-			},
-
-			startTimespan: function startTimespan(key, description) {
-				if (timespans[key]) {
-					return;
-				}
-
-				timespans[key] = {
-					description: description,
-					startTime: performanceNow() };
-			},
-
-			stopTimespan: function stopTimespan(key) {
-				if (!timespans[key] || !timespans[key].startTime) {
-					return;
-				}
-				if (timespans[key].endTime) {
-					return;
-				}
-
-				timespans[key].endTime = performanceNow();
-				timespans[key].totalTime = timespans[key].endTime - timespans[key].startTime;
-			},
-
-			clear: function clear() {
-				timespans = {};
-				extras = {};
-			},
-
-			clearExceptTimespans: function clearExceptTimespans(keys) {
-				timespans = Object.keys(timespans).reduce(function (previous, key) {
-					if (keys.indexOf(key) !== -1) {
-						previous[key] = timespans[key];
-					}
-					return previous;
-				}, {});
-				extras = {};
-			},
-
-			getTimespans: function getTimespans() {
-				return timespans;
-			},
-
-			hasTimespan: function hasTimespan(key) {
-				return !!timespans[key];
-			},
-
-			logTimespans: function logTimespans() {
-				for (var key in timespans) {
-					if (timespans[key].totalTime) {
-						console.log(key + ': ' + timespans[key].totalTime + 'ms');
-					}
-				}
-			},
-
-			addTimespans: function addTimespans(newTimespans, labels) {
-				for (var i = 0, l = newTimespans.length; i < l; i += 2) {
-					var label = labels[i / 2];
-					PerformanceLogger.addTimespan(label, newTimespans[i + 1] - newTimespans[i], label);
-				}
-			},
-
-			setExtra: function setExtra(key, value) {
-				if (extras[key]) {
-					return;
-				}
-				extras[key] = value;
-			},
-
-			getExtras: function getExtras() {
-				return extras;
+				throw new Error('This seems to be unused. Will disable until it is needed again.');
 			} };
 
-		BatchedBridge.registerCallableModule('PerformanceLogger', PerformanceLogger);
+		BatchedBridge.registerCallableModule('RCTDebugComponentOwnership', RCTDebugComponentOwnership);
 
-		module.exports = PerformanceLogger;
+		module.exports = RCTDebugComponentOwnership;
 	}];
 });

@@ -30,6 +30,10 @@ pack("/Users/lifan/work-test/sss7/rn", null, null, function(){
 					}[key];
 				});
 			});
-		}]
+		}],
+		presets: {
+			"process.env.NODE_ENV": "production",
+			"__DEV__": false
+		}
 	}
 });

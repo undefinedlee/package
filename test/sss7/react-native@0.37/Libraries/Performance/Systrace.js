@@ -1,4 +1,4 @@
-__d("react-native@0.37/Libraries/Performance/Systrace.js", [], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+__d("react-native@0.37/Libraries/Performance/Systrace.js", ["react@15.3/lib/ReactComponentTreeDevtool.js", "react@15.3/lib/ReactDebugTool.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/Performance/Systrace.js
@@ -9,11 +9,48 @@ __d("react-native@0.37/Libraries/Performance/Systrace.js", [], function (require
 		var _enabled = false;
 		var _asyncCookie = 0;
 
-		var ReactSystraceDevtool = null;
+		var ReactSystraceDevtool = __DEV__ ? {
+			onBeforeMountComponent: function onBeforeMountComponent(debugID) {
+				var displayName = require('react@15.3/lib/ReactComponentTreeDevtool.js').getDisplayName(debugID);
+				Systrace.beginEvent('ReactReconciler.mountComponent(' + displayName + ')');
+			},
+			onMountComponent: function onMountComponent(debugID) {
+				Systrace.endEvent();
+			},
+			onBeforeUpdateComponent: function onBeforeUpdateComponent(debugID) {
+				var displayName = require('react@15.3/lib/ReactComponentTreeDevtool.js').getDisplayName(debugID);
+				Systrace.beginEvent('ReactReconciler.updateComponent(' + displayName + ')');
+			},
+			onUpdateComponent: function onUpdateComponent(debugID) {
+				Systrace.endEvent();
+			},
+			onBeforeUnmountComponent: function onBeforeUnmountComponent(debugID) {
+				var displayName = require('react@15.3/lib/ReactComponentTreeDevtool.js').getDisplayName(debugID);
+				Systrace.beginEvent('ReactReconciler.unmountComponent(' + displayName + ')');
+			},
+			onUnmountComponent: function onUnmountComponent(debugID) {
+				Systrace.endEvent();
+			},
+			onBeginLifeCycleTimer: function onBeginLifeCycleTimer(debugID, timerType) {
+				var displayName = require('react@15.3/lib/ReactComponentTreeDevtool.js').getDisplayName(debugID);
+				Systrace.beginEvent(displayName + '.' + timerType + '()');
+			},
+			onEndLifeCycleTimer: function onEndLifeCycleTimer(debugID, timerType) {
+				Systrace.endEvent();
+			} } : null;
 
 		var Systrace = {
 			setEnabled: function setEnabled(enabled) {
 				if (_enabled !== enabled) {
+					if (__DEV__) {
+						if (enabled) {
+							global.nativeTraceBeginLegacy && global.nativeTraceBeginLegacy(TRACE_TAG_JSC_CALLS);
+							require('react@15.3/lib/ReactDebugTool.js').addDevtool(ReactSystraceDevtool);
+						} else {
+							global.nativeTraceEndLegacy && global.nativeTraceEndLegacy(TRACE_TAG_JSC_CALLS);
+							require('react@15.3/lib/ReactDebugTool.js').removeDevtool(ReactSystraceDevtool);
+						}
+					}
 					_enabled = enabled;
 				}
 			},
@@ -101,6 +138,11 @@ __d("react-native@0.37/Libraries/Performance/Systrace.js", [], function (require
 					return ret;
 				};
 			} };
+
+		if (__DEV__) {
+
+			require.Systrace = Systrace;
+		}
 
 		module.exports = Systrace;
 	}];

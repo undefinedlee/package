@@ -49,6 +49,9 @@ __d("react-native@0.37/Libraries/ReactNative/requireNativeComponent.js", ["react
 
 			viewConfig.validAttributes.style = ReactNativeStyleAttributes;
 
+			if (__DEV__) {
+				componentInterface && verifyPropTypes(componentInterface, viewConfig, extraConfig && extraConfig.nativeOnly);
+			}
 			return createReactNativeComponentClass(viewConfig);
 		}
 

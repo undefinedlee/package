@@ -34,6 +34,10 @@ __d("react-native@0.37/Libraries/BatchedBridge/NativeModules.js", ["react-native
 			});
 			babelHelpers.extends(module, constants);
 
+			if (__DEV__) {
+				BatchedBridge.createDebugLookup(moduleID, moduleName, methods);
+			}
+
 			return { name: moduleName, module: module };
 		}
 

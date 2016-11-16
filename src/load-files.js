@@ -4,13 +4,14 @@ import asyncList from "../util/async-list";
 import console from "../util/console";
 import jsDeps from "../util/js-deps";
 import glob from "glob";
+import utils from "node-pearls";
 
 const LoadStatus = {
 	loading: 1,
 	complete: 2
 };
 
-export default function(files, extensions, loader, callback){
+export default function(files, extensions, loader, config, callback){
 	var loadCache = {};
 
 	var extensionFileHash = {};
@@ -50,6 +51,11 @@ export default function(files, extensions, loader, callback){
 				};
 
 				loader(file, function(content){
+					// 如果有预设信息，则移除在预设信息条件下不会执行到的条件分支
+					if(config.presets){
+						content = utils.removeInvalid(content, config.presets);
+					}
+
 					var innerDeps = [];
 					var outerDeps = [];
 					var fileDir = path.dirname(file);

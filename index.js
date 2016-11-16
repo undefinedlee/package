@@ -54,7 +54,8 @@ async function start(projectPath, output, packageJson, config, version, callback
 		output: projectOutput,
 		extensions: extensions,
 		packageJson: packageJson,
-		version: version
+		version: version,
+		config: config
 	};
 	// 插件列表
 	const plugin = Plugin(config.plugins);
@@ -71,7 +72,7 @@ async function start(projectPath, output, packageJson, config, version, callback
 		}));
 
 		// 加载入口能访问到的所有文件进缓存
-		loadFiles(entries, extensions, loader, async function(loadCache, extensionFileHash){
+		loadFiles(entries, extensions, loader, config, async function(loadCache, extensionFileHash){
 			await plugin.task("loader-complete", Object.assign(projectInfo, {
 				loadCache: loadCache,
 				extensionFileHash: extensionFileHash
@@ -247,6 +248,7 @@ function updatePackageInfo(output, modId, version, entries){
  * @param {string} [version="^packageJson.version"] - 需要打包的版本规则
  */
 var plugins = [];
+var presets;
 var useVersion;
 export default function main(projectPath, version, output, callback, options){
 	options = options || {};
@@ -320,8 +322,10 @@ export default function main(projectPath, version, output, callback, options){
 	if(options.isInner){
 		config.plugins = plugins;
 		config.useVersion = useVersion;
+		config.presets = presets;
 	}else{
 		plugins = config.plugins;
+		presets = config.presets;
 		useVersion = config.useVersion = config.useVersion === false ? false : true;
 	}
 

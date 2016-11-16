@@ -22,7 +22,15 @@ __d("react-native@0.37/Libraries/Core/Timers/JSTimers.js", ["react-native@0.37/L
 			JSTimersExecution.timerIDs[freeIndex] = id;
 			JSTimersExecution.callbacks[freeIndex] = func;
 			JSTimersExecution.types[freeIndex] = type;
+			if (__DEV__) {
+				var e = new Error();
+				e.framesToPop = 1;
+				var stack = parseErrorStack(e);
+				if (stack) {
 
+					JSTimersExecution.identifiers[freeIndex] = stack.shift();
+				}
+			}
 			return id;
 		}
 

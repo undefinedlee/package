@@ -108,8 +108,20 @@ __d("react-native@0.37/Libraries/Components/View/View.js", ["react-native@0.37/L
 				nativeBackgroundAndroid: true,
 				nativeForegroundAndroid: true } });
 
+		if (__DEV__) {
+			var viewConfig = UIManager.viewConfigs && UIManager.viewConfigs.RCTView || {};
+			for (var prop in viewConfig.nativeProps) {
+				var viewAny = View;
+				if (!viewAny.propTypes[prop] && !ReactNativeStyleAttributes[prop]) {
+					throw new Error('View is missing propType for native prop `' + prop + '`');
+				}
+			}
+		}
+
 		var ViewToExport = RCTView;
-		{
+		if (__DEV__) {
+			ViewToExport = View;
+		} else {
 			babelHelpers.extends(RCTView, statics);
 		}
 

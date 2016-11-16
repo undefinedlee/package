@@ -45,6 +45,9 @@ __d("react-native@0.37/Libraries/Components/View/ReactNativeStyleAttributes.js",
 		var stringifySafe = require('react-native@0.37/Libraries/Utilities/stringifySafe.js');
 
 		function processTransform(transform) {
+			if (__DEV__) {
+				_validateTransforms(transform);
+			}
 
 			if (Platform.OS === 'android') {
 				return transform;

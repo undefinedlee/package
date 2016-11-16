@@ -1,9 +1,18 @@
-__d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/warning.js", "react-native@0.37/Libraries/Components/View/View.js", "react-native@0.37/Libraries/Alert/Alert.js", "react-native@0.37/Libraries/Alert/AlertIOS.js", "react-native@0.37/Libraries/AppState/AppState.js", "react-native@0.37/Libraries/Utilities/Dimensions.js", "react-native@0.37/Libraries/Components/Keyboard/Keyboard.js", "react-native@0.37/Libraries/EventEmitter/NativeEventEmitter.js", "react-native@0.37/Libraries/Utilities/PixelRatio.js", "react-native@0.37/Libraries/Components/StatusBar/StatusBarIOS.ios.js", "react-native@0.37/Libraries/StyleSheet/StyleSheet.js", "react-native@0.37/Libraries/Performance/Systrace.js", "react-native@0.37/Libraries/ReactNative/UIManager.js", "react-native@0.37/Libraries/EventEmitter/RCTDeviceEventEmitter.js", "react-native@0.37/Libraries/EventEmitter/RCTNativeAppEventEmitter.js", "react-native@0.37/Libraries/BatchedBridge/NativeModules.js", "react-native@0.37/Libraries/Utilities/Platform.ios.js", "react-native@0.37/Libraries/StyleSheet/processColor.js", "react-native@0.37/Libraries/ReactNative/requireNativeComponent.js", "react-native@0.37/Libraries/StyleSheet/ColorPropType.js", "react-native@0.37/Libraries/StyleSheet/EdgeInsetsPropType.js", "react@15.3/lib/LinkedStateMixin.js", "react@15.3/lib/ReactComponentWithPureRenderMixin.js", "react@15.3/lib/ReactUpdates.js", "react@15.3/lib/ReactFragment.js", "react@15.3/lib/update.js", "react@15.3/lib/NativeMethodsMixin.js", "react-native@0.37/Libraries/react-native/React.js", "art@0.10/core/color.js", "art@0.10/core/transform.js", "react-native@0.37/Libraries/Components/View/ReactNativeViewAttributes.js", "react@15.3/lib/createReactNativeComponentClass.js", "react-native@0.37/Libraries/vendor/core/merge.js", "art@0.10/core/class.js", "art@0.10/core/path.js", "fbjs@0.8/lib/invariant.js", "react-native@0.37/Libraries/StyleSheet/StyleSheetPropType.js", "react-native@0.37/Libraries/Text/TextStylePropTypes.js", "fbjs@0.8/lib/TouchEventUtils.js", "fbjs@0.8/lib/keyMirror.js", "react-native@0.37/Libraries/StyleSheet/normalizeColor.js", "react@15.3/lib/PooledClass.js", "react-timer-mixin@0.13/TimerMixin.js", "react-native@0.37/Libraries/StyleSheet/flattenStyle.js", "react-native@0.37/Libraries/vendor/core/Set.js", "react-native@0.37/Libraries/Components/View/ViewStylePropTypes.js", "react@15.3/lib/findNodeHandle.js", "fbjs@0.8/lib/requestAnimationFrame.js", "react-native@0.37/Libraries/BatchedBridge/BatchedBridge.js", "react-native@0.37/Libraries/EventEmitter/EventEmitter.js", "react-native@0.37/Libraries/Image/ImageResizeMode.js", "react-native@0.37/Libraries/Image/ImageStylePropTypes.js", "react-native@0.37/Libraries/Image/resolveAssetSource.js", "react-native@0.37/Libraries/Utilities/dismissKeyboard.js", "react-native@0.37/Libraries/Utilities/createStrictShapeTypeChecker.js", "react@15.3/lib/ReactNative.js", "react-native@0.37/Libraries/Components/TextInput/TextInputState.js", "react-native@0.37/Libraries/Components/UnimplementedViews/UnimplementedView.js", "react-clone-referenced-element@1/cloneReferencedElement.js", "react-native@0.37/Libraries/Utilities/deprecatedPropType.js", "rebound@0.0.13/rebound.js", "fbjs@0.8/lib/emptyFunction.js", "immutable@3.7/dist/immutable.js", "react-native@0.37/Libraries/vendor/core/guid.js", "fbjs@0.8/lib/keyOf.js", "react@15.3/lib/TouchHistoryMath.js", "react-native@0.37/Libraries/Utilities/logError.js", "react-native@0.37/Libraries/vendor/core/Map.js", "react@15.3/lib/ReactNativeMount.js", "react-native@0.37/Libraries/Utilities/deepFreezeAndThrowOnMutationInDev.js", "fbjs@0.8/lib/shallowEqual.js", "react-native@0.37/Libraries/react-native/react-native.js", "react@15.3/react.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
+__d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/warning.js", "react-native@0.37/Libraries/Components/View/View.js", "react-native@0.37/Libraries/Alert/Alert.js", "react-native@0.37/Libraries/Alert/AlertIOS.js", "react-native@0.37/Libraries/AppState/AppState.js", "react-native@0.37/Libraries/Utilities/Dimensions.js", "react-native@0.37/Libraries/Components/Keyboard/Keyboard.js", "react-native@0.37/Libraries/EventEmitter/NativeEventEmitter.js", "react-native@0.37/Libraries/Utilities/PixelRatio.js", "react-native@0.37/Libraries/Components/StatusBar/StatusBarIOS.ios.js", "react-native@0.37/Libraries/StyleSheet/StyleSheet.js", "react-native@0.37/Libraries/Performance/Systrace.js", "react-native@0.37/Libraries/ReactNative/UIManager.js", "react-native@0.37/Libraries/EventEmitter/RCTDeviceEventEmitter.js", "react-native@0.37/Libraries/EventEmitter/RCTNativeAppEventEmitter.js", "react-native@0.37/Libraries/BatchedBridge/NativeModules.js", "react-native@0.37/Libraries/Utilities/Platform.ios.js", "react-native@0.37/Libraries/StyleSheet/processColor.js", "react-native@0.37/Libraries/ReactNative/requireNativeComponent.js", "react-native@0.37/Libraries/StyleSheet/ColorPropType.js", "react-native@0.37/Libraries/StyleSheet/EdgeInsetsPropType.js", "react@15.3/lib/LinkedStateMixin.js", "react@15.3/lib/ReactComponentWithPureRenderMixin.js", "react@15.3/lib/ReactUpdates.js", "react@15.3/lib/ReactFragment.js", "react@15.3/lib/update.js", "react@15.3/lib/NativeMethodsMixin.js", "react-native@0.37/Libraries/react-native/React.js", "art@0.10/core/color.js", "art@0.10/core/transform.js", "react-native@0.37/Libraries/Components/View/ReactNativeViewAttributes.js", "react@15.3/lib/createReactNativeComponentClass.js", "react-native@0.37/Libraries/vendor/core/merge.js", "art@0.10/core/class.js", "art@0.10/core/path.js", "fbjs@0.8/lib/invariant.js", "react-native@0.37/Libraries/StyleSheet/StyleSheetPropType.js", "react-native@0.37/Libraries/Text/TextStylePropTypes.js", "fbjs@0.8/lib/TouchEventUtils.js", "fbjs@0.8/lib/keyMirror.js", "react-native@0.37/Libraries/StyleSheet/normalizeColor.js", "react@15.3/lib/PooledClass.js", "react-timer-mixin@0.13/TimerMixin.js", "react-native@0.37/Libraries/StyleSheet/flattenStyle.js", "react-native@0.37/Libraries/vendor/core/Set.js", "react-native@0.37/Libraries/Components/View/ViewStylePropTypes.js", "react@15.3/lib/findNodeHandle.js", "fbjs@0.8/lib/requestAnimationFrame.js", "react-native@0.37/Libraries/BatchedBridge/BatchedBridge.js", "react-native@0.37/Libraries/EventEmitter/EventEmitter.js", "react-native@0.37/Libraries/Image/ImageResizeMode.js", "react-native@0.37/Libraries/Image/ImageStylePropTypes.js", "react-native@0.37/Libraries/Image/resolveAssetSource.js", "react-native@0.37/Libraries/Utilities/dismissKeyboard.js", "react-native@0.37/Libraries/Utilities/createStrictShapeTypeChecker.js", "react@15.3/lib/ReactNative.js", "react-native@0.37/Libraries/Components/TextInput/TextInputState.js", "react-native@0.37/Libraries/Components/UnimplementedViews/UnimplementedView.js", "react-clone-referenced-element@1/cloneReferencedElement.js", "react-native@0.37/Libraries/Utilities/deprecatedPropType.js", "react@15.3/lib/ReactNativeComponentTree.js", "fbjs@0.8/lib/keyOf.js", "react-native@0.37/Libraries/Core/Devtools/getDevServer.js", "react-native@0.37/Libraries/Utilities/PerformanceLogger.js", "base64-js@1/index.js", "react-native@0.37/Libraries/Network/XMLHttpRequest.js", "react-native@0.37/Libraries/Core/Devtools/parseErrorStack.js", "react-native@0.37/Libraries/Core/Devtools/symbolicateStackTrace.js", "react-native@0.37/Libraries/Utilities/stringifySafe.js", "rebound@0.0.13/rebound.js", "fbjs@0.8/lib/emptyFunction.js", "immutable@3.7/dist/immutable.js", "react-native@0.37/Libraries/vendor/core/guid.js", "react@15.3/lib/TouchHistoryMath.js", "react-native@0.37/Libraries/Utilities/logError.js", "react-native@0.37/Libraries/vendor/core/Map.js", "react@15.3/lib/ReactNativeMount.js", "react@15.3/lib/ReactDebugTool.js", "react@15.3/lib/ReactPerf.js", "fbjs@0.8/lib/performanceNow.js", "react-native@0.37/Libraries/Utilities/deepFreezeAndThrowOnMutationInDev.js", "fbjs@0.8/lib/shallowEqual.js", "react-native@0.37/Libraries/react-native/react-native.js", "react@15.3/react.js"], function (require, global, __project, __filename, __dirname, __base, __pixel_ratio) {
 
 	return [
 	// Libraries/react-native/react-native.js
 	function (__inner_require__, exports, module) {
 		var warning = require('fbjs@0.8/lib/warning.js');
+
+		if (__DEV__) {
+			var warningDedupe = {};
+			var addonWarn = function addonWarn(prevName, newPackageName) {
+				warning(warningDedupe[prevName], 'React.addons.' + prevName + ' is deprecated. Please import the "' + newPackageName + '" package instead.');
+
+				warningDedupe[prevName] = true;
+			};
+		}
 
 		var ReactNative = {
 
@@ -44,70 +53,70 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 				return __inner_require__(43 /*Libraries/Modal/Modal.js*/);
 			},
 			get Navigator() {
-				return __inner_require__(46 /*Libraries/CustomComponents/Navigator/Navigator.js*/);
+				return __inner_require__(66 /*Libraries/CustomComponents/Navigator/Navigator.js*/);
 			},
 			get NavigatorIOS() {
-				return __inner_require__(61 /*Libraries/Components/Navigation/NavigatorIOS.ios.js*/);
+				return __inner_require__(81 /*Libraries/Components/Navigation/NavigatorIOS.ios.js*/);
 			},
 			get Picker() {
-				return __inner_require__(63 /*Libraries/Components/Picker/Picker.js*/);
+				return __inner_require__(83 /*Libraries/Components/Picker/Picker.js*/);
 			},
 			get PickerIOS() {
-				return __inner_require__(64 /*Libraries/Components/Picker/PickerIOS.ios.js*/);
+				return __inner_require__(84 /*Libraries/Components/Picker/PickerIOS.ios.js*/);
 			},
 			get ProgressBarAndroid() {
-				return __inner_require__(66 /*Libraries/Components/ProgressBarAndroid/ProgressBarAndroid.ios.js*/);
+				return __inner_require__(86 /*Libraries/Components/ProgressBarAndroid/ProgressBarAndroid.ios.js*/);
 			},
 			get ProgressViewIOS() {
-				return __inner_require__(67 /*Libraries/Components/ProgressViewIOS/ProgressViewIOS.ios.js*/);
+				return __inner_require__(87 /*Libraries/Components/ProgressViewIOS/ProgressViewIOS.ios.js*/);
 			},
 			get ScrollView() {
 				return __inner_require__(24 /*Libraries/Components/ScrollView/ScrollView.js*/);
 			},
 			get SegmentedControlIOS() {
-				return __inner_require__(68 /*Libraries/Components/SegmentedControlIOS/SegmentedControlIOS.ios.js*/);
+				return __inner_require__(88 /*Libraries/Components/SegmentedControlIOS/SegmentedControlIOS.ios.js*/);
 			},
 			get Slider() {
-				return __inner_require__(69 /*Libraries/Components/Slider/Slider.js*/);
+				return __inner_require__(89 /*Libraries/Components/Slider/Slider.js*/);
 			},
 			get SnapshotViewIOS() {
-				return __inner_require__(70 /*Libraries/RCTTest/SnapshotViewIOS.ios.js*/);
+				return __inner_require__(90 /*Libraries/RCTTest/SnapshotViewIOS.ios.js*/);
 			},
 			get Switch() {
-				return __inner_require__(71 /*Libraries/Components/Switch/Switch.js*/);
+				return __inner_require__(91 /*Libraries/Components/Switch/Switch.js*/);
 			},
 			get RecyclerViewBackedScrollView() {
-				return __inner_require__(72 /*Libraries/Components/ScrollView/RecyclerViewBackedScrollView.ios.js*/);
+				return __inner_require__(61 /*Libraries/Components/ScrollView/RecyclerViewBackedScrollView.ios.js*/);
 			},
 			get RefreshControl() {
-				return __inner_require__(73 /*Libraries/Components/RefreshControl/RefreshControl.js*/);
+				return __inner_require__(92 /*Libraries/Components/RefreshControl/RefreshControl.js*/);
 			},
 			get StatusBar() {
-				return __inner_require__(74 /*Libraries/Components/StatusBar/StatusBar.js*/);
+				return __inner_require__(93 /*Libraries/Components/StatusBar/StatusBar.js*/);
 			},
 			get SwipeableListView() {
-				return __inner_require__(75 /*Libraries/Experimental/SwipeableRow/SwipeableListView.js*/);
+				return __inner_require__(94 /*Libraries/Experimental/SwipeableRow/SwipeableListView.js*/);
 			},
 			get TabBarIOS() {
-				return __inner_require__(78 /*Libraries/Components/TabBarIOS/TabBarIOS.ios.js*/);
+				return __inner_require__(97 /*Libraries/Components/TabBarIOS/TabBarIOS.ios.js*/);
 			},
 			get Text() {
 				return __inner_require__(5 /*Libraries/Text/Text.js*/);
 			},
 			get TextInput() {
-				return __inner_require__(80 /*Libraries/Components/TextInput/TextInput.js*/);
+				return __inner_require__(99 /*Libraries/Components/TextInput/TextInput.js*/);
 			},
 			get ToastAndroid() {
-				return __inner_require__(87 /*Libraries/Components/ToastAndroid/ToastAndroid.ios.js*/);
+				return __inner_require__(106 /*Libraries/Components/ToastAndroid/ToastAndroid.ios.js*/);
 			},
 			get ToolbarAndroid() {
-				return __inner_require__(88 /*Libraries/Components/ToolbarAndroid/ToolbarAndroid.ios.js*/);
+				return __inner_require__(107 /*Libraries/Components/ToolbarAndroid/ToolbarAndroid.ios.js*/);
 			},
 			get Touchable() {
 				return __inner_require__(6 /*Libraries/Components/Touchable/Touchable.js*/);
 			},
 			get TouchableHighlight() {
-				return __inner_require__(89 /*Libraries/Components/Touchable/TouchableHighlight.js*/);
+				return __inner_require__(55 /*Libraries/Components/Touchable/TouchableHighlight.js*/);
 			},
 			get TouchableNativeFeedback() {
 				return __inner_require__(10 /*Libraries/Components/Touchable/TouchableNativeFeedback.ios.js*/);
@@ -122,17 +131,17 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 				return require('react-native@0.37/Libraries/Components/View/View.js');
 			},
 			get ViewPagerAndroid() {
-				return __inner_require__(91 /*Libraries/Components/ViewPager/ViewPagerAndroid.ios.js*/);
+				return __inner_require__(108 /*Libraries/Components/ViewPager/ViewPagerAndroid.ios.js*/);
 			},
 			get WebView() {
-				return __inner_require__(92 /*Libraries/Components/WebView/WebView.ios.js*/);
+				return __inner_require__(109 /*Libraries/Components/WebView/WebView.ios.js*/);
 			},
 
 			get ActionSheetIOS() {
-				return __inner_require__(93 /*Libraries/ActionSheetIOS/ActionSheetIOS.js*/);
+				return __inner_require__(110 /*Libraries/ActionSheetIOS/ActionSheetIOS.js*/);
 			},
 			get AdSupportIOS() {
-				return __inner_require__(94 /*Libraries/AdSupport/AdSupportIOS.js*/);
+				return __inner_require__(111 /*Libraries/AdSupport/AdSupportIOS.js*/);
 			},
 			get Alert() {
 				return require('react-native@0.37/Libraries/Alert/Alert.js');
@@ -144,25 +153,25 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 				return __inner_require__(12 /*Libraries/Animated/src/Animated.js*/);
 			},
 			get AppRegistry() {
-				return __inner_require__(95 /*Libraries/ReactNative/AppRegistry.js*/);
+				return __inner_require__(112 /*Libraries/ReactNative/AppRegistry.js*/);
 			},
 			get AppState() {
 				return require('react-native@0.37/Libraries/AppState/AppState.js');
 			},
 			get AsyncStorage() {
-				return __inner_require__(101 /*Libraries/Storage/AsyncStorage.js*/);
+				return __inner_require__(119 /*Libraries/Storage/AsyncStorage.js*/);
 			},
 			get BackAndroid() {
-				return __inner_require__(100 /*Libraries/Utilities/BackAndroid.ios.js*/);
+				return __inner_require__(117 /*Libraries/Utilities/BackAndroid.ios.js*/);
 			},
 			get CameraRoll() {
-				return __inner_require__(102 /*Libraries/CameraRoll/CameraRoll.js*/);
+				return __inner_require__(120 /*Libraries/CameraRoll/CameraRoll.js*/);
 			},
 			get Clipboard() {
-				return __inner_require__(103 /*Libraries/Components/Clipboard/Clipboard.js*/);
+				return __inner_require__(121 /*Libraries/Components/Clipboard/Clipboard.js*/);
 			},
 			get DatePickerAndroid() {
-				return __inner_require__(104 /*Libraries/Components/DatePickerAndroid/DatePickerAndroid.ios.js*/);
+				return __inner_require__(122 /*Libraries/Components/DatePickerAndroid/DatePickerAndroid.ios.js*/);
 			},
 			get Dimensions() {
 				return require('react-native@0.37/Libraries/Utilities/Dimensions.js');
@@ -171,10 +180,10 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 				return __inner_require__(20 /*Libraries/Animated/src/Easing.js*/);
 			},
 			get I18nManager() {
-				return __inner_require__(45 /*Libraries/ReactNative/I18nManager.js*/);
+				return __inner_require__(65 /*Libraries/ReactNative/I18nManager.js*/);
 			},
 			get ImagePickerIOS() {
-				return __inner_require__(105 /*Libraries/CameraRoll/ImagePickerIOS.js*/);
+				return __inner_require__(123 /*Libraries/CameraRoll/ImagePickerIOS.js*/);
 			},
 			get InteractionManager() {
 				return __inner_require__(14 /*Libraries/Interaction/InteractionManager.js*/);
@@ -186,34 +195,34 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 				return __inner_require__(37 /*Libraries/LayoutAnimation/LayoutAnimation.js*/);
 			},
 			get Linking() {
-				return __inner_require__(106 /*Libraries/Linking/Linking.js*/);
+				return __inner_require__(124 /*Libraries/Linking/Linking.js*/);
 			},
 			get NativeEventEmitter() {
 				return require('react-native@0.37/Libraries/EventEmitter/NativeEventEmitter.js');
 			},
 			get NavigationExperimental() {
-				return __inner_require__(107 /*Libraries/NavigationExperimental/NavigationExperimental.js*/);
+				return __inner_require__(125 /*Libraries/NavigationExperimental/NavigationExperimental.js*/);
 			},
 			get NetInfo() {
-				return __inner_require__(125 /*Libraries/Network/NetInfo.js*/);
+				return __inner_require__(143 /*Libraries/Network/NetInfo.js*/);
 			},
 			get PanResponder() {
-				return __inner_require__(59 /*Libraries/Interaction/PanResponder.js*/);
+				return __inner_require__(79 /*Libraries/Interaction/PanResponder.js*/);
 			},
 			get PermissionsAndroid() {
-				return __inner_require__(126 /*Libraries/PermissionsAndroid/PermissionsAndroid.js*/);
+				return __inner_require__(144 /*Libraries/PermissionsAndroid/PermissionsAndroid.js*/);
 			},
 			get PixelRatio() {
 				return require('react-native@0.37/Libraries/Utilities/PixelRatio.js');
 			},
 			get PushNotificationIOS() {
-				return __inner_require__(127 /*Libraries/PushNotificationIOS/PushNotificationIOS.js*/);
+				return __inner_require__(145 /*Libraries/PushNotificationIOS/PushNotificationIOS.js*/);
 			},
 			get Settings() {
-				return __inner_require__(128 /*Libraries/Settings/Settings.ios.js*/);
+				return __inner_require__(146 /*Libraries/Settings/Settings.ios.js*/);
 			},
 			get Share() {
-				return __inner_require__(129 /*Libraries/Share/Share.js*/);
+				return __inner_require__(147 /*Libraries/Share/Share.js*/);
 			},
 			get StatusBarIOS() {
 				return require('react-native@0.37/Libraries/Components/StatusBar/StatusBarIOS.ios.js');
@@ -225,16 +234,16 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 				return require('react-native@0.37/Libraries/Performance/Systrace.js');
 			},
 			get TimePickerAndroid() {
-				return __inner_require__(130 /*Libraries/Components/TimePickerAndroid/TimePickerAndroid.ios.js*/);
+				return __inner_require__(148 /*Libraries/Components/TimePickerAndroid/TimePickerAndroid.ios.js*/);
 			},
 			get UIManager() {
 				return require('react-native@0.37/Libraries/ReactNative/UIManager.js');
 			},
 			get Vibration() {
-				return __inner_require__(131 /*Libraries/Vibration/Vibration.js*/);
+				return __inner_require__(149 /*Libraries/Vibration/Vibration.js*/);
 			},
 			get VibrationIOS() {
-				return __inner_require__(132 /*Libraries/Vibration/VibrationIOS.ios.js*/);
+				return __inner_require__(150 /*Libraries/Vibration/VibrationIOS.ios.js*/);
 			},
 
 			get DeviceEventEmitter() {
@@ -268,26 +277,73 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 
 			addons: {
 				get LinkedStateMixin() {
+					if (__DEV__) {
+						addonWarn('LinkedStateMixin', 'react-addons-linked-state-mixin');
+					}
 					return require('react@15.3/lib/LinkedStateMixin.js');
 				},
 				get PureRenderMixin() {
+					if (__DEV__) {
+						addonWarn('PureRenderMixin', 'react-addons-pure-render-mixin');
+					}
 					return require('react@15.3/lib/ReactComponentWithPureRenderMixin.js');
 				},
 				get TestModule() {
+					if (__DEV__) {
+						warning(warningDedupe.TestModule, 'React.addons.TestModule is deprecated. ' + 'Use ReactNative.NativeModules.TestModule instead.');
+
+						warningDedupe.TestModule = true;
+					}
 					return require('react-native@0.37/Libraries/BatchedBridge/NativeModules.js').TestModule;
 				},
 				get batchedUpdates() {
+					if (__DEV__) {
+						warning(warningDedupe.batchedUpdates, 'React.addons.batchedUpdates is deprecated. ' + 'Use ReactNative.unstable_batchedUpdates instead.');
+
+						warningDedupe.batchedUpdates = true;
+					}
 					return require('react@15.3/lib/ReactUpdates.js').batchedUpdates;
 				},
 				get createFragment() {
+					if (__DEV__) {
+						addonWarn('createFragment', 'react-addons-create-fragment');
+					}
 					return require('react@15.3/lib/ReactFragment.js').create;
 				},
 				get update() {
+					if (__DEV__) {
+						addonWarn('update', 'react-addons-update');
+					}
 					return require('react@15.3/lib/update.js');
 				} } };
 
+		if (__DEV__) {
+			(function () {
+				var throwOnWrongReactAPI = __inner_require__(151 /*Libraries/Utilities/throwOnWrongReactAPI.js*/);
+				var reactAPIs = ['createClass', 'Component'];var _loop = function _loop(key) {
+					Object.defineProperty(ReactNative, key, {
+						get: function get() {
+							throwOnWrongReactAPI(key);
+						},
+						enumerable: false,
+						configurable: false });
+				};for (var _iterator = reactAPIs, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[typeof Symbol === 'function' ? Symbol.iterator : '@@iterator']();;) {
+					var _ref;if (_isArray) {
+						if (_i >= _iterator.length) break;_ref = _iterator[_i++];
+					} else {
+						_i = _iterator.next();if (_i.done) break;_ref = _i.value;
+					}var key = _ref;_loop(key);
+				}
+			})();
+		}
+
 		var ReactNativeInternal = __inner_require__(26 /*Libraries/react-native/ReactNative.js*/);
 		function applyForwarding(key) {
+			if (__DEV__) {
+				Object.defineProperty(ReactNative, key, Object.getOwnPropertyDescriptor(ReactNativeInternal, key));
+
+				return;
+			}
 			ReactNative[key] = ReactNativeInternal[key];
 		}
 		for (var key in ReactNativeInternal) {
@@ -2429,6 +2485,9 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 						}
 					});
 				} }, { key: '__getNativeConfig', value: function __getNativeConfig() {
+					if (__DEV__) {
+						NativeAnimatedHelper.validateInterpolation(this._config);
+					}
 
 					return {
 						inputRange: this._config.inputRange,
@@ -3170,6 +3229,10 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 
 				if (this.__isNative) {
 					invariant(!this._listener, 'Listener is not supported for native driven events.');
+				}
+
+				if (__DEV__) {
+					this._validateMapping();
 				}
 			}babelHelpers.createClass(AnimatedEvent, [{ key: '__attach', value: function __attach(viewRef, eventName) {
 					invariant(this.__isNative, 'Only native driven events need to be attached.');
@@ -4390,6 +4453,11 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 			},
 
 			_handleScroll: function _handleScroll(e) {
+				if (__DEV__) {
+					if (this.props.onScroll && this.props.scrollEventThrottle == null && Platform.OS === 'ios') {
+						console.log('You specified `onScroll` on a <ScrollView> but not ' + '`scrollEventThrottle`. You will only receive one event. ' + 'Using `16` you get all the events but be aware that it may ' + 'cause frame drops, use a bigger number if you don\'t need as ' + 'much precision.');
+					}
+				}
 				if (Platform.OS === 'android') {
 					if (this.props.keyboardDismissMode === 'on-drag') {
 						dismissKeyboard();
@@ -6193,7 +6261,7 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 		var _container;
 
 		var AppContainer = __inner_require__(44 /*Libraries/ReactNative/AppContainer.js*/);
-		var I18nManager = __inner_require__(45 /*Libraries/ReactNative/I18nManager.js*/);
+		var I18nManager = __inner_require__(65 /*Libraries/ReactNative/I18nManager.js*/);
 		var Platform = require('react-native@0.37/Libraries/Utilities/Platform.ios.js');
 		var React = require('react-native@0.37/Libraries/react-native/React.js');
 		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
@@ -6223,7 +6291,7 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 						}
 					}
 
-					var innerChildren = this.props.children;
+					var innerChildren = __DEV__ ? React.createElement(AppContainer, null, this.props.children) : this.props.children;
 
 					return React.createElement(RCTModalHostView, {
 						animationType: animationType,
@@ -6257,8 +6325,8 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 		var Subscribable = __inner_require__(28 /*Libraries/Components/Subscribable.js*/);
 		var View = require('react-native@0.37/Libraries/Components/View/View.js');
 
-		var Inspector = null;
-		var YellowBox = null;
+		var Inspector = __DEV__ ? __inner_require__(45 /*Libraries/Inspector/Inspector.js*/) : null;
+		var YellowBox = __DEV__ ? __inner_require__(64 /*Libraries/ReactNative/YellowBox.js*/) : null;
 
 		var AppContainer = React.createClass({ displayName: 'AppContainer',
 			mixins: [Subscribable.Mixin],
@@ -6288,7 +6356,9 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 
 			render: function render() {
 				var yellowBox = null;
-
+				if (__DEV__) {
+					yellowBox = React.createElement(YellowBox, null);
+				}
 				return React.createElement(View, { style: styles.appContainer }, React.createElement(View, {
 					collapsable: !this.state.inspector,
 					key: this.state.mainKey,
@@ -6300,6 +6370,2013 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 				flex: 1 } });
 
 		module.exports = AppContainer;
+	}, // Libraries/Inspector/Inspector.js
+	function (__inner_require__, exports, module) {
+		var Dimensions = require('react-native@0.37/Libraries/Utilities/Dimensions.js');
+		var InspectorOverlay = __inner_require__(46 /*Libraries/Inspector/InspectorOverlay.js*/);
+		var InspectorPanel = __inner_require__(51 /*Libraries/Inspector/InspectorPanel.js*/);
+		var InspectorUtils = __inner_require__(47 /*Libraries/Inspector/InspectorUtils.js*/);
+		var React = require('react-native@0.37/Libraries/react-native/React.js');
+		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
+		var Touchable = __inner_require__(6 /*Libraries/Components/Touchable/Touchable.js*/);
+		var UIManager = require('react-native@0.37/Libraries/ReactNative/UIManager.js');
+		var View = require('react-native@0.37/Libraries/Components/View/View.js');
+
+		if (window.__REACT_DEVTOOLS_GLOBAL_HOOK__) {
+
+			window.__REACT_DEVTOOLS_GLOBAL_HOOK__.resolveRNStyle = require('react-native@0.37/Libraries/StyleSheet/flattenStyle.js');
+		}var Inspector = function (_React$Component) {
+			babelHelpers.inherits(Inspector, _React$Component);
+
+			function Inspector(props) {
+				babelHelpers.classCallCheck(this, Inspector);var _this = babelHelpers.possibleConstructorReturn(this, (Inspector.__proto__ || Object.getPrototypeOf(Inspector)).call(this, props));
+
+				_this.state = {
+					devtoolsAgent: null,
+					hierarchy: null,
+					panelPos: 'bottom',
+					inspecting: true,
+					perfing: false,
+					inspected: null,
+					selection: null,
+					inspectedViewTag: _this.props.inspectedViewTag,
+					networking: false };return _this;
+			}babelHelpers.createClass(Inspector, [{ key: 'componentDidMount', value: function componentDidMount() {
+					if (window.__REACT_DEVTOOLS_GLOBAL_HOOK__) {
+						this.attachToDevtools = this.attachToDevtools.bind(this);
+						window.__REACT_DEVTOOLS_GLOBAL_HOOK__.on('react-devtools', this.attachToDevtools);
+
+						if (window.__REACT_DEVTOOLS_GLOBAL_HOOK__.reactDevtoolsAgent) {
+							this.attachToDevtools(window.__REACT_DEVTOOLS_GLOBAL_HOOK__.reactDevtoolsAgent);
+						}
+					}
+				} }, { key: 'componentWillUnmount', value: function componentWillUnmount() {
+					if (this._subs) {
+						this._subs.map(function (fn) {
+							return fn();
+						});
+					}
+					if (window.__REACT_DEVTOOLS_GLOBAL_HOOK__) {
+						window.__REACT_DEVTOOLS_GLOBAL_HOOK__.off('react-devtools', this.attachToDevtools);
+					}
+				} }, { key: 'componentWillReceiveProps', value: function componentWillReceiveProps(newProps) {
+					this.setState({ inspectedViewTag: newProps.inspectedViewTag });
+				} }, { key: 'attachToDevtools', value: function attachToDevtools(agent) {
+					var _this2 = this;
+					var _hideWait = null;
+					var hlSub = agent.sub('highlight', function (_ref) {
+						var node = _ref.node,
+						    name = _ref.name,
+						    props = _ref.props;
+						clearTimeout(_hideWait);
+						UIManager.measure(node, function (x, y, width, height, left, top) {
+							_this2.setState({
+								hierarchy: [],
+								inspected: {
+									frame: { left: left, top: top, width: width, height: height },
+									style: props ? props.style : {} } });
+						});
+					});
+					var hideSub = agent.sub('hideHighlight', function () {
+						if (_this2.state.inspected === null) {
+							return;
+						}
+
+						_hideWait = setTimeout(function () {
+							_this2.setState({
+								inspected: null });
+						}, 100);
+					});
+					this._subs = [hlSub, hideSub];
+
+					agent.on('shutdown', function () {
+						_this2.setState({ devtoolsAgent: null });
+						_this2._subs = null;
+					});
+					this.setState({
+						devtoolsAgent: agent });
+				} }, { key: 'setSelection', value: function setSelection(i) {
+					var _this3 = this;
+					var instance = this.state.hierarchy[i];
+
+					var publicInstance = instance['_instance'] || {};
+					var source = instance['_currentElement'] && instance['_currentElement']['_source'];
+					UIManager.measure(instance.getHostNode(), function (x, y, width, height, left, top) {
+						_this3.setState({
+							inspected: {
+								frame: { left: left, top: top, width: width, height: height },
+								style: publicInstance.props ? publicInstance.props.style : {},
+								source: source },
+
+							selection: i });
+					});
+				} }, { key: 'onTouchInstance', value: function onTouchInstance(touched, frame, pointerY) {
+
+					var hierarchy = InspectorUtils.getOwnerHierarchy(touched);
+					var instance = InspectorUtils.lastNotNativeInstance(hierarchy);
+
+					if (this.state.devtoolsAgent) {
+						this.state.devtoolsAgent.selectFromReactInstance(instance, true);
+					}
+
+					var publicInstance = instance['_instance'] || {};
+					var props = publicInstance.props || {};
+					var source = instance['_currentElement'] && instance['_currentElement']['_source'];
+					this.setState({
+						panelPos: pointerY > Dimensions.get('window').height / 2 ? 'top' : 'bottom',
+						selection: hierarchy.indexOf(instance),
+						hierarchy: hierarchy,
+						inspected: {
+							style: props.style || {},
+							frame: frame,
+							source: source } });
+				} }, { key: 'setPerfing', value: function setPerfing(val) {
+					this.setState({
+						perfing: val,
+						inspecting: false,
+						inspected: null,
+						networking: false });
+				} }, { key: 'setInspecting', value: function setInspecting(val) {
+					this.setState({
+						inspecting: val,
+						inspected: null });
+				} }, { key: 'setTouchTargetting', value: function setTouchTargetting(val) {
+					var _this4 = this;
+					Touchable.TOUCH_TARGET_DEBUG = val;
+					this.props.onRequestRerenderApp(function (inspectedViewTag) {
+						_this4.setState({ inspectedViewTag: inspectedViewTag });
+					});
+				} }, { key: 'setNetworking', value: function setNetworking(val) {
+					this.setState({
+						networking: val,
+						perfing: false,
+						inspecting: false,
+						inspected: null });
+				} }, { key: 'render', value: function render() {
+					var panelContainerStyle = this.state.panelPos === 'bottom' ? { bottom: 0 } : { top: 0 };
+					return React.createElement(View, { style: styles.container, pointerEvents: 'box-none' }, this.state.inspecting && React.createElement(InspectorOverlay, {
+						inspected: this.state.inspected,
+						inspectedViewTag: this.state.inspectedViewTag,
+						onTouchInstance: this.onTouchInstance.bind(this) }), React.createElement(View, { style: [styles.panelContainer, panelContainerStyle] }, React.createElement(InspectorPanel, {
+						devtoolsIsOpen: !!this.state.devtoolsAgent,
+						inspecting: this.state.inspecting,
+						perfing: this.state.perfing,
+						setPerfing: this.setPerfing.bind(this),
+						setInspecting: this.setInspecting.bind(this),
+						inspected: this.state.inspected,
+						hierarchy: this.state.hierarchy,
+						selection: this.state.selection,
+						setSelection: this.setSelection.bind(this),
+						touchTargetting: Touchable.TOUCH_TARGET_DEBUG,
+						setTouchTargetting: this.setTouchTargetting.bind(this),
+						networking: this.state.networking,
+						setNetworking: this.setNetworking.bind(this) })));
+				} }]);return Inspector;
+		}(React.Component);
+
+		var styles = StyleSheet.create({
+			container: {
+				position: 'absolute',
+				backgroundColor: 'transparent',
+				top: 0,
+				left: 0,
+				right: 0,
+				bottom: 0 },
+
+			panelContainer: {
+				position: 'absolute',
+				left: 0,
+				right: 0 } });
+
+		module.exports = Inspector;
+	}, // Libraries/Inspector/InspectorOverlay.js
+	function (__inner_require__, exports, module) {
+		var Dimensions = require('react-native@0.37/Libraries/Utilities/Dimensions.js');
+		var InspectorUtils = __inner_require__(47 /*Libraries/Inspector/InspectorUtils.js*/);
+		var React = require('react-native@0.37/Libraries/react-native/React.js');
+		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
+		var UIManager = require('react-native@0.37/Libraries/ReactNative/UIManager.js');
+		var View = require('react-native@0.37/Libraries/Components/View/View.js');
+		var ElementBox = __inner_require__(48 /*Libraries/Inspector/ElementBox.js*/);
+
+		var PropTypes = React.PropTypes;var InspectorOverlay = function (_React$Component) {
+			babelHelpers.inherits(InspectorOverlay, _React$Component);function InspectorOverlay() {
+				var _ref;var _temp, _this, _ret;babelHelpers.classCallCheck(this, InspectorOverlay);for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+					args[_key] = arguments[_key];
+				}return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = InspectorOverlay.__proto__ || Object.getPrototypeOf(InspectorOverlay)).call.apply(_ref, [this].concat(args))), _this), _this.findViewForTouchEvent = function (e) {
+					var _e$nativeEvent$touche = e.nativeEvent.touches[0],
+					    locationX = _e$nativeEvent$touche.locationX,
+					    locationY = _e$nativeEvent$touche.locationY;
+					UIManager.findSubviewIn(_this.props.inspectedViewTag, [locationX, locationY], function (nativeViewTag, left, top, width, height) {
+						var instance = InspectorUtils.findInstanceByNativeTag(nativeViewTag);
+						if (!instance) {
+							return;
+						}
+						_this.props.onTouchInstance(instance, { left: left, top: top, width: width, height: height }, locationY);
+					});
+				}, _this.shouldSetResponser = function (e) {
+					_this.findViewForTouchEvent(e);
+					return true;
+				}, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
+			}babelHelpers.createClass(InspectorOverlay, [{ key: 'render', value: function render() {
+					var content = null;
+					if (this.props.inspected) {
+						content = React.createElement(ElementBox, { frame: this.props.inspected.frame, style: this.props.inspected.style });
+					}
+
+					return React.createElement(View, {
+						onStartShouldSetResponder: this.shouldSetResponser,
+						onResponderMove: this.findViewForTouchEvent,
+						style: [styles.inspector, { height: Dimensions.get('window').height }] }, content);
+				} }]);return InspectorOverlay;
+		}(React.Component);InspectorOverlay.propTypes = { inspected: PropTypes.shape({ frame: PropTypes.object, style: PropTypes.any }), inspectedViewTag: PropTypes.number, onTouchInstance: PropTypes.func.isRequired };
+
+		var styles = StyleSheet.create({
+			inspector: {
+				backgroundColor: 'transparent',
+				position: 'absolute',
+				left: 0,
+				top: 0,
+				right: 0 } });
+
+		module.exports = InspectorOverlay;
+	}, // Libraries/Inspector/InspectorUtils.js
+	function (__inner_require__, exports, module) {
+		var ReactNativeComponentTree = require('react@15.3/lib/ReactNativeComponentTree.js');
+
+		function traverseOwnerTreeUp(hierarchy, instance) {
+			if (instance) {
+				hierarchy.unshift(instance);
+				traverseOwnerTreeUp(hierarchy, instance._currentElement._owner);
+			}
+		}
+
+		function findInstanceByNativeTag(nativeTag) {
+			return ReactNativeComponentTree.getInstanceFromNode(nativeTag);
+		}
+
+		function getOwnerHierarchy(instance) {
+			var hierarchy = [];
+			traverseOwnerTreeUp(hierarchy, instance);
+			return hierarchy;
+		}
+
+		function lastNotNativeInstance(hierarchy) {
+			for (var i = hierarchy.length - 1; i > 1; i--) {
+				var instance = hierarchy[i];
+				if (!instance.viewConfig) {
+					return instance;
+				}
+			}
+			return hierarchy[0];
+		}
+
+		module.exports = { findInstanceByNativeTag: findInstanceByNativeTag, getOwnerHierarchy: getOwnerHierarchy, lastNotNativeInstance: lastNotNativeInstance };
+	}, // Libraries/Inspector/ElementBox.js
+	function (__inner_require__, exports, module) {
+		var React = require('react-native@0.37/Libraries/react-native/React.js');
+		var View = require('react-native@0.37/Libraries/Components/View/View.js');
+		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
+		var BorderBox = __inner_require__(49 /*Libraries/Inspector/BorderBox.js*/);
+		var resolveBoxStyle = __inner_require__(50 /*Libraries/Inspector/resolveBoxStyle.js*/);
+
+		var flattenStyle = require('react-native@0.37/Libraries/StyleSheet/flattenStyle.js');var ElementBox = function (_React$Component) {
+			babelHelpers.inherits(ElementBox, _React$Component);function ElementBox() {
+				babelHelpers.classCallCheck(this, ElementBox);return babelHelpers.possibleConstructorReturn(this, (ElementBox.__proto__ || Object.getPrototypeOf(ElementBox)).apply(this, arguments));
+			}babelHelpers.createClass(ElementBox, [{ key: 'render', value: function render() {
+					var style = flattenStyle(this.props.style) || {};
+					var margin = resolveBoxStyle('margin', style);
+					var padding = resolveBoxStyle('padding', style);
+					var frameStyle = this.props.frame;
+					if (margin) {
+						frameStyle = {
+							top: frameStyle.top - margin.top,
+							left: frameStyle.left - margin.left,
+							height: frameStyle.height + margin.top + margin.bottom,
+							width: frameStyle.width + margin.left + margin.right };
+					}
+					var contentStyle = {
+						width: this.props.frame.width,
+						height: this.props.frame.height };
+
+					if (padding) {
+						contentStyle = {
+							width: contentStyle.width - padding.left - padding.right,
+							height: contentStyle.height - padding.top - padding.bottom };
+					}
+					return React.createElement(View, { style: [styles.frame, frameStyle], pointerEvents: 'none' }, React.createElement(BorderBox, { box: margin, style: styles.margin }, React.createElement(BorderBox, { box: padding, style: styles.padding }, React.createElement(View, { style: [styles.content, contentStyle] }))));
+				} }]);return ElementBox;
+		}(React.Component);
+
+		var styles = StyleSheet.create({
+			frame: {
+				position: 'absolute' },
+
+			content: {
+				backgroundColor: 'rgba(200, 230, 255, 0.8)' },
+
+			padding: {
+				borderColor: 'rgba(77, 255, 0, 0.3)' },
+
+			margin: {
+				borderColor: 'rgba(255, 132, 0, 0.3)' } });
+
+		module.exports = ElementBox;
+	}, // Libraries/Inspector/BorderBox.js
+	function (__inner_require__, exports, module) {
+		var React = require('react-native@0.37/Libraries/react-native/React.js');
+		var View = require('react-native@0.37/Libraries/Components/View/View.js');var BorderBox = function (_React$Component) {
+			babelHelpers.inherits(BorderBox, _React$Component);function BorderBox() {
+				babelHelpers.classCallCheck(this, BorderBox);return babelHelpers.possibleConstructorReturn(this, (BorderBox.__proto__ || Object.getPrototypeOf(BorderBox)).apply(this, arguments));
+			}babelHelpers.createClass(BorderBox, [{ key: 'render', value: function render() {
+					var box = this.props.box;
+					if (!box) {
+						return this.props.children;
+					}
+					var style = {
+						borderTopWidth: box.top,
+						borderBottomWidth: box.bottom,
+						borderLeftWidth: box.left,
+						borderRightWidth: box.right };
+
+					return React.createElement(View, { style: [style, this.props.style] }, this.props.children);
+				} }]);return BorderBox;
+		}(React.Component);
+
+		module.exports = BorderBox;
+	}, // Libraries/Inspector/resolveBoxStyle.js
+	function (__inner_require__, exports, module) {
+		function resolveBoxStyle(prefix, style) {
+			var res = {};
+			var subs = ['top', 'left', 'bottom', 'right'];
+			var set = false;
+			subs.forEach(function (sub) {
+				res[sub] = style[prefix] || 0;
+			});
+			if (style[prefix]) {
+				set = true;
+			}
+			if (style[prefix + 'Vertical']) {
+				res.top = res.bottom = style[prefix + 'Vertical'];
+				set = true;
+			}
+			if (style[prefix + 'Horizontal']) {
+				res.left = res.right = style[prefix + 'Horizontal'];
+				set = true;
+			}
+			subs.forEach(function (sub) {
+				var val = style[prefix + capFirst(sub)];
+				if (val) {
+					res[sub] = val;
+					set = true;
+				}
+			});
+			if (!set) {
+				return;
+			}
+			return res;
+		}
+
+		function capFirst(text) {
+			return text[0].toUpperCase() + text.slice(1);
+		}
+
+		module.exports = resolveBoxStyle;
+	}, // Libraries/Inspector/InspectorPanel.js
+	function (__inner_require__, exports, module) {
+		var React = require('react-native@0.37/Libraries/react-native/React.js');
+		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
+		var Text = __inner_require__(5 /*Libraries/Text/Text.js*/);
+		var View = require('react-native@0.37/Libraries/Components/View/View.js');
+		var ElementProperties = __inner_require__(52 /*Libraries/Inspector/ElementProperties.js*/);
+		var PerformanceOverlay = __inner_require__(59 /*Libraries/Inspector/PerformanceOverlay.js*/);
+		var TouchableHighlight = __inner_require__(55 /*Libraries/Components/Touchable/TouchableHighlight.js*/);
+		var NetworkOverlay = __inner_require__(60 /*Libraries/Inspector/NetworkOverlay.js*/);
+
+		var PropTypes = React.PropTypes;var InspectorPanel = function (_React$Component) {
+			babelHelpers.inherits(InspectorPanel, _React$Component);function InspectorPanel() {
+				babelHelpers.classCallCheck(this, InspectorPanel);return babelHelpers.possibleConstructorReturn(this, (InspectorPanel.__proto__ || Object.getPrototypeOf(InspectorPanel)).apply(this, arguments));
+			}babelHelpers.createClass(InspectorPanel, [{ key: 'renderWaiting', value: function renderWaiting() {
+					if (this.props.inspecting) {
+						return React.createElement(Text, { style: styles.waitingText }, 'Tap something to inspect it');
+					}
+					return React.createElement(Text, { style: styles.waitingText }, 'Nothing is inspected');
+				} }, { key: 'render', value: function render() {
+					var contents;
+					if (this.props.inspected) {
+						contents = React.createElement(ElementProperties, {
+							style: this.props.inspected.style,
+							frame: this.props.inspected.frame,
+							source: this.props.inspected.source,
+							hierarchy: this.props.hierarchy,
+							selection: this.props.selection,
+							setSelection: this.props.setSelection });
+					} else if (this.props.perfing) {
+						contents = React.createElement(PerformanceOverlay, null);
+					} else if (this.props.networking) {
+						contents = React.createElement(NetworkOverlay, null);
+					} else {
+						contents = React.createElement(View, { style: styles.waiting }, this.renderWaiting());
+					}
+					return React.createElement(View, { style: styles.container }, !this.props.devtoolsIsOpen && contents, React.createElement(View, { style: styles.buttonRow }, React.createElement(Button, {
+						title: 'Inspect',
+						pressed: this.props.inspecting,
+						onClick: this.props.setInspecting }), React.createElement(Button, { title: 'Perf',
+						pressed: this.props.perfing,
+						onClick: this.props.setPerfing }), React.createElement(Button, { title: 'Network',
+						pressed: this.props.networking,
+						onClick: this.props.setNetworking }), React.createElement(Button, { title: 'Touchables',
+						pressed: this.props.touchTargetting,
+						onClick: this.props.setTouchTargetting })));
+				} }]);return InspectorPanel;
+		}(React.Component);
+
+		InspectorPanel.propTypes = {
+			devtoolsIsOpen: PropTypes.bool,
+			inspecting: PropTypes.bool,
+			setInspecting: PropTypes.func,
+			inspected: PropTypes.object,
+			perfing: PropTypes.bool,
+			setPerfing: PropTypes.func,
+			touchTargetting: PropTypes.bool,
+			setTouchTargetting: PropTypes.func,
+			networking: PropTypes.bool,
+			setNetworking: PropTypes.func };var Button = function (_React$Component2) {
+			babelHelpers.inherits(Button, _React$Component2);function Button() {
+				babelHelpers.classCallCheck(this, Button);return babelHelpers.possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).apply(this, arguments));
+			}babelHelpers.createClass(Button, [{ key: 'render', value: function render() {
+					var _this3 = this;
+					return React.createElement(TouchableHighlight, { onPress: function onPress() {
+							return _this3.props.onClick(!_this3.props.pressed);
+						}, style: [styles.button, this.props.pressed && styles.buttonPressed] }, React.createElement(Text, { style: styles.buttonText }, this.props.title));
+				} }]);return Button;
+		}(React.Component);
+
+		var styles = StyleSheet.create({
+			buttonRow: {
+				flexDirection: 'row' },
+
+			button: {
+				backgroundColor: 'rgba(0, 0, 0, 0.3)',
+				margin: 2,
+				height: 30,
+				justifyContent: 'center',
+				alignItems: 'center' },
+
+			buttonPressed: {
+				backgroundColor: 'rgba(255, 255, 255, 0.3)' },
+
+			buttonText: {
+				textAlign: 'center',
+				color: 'white',
+				margin: 5 },
+
+			container: {
+				backgroundColor: 'rgba(0, 0, 0, 0.7)' },
+
+			waiting: {
+				height: 100 },
+
+			waitingText: {
+				fontSize: 20,
+				textAlign: 'center',
+				marginVertical: 20,
+				color: 'white' } });
+
+		module.exports = InspectorPanel;
+	}, // Libraries/Inspector/ElementProperties.js
+	function (__inner_require__, exports, module) {
+		var BoxInspector = __inner_require__(53 /*Libraries/Inspector/BoxInspector.js*/);
+		var React = require('react-native@0.37/Libraries/react-native/React.js');
+		var StyleInspector = __inner_require__(54 /*Libraries/Inspector/StyleInspector.js*/);
+		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
+		var Text = __inner_require__(5 /*Libraries/Text/Text.js*/);
+		var TouchableHighlight = __inner_require__(55 /*Libraries/Components/Touchable/TouchableHighlight.js*/);
+		var TouchableWithoutFeedback = __inner_require__(30 /*Libraries/Components/Touchable/TouchableWithoutFeedback.js*/);
+		var View = require('react-native@0.37/Libraries/Components/View/View.js');
+
+		var flattenStyle = require('react-native@0.37/Libraries/StyleSheet/flattenStyle.js');
+		var mapWithSeparator = __inner_require__(57 /*Libraries/Utilities/mapWithSeparator.js*/);
+		var openFileInEditor = __inner_require__(58 /*Libraries/Core/Devtools/openFileInEditor.js*/);
+
+		var PropTypes = React.PropTypes;var ElementProperties = function (_React$Component) {
+			babelHelpers.inherits(ElementProperties, _React$Component);function ElementProperties() {
+				babelHelpers.classCallCheck(this, ElementProperties);return babelHelpers.possibleConstructorReturn(this, (ElementProperties.__proto__ || Object.getPrototypeOf(ElementProperties)).apply(this, arguments));
+			}babelHelpers.createClass(ElementProperties, [{ key: 'render', value: function render() {
+					var _this2 = this;
+					var style = flattenStyle(this.props.style);
+
+					var selection = this.props.selection;
+					var openFileButton;
+					var source = this.props.source;var _ref = source || {},
+					    fileName = _ref.fileName,
+					    lineNumber = _ref.lineNumber;
+					if (fileName && lineNumber) {
+						var parts = fileName.split('/');
+						var fileNameShort = parts[parts.length - 1];
+						openFileButton = React.createElement(TouchableHighlight, {
+							style: styles.openButton,
+							onPress: openFileInEditor.bind(null, fileName, lineNumber) }, React.createElement(Text, { style: styles.openButtonTitle, numberOfLines: 1 }, fileNameShort, ':', lineNumber));
+					}
+
+					return React.createElement(TouchableWithoutFeedback, null, React.createElement(View, { style: styles.info }, React.createElement(View, { style: styles.breadcrumb }, mapWithSeparator(this.props.hierarchy, function (item, i) {
+						return React.createElement(TouchableHighlight, {
+							key: 'item-' + i,
+							style: [styles.breadItem, i === selection && styles.selected],
+
+							onPress: function onPress() {
+								return _this2.props.setSelection(i);
+							} }, React.createElement(Text, { style: styles.breadItemText }, getInstanceName(item)));
+					}, function (i) {
+						return React.createElement(Text, { key: 'sep-' + i, style: styles.breadSep }, '\u25B8');
+					})), React.createElement(View, { style: styles.row }, React.createElement(View, { style: styles.col }, React.createElement(StyleInspector, { style: style }), openFileButton), React.createElement(BoxInspector, { style: style, frame: this.props.frame }))));
+				} }]);return ElementProperties;
+		}(React.Component);ElementProperties.propTypes = { hierarchy: PropTypes.array.isRequired, style: PropTypes.oneOfType([PropTypes.object, PropTypes.array, PropTypes.number]), source: PropTypes.shape({ fileName: PropTypes.string, lineNumber: PropTypes.number }) };
+
+		function getInstanceName(instance) {
+			if (instance.getName) {
+				return instance.getName();
+			}
+			if (instance.constructor && instance.constructor.displayName) {
+				return instance.constructor.displayName;
+			}
+			return 'Unknown';
+		}
+
+		var styles = StyleSheet.create({
+			breadSep: {
+				fontSize: 8,
+				color: 'white' },
+
+			breadcrumb: {
+				flexDirection: 'row',
+				flexWrap: 'wrap',
+				alignItems: 'flex-start',
+				marginBottom: 5 },
+
+			selected: {
+				borderColor: 'white',
+				borderRadius: 5 },
+
+			breadItem: {
+				borderWidth: 1,
+				borderColor: 'transparent',
+				marginHorizontal: 2 },
+
+			breadItemText: {
+				fontSize: 10,
+				color: 'white',
+				marginHorizontal: 5 },
+
+			row: {
+				flexDirection: 'row',
+				alignItems: 'center',
+				justifyContent: 'space-between' },
+
+			col: {
+				flex: 1 },
+
+			info: {
+				padding: 10 },
+
+			path: {
+				color: 'white',
+				fontSize: 9 },
+
+			openButton: {
+				padding: 10,
+				backgroundColor: '#000',
+				marginVertical: 5,
+				marginRight: 5,
+				borderRadius: 2 },
+
+			openButtonTitle: {
+				color: 'white',
+				fontSize: 8 } });
+
+		module.exports = ElementProperties;
+	}, // Libraries/Inspector/BoxInspector.js
+	function (__inner_require__, exports, module) {
+		var React = require('react-native@0.37/Libraries/react-native/React.js');
+		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
+		var Text = __inner_require__(5 /*Libraries/Text/Text.js*/);
+		var View = require('react-native@0.37/Libraries/Components/View/View.js');
+		var resolveBoxStyle = __inner_require__(50 /*Libraries/Inspector/resolveBoxStyle.js*/);
+
+		var blank = {
+			top: 0,
+			left: 0,
+			right: 0,
+			bottom: 0 };var BoxInspector = function (_React$Component) {
+			babelHelpers.inherits(BoxInspector, _React$Component);function BoxInspector() {
+				babelHelpers.classCallCheck(this, BoxInspector);return babelHelpers.possibleConstructorReturn(this, (BoxInspector.__proto__ || Object.getPrototypeOf(BoxInspector)).apply(this, arguments));
+			}babelHelpers.createClass(BoxInspector, [{ key: 'render', value: function render() {
+					var frame = this.props.frame;
+					var style = this.props.style;
+					var margin = style && resolveBoxStyle('margin', style) || blank;
+					var padding = style && resolveBoxStyle('padding', style) || blank;
+					return React.createElement(BoxContainer, { title: 'margin', titleStyle: styles.marginLabel, box: margin }, React.createElement(BoxContainer, { title: 'padding', box: padding }, React.createElement(View, null, React.createElement(Text, { style: styles.innerText }, '(', frame.left, ', ', frame.top, ')'), React.createElement(Text, { style: styles.innerText }, frame.width, ' \xD7 ', frame.height))));
+				} }]);return BoxInspector;
+		}(React.Component);var BoxContainer = function (_React$Component2) {
+			babelHelpers.inherits(BoxContainer, _React$Component2);function BoxContainer() {
+				babelHelpers.classCallCheck(this, BoxContainer);return babelHelpers.possibleConstructorReturn(this, (BoxContainer.__proto__ || Object.getPrototypeOf(BoxContainer)).apply(this, arguments));
+			}babelHelpers.createClass(BoxContainer, [{ key: 'render', value: function render() {
+					var box = this.props.box;
+					return React.createElement(View, { style: styles.box }, React.createElement(View, { style: styles.row }, React.createElement(Text, { style: [this.props.titleStyle, styles.label] }, this.props.title), React.createElement(Text, { style: styles.boxText }, box.top)), React.createElement(View, { style: styles.row }, React.createElement(Text, { style: styles.boxText }, box.left), this.props.children, React.createElement(Text, { style: styles.boxText }, box.right)), React.createElement(Text, { style: styles.boxText }, box.bottom));
+				} }]);return BoxContainer;
+		}(React.Component);
+
+		var styles = StyleSheet.create({
+			row: {
+				flexDirection: 'row',
+				alignItems: 'center',
+				justifyContent: 'space-around' },
+
+			marginLabel: {
+				width: 60 },
+
+			label: {
+				fontSize: 10,
+				color: 'rgb(255,100,0)',
+				marginLeft: 5,
+				flex: 1,
+				textAlign: 'left',
+				top: -3 },
+
+			buffer: {
+				fontSize: 10,
+				color: 'yellow',
+				flex: 1,
+				textAlign: 'center' },
+
+			innerText: {
+				color: 'yellow',
+				fontSize: 12,
+				textAlign: 'center',
+				width: 70 },
+
+			box: {
+				borderWidth: 1,
+				borderColor: 'grey' },
+
+			boxText: {
+				color: 'white',
+				fontSize: 12,
+				marginHorizontal: 3,
+				marginVertical: 2,
+				textAlign: 'center' } });
+
+		module.exports = BoxInspector;
+	}, // Libraries/Inspector/StyleInspector.js
+	function (__inner_require__, exports, module) {
+		var React = require('react-native@0.37/Libraries/react-native/React.js');
+		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
+		var Text = __inner_require__(5 /*Libraries/Text/Text.js*/);
+		var View = require('react-native@0.37/Libraries/Components/View/View.js');var StyleInspector = function (_React$Component) {
+			babelHelpers.inherits(StyleInspector, _React$Component);function StyleInspector() {
+				babelHelpers.classCallCheck(this, StyleInspector);return babelHelpers.possibleConstructorReturn(this, (StyleInspector.__proto__ || Object.getPrototypeOf(StyleInspector)).apply(this, arguments));
+			}babelHelpers.createClass(StyleInspector, [{ key: 'render', value: function render() {
+					var _this2 = this;
+					if (!this.props.style) {
+						return React.createElement(Text, { style: styles.noStyle }, 'No style');
+					}
+					var names = Object.keys(this.props.style);
+					return React.createElement(View, { style: styles.container }, React.createElement(View, null, names.map(function (name) {
+						return React.createElement(Text, { key: name, style: styles.attr }, name, ':');
+					})), React.createElement(View, null, names.map(function (name) {
+						var value = typeof _this2.props.style[name] === 'object' ? JSON.stringify(_this2.props.style[name]) : _this2.props.style[name];
+						return React.createElement(Text, { key: name, style: styles.value }, value);
+					})));
+				} }]);return StyleInspector;
+		}(React.Component);
+
+		var styles = StyleSheet.create({
+			container: {
+				flexDirection: 'row' },
+
+			row: {
+				flexDirection: 'row',
+				alignItems: 'center',
+				justifyContent: 'space-around' },
+
+			attr: {
+				fontSize: 10,
+				color: '#ccc' },
+
+			value: {
+				fontSize: 10,
+				color: 'white',
+				marginLeft: 10 },
+
+			noStyle: {
+				color: 'white',
+				fontSize: 10 } });
+
+		module.exports = StyleInspector;
+	}, // Libraries/Components/Touchable/TouchableHighlight.js
+	function (__inner_require__, exports, module) {
+		var ColorPropType = require('react-native@0.37/Libraries/StyleSheet/ColorPropType.js');
+		var NativeMethodsMixin = require('react@15.3/lib/NativeMethodsMixin.js');
+		var React = require('react-native@0.37/Libraries/react-native/React.js');
+		var ReactNativeViewAttributes = require('react-native@0.37/Libraries/Components/View/ReactNativeViewAttributes.js');
+		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
+		var TimerMixin = require('react-timer-mixin@0.13/TimerMixin.js');
+		var Touchable = __inner_require__(6 /*Libraries/Components/Touchable/Touchable.js*/);
+		var TouchableWithoutFeedback = __inner_require__(30 /*Libraries/Components/Touchable/TouchableWithoutFeedback.js*/);
+		var View = require('react-native@0.37/Libraries/Components/View/View.js');
+
+		var ensureComponentIsNative = __inner_require__(56 /*Libraries/Components/Touchable/ensureComponentIsNative.js*/);
+		var ensurePositiveDelayProps = __inner_require__(31 /*Libraries/Components/Touchable/ensurePositiveDelayProps.js*/);
+		var keyOf = require('fbjs@0.8/lib/keyOf.js');
+		var merge = require('react-native@0.37/Libraries/vendor/core/merge.js');
+
+		var DEFAULT_PROPS = {
+			activeOpacity: 0.85,
+			underlayColor: 'black' };
+
+		var PRESS_RETENTION_OFFSET = { top: 20, left: 20, right: 20, bottom: 30 };
+
+		var TouchableHighlight = React.createClass({ displayName: 'TouchableHighlight',
+			propTypes: babelHelpers.extends({}, TouchableWithoutFeedback.propTypes, {
+
+				activeOpacity: React.PropTypes.number,
+
+				underlayColor: ColorPropType,
+				style: View.propTypes.style,
+
+				onShowUnderlay: React.PropTypes.func,
+
+				onHideUnderlay: React.PropTypes.func }),
+
+			mixins: [NativeMethodsMixin, TimerMixin, Touchable.Mixin],
+
+			getDefaultProps: function getDefaultProps() {
+				return DEFAULT_PROPS;
+			},
+
+			_computeSyntheticState: function _computeSyntheticState(props) {
+				return {
+					activeProps: {
+						style: {
+							opacity: props.activeOpacity } },
+
+					activeUnderlayProps: {
+						style: {
+							backgroundColor: props.underlayColor } },
+
+					underlayStyle: [INACTIVE_UNDERLAY_PROPS.style, props.style] };
+			},
+
+			getInitialState: function getInitialState() {
+				return merge(this.touchableGetInitialState(), this._computeSyntheticState(this.props));
+			},
+
+			componentDidMount: function componentDidMount() {
+				ensurePositiveDelayProps(this.props);
+				ensureComponentIsNative(this.refs[CHILD_REF]);
+			},
+
+			componentDidUpdate: function componentDidUpdate() {
+				ensureComponentIsNative(this.refs[CHILD_REF]);
+			},
+
+			componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+				ensurePositiveDelayProps(nextProps);
+				if (nextProps.activeOpacity !== this.props.activeOpacity || nextProps.underlayColor !== this.props.underlayColor || nextProps.style !== this.props.style) {
+					this.setState(this._computeSyntheticState(nextProps));
+				}
+			},
+
+			viewConfig: {
+				uiViewClassName: 'RCTView',
+				validAttributes: ReactNativeViewAttributes.RCTView },
+
+			touchableHandleActivePressIn: function touchableHandleActivePressIn(e) {
+				this.clearTimeout(this._hideTimeout);
+				this._hideTimeout = null;
+				this._showUnderlay();
+				this.props.onPressIn && this.props.onPressIn(e);
+			},
+
+			touchableHandleActivePressOut: function touchableHandleActivePressOut(e) {
+				if (!this._hideTimeout) {
+					this._hideUnderlay();
+				}
+				this.props.onPressOut && this.props.onPressOut(e);
+			},
+
+			touchableHandlePress: function touchableHandlePress(e) {
+				this.clearTimeout(this._hideTimeout);
+				this._showUnderlay();
+				this._hideTimeout = this.setTimeout(this._hideUnderlay, this.props.delayPressOut || 100);
+				this.props.onPress && this.props.onPress(e);
+			},
+
+			touchableHandleLongPress: function touchableHandleLongPress(e) {
+				this.props.onLongPress && this.props.onLongPress(e);
+			},
+
+			touchableGetPressRectOffset: function touchableGetPressRectOffset() {
+				return this.props.pressRetentionOffset || PRESS_RETENTION_OFFSET;
+			},
+
+			touchableGetHitSlop: function touchableGetHitSlop() {
+				return this.props.hitSlop;
+			},
+
+			touchableGetHighlightDelayMS: function touchableGetHighlightDelayMS() {
+				return this.props.delayPressIn;
+			},
+
+			touchableGetLongPressDelayMS: function touchableGetLongPressDelayMS() {
+				return this.props.delayLongPress;
+			},
+
+			touchableGetPressOutDelayMS: function touchableGetPressOutDelayMS() {
+				return this.props.delayPressOut;
+			},
+
+			_showUnderlay: function _showUnderlay() {
+				if (!this.isMounted() || !this._hasPressHandler()) {
+					return;
+				}
+
+				this.refs[UNDERLAY_REF].setNativeProps(this.state.activeUnderlayProps);
+				this.refs[CHILD_REF].setNativeProps(this.state.activeProps);
+				this.props.onShowUnderlay && this.props.onShowUnderlay();
+			},
+
+			_hideUnderlay: function _hideUnderlay() {
+				this.clearTimeout(this._hideTimeout);
+				this._hideTimeout = null;
+				if (this._hasPressHandler() && this.refs[UNDERLAY_REF]) {
+					this.refs[CHILD_REF].setNativeProps(INACTIVE_CHILD_PROPS);
+					this.refs[UNDERLAY_REF].setNativeProps(babelHelpers.extends({}, INACTIVE_UNDERLAY_PROPS, {
+						style: this.state.underlayStyle }));
+
+					this.props.onHideUnderlay && this.props.onHideUnderlay();
+				}
+			},
+
+			_hasPressHandler: function _hasPressHandler() {
+				return !!(this.props.onPress || this.props.onPressIn || this.props.onPressOut || this.props.onLongPress);
+			},
+
+			render: function render() {
+				return React.createElement(View, {
+					accessible: this.props.accessible !== false,
+					accessibilityLabel: this.props.accessibilityLabel,
+					accessibilityComponentType: this.props.accessibilityComponentType,
+					accessibilityTraits: this.props.accessibilityTraits,
+					ref: UNDERLAY_REF,
+					style: this.state.underlayStyle,
+					onLayout: this.props.onLayout,
+					hitSlop: this.props.hitSlop,
+					onStartShouldSetResponder: this.touchableHandleStartShouldSetResponder,
+					onResponderTerminationRequest: this.touchableHandleResponderTerminationRequest,
+					onResponderGrant: this.touchableHandleResponderGrant,
+					onResponderMove: this.touchableHandleResponderMove,
+					onResponderRelease: this.touchableHandleResponderRelease,
+					onResponderTerminate: this.touchableHandleResponderTerminate,
+					testID: this.props.testID }, React.cloneElement(React.Children.only(this.props.children), {
+					ref: CHILD_REF }), Touchable.renderDebugView({ color: 'green', hitSlop: this.props.hitSlop }));
+			} });
+
+		var CHILD_REF = keyOf({ childRef: null });
+		var UNDERLAY_REF = keyOf({ underlayRef: null });
+		var INACTIVE_CHILD_PROPS = {
+			style: StyleSheet.create({ x: { opacity: 1.0 } }).x };
+
+		var INACTIVE_UNDERLAY_PROPS = {
+			style: StyleSheet.create({ x: { backgroundColor: 'transparent' } }).x };
+
+		module.exports = TouchableHighlight;
+	}, // Libraries/Components/Touchable/ensureComponentIsNative.js
+	function (__inner_require__, exports, module) {
+		var invariant = require('fbjs@0.8/lib/invariant.js');
+
+		var ensureComponentIsNative = function ensureComponentIsNative(component) {
+			invariant(component && typeof component.setNativeProps === 'function', 'Touchable child must either be native or forward setNativeProps to a ' + 'native component');
+		};
+
+		module.exports = ensureComponentIsNative;
+	}, // Libraries/Utilities/mapWithSeparator.js
+	function (__inner_require__, exports, module) {
+		function mapWithSeparator(items, itemRenderer, spacerRenderer) {
+			var mapped = [];
+			if (items.length > 0) {
+				mapped.push(itemRenderer(items[0], 0, items));
+				for (var ii = 1; ii < items.length; ii++) {
+					mapped.push(spacerRenderer(ii - 1), itemRenderer(items[ii], ii, items));
+				}
+			}
+			return mapped;
+		}
+
+		module.exports = mapWithSeparator;
+	}, // Libraries/Core/Devtools/openFileInEditor.js
+	function (__inner_require__, exports, module) {
+		var getDevServer = require('react-native@0.37/Libraries/Core/Devtools/getDevServer.js');
+
+		function openFileInEditor(file, lineNumber) {
+			fetch(getDevServer().url + 'open-stack-frame', {
+				method: 'POST',
+				body: JSON.stringify({ file: file, lineNumber: lineNumber }) });
+		}
+
+		module.exports = openFileInEditor;
+	}, // Libraries/Inspector/PerformanceOverlay.js
+	function (__inner_require__, exports, module) {
+		var PerformanceLogger = require('react-native@0.37/Libraries/Utilities/PerformanceLogger.js');
+		var React = require('react-native@0.37/Libraries/react-native/React.js');
+		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
+		var Text = __inner_require__(5 /*Libraries/Text/Text.js*/);
+		var View = require('react-native@0.37/Libraries/Components/View/View.js');var PerformanceOverlay = function (_React$Component) {
+			babelHelpers.inherits(PerformanceOverlay, _React$Component);function PerformanceOverlay() {
+				babelHelpers.classCallCheck(this, PerformanceOverlay);return babelHelpers.possibleConstructorReturn(this, (PerformanceOverlay.__proto__ || Object.getPrototypeOf(PerformanceOverlay)).apply(this, arguments));
+			}babelHelpers.createClass(PerformanceOverlay, [{ key: 'render', value: function render() {
+					var perfLogs = PerformanceLogger.getTimespans();
+					var items = [];
+
+					for (var key in perfLogs) {
+						if (perfLogs[key].totalTime) {
+							var unit = key === 'BundleSize' ? 'b' : 'ms';
+							items.push(React.createElement(View, { style: styles.row, key: key }, React.createElement(Text, { style: [styles.text, styles.label] }, key), React.createElement(Text, { style: [styles.text, styles.totalTime] }, perfLogs[key].totalTime + unit)));
+						}
+					}
+
+					return React.createElement(View, { style: styles.container }, items);
+				} }]);return PerformanceOverlay;
+		}(React.Component);
+
+		var styles = StyleSheet.create({
+			container: {
+				height: 100,
+				paddingTop: 10 },
+
+			label: {
+				flex: 1 },
+
+			row: {
+				flexDirection: 'row',
+				paddingHorizontal: 10 },
+
+			text: {
+				color: 'white',
+				fontSize: 12 },
+
+			totalTime: {
+				paddingRight: 100 } });
+
+		module.exports = PerformanceOverlay;
+	}, // Libraries/Inspector/NetworkOverlay.js
+	function (__inner_require__, exports, module) {
+		var ListView = __inner_require__(38 /*Libraries/CustomComponents/ListView/ListView.js*/);
+		var React = require('react-native@0.37/Libraries/react-native/React.js');
+		var RecyclerViewBackedScrollView = __inner_require__(61 /*Libraries/Components/ScrollView/RecyclerViewBackedScrollView.ios.js*/);
+		var ScrollView = __inner_require__(24 /*Libraries/Components/ScrollView/ScrollView.js*/);
+		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
+		var Text = __inner_require__(5 /*Libraries/Text/Text.js*/);
+		var TouchableHighlight = __inner_require__(55 /*Libraries/Components/Touchable/TouchableHighlight.js*/);
+		var View = require('react-native@0.37/Libraries/Components/View/View.js');
+		var WebSocketInterceptor = __inner_require__(62 /*Libraries/WebSocket/WebSocketInterceptor.js*/);
+		var XHRInterceptor = __inner_require__(63 /*Libraries/Network/XHRInterceptor.js*/);
+
+		var LISTVIEW_CELL_HEIGHT = 15;
+		var SEPARATOR_THICKNESS = 2;
+
+		var nextXHRId = 0;var NetworkOverlay = function (_React$Component) {
+			babelHelpers.inherits(NetworkOverlay, _React$Component);
+
+			function NetworkOverlay(props) {
+				babelHelpers.classCallCheck(this, NetworkOverlay);var _this = babelHelpers.possibleConstructorReturn(this, (NetworkOverlay.__proto__ || Object.getPrototypeOf(NetworkOverlay)).call(this, props));
+				_this._requests = [];
+				_this._detailViewItems = [];
+				_this._listViewDataSource = new ListView.DataSource({ rowHasChanged: function rowHasChanged(r1, r2) {
+						return r1 !== r2;
+					} });
+				_this.state = {
+					dataSource: _this._listViewDataSource.cloneWithRows([]),
+					newDetailInfo: false,
+					detailRowID: null };
+
+				_this._listViewHighlighted = false;
+				_this._listViewHeight = 0;
+				_this._captureRequestListView = _this._captureRequestListView.bind(_this);
+				_this._captureDetailScrollView = _this._captureDetailScrollView.bind(_this);
+				_this._listViewOnLayout = _this._listViewOnLayout.bind(_this);
+				_this._renderRow = _this._renderRow.bind(_this);
+				_this._renderScrollComponent = _this._renderScrollComponent.bind(_this);
+				_this._closeButtonClicked = _this._closeButtonClicked.bind(_this);
+				_this._socketIdMap = {};
+				_this._xhrIdMap = {};return _this;
+			}babelHelpers.createClass(NetworkOverlay, [{ key: '_enableXHRInterception', value: function _enableXHRInterception() {
+					var _this2 = this;
+					if (XHRInterceptor.isInterceptorEnabled()) {
+						return;
+					}
+
+					XHRInterceptor.setOpenCallback(function (method, url, xhr) {
+
+						xhr._index = nextXHRId++;
+						var xhrIndex = _this2._requests.length;
+						_this2._xhrIdMap[xhr._index] = xhrIndex;
+
+						var _xhr = {
+							'type': 'XMLHttpRequest',
+							'method': method,
+							'url': url };
+
+						_this2._requests.push(_xhr);
+						_this2._detailViewItems.push([]);
+						_this2._genDetailViewItem(xhrIndex);
+						_this2.setState({ dataSource: _this2._listViewDataSource.cloneWithRows(_this2._requests) }, _this2._scrollToBottom());
+					});
+
+					XHRInterceptor.setRequestHeaderCallback(function (header, value, xhr) {
+						var xhrIndex = _this2._getRequestIndexByXHRID(xhr._index);
+						if (xhrIndex === -1) {
+							return;
+						}
+						var networkInfo = _this2._requests[xhrIndex];
+						if (!networkInfo.requestHeaders) {
+							networkInfo.requestHeaders = {};
+						}
+						networkInfo.requestHeaders[header] = value;
+						_this2._genDetailViewItem(xhrIndex);
+					});
+
+					XHRInterceptor.setSendCallback(function (data, xhr) {
+						var xhrIndex = _this2._getRequestIndexByXHRID(xhr._index);
+						if (xhrIndex === -1) {
+							return;
+						}
+						_this2._requests[xhrIndex].dataSent = data;
+						_this2._genDetailViewItem(xhrIndex);
+					});
+
+					XHRInterceptor.setHeaderReceivedCallback(function (type, size, responseHeaders, xhr) {
+						var xhrIndex = _this2._getRequestIndexByXHRID(xhr._index);
+						if (xhrIndex === -1) {
+							return;
+						}
+						var networkInfo = _this2._requests[xhrIndex];
+						networkInfo.responseContentType = type;
+						networkInfo.responseSize = size;
+						networkInfo.responseHeaders = responseHeaders;
+						_this2._genDetailViewItem(xhrIndex);
+					});
+
+					XHRInterceptor.setResponseCallback(function (status, timeout, response, responseURL, responseType, xhr) {
+						var xhrIndex = _this2._getRequestIndexByXHRID(xhr._index);
+						if (xhrIndex === -1) {
+							return;
+						}
+						var networkInfo = _this2._requests[xhrIndex];
+						networkInfo.status = status;
+						networkInfo.timeout = timeout;
+						networkInfo.response = response;
+						networkInfo.responseURL = responseURL;
+						networkInfo.responseType = responseType;
+						_this2._genDetailViewItem(xhrIndex);
+					});
+
+					XHRInterceptor.enableInterception();
+				} }, { key: '_enableWebSocketInterception', value: function _enableWebSocketInterception() {
+					var _this3 = this;
+					if (WebSocketInterceptor.isInterceptorEnabled()) {
+						return;
+					}
+
+					WebSocketInterceptor.setConnectCallback(function (url, protocols, options, socketId) {
+						var socketIndex = _this3._requests.length;
+						_this3._socketIdMap[socketId] = socketIndex;
+						var _webSocket = {
+							'type': 'WebSocket',
+							'url': url,
+							'protocols': protocols };
+
+						_this3._requests.push(_webSocket);
+						_this3._detailViewItems.push([]);
+						_this3._genDetailViewItem(socketIndex);
+						_this3.setState({ dataSource: _this3._listViewDataSource.cloneWithRows(_this3._requests) }, _this3._scrollToBottom());
+					});
+
+					WebSocketInterceptor.setCloseCallback(function (statusCode, closeReason, socketId) {
+						var socketIndex = _this3._socketIdMap[socketId];
+						if (socketIndex === undefined) {
+							return;
+						}
+						if (statusCode !== null && closeReason !== null) {
+							_this3._requests[socketIndex].status = statusCode;
+							_this3._requests[socketIndex].closeReason = closeReason;
+						}
+						_this3._genDetailViewItem(socketIndex);
+					});
+
+					WebSocketInterceptor.setSendCallback(function (data, socketId) {
+						var socketIndex = _this3._socketIdMap[socketId];
+						if (socketIndex === undefined) {
+							return;
+						}
+						if (!_this3._requests[socketIndex].messages) {
+							_this3._requests[socketIndex].messages = '';
+						}
+						_this3._requests[socketIndex].messages += 'Sent: ' + JSON.stringify(data) + '\n';
+						_this3._genDetailViewItem(socketIndex);
+					});
+
+					WebSocketInterceptor.setOnMessageCallback(function (socketId, message) {
+						var socketIndex = _this3._socketIdMap[socketId];
+						if (socketIndex === undefined) {
+							return;
+						}
+						if (!_this3._requests[socketIndex].messages) {
+							_this3._requests[socketIndex].messages = '';
+						}
+						_this3._requests[socketIndex].messages += 'Received: ' + JSON.stringify(message) + '\n';
+						_this3._genDetailViewItem(socketIndex);
+					});
+
+					WebSocketInterceptor.setOnCloseCallback(function (socketId, message) {
+						var socketIndex = _this3._socketIdMap[socketId];
+						if (socketIndex === undefined) {
+							return;
+						}
+						_this3._requests[socketIndex].serverClose = message;
+						_this3._genDetailViewItem(socketIndex);
+					});
+
+					WebSocketInterceptor.setOnErrorCallback(function (socketId, message) {
+						var socketIndex = _this3._socketIdMap[socketId];
+						if (socketIndex === undefined) {
+							return;
+						}
+						_this3._requests[socketIndex].serverError = message;
+						_this3._genDetailViewItem(socketIndex);
+					});
+
+					WebSocketInterceptor.enableInterception();
+				} }, { key: 'componentDidMount', value: function componentDidMount() {
+					this._enableXHRInterception();
+					this._enableWebSocketInterception();
+				} }, { key: 'componentWillUnmount', value: function componentWillUnmount() {
+					XHRInterceptor.disableInterception();
+					WebSocketInterceptor.disableInterception();
+				} }, { key: '_renderRow', value: function _renderRow(rowData, sectionID, rowID, highlightRow) {
+					var _this4 = this;
+					var urlCellViewStyle = styles.urlEvenCellView;
+					var methodCellViewStyle = styles.methodEvenCellView;
+					if (rowID % 2 === 1) {
+						urlCellViewStyle = styles.urlOddCellView;
+						methodCellViewStyle = styles.methodOddCellView;
+					}
+					return React.createElement(TouchableHighlight, { onPress: function onPress() {
+							_this4._pressRow(rowID);
+							highlightRow(sectionID, rowID);
+						} }, React.createElement(View, null, React.createElement(View, { style: styles.tableRow }, React.createElement(View, { style: urlCellViewStyle }, React.createElement(Text, { style: styles.cellText, numberOfLines: 1 }, rowData.url)), React.createElement(View, { style: methodCellViewStyle }, React.createElement(Text, { style: styles.cellText, numberOfLines: 1 }, this._getTypeShortName(rowData.type))))));
+				} }, { key: '_renderSeperator', value: function _renderSeperator(sectionID, rowID, adjacentRowHighlighted) {
+					return React.createElement(View, {
+						key: sectionID + '-' + rowID,
+						style: {
+							height: adjacentRowHighlighted ? SEPARATOR_THICKNESS : 0,
+							backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC' } });
+				} }, { key: '_scrollToBottom', value: function _scrollToBottom() {
+					if (this._listView) {
+						var scrollResponder = this._listView.getScrollResponder();
+						if (scrollResponder) {
+							var scrollY = Math.max(this._requests.length * LISTVIEW_CELL_HEIGHT + (this._listViewHighlighted ? 2 * SEPARATOR_THICKNESS : 0) - this._listViewHeight, 0);
+
+							scrollResponder.scrollResponderScrollTo({
+								x: 0,
+								y: scrollY,
+								animated: true });
+						}
+					}
+				} }, { key: '_captureRequestListView', value: function _captureRequestListView(listRef) {
+					this._listView = listRef;
+				} }, { key: '_listViewOnLayout', value: function _listViewOnLayout(event) {
+					var height = event.nativeEvent.layout.height;
+					this._listViewHeight = height;
+				} }, { key: '_renderScrollComponent', value: function _renderScrollComponent(props) {
+					return React.createElement(RecyclerViewBackedScrollView, props);
+				} }, { key: '_pressRow', value: function _pressRow(rowID) {
+					this._listViewHighlighted = true;
+					this.setState({ detailRowID: rowID }, this._scrollToTop());
+				} }, { key: '_scrollToTop', value: function _scrollToTop() {
+					if (this._scrollView) {
+						this._scrollView.scrollTo({
+							y: 0,
+							animated: false });
+					}
+				} }, { key: '_captureDetailScrollView', value: function _captureDetailScrollView(scrollRef) {
+					this._scrollView = scrollRef;
+				} }, { key: '_closeButtonClicked', value: function _closeButtonClicked() {
+					this.setState({ detailRowID: null });
+				} }, { key: '_getStringByValue', value: function _getStringByValue(value) {
+					if (value === undefined) {
+						return 'undefined';
+					}
+					if (typeof value === 'object') {
+						return JSON.stringify(value);
+					}
+					if (typeof value === 'string' && value.length > 500) {
+						return String(value).substr(0, 500).concat('\n***TRUNCATED TO 500 CHARACTERS***');
+					}
+					return value;
+				} }, { key: '_getRequestIndexByXHRID', value: function _getRequestIndexByXHRID(index) {
+					if (index === undefined) {
+						return -1;
+					}
+					var xhrIndex = this._xhrIdMap[index];
+					if (xhrIndex === undefined) {
+						return -1;
+					} else {
+						return xhrIndex;
+					}
+				} }, { key: '_getTypeShortName', value: function _getTypeShortName(type) {
+					if (type === 'XMLHttpRequest') {
+						return 'XHR';
+					} else if (type === 'WebSocket') {
+						return 'WS';
+					}
+
+					return '';
+				} }, { key: '_genDetailViewItem', value: function _genDetailViewItem(index) {
+					this._detailViewItems[index] = [];
+					var detailViewItem = this._detailViewItems[index];
+					var requestItem = this._requests[index];
+					for (var _key in requestItem) {
+						detailViewItem.push(React.createElement(View, { style: styles.detailViewRow, key: _key }, React.createElement(Text, { style: [styles.detailViewText, styles.detailKeyCellView] }, _key), React.createElement(Text, { style: [styles.detailViewText, styles.detailValueCellView] }, this._getStringByValue(requestItem[_key]))));
+					}
+
+					if (this.state.detailRowID != null && Number(this.state.detailRowID) === index) {
+						this.setState({ newDetailInfo: true });
+					}
+				} }, { key: 'render', value: function render() {
+					return React.createElement(View, { style: styles.container }, this.state.detailRowID != null && React.createElement(TouchableHighlight, {
+						style: styles.closeButton,
+						onPress: this._closeButtonClicked }, React.createElement(View, null, React.createElement(Text, { style: styles.clostButtonText }, 'v'))), this.state.detailRowID != null && React.createElement(ScrollView, {
+						style: styles.detailScrollView,
+						ref: this._captureDetailScrollView }, this._detailViewItems[this.state.detailRowID]), React.createElement(View, { style: styles.listViewTitle }, this._requests.length > 0 && React.createElement(View, { style: styles.tableRow }, React.createElement(View, { style: styles.urlTitleCellView }, React.createElement(Text, { style: styles.cellText, numberOfLines: 1 }, 'URL')), React.createElement(View, { style: styles.methodTitleCellView }, React.createElement(Text, { style: styles.cellText, numberOfLines: 1 }, 'Type')))), React.createElement(ListView, {
+						style: styles.listView,
+						ref: this._captureRequestListView,
+						dataSource: this.state.dataSource,
+						renderRow: this._renderRow,
+						renderScrollComponent: this._renderScrollComponent,
+						enableEmptySections: true,
+						renderSeparator: this._renderSeperator,
+						onLayout: this._listViewOnLayout }));
+				} }]);return NetworkOverlay;
+		}(React.Component);
+
+		var styles = StyleSheet.create({
+			container: {
+				paddingTop: 10,
+				paddingBottom: 10,
+				paddingLeft: 5,
+				paddingRight: 5 },
+
+			listViewTitle: {
+				height: 20 },
+
+			listView: {
+				flex: 1,
+				height: 60 },
+
+			tableRow: {
+				flexDirection: 'row',
+				flex: 1 },
+
+			cellText: {
+				color: 'white',
+				fontSize: 12 },
+
+			methodTitleCellView: {
+				height: 18,
+				borderColor: '#DCD7CD',
+				borderTopWidth: 1,
+				borderBottomWidth: 1,
+				borderRightWidth: 1,
+				alignItems: 'center',
+				justifyContent: 'center',
+				backgroundColor: '#444',
+				flex: 1 },
+
+			urlTitleCellView: {
+				height: 18,
+				borderColor: '#DCD7CD',
+				borderTopWidth: 1,
+				borderBottomWidth: 1,
+				borderLeftWidth: 1,
+				borderRightWidth: 1,
+				justifyContent: 'center',
+				backgroundColor: '#444',
+				flex: 5,
+				paddingLeft: 3 },
+
+			methodOddCellView: {
+				height: 15,
+				borderColor: '#DCD7CD',
+				borderRightWidth: 1,
+				alignItems: 'center',
+				justifyContent: 'center',
+				backgroundColor: '#000',
+				flex: 1 },
+
+			urlOddCellView: {
+				height: 15,
+				borderColor: '#DCD7CD',
+				borderLeftWidth: 1,
+				borderRightWidth: 1,
+				justifyContent: 'center',
+				backgroundColor: '#000',
+				flex: 5,
+				paddingLeft: 3 },
+
+			methodEvenCellView: {
+				height: 15,
+				borderColor: '#DCD7CD',
+				borderRightWidth: 1,
+				alignItems: 'center',
+				justifyContent: 'center',
+				backgroundColor: '#888',
+				flex: 1 },
+
+			urlEvenCellView: {
+				height: 15,
+				borderColor: '#DCD7CD',
+				borderLeftWidth: 1,
+				borderRightWidth: 1,
+				justifyContent: 'center',
+				backgroundColor: '#888',
+				flex: 5,
+				paddingLeft: 3 },
+
+			detailScrollView: {
+				flex: 1,
+				height: 180,
+				marginTop: 5,
+				marginBottom: 5 },
+
+			detailKeyCellView: {
+				flex: 1.3 },
+
+			detailValueCellView: {
+				flex: 2 },
+
+			detailViewRow: {
+				flexDirection: 'row',
+				paddingHorizontal: 3 },
+
+			detailViewText: {
+				color: 'white',
+				fontSize: 11 },
+
+			clostButtonText: {
+				color: 'white',
+				fontSize: 10 },
+
+			closeButton: {
+				marginTop: 5,
+				backgroundColor: '#888',
+				justifyContent: 'center',
+				alignItems: 'center' } });
+
+		module.exports = NetworkOverlay;
+	}, // Libraries/Components/ScrollView/RecyclerViewBackedScrollView.ios.js
+	function (__inner_require__, exports, module) {
+		module.exports = __inner_require__(24 /*Libraries/Components/ScrollView/ScrollView.js*/);
+	}, // Libraries/WebSocket/WebSocketInterceptor.js
+	function (__inner_require__, exports, module) {
+		var RCTWebSocketModule = require('react-native@0.37/Libraries/BatchedBridge/NativeModules.js').WebSocketModule;
+		var NativeEventEmitter = require('react-native@0.37/Libraries/EventEmitter/NativeEventEmitter.js');
+
+		var base64 = require('base64-js@1/index.js');
+
+		var originalRCTWebSocketConnect = RCTWebSocketModule.connect;
+		var originalRCTWebSocketSend = RCTWebSocketModule.send;
+		var originalRCTWebSocketSendBinary = RCTWebSocketModule.sendBinary;
+		var originalRCTWebSocketClose = RCTWebSocketModule.close;
+
+		var eventEmitter = void 0;
+		var subscriptions = void 0;
+
+		var closeCallback = void 0;
+		var sendCallback = void 0;
+		var connectCallback = void 0;
+		var onOpenCallback = void 0;
+		var onMessageCallback = void 0;
+		var onErrorCallback = void 0;
+		var onCloseCallback = void 0;
+
+		var _isInterceptorEnabled = false;
+
+		var WebSocketInterceptor = {
+
+			setCloseCallback: function setCloseCallback(callback) {
+				closeCallback = callback;
+			},
+
+			setSendCallback: function setSendCallback(callback) {
+				sendCallback = callback;
+			},
+
+			setConnectCallback: function setConnectCallback(callback) {
+				connectCallback = callback;
+			},
+
+			setOnOpenCallback: function setOnOpenCallback(callback) {
+				onOpenCallback = callback;
+			},
+
+			setOnMessageCallback: function setOnMessageCallback(callback) {
+				onMessageCallback = callback;
+			},
+
+			setOnErrorCallback: function setOnErrorCallback(callback) {
+				onErrorCallback = callback;
+			},
+
+			setOnCloseCallback: function setOnCloseCallback(callback) {
+				onCloseCallback = callback;
+			},
+
+			isInterceptorEnabled: function isInterceptorEnabled() {
+				return _isInterceptorEnabled;
+			},
+
+			_unregisterEvents: function _unregisterEvents() {
+				subscriptions.forEach(function (e) {
+					return e.remove();
+				});
+				subscriptions = [];
+			},
+
+			_registerEvents: function _registerEvents() {
+				subscriptions = [eventEmitter.addListener('websocketMessage', function (ev) {
+					if (onMessageCallback) {
+						onMessageCallback(ev.id, ev.type === 'binary' ? WebSocketInterceptor._arrayBufferToString(ev.data) : ev.data);
+					}
+				}), eventEmitter.addListener('websocketOpen', function (ev) {
+					if (onOpenCallback) {
+						onOpenCallback(ev.id);
+					}
+				}), eventEmitter.addListener('websocketClosed', function (ev) {
+					if (onCloseCallback) {
+						onCloseCallback(ev.id, { code: ev.code, reason: ev.reason });
+					}
+				}), eventEmitter.addListener('websocketFailed', function (ev) {
+					if (onErrorCallback) {
+						onErrorCallback(ev.id, { message: ev.message });
+					}
+				})];
+			},
+
+			enableInterception: function enableInterception() {
+				if (_isInterceptorEnabled) {
+					return;
+				}
+				eventEmitter = new NativeEventEmitter(RCTWebSocketModule);
+				WebSocketInterceptor._registerEvents();
+
+				RCTWebSocketModule.connect = function (url, protocols, options, socketId) {
+					if (connectCallback) {
+						connectCallback(url, protocols, options, socketId);
+					}
+					originalRCTWebSocketConnect.apply(this, arguments);
+				};
+
+				RCTWebSocketModule.send = function (data, socketId) {
+					if (sendCallback) {
+						sendCallback(data, socketId);
+					}
+					originalRCTWebSocketSend.apply(this, arguments);
+				};
+
+				RCTWebSocketModule.sendBinary = function (data, socketId) {
+					if (sendCallback) {
+						sendCallback(WebSocketInterceptor._arrayBufferToString(data), socketId);
+					}
+					originalRCTWebSocketSendBinary.apply(this, arguments);
+				};
+
+				RCTWebSocketModule.close = function () {
+					if (closeCallback) {
+						if (arguments.length === 3) {
+							closeCallback(arguments[0], arguments[1], arguments[2]);
+						} else {
+							closeCallback(null, null, arguments[0]);
+						}
+					}
+					originalRCTWebSocketClose.apply(this, arguments);
+				};
+
+				_isInterceptorEnabled = true;
+			},
+
+			_arrayBufferToString: function _arrayBufferToString(data) {
+				var value = base64.toByteArray(data).buffer;
+				if (value === undefined || value === null) {
+					return '(no value)';
+				}
+				if (typeof ArrayBuffer !== 'undefined' && typeof Uint8Array !== 'undefined' && value instanceof ArrayBuffer) {
+					return 'ArrayBuffer {' + String(Array.from(new Uint8Array(value))) + '}';
+				}
+				return value;
+			},
+
+			disableInterception: function disableInterception() {
+				if (!_isInterceptorEnabled) {
+					return;
+				}
+				_isInterceptorEnabled = false;
+				RCTWebSocketModule.send = originalRCTWebSocketSend;
+				RCTWebSocketModule.sendBinary = originalRCTWebSocketSendBinary;
+				RCTWebSocketModule.close = originalRCTWebSocketClose;
+				RCTWebSocketModule.connect = originalRCTWebSocketConnect;
+
+				connectCallback = null;
+				closeCallback = null;
+				sendCallback = null;
+				onOpenCallback = null;
+				onMessageCallback = null;
+				onCloseCallback = null;
+				onErrorCallback = null;
+
+				WebSocketInterceptor._unregisterEvents();
+			} };
+
+		module.exports = WebSocketInterceptor;
+	}, // Libraries/Network/XHRInterceptor.js
+	function (__inner_require__, exports, module) {
+		var XMLHttpRequest = require('react-native@0.37/Libraries/Network/XMLHttpRequest.js');
+		var originalXHROpen = XMLHttpRequest.prototype.open;
+		var originalXHRSend = XMLHttpRequest.prototype.send;
+		var originalXHRSetRequestHeader = XMLHttpRequest.prototype.setRequestHeader;
+
+		var openCallback;
+		var sendCallback;
+		var requestHeaderCallback;
+		var headerReceivedCallback;
+		var responseCallback;
+
+		var _isInterceptorEnabled = false;
+
+		var XHRInterceptor = {
+
+			setOpenCallback: function setOpenCallback(callback) {
+				openCallback = callback;
+			},
+
+			setSendCallback: function setSendCallback(callback) {
+				sendCallback = callback;
+			},
+
+			setHeaderReceivedCallback: function setHeaderReceivedCallback(callback) {
+				headerReceivedCallback = callback;
+			},
+
+			setResponseCallback: function setResponseCallback(callback) {
+				responseCallback = callback;
+			},
+
+			setRequestHeaderCallback: function setRequestHeaderCallback(callback) {
+				requestHeaderCallback = callback;
+			},
+
+			isInterceptorEnabled: function isInterceptorEnabled() {
+				return _isInterceptorEnabled;
+			},
+
+			enableInterception: function enableInterception() {
+				if (_isInterceptorEnabled) {
+					return;
+				}
+
+				XMLHttpRequest.prototype.open = function (method, url) {
+					if (openCallback) {
+						openCallback(method, url, this);
+					}
+					originalXHROpen.apply(this, arguments);
+				};
+
+				XMLHttpRequest.prototype.setRequestHeader = function (header, value) {
+					if (requestHeaderCallback) {
+						requestHeaderCallback(header, value, this);
+					}
+					originalXHRSetRequestHeader.apply(this, arguments);
+				};
+
+				XMLHttpRequest.prototype.send = function (data) {
+					var _this = this;
+					if (sendCallback) {
+						sendCallback(data, this);
+					}
+					if (this.addEventListener) {
+						this.addEventListener('readystatechange', function () {
+							if (!_isInterceptorEnabled) {
+								return;
+							}
+							if (_this.readyState === _this.HEADERS_RECEIVED) {
+								var contentTypeString = _this.getResponseHeader('Content-Type');
+								var contentLengthString = _this.getResponseHeader('Content-Length');
+								var responseContentType = void 0,
+								    responseSize = void 0;
+								if (contentTypeString) {
+									responseContentType = contentTypeString.split(';')[0];
+								}
+								if (contentLengthString) {
+									responseSize = parseInt(contentLengthString, 10);
+								}
+								if (headerReceivedCallback) {
+									headerReceivedCallback(responseContentType, responseSize, _this.getAllResponseHeaders(), _this);
+								}
+							}
+							if (_this.readyState === _this.DONE) {
+								if (responseCallback) {
+									responseCallback(_this.status, _this.timeout, _this.response, _this.responseURL, _this.responseType, _this);
+								}
+							}
+						}, false);
+					}
+					originalXHRSend.apply(this, arguments);
+				};
+				_isInterceptorEnabled = true;
+			},
+
+			disableInterception: function disableInterception() {
+				if (!_isInterceptorEnabled) {
+					return;
+				}
+				_isInterceptorEnabled = false;
+				XMLHttpRequest.prototype.send = originalXHRSend;
+				XMLHttpRequest.prototype.open = originalXHROpen;
+				XMLHttpRequest.prototype.setRequestHeader = originalXHRSetRequestHeader;
+				responseCallback = null;
+				openCallback = null;
+				sendCallback = null;
+				headerReceivedCallback = null;
+				requestHeaderCallback = null;
+			} };
+
+		module.exports = XHRInterceptor;
+	}, // Libraries/ReactNative/YellowBox.js
+	function (__inner_require__, exports, module) {
+		var EventEmitter = require('react-native@0.37/Libraries/EventEmitter/EventEmitter.js');
+		var Platform = require('react-native@0.37/Libraries/Utilities/Platform.ios.js');
+		var React = require('react-native@0.37/Libraries/react-native/React.js');
+		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
+
+		var infoLog = __inner_require__(16 /*Libraries/Utilities/infoLog.js*/);
+		var openFileInEditor = __inner_require__(58 /*Libraries/Core/Devtools/openFileInEditor.js*/);
+		var parseErrorStack = require('react-native@0.37/Libraries/Core/Devtools/parseErrorStack.js');
+		var symbolicateStackTrace = require('react-native@0.37/Libraries/Core/Devtools/symbolicateStackTrace.js');
+
+		var _warningEmitter = new EventEmitter();
+		var _warningMap = new Map();
+
+		if (__DEV__) {
+			(function () {
+				var _console = console,
+				    error = _console.error,
+				    warn = _console.warn;
+				console.error = function () {
+					error.apply(console, arguments);
+
+					if (typeof arguments[0] === 'string' && arguments[0].startsWith('Warning: ')) {
+						updateWarningMap.apply(null, arguments);
+					}
+				};
+				console.warn = function () {
+					warn.apply(console, arguments);
+					updateWarningMap.apply(null, arguments);
+				};
+			})();
+		}
+
+		function sprintf(format) {
+			for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+				args[_key - 1] = arguments[_key];
+			}
+			var index = 0;
+			return format.replace(/%s/g, function (match) {
+				return args[index++];
+			});
+		}
+
+		function updateWarningMap(format) {
+			if (console.disableYellowBox) {
+				return;
+			}
+			var stringifySafe = require('react-native@0.37/Libraries/Utilities/stringifySafe.js');
+
+			format = String(format);
+			var argCount = (format.match(/%s/g) || []).length;for (var _len2 = arguments.length, args = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+				args[_key2 - 1] = arguments[_key2];
+			}
+			var warning = [sprintf.apply(undefined, [format].concat(babelHelpers.toConsumableArray(args.slice(0, argCount))))].concat(babelHelpers.toConsumableArray(args.slice(argCount).map(stringifySafe))).join(' ');
+
+			var warningInfo = _warningMap.get(warning);
+			if (warningInfo) {
+				warningInfo.count += 1;
+			} else {
+				var _error = new Error();
+				_error.framesToPop = 2;
+
+				_warningMap.set(warning, {
+					count: 1,
+					stacktrace: parseErrorStack(_error),
+					symbolicated: false });
+			}
+
+			_warningEmitter.emit('warning', _warningMap);
+		}
+
+		function ensureSymbolicatedWarning(warning) {
+			var prevWarningInfo = _warningMap.get(warning);
+			if (!prevWarningInfo || prevWarningInfo.symbolicated) {
+				return;
+			}
+			prevWarningInfo.symbolicated = true;
+
+			symbolicateStackTrace(prevWarningInfo.stacktrace).then(function (stack) {
+				var nextWarningInfo = _warningMap.get(warning);
+				if (nextWarningInfo) {
+					nextWarningInfo.stacktrace = stack;
+					_warningEmitter.emit('warning', _warningMap);
+				}
+			}, function (error) {
+				var nextWarningInfo = _warningMap.get(warning);
+				if (nextWarningInfo) {
+					infoLog('Failed to symbolicate warning, "%s":', warning, error);
+					_warningEmitter.emit('warning', _warningMap);
+				}
+			});
+		}
+
+		function isWarningIgnored(warning) {
+			return Array.isArray(console.ignoredYellowBox) && console.ignoredYellowBox.some(function (ignorePrefix) {
+				return warning.startsWith(String(ignorePrefix));
+			});
+		}
+
+		var WarningRow = function WarningRow(_ref) {
+			var count = _ref.count,
+			    warning = _ref.warning,
+			    onPress = _ref.onPress;
+			var Text = __inner_require__(5 /*Libraries/Text/Text.js*/);
+			var TouchableHighlight = __inner_require__(55 /*Libraries/Components/Touchable/TouchableHighlight.js*/);
+			var View = require('react-native@0.37/Libraries/Components/View/View.js');
+
+			var countText = count > 1 ? React.createElement(Text, { style: styles.listRowCount }, '(' + count + ') ') : null;
+
+			return React.createElement(View, { style: styles.listRow }, React.createElement(TouchableHighlight, {
+				activeOpacity: 0.5,
+				onPress: onPress,
+				style: styles.listRowContent,
+				underlayColor: 'transparent' }, React.createElement(Text, { style: styles.listRowText, numberOfLines: 2 }, countText, warning)));
+		};
+
+		var StackRow = function StackRow(_ref2) {
+			var frame = _ref2.frame;
+			var Text = __inner_require__(5 /*Libraries/Text/Text.js*/);
+			var TouchableHighlight = __inner_require__(55 /*Libraries/Components/Touchable/TouchableHighlight.js*/);var file = frame.file,
+			    lineNumber = frame.lineNumber;
+			var fileParts = file.split('/');
+			var fileName = fileParts[fileParts.length - 1];
+
+			return React.createElement(TouchableHighlight, {
+				activeOpacity: 0.5,
+				style: styles.openInEditorButton,
+				underlayColor: 'transparent',
+				onPress: openFileInEditor.bind(null, file, lineNumber) }, React.createElement(Text, { style: styles.inspectorCountText }, fileName, ':', lineNumber));
+		};
+
+		var WarningInspector = function WarningInspector(_ref3) {
+			var warningInfo = _ref3.warningInfo,
+			    warning = _ref3.warning,
+			    stacktraceVisible = _ref3.stacktraceVisible,
+			    onDismiss = _ref3.onDismiss,
+			    onDismissAll = _ref3.onDismissAll,
+			    onMinimize = _ref3.onMinimize,
+			    toggleStacktrace = _ref3.toggleStacktrace;
+			var ScrollView = __inner_require__(24 /*Libraries/Components/ScrollView/ScrollView.js*/);
+			var Text = __inner_require__(5 /*Libraries/Text/Text.js*/);
+			var TouchableHighlight = __inner_require__(55 /*Libraries/Components/Touchable/TouchableHighlight.js*/);
+			var View = require('react-native@0.37/Libraries/Components/View/View.js');var _ref4 = warningInfo || {},
+			    count = _ref4.count,
+			    stacktrace = _ref4.stacktrace;
+
+			var countSentence = 'Warning encountered ' + count + ' time' + (count - 1 ? 's' : '') + '.';
+
+			var stacktraceList = void 0;
+			if (stacktraceVisible && stacktrace) {
+				stacktraceList = React.createElement(View, { style: styles.stacktraceList }, stacktrace.map(function (frame, ii) {
+					return React.createElement(StackRow, { frame: frame, key: ii });
+				}));
+			}
+
+			return React.createElement(View, { style: styles.inspector }, React.createElement(View, { style: styles.inspectorCount }, React.createElement(Text, { style: styles.inspectorCountText }, countSentence), React.createElement(TouchableHighlight, {
+				activeOpacity: 0.5,
+				onPress: toggleStacktrace,
+				style: styles.toggleStacktraceButton,
+				underlayColor: 'transparent' }, React.createElement(Text, { style: styles.inspectorButtonText }, stacktraceVisible ? 'Hide' : 'Show', ' Stacktrace'))), React.createElement(ScrollView, { style: styles.inspectorWarning }, stacktraceList, React.createElement(Text, { style: styles.inspectorWarningText }, warning)), React.createElement(View, { style: styles.inspectorButtons }, React.createElement(TouchableHighlight, {
+				activeOpacity: 0.5,
+				onPress: onMinimize,
+				style: styles.inspectorButton,
+				underlayColor: 'transparent' }, React.createElement(Text, { style: styles.inspectorButtonText }, 'Minimize')), React.createElement(TouchableHighlight, {
+				activeOpacity: 0.5,
+				onPress: onDismiss,
+				style: styles.inspectorButton,
+				underlayColor: 'transparent' }, React.createElement(Text, { style: styles.inspectorButtonText }, 'Dismiss')), React.createElement(TouchableHighlight, {
+				activeOpacity: 0.5,
+				onPress: onDismissAll,
+				style: styles.inspectorButton,
+				underlayColor: 'transparent' }, React.createElement(Text, { style: styles.inspectorButtonText }, 'Dismiss All'))));
+		};var YellowBox = function (_React$Component) {
+			babelHelpers.inherits(YellowBox, _React$Component);
+
+			function YellowBox(props, context) {
+				babelHelpers.classCallCheck(this, YellowBox);var _this = babelHelpers.possibleConstructorReturn(this, (YellowBox.__proto__ || Object.getPrototypeOf(YellowBox)).call(this, props, context));
+				_this.state = {
+					inspecting: null,
+					stacktraceVisible: false,
+					warningMap: _warningMap };
+
+				_this.dismissWarning = function (warning) {
+					var _this$state = _this.state,
+					    inspecting = _this$state.inspecting,
+					    warningMap = _this$state.warningMap;
+					if (warning) {
+						warningMap.delete(warning);
+					} else {
+						warningMap.clear();
+					}
+					_this.setState({
+						inspecting: warning && inspecting !== warning ? inspecting : null,
+						warningMap: warningMap });
+				};return _this;
+			}babelHelpers.createClass(YellowBox, [{ key: 'componentDidMount', value: function componentDidMount() {
+					var _this2 = this;
+					var scheduled = null;
+					this._listener = _warningEmitter.addListener('warning', function (warningMap) {
+
+						scheduled = scheduled || setImmediate(function () {
+							scheduled = null;
+							_this2.setState({
+								warningMap: warningMap });
+						});
+					});
+				} }, { key: 'componentDidUpdate', value: function componentDidUpdate() {
+					var inspecting = this.state.inspecting;
+					if (inspecting != null) {
+						ensureSymbolicatedWarning(inspecting);
+					}
+				} }, { key: 'componentWillUnmount', value: function componentWillUnmount() {
+					if (this._listener) {
+						this._listener.remove();
+					}
+				} }, { key: 'render', value: function render() {
+					var _this3 = this;
+					if (console.disableYellowBox || this.state.warningMap.size === 0) {
+						return null;
+					}
+					var ScrollView = __inner_require__(24 /*Libraries/Components/ScrollView/ScrollView.js*/);
+					var View = require('react-native@0.37/Libraries/Components/View/View.js');var _state = this.state,
+					    inspecting = _state.inspecting,
+					    stacktraceVisible = _state.stacktraceVisible;
+					var inspector = inspecting !== null ? React.createElement(WarningInspector, {
+						warningInfo: this.state.warningMap.get(inspecting),
+						warning: inspecting,
+						stacktraceVisible: stacktraceVisible,
+						onDismiss: function onDismiss() {
+							return _this3.dismissWarning(inspecting);
+						},
+						onDismissAll: function onDismissAll() {
+							return _this3.dismissWarning(null);
+						},
+						onMinimize: function onMinimize() {
+							return _this3.setState({ inspecting: null });
+						},
+						toggleStacktrace: function toggleStacktrace() {
+							return _this3.setState({ stacktraceVisible: !stacktraceVisible });
+						} }) : null;
+
+					var rows = [];
+					this.state.warningMap.forEach(function (warningInfo, warning) {
+						if (!isWarningIgnored(warning)) {
+							rows.push(React.createElement(WarningRow, {
+								key: warning,
+								count: warningInfo.count,
+								warning: warning,
+								onPress: function onPress() {
+									return _this3.setState({ inspecting: warning });
+								},
+								onDismiss: function onDismiss() {
+									return _this3.dismissWarning(warning);
+								} }));
+						}
+					});
+
+					var listStyle = [styles.list, { height: Math.min(rows.length, 4.4) * (rowGutter + rowHeight) }];
+
+					return React.createElement(View, { style: inspector ? styles.fullScreen : listStyle }, React.createElement(ScrollView, { style: listStyle, scrollsToTop: false }, rows), inspector);
+				} }]);return YellowBox;
+		}(React.Component);
+
+		var backgroundColor = function backgroundColor(opacity) {
+			return 'rgba(250, 186, 48, ' + opacity + ')';
+		};
+		var textColor = 'white';
+		var rowGutter = 1;
+		var rowHeight = 46;
+
+		var styles = StyleSheet.create({
+			fullScreen: {
+				backgroundColor: 'transparent',
+				position: 'absolute',
+				left: 0,
+				right: 0,
+				top: 0,
+				bottom: 0 },
+
+			inspector: {
+				backgroundColor: backgroundColor(0.95),
+				flex: 1,
+				paddingTop: 5 },
+
+			inspectorButtons: {
+				flexDirection: 'row' },
+
+			inspectorButton: {
+				flex: 1,
+				paddingVertical: 22,
+				backgroundColor: backgroundColor(1) },
+
+			toggleStacktraceButton: {
+				flex: 1,
+				padding: 5 },
+
+			stacktraceList: {
+				paddingBottom: 5 },
+
+			inspectorButtonText: {
+				color: textColor,
+				fontSize: 14,
+				opacity: 0.8,
+				textAlign: 'center' },
+
+			openInEditorButton: {
+				paddingTop: 5,
+				paddingBottom: 5 },
+
+			inspectorCount: {
+				padding: 15,
+				paddingBottom: 0 },
+
+			inspectorCountText: {
+				color: textColor,
+				fontSize: 14 },
+
+			inspectorWarning: {
+				flex: 1,
+				paddingHorizontal: 15 },
+
+			inspectorWarningText: {
+				color: textColor,
+				fontSize: 16,
+				fontWeight: '600' },
+
+			list: {
+				backgroundColor: 'transparent',
+				position: 'absolute',
+				left: 0,
+				right: 0,
+				bottom: 0 },
+
+			listRow: {
+				position: 'relative',
+				backgroundColor: backgroundColor(0.95),
+				flex: 1,
+				height: rowHeight,
+				marginTop: rowGutter },
+
+			listRowContent: {
+				flex: 1 },
+
+			listRowCount: {
+				color: 'rgba(255, 255, 255, 0.5)' },
+
+			listRowText: {
+				color: textColor,
+				position: 'absolute',
+				left: 0,
+				top: Platform.OS === 'android' ? 5 : 7,
+				marginLeft: 15,
+				marginRight: 15 } });
+
+		module.exports = YellowBox;
 	}, // Libraries/ReactNative/I18nManager.js
 	function (__inner_require__, exports, module) {
 		var I18nManager = require('react-native@0.37/Libraries/BatchedBridge/NativeModules.js').I18nManager || {
@@ -6312,19 +8389,19 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	function (__inner_require__, exports, module) {
 		var AnimationsDebugModule = require('react-native@0.37/Libraries/BatchedBridge/NativeModules.js').AnimationsDebugModule;
 		var Dimensions = require('react-native@0.37/Libraries/Utilities/Dimensions.js');
-		var InteractionMixin = __inner_require__(47 /*Libraries/Interaction/InteractionMixin.js*/);
-		var NavigationContext = __inner_require__(48 /*Libraries/CustomComponents/Navigator/Navigation/NavigationContext.js*/);
-		var NavigatorBreadcrumbNavigationBar = __inner_require__(52 /*Libraries/CustomComponents/Navigator/NavigatorBreadcrumbNavigationBar.js*/);
-		var NavigatorNavigationBar = __inner_require__(57 /*Libraries/CustomComponents/Navigator/NavigatorNavigationBar.js*/);
-		var NavigatorSceneConfigs = __inner_require__(58 /*Libraries/CustomComponents/Navigator/NavigatorSceneConfigs.js*/);
-		var PanResponder = __inner_require__(59 /*Libraries/Interaction/PanResponder.js*/);
+		var InteractionMixin = __inner_require__(67 /*Libraries/Interaction/InteractionMixin.js*/);
+		var NavigationContext = __inner_require__(68 /*Libraries/CustomComponents/Navigator/Navigation/NavigationContext.js*/);
+		var NavigatorBreadcrumbNavigationBar = __inner_require__(72 /*Libraries/CustomComponents/Navigator/NavigatorBreadcrumbNavigationBar.js*/);
+		var NavigatorNavigationBar = __inner_require__(77 /*Libraries/CustomComponents/Navigator/NavigatorNavigationBar.js*/);
+		var NavigatorSceneConfigs = __inner_require__(78 /*Libraries/CustomComponents/Navigator/NavigatorSceneConfigs.js*/);
+		var PanResponder = __inner_require__(79 /*Libraries/Interaction/PanResponder.js*/);
 		var React = require('react-native@0.37/Libraries/react-native/React.js');
 		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
 		var Subscribable = __inner_require__(28 /*Libraries/Components/Subscribable.js*/);
 		var TimerMixin = require('react-timer-mixin@0.13/TimerMixin.js');
 		var View = require('react-native@0.37/Libraries/Components/View/View.js');
 
-		var clamp = __inner_require__(60 /*Libraries/Utilities/clamp.js*/);
+		var clamp = __inner_require__(80 /*Libraries/Utilities/clamp.js*/);
 		var flattenStyle = require('react-native@0.37/Libraries/StyleSheet/flattenStyle.js');
 		var invariant = require('fbjs@0.8/lib/invariant.js');
 		var rebound = require('rebound@0.0.13/rebound.js');
@@ -7219,9 +9296,9 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 		module.exports = InteractionMixin;
 	}, // Libraries/CustomComponents/Navigator/Navigation/NavigationContext.js
 	function (__inner_require__, exports, module) {
-		var NavigationEvent = __inner_require__(49 /*Libraries/CustomComponents/Navigator/Navigation/NavigationEvent.js*/);
-		var NavigationEventEmitter = __inner_require__(50 /*Libraries/CustomComponents/Navigator/Navigation/NavigationEventEmitter.js*/);
-		var NavigationTreeNode = __inner_require__(51 /*Libraries/CustomComponents/Navigator/Navigation/NavigationTreeNode.js*/);
+		var NavigationEvent = __inner_require__(69 /*Libraries/CustomComponents/Navigator/Navigation/NavigationEvent.js*/);
+		var NavigationEventEmitter = __inner_require__(70 /*Libraries/CustomComponents/Navigator/Navigation/NavigationEventEmitter.js*/);
+		var NavigationTreeNode = __inner_require__(71 /*Libraries/CustomComponents/Navigator/Navigation/NavigationTreeNode.js*/);
 
 		var Set = require('react-native@0.37/Libraries/vendor/core/Set.js');
 
@@ -7463,7 +9540,7 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	}, // Libraries/CustomComponents/Navigator/Navigation/NavigationEventEmitter.js
 	function (__inner_require__, exports, module) {
 		var EventEmitter = require('react-native@0.37/Libraries/EventEmitter/EventEmitter.js');
-		var NavigationEvent = __inner_require__(49 /*Libraries/CustomComponents/Navigator/Navigation/NavigationEvent.js*/);var NavigationEventEmitter = function (_EventEmitter) {
+		var NavigationEvent = __inner_require__(69 /*Libraries/CustomComponents/Navigator/Navigation/NavigationEvent.js*/);var NavigationEventEmitter = function (_EventEmitter) {
 			babelHelpers.inherits(NavigationEventEmitter, _EventEmitter);
 
 			function NavigationEventEmitter(target) {
@@ -7565,9 +9642,9 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 		module.exports = NavigationTreeNode;
 	}, // Libraries/CustomComponents/Navigator/NavigatorBreadcrumbNavigationBar.js
 	function (__inner_require__, exports, module) {
-		var NavigatorBreadcrumbNavigationBarStyles = __inner_require__(53 /*Libraries/CustomComponents/Navigator/NavigatorBreadcrumbNavigationBarStyles.ios.js*/);
-		var NavigatorNavigationBarStylesAndroid = __inner_require__(56 /*Libraries/CustomComponents/Navigator/NavigatorNavigationBarStylesAndroid.js*/);
-		var NavigatorNavigationBarStylesIOS = __inner_require__(54 /*Libraries/CustomComponents/Navigator/NavigatorNavigationBarStylesIOS.js*/);
+		var NavigatorBreadcrumbNavigationBarStyles = __inner_require__(73 /*Libraries/CustomComponents/Navigator/NavigatorBreadcrumbNavigationBarStyles.ios.js*/);
+		var NavigatorNavigationBarStylesAndroid = __inner_require__(76 /*Libraries/CustomComponents/Navigator/NavigatorNavigationBarStylesAndroid.js*/);
+		var NavigatorNavigationBarStylesIOS = __inner_require__(74 /*Libraries/CustomComponents/Navigator/NavigatorNavigationBarStylesIOS.js*/);
 		var Platform = require('react-native@0.37/Libraries/Utilities/Platform.ios.js');
 		var React = require('react-native@0.37/Libraries/react-native/React.js');
 		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
@@ -7721,9 +9798,9 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	}, // Libraries/CustomComponents/Navigator/NavigatorBreadcrumbNavigationBarStyles.ios.js
 	function (__inner_require__, exports, module) {
 		var Dimensions = require('react-native@0.37/Libraries/Utilities/Dimensions.js');
-		var NavigatorNavigationBarStylesIOS = __inner_require__(54 /*Libraries/CustomComponents/Navigator/NavigatorNavigationBarStylesIOS.js*/);
+		var NavigatorNavigationBarStylesIOS = __inner_require__(74 /*Libraries/CustomComponents/Navigator/NavigatorNavigationBarStylesIOS.js*/);
 
-		var buildStyleInterpolator = __inner_require__(55 /*Libraries/Utilities/buildStyleInterpolator.js*/);
+		var buildStyleInterpolator = __inner_require__(75 /*Libraries/Utilities/buildStyleInterpolator.js*/);
 		var merge = require('react-native@0.37/Libraries/vendor/core/merge.js');
 
 		var SCREEN_WIDTH = Dimensions.get('window').width;
@@ -7896,7 +9973,7 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	function (__inner_require__, exports, module) {
 		var Dimensions = require('react-native@0.37/Libraries/Utilities/Dimensions.js');
 
-		var buildStyleInterpolator = __inner_require__(55 /*Libraries/Utilities/buildStyleInterpolator.js*/);
+		var buildStyleInterpolator = __inner_require__(75 /*Libraries/Utilities/buildStyleInterpolator.js*/);
 		var merge = require('react-native@0.37/Libraries/vendor/core/merge.js');
 
 		var SCREEN_WIDTH = Dimensions.get('window').width;
@@ -8420,7 +10497,7 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 		module.exports = buildStyleInterpolator;
 	}, // Libraries/CustomComponents/Navigator/NavigatorNavigationBarStylesAndroid.js
 	function (__inner_require__, exports, module) {
-		var buildStyleInterpolator = __inner_require__(55 /*Libraries/Utilities/buildStyleInterpolator.js*/);
+		var buildStyleInterpolator = __inner_require__(75 /*Libraries/Utilities/buildStyleInterpolator.js*/);
 		var merge = require('react-native@0.37/Libraries/vendor/core/merge.js');
 
 		var NAV_BAR_HEIGHT = 56;
@@ -8549,8 +10626,8 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	}, // Libraries/CustomComponents/Navigator/NavigatorNavigationBar.js
 	function (__inner_require__, exports, module) {
 		var React = require('react-native@0.37/Libraries/react-native/React.js');
-		var NavigatorNavigationBarStylesAndroid = __inner_require__(56 /*Libraries/CustomComponents/Navigator/NavigatorNavigationBarStylesAndroid.js*/);
-		var NavigatorNavigationBarStylesIOS = __inner_require__(54 /*Libraries/CustomComponents/Navigator/NavigatorNavigationBarStylesIOS.js*/);
+		var NavigatorNavigationBarStylesAndroid = __inner_require__(76 /*Libraries/CustomComponents/Navigator/NavigatorNavigationBarStylesAndroid.js*/);
+		var NavigatorNavigationBarStylesIOS = __inner_require__(74 /*Libraries/CustomComponents/Navigator/NavigatorNavigationBarStylesIOS.js*/);
 		var Platform = require('react-native@0.37/Libraries/Utilities/Platform.ios.js');
 		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
 		var View = require('react-native@0.37/Libraries/Components/View/View.js');
@@ -8673,9 +10750,9 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	function (__inner_require__, exports, module) {
 		var Dimensions = require('react-native@0.37/Libraries/Utilities/Dimensions.js');
 		var PixelRatio = require('react-native@0.37/Libraries/Utilities/PixelRatio.js');
-		var I18nManager = __inner_require__(45 /*Libraries/ReactNative/I18nManager.js*/);
+		var I18nManager = __inner_require__(65 /*Libraries/ReactNative/I18nManager.js*/);
 
-		var buildStyleInterpolator = __inner_require__(55 /*Libraries/Utilities/buildStyleInterpolator.js*/);
+		var buildStyleInterpolator = __inner_require__(75 /*Libraries/Utilities/buildStyleInterpolator.js*/);
 
 		var IS_RTL = I18nManager.isRTL;
 
@@ -9457,11 +11534,11 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	function (__inner_require__, exports, module) {
 		var EventEmitter = require('react-native@0.37/Libraries/EventEmitter/EventEmitter.js');
 		var Image = __inner_require__(22 /*Libraries/Image/Image.ios.js*/);
-		var NavigationContext = __inner_require__(48 /*Libraries/CustomComponents/Navigator/Navigation/NavigationContext.js*/);
+		var NavigationContext = __inner_require__(68 /*Libraries/CustomComponents/Navigator/Navigation/NavigationContext.js*/);
 		var RCTNavigatorManager = require('react-native@0.37/Libraries/BatchedBridge/NativeModules.js').NavigatorManager;
 		var React = require('react-native@0.37/Libraries/react-native/React.js');
 		var ReactNative = __inner_require__(26 /*Libraries/react-native/ReactNative.js*/);
-		var StaticContainer = __inner_require__(62 /*Libraries/Components/StaticContainer.js*/);
+		var StaticContainer = __inner_require__(82 /*Libraries/Components/StaticContainer.js*/);
 		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
 		var View = require('react-native@0.37/Libraries/Components/View/View.js');
 
@@ -9908,8 +11985,8 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 		var _class, _temp;
 
 		var ColorPropType = require('react-native@0.37/Libraries/StyleSheet/ColorPropType.js');
-		var PickerIOS = __inner_require__(64 /*Libraries/Components/Picker/PickerIOS.ios.js*/);
-		var PickerAndroid = __inner_require__(65 /*Libraries/Components/Picker/PickerAndroid.ios.js*/);
+		var PickerIOS = __inner_require__(84 /*Libraries/Components/Picker/PickerIOS.ios.js*/);
+		var PickerAndroid = __inner_require__(85 /*Libraries/Components/Picker/PickerAndroid.ios.js*/);
 		var Platform = require('react-native@0.37/Libraries/Utilities/Platform.ios.js');
 		var React = require('react-native@0.37/Libraries/react-native/React.js');
 		var StyleSheetPropType = require('react-native@0.37/Libraries/StyleSheet/StyleSheetPropType.js');
@@ -10377,9 +12454,6 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 		}
 
 		module.exports = Switch;
-	}, // Libraries/Components/ScrollView/RecyclerViewBackedScrollView.ios.js
-	function (__inner_require__, exports, module) {
-		module.exports = __inner_require__(24 /*Libraries/Components/ScrollView/ScrollView.js*/);
 	}, // Libraries/Components/RefreshControl/RefreshControl.js
 	function (__inner_require__, exports, module) {
 		var ColorPropType = require('react-native@0.37/Libraries/StyleSheet/ColorPropType.js');
@@ -10580,8 +12654,8 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	function (__inner_require__, exports, module) {
 		var ListView = __inner_require__(38 /*Libraries/CustomComponents/ListView/ListView.js*/);
 		var React = require('react-native@0.37/Libraries/react-native/React.js');
-		var SwipeableListViewDataSource = __inner_require__(76 /*Libraries/Experimental/SwipeableRow/SwipeableListViewDataSource.js*/);
-		var SwipeableRow = __inner_require__(77 /*Libraries/Experimental/SwipeableRow/SwipeableRow.js*/);var PropTypes = React.PropTypes;var SwipeableListView = function (_React$Component) {
+		var SwipeableListViewDataSource = __inner_require__(95 /*Libraries/Experimental/SwipeableRow/SwipeableListViewDataSource.js*/);
+		var SwipeableRow = __inner_require__(96 /*Libraries/Experimental/SwipeableRow/SwipeableRow.js*/);var PropTypes = React.PropTypes;var SwipeableListView = function (_React$Component) {
 			babelHelpers.inherits(SwipeableListView, _React$Component);babelHelpers.createClass(SwipeableListView, null, [{ key: 'getNewDataSource', value: function getNewDataSource() {
 					return new SwipeableListViewDataSource({
 						getRowData: function getRowData(data, sectionID, rowID) {
@@ -10706,8 +12780,8 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	}, // Libraries/Experimental/SwipeableRow/SwipeableRow.js
 	function (__inner_require__, exports, module) {
 		var Animated = __inner_require__(12 /*Libraries/Animated/src/Animated.js*/);
-		var PanResponder = __inner_require__(59 /*Libraries/Interaction/PanResponder.js*/);
-		var I18nManager = __inner_require__(45 /*Libraries/ReactNative/I18nManager.js*/);
+		var PanResponder = __inner_require__(79 /*Libraries/Interaction/PanResponder.js*/);
+		var I18nManager = __inner_require__(65 /*Libraries/ReactNative/I18nManager.js*/);
 		var React = require('react-native@0.37/Libraries/react-native/React.js');
 		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
 		var TimerMixin = require('react-timer-mixin@0.13/TimerMixin.js');
@@ -10964,7 +13038,7 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 		var ColorPropType = require('react-native@0.37/Libraries/StyleSheet/ColorPropType.js');
 		var React = require('react-native@0.37/Libraries/react-native/React.js');
 		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
-		var TabBarItemIOS = __inner_require__(79 /*Libraries/Components/TabBarIOS/TabBarItemIOS.ios.js*/);
+		var TabBarItemIOS = __inner_require__(98 /*Libraries/Components/TabBarIOS/TabBarItemIOS.ios.js*/);
 		var View = require('react-native@0.37/Libraries/Components/View/View.js');
 
 		var requireNativeComponent = require('react-native@0.37/Libraries/ReactNative/requireNativeComponent.js');var TabBarIOS = function (_React$Component) {
@@ -10992,7 +13066,7 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	function (__inner_require__, exports, module) {
 		var Image = __inner_require__(22 /*Libraries/Image/Image.ios.js*/);
 		var React = require('react-native@0.37/Libraries/react-native/React.js');
-		var StaticContainer = __inner_require__(62 /*Libraries/Components/StaticContainer.js*/);
+		var StaticContainer = __inner_require__(82 /*Libraries/Components/StaticContainer.js*/);
 		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
 		var View = require('react-native@0.37/Libraries/Components/View/View.js');
 
@@ -11041,7 +13115,7 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	}, // Libraries/Components/TextInput/TextInput.js
 	function (__inner_require__, exports, module) {
 		var ColorPropType = require('react-native@0.37/Libraries/StyleSheet/ColorPropType.js');
-		var DocumentSelectionState = __inner_require__(81 /*Libraries/vendor/document/selection/DocumentSelectionState.js*/);
+		var DocumentSelectionState = __inner_require__(100 /*Libraries/vendor/document/selection/DocumentSelectionState.js*/);
 		var EventEmitter = require('react-native@0.37/Libraries/EventEmitter/EventEmitter.js');
 		var NativeMethodsMixin = require('react@15.3/lib/NativeMethodsMixin.js');
 		var Platform = require('react-native@0.37/Libraries/Utilities/Platform.ios.js');
@@ -11246,6 +13320,15 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 				}
 
 				if (!props.multiline) {
+					if (__DEV__) {
+						for (var propKey in onlyMultiline) {
+							if (props[propKey]) {
+								var error = new Error('TextInput prop `' + propKey + '` is only supported with multiline.');
+
+								warning(false, '%s', error.stack);
+							}
+						}
+					}
 					textContainer = React.createElement(RCTTextField, babelHelpers.extends({
 						ref: this._setNativeRef }, props, {
 						onFocus: this._onFocus,
@@ -11422,7 +13505,7 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 		module.exports = TextInput;
 	}, // Libraries/vendor/document/selection/DocumentSelectionState.js
 	function (__inner_require__, exports, module) {
-		var mixInEventEmitter = __inner_require__(82 /*Libraries/EventEmitter/mixInEventEmitter.js*/);var DocumentSelectionState = function () {
+		var mixInEventEmitter = __inner_require__(101 /*Libraries/EventEmitter/mixInEventEmitter.js*/);var DocumentSelectionState = function () {
 
 			function DocumentSelectionState(anchor, focus) {
 				babelHelpers.classCallCheck(this, DocumentSelectionState);
@@ -11475,11 +13558,11 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	}, // Libraries/EventEmitter/mixInEventEmitter.js
 	function (__inner_require__, exports, module) {
 		var EventEmitter = require('react-native@0.37/Libraries/EventEmitter/EventEmitter.js');
-		var EventEmitterWithHolding = __inner_require__(83 /*Libraries/EventEmitter/EventEmitterWithHolding.js*/);
-		var EventHolder = __inner_require__(84 /*Libraries/EventEmitter/EventHolder.js*/);
-		var EventValidator = __inner_require__(85 /*Libraries/EventEmitter/EventValidator.js*/);
+		var EventEmitterWithHolding = __inner_require__(102 /*Libraries/EventEmitter/EventEmitterWithHolding.js*/);
+		var EventHolder = __inner_require__(103 /*Libraries/EventEmitter/EventHolder.js*/);
+		var EventValidator = __inner_require__(104 /*Libraries/EventEmitter/EventValidator.js*/);
 
-		var copyProperties = __inner_require__(86 /*Libraries/vendor/core/copyProperties.js*/);
+		var copyProperties = __inner_require__(105 /*Libraries/vendor/core/copyProperties.js*/);
 		var invariant = require('fbjs@0.8/lib/invariant.js');
 		var keyOf = require('fbjs@0.8/lib/keyOf.js');
 
@@ -11663,7 +13746,7 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 		module.exports = EventHolder;
 	}, // Libraries/EventEmitter/EventValidator.js
 	function (__inner_require__, exports, module) {
-		var copyProperties = __inner_require__(86 /*Libraries/vendor/core/copyProperties.js*/);
+		var copyProperties = __inner_require__(105 /*Libraries/vendor/core/copyProperties.js*/);
 
 		var EventValidator = {
 
@@ -11688,9 +13771,76 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 
 		function errorMessageFor(type, allowedTypes) {
 			var message = 'Unknown event type "' + type + '". ';
-
+			if (__DEV__) {
+				message += recommendationFor(type, allowedTypes);
+			}
 			message += 'Known event types: ' + allowedTypes.join(', ') + '.';
 			return message;
+		}
+
+		if (__DEV__) {
+			var recommendationFor = function recommendationFor(type, allowedTypes) {
+				var closestTypeRecommendation = closestTypeFor(type, allowedTypes);
+				if (isCloseEnough(closestTypeRecommendation, type)) {
+					return 'Did you mean "' + closestTypeRecommendation.type + '"? ';
+				} else {
+					return '';
+				}
+			};
+
+			var closestTypeFor = function closestTypeFor(type, allowedTypes) {
+				var typeRecommendations = allowedTypes.map(typeRecommendationFor.bind(this, type));
+
+				return typeRecommendations.sort(recommendationSort)[0];
+			};
+
+			var typeRecommendationFor = function typeRecommendationFor(type, recomendedType) {
+				return {
+					type: recomendedType,
+					distance: damerauLevenshteinDistance(type, recomendedType) };
+			};
+
+			var recommendationSort = function recommendationSort(recommendationA, recommendationB) {
+				if (recommendationA.distance < recommendationB.distance) {
+					return -1;
+				} else if (recommendationA.distance > recommendationB.distance) {
+					return 1;
+				} else {
+					return 0;
+				}
+			};
+
+			var isCloseEnough = function isCloseEnough(closestType, actualType) {
+				return closestType.distance / actualType.length < 0.334;
+			};
+
+			var damerauLevenshteinDistance = function damerauLevenshteinDistance(a, b) {
+				var i = void 0,
+				    j = void 0;
+				var d = [];
+
+				for (i = 0; i <= a.length; i++) {
+					d[i] = [i];
+				}
+
+				for (j = 1; j <= b.length; j++) {
+					d[0][j] = j;
+				}
+
+				for (i = 1; i <= a.length; i++) {
+					for (j = 1; j <= b.length; j++) {
+						var cost = a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1;
+
+						d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+
+						if (i > 1 && j > 1 && a.charAt(i - 1) === b.charAt(j - 2) && a.charAt(i - 2) === b.charAt(j - 1)) {
+							d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + cost);
+						}
+					}
+				}
+
+				return d[a.length][b.length];
+			};
 		}
 
 		module.exports = EventValidator;
@@ -11698,6 +13848,12 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	function (__inner_require__, exports, module) {
 		function copyProperties(obj, a, b, c, d, e, f) {
 			obj = obj || {};
+
+			if (__DEV__) {
+				if (f) {
+					throw new Error('Too many arguments passed to copyProperties');
+				}
+			}
 
 			var args = [a, b, c, d, e];
 			var ii = 0,
@@ -11731,193 +13887,6 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	}, // Libraries/Components/ToolbarAndroid/ToolbarAndroid.ios.js
 	function (__inner_require__, exports, module) {
 		module.exports = require('react-native@0.37/Libraries/Components/UnimplementedViews/UnimplementedView.js');
-	}, // Libraries/Components/Touchable/TouchableHighlight.js
-	function (__inner_require__, exports, module) {
-		var ColorPropType = require('react-native@0.37/Libraries/StyleSheet/ColorPropType.js');
-		var NativeMethodsMixin = require('react@15.3/lib/NativeMethodsMixin.js');
-		var React = require('react-native@0.37/Libraries/react-native/React.js');
-		var ReactNativeViewAttributes = require('react-native@0.37/Libraries/Components/View/ReactNativeViewAttributes.js');
-		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
-		var TimerMixin = require('react-timer-mixin@0.13/TimerMixin.js');
-		var Touchable = __inner_require__(6 /*Libraries/Components/Touchable/Touchable.js*/);
-		var TouchableWithoutFeedback = __inner_require__(30 /*Libraries/Components/Touchable/TouchableWithoutFeedback.js*/);
-		var View = require('react-native@0.37/Libraries/Components/View/View.js');
-
-		var ensureComponentIsNative = __inner_require__(90 /*Libraries/Components/Touchable/ensureComponentIsNative.js*/);
-		var ensurePositiveDelayProps = __inner_require__(31 /*Libraries/Components/Touchable/ensurePositiveDelayProps.js*/);
-		var keyOf = require('fbjs@0.8/lib/keyOf.js');
-		var merge = require('react-native@0.37/Libraries/vendor/core/merge.js');
-
-		var DEFAULT_PROPS = {
-			activeOpacity: 0.85,
-			underlayColor: 'black' };
-
-		var PRESS_RETENTION_OFFSET = { top: 20, left: 20, right: 20, bottom: 30 };
-
-		var TouchableHighlight = React.createClass({ displayName: 'TouchableHighlight',
-			propTypes: babelHelpers.extends({}, TouchableWithoutFeedback.propTypes, {
-
-				activeOpacity: React.PropTypes.number,
-
-				underlayColor: ColorPropType,
-				style: View.propTypes.style,
-
-				onShowUnderlay: React.PropTypes.func,
-
-				onHideUnderlay: React.PropTypes.func }),
-
-			mixins: [NativeMethodsMixin, TimerMixin, Touchable.Mixin],
-
-			getDefaultProps: function getDefaultProps() {
-				return DEFAULT_PROPS;
-			},
-
-			_computeSyntheticState: function _computeSyntheticState(props) {
-				return {
-					activeProps: {
-						style: {
-							opacity: props.activeOpacity } },
-
-					activeUnderlayProps: {
-						style: {
-							backgroundColor: props.underlayColor } },
-
-					underlayStyle: [INACTIVE_UNDERLAY_PROPS.style, props.style] };
-			},
-
-			getInitialState: function getInitialState() {
-				return merge(this.touchableGetInitialState(), this._computeSyntheticState(this.props));
-			},
-
-			componentDidMount: function componentDidMount() {
-				ensurePositiveDelayProps(this.props);
-				ensureComponentIsNative(this.refs[CHILD_REF]);
-			},
-
-			componentDidUpdate: function componentDidUpdate() {
-				ensureComponentIsNative(this.refs[CHILD_REF]);
-			},
-
-			componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-				ensurePositiveDelayProps(nextProps);
-				if (nextProps.activeOpacity !== this.props.activeOpacity || nextProps.underlayColor !== this.props.underlayColor || nextProps.style !== this.props.style) {
-					this.setState(this._computeSyntheticState(nextProps));
-				}
-			},
-
-			viewConfig: {
-				uiViewClassName: 'RCTView',
-				validAttributes: ReactNativeViewAttributes.RCTView },
-
-			touchableHandleActivePressIn: function touchableHandleActivePressIn(e) {
-				this.clearTimeout(this._hideTimeout);
-				this._hideTimeout = null;
-				this._showUnderlay();
-				this.props.onPressIn && this.props.onPressIn(e);
-			},
-
-			touchableHandleActivePressOut: function touchableHandleActivePressOut(e) {
-				if (!this._hideTimeout) {
-					this._hideUnderlay();
-				}
-				this.props.onPressOut && this.props.onPressOut(e);
-			},
-
-			touchableHandlePress: function touchableHandlePress(e) {
-				this.clearTimeout(this._hideTimeout);
-				this._showUnderlay();
-				this._hideTimeout = this.setTimeout(this._hideUnderlay, this.props.delayPressOut || 100);
-				this.props.onPress && this.props.onPress(e);
-			},
-
-			touchableHandleLongPress: function touchableHandleLongPress(e) {
-				this.props.onLongPress && this.props.onLongPress(e);
-			},
-
-			touchableGetPressRectOffset: function touchableGetPressRectOffset() {
-				return this.props.pressRetentionOffset || PRESS_RETENTION_OFFSET;
-			},
-
-			touchableGetHitSlop: function touchableGetHitSlop() {
-				return this.props.hitSlop;
-			},
-
-			touchableGetHighlightDelayMS: function touchableGetHighlightDelayMS() {
-				return this.props.delayPressIn;
-			},
-
-			touchableGetLongPressDelayMS: function touchableGetLongPressDelayMS() {
-				return this.props.delayLongPress;
-			},
-
-			touchableGetPressOutDelayMS: function touchableGetPressOutDelayMS() {
-				return this.props.delayPressOut;
-			},
-
-			_showUnderlay: function _showUnderlay() {
-				if (!this.isMounted() || !this._hasPressHandler()) {
-					return;
-				}
-
-				this.refs[UNDERLAY_REF].setNativeProps(this.state.activeUnderlayProps);
-				this.refs[CHILD_REF].setNativeProps(this.state.activeProps);
-				this.props.onShowUnderlay && this.props.onShowUnderlay();
-			},
-
-			_hideUnderlay: function _hideUnderlay() {
-				this.clearTimeout(this._hideTimeout);
-				this._hideTimeout = null;
-				if (this._hasPressHandler() && this.refs[UNDERLAY_REF]) {
-					this.refs[CHILD_REF].setNativeProps(INACTIVE_CHILD_PROPS);
-					this.refs[UNDERLAY_REF].setNativeProps(babelHelpers.extends({}, INACTIVE_UNDERLAY_PROPS, {
-						style: this.state.underlayStyle }));
-
-					this.props.onHideUnderlay && this.props.onHideUnderlay();
-				}
-			},
-
-			_hasPressHandler: function _hasPressHandler() {
-				return !!(this.props.onPress || this.props.onPressIn || this.props.onPressOut || this.props.onLongPress);
-			},
-
-			render: function render() {
-				return React.createElement(View, {
-					accessible: this.props.accessible !== false,
-					accessibilityLabel: this.props.accessibilityLabel,
-					accessibilityComponentType: this.props.accessibilityComponentType,
-					accessibilityTraits: this.props.accessibilityTraits,
-					ref: UNDERLAY_REF,
-					style: this.state.underlayStyle,
-					onLayout: this.props.onLayout,
-					hitSlop: this.props.hitSlop,
-					onStartShouldSetResponder: this.touchableHandleStartShouldSetResponder,
-					onResponderTerminationRequest: this.touchableHandleResponderTerminationRequest,
-					onResponderGrant: this.touchableHandleResponderGrant,
-					onResponderMove: this.touchableHandleResponderMove,
-					onResponderRelease: this.touchableHandleResponderRelease,
-					onResponderTerminate: this.touchableHandleResponderTerminate,
-					testID: this.props.testID }, React.cloneElement(React.Children.only(this.props.children), {
-					ref: CHILD_REF }), Touchable.renderDebugView({ color: 'green', hitSlop: this.props.hitSlop }));
-			} });
-
-		var CHILD_REF = keyOf({ childRef: null });
-		var UNDERLAY_REF = keyOf({ underlayRef: null });
-		var INACTIVE_CHILD_PROPS = {
-			style: StyleSheet.create({ x: { opacity: 1.0 } }).x };
-
-		var INACTIVE_UNDERLAY_PROPS = {
-			style: StyleSheet.create({ x: { backgroundColor: 'transparent' } }).x };
-
-		module.exports = TouchableHighlight;
-	}, // Libraries/Components/Touchable/ensureComponentIsNative.js
-	function (__inner_require__, exports, module) {
-		var invariant = require('fbjs@0.8/lib/invariant.js');
-
-		var ensureComponentIsNative = function ensureComponentIsNative(component) {
-			invariant(component && typeof component.setNativeProps === 'function', 'Touchable child must either be native or forward setNativeProps to a ' + 'native component');
-		};
-
-		module.exports = ensureComponentIsNative;
 	}, // Libraries/Components/ViewPager/ViewPagerAndroid.ios.js
 	function (__inner_require__, exports, module) {
 		module.exports = require('react-native@0.37/Libraries/Components/UnimplementedViews/UnimplementedView.js');
@@ -12131,13 +14100,18 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	}, // Libraries/ReactNative/AppRegistry.js
 	function (__inner_require__, exports, module) {
 		var BatchedBridge = require('react-native@0.37/Libraries/BatchedBridge/BatchedBridge.js');
-		var BugReporting = __inner_require__(96 /*Libraries/BugReporting/BugReporting.js*/);
+		var BugReporting = __inner_require__(113 /*Libraries/BugReporting/BugReporting.js*/);
 		var ReactNative = __inner_require__(26 /*Libraries/react-native/ReactNative.js*/);
 
 		var infoLog = __inner_require__(16 /*Libraries/Utilities/infoLog.js*/);
 		var invariant = require('fbjs@0.8/lib/invariant.js');
-		var renderApplication = __inner_require__(99 /*Libraries/ReactNative/renderApplication.js*/);var _require = require('react-native@0.37/Libraries/BatchedBridge/NativeModules.js'),
+		var renderApplication = __inner_require__(116 /*Libraries/ReactNative/renderApplication.js*/);var _require = require('react-native@0.37/Libraries/BatchedBridge/NativeModules.js'),
 		    HeadlessJsTaskSupport = _require.HeadlessJsTaskSupport;
+
+		if (__DEV__) {
+
+			__inner_require__(118 /*Libraries/Performance/RCTRenderingPerf.js*/);
+		}
 
 		var runnables = {};
 		var runCount = 1;
@@ -12175,7 +14149,7 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 			},
 
 			runApplication: function runApplication(appKey, appParameters) {
-				var msg = 'Running application "' + appKey + '" with appParams: ' + JSON.stringify(appParameters) + '. ' + '__DEV__ === ' + String(__DEV__) + ', development-level warning are ' + 'OFF' + ', performance optimizations are ' + 'ON';
+				var msg = 'Running application "' + appKey + '" with appParams: ' + JSON.stringify(appParameters) + '. ' + '__DEV__ === ' + String(__DEV__) + ', development-level warning are ' + (__DEV__ ? 'ON' : 'OFF') + ', performance optimizations are ' + (__DEV__ ? 'OFF' : 'ON');
 				infoLog(msg);
 				BugReporting.addSource('AppRegistry.runApplication' + runCount++, function () {
 					return msg;
@@ -12220,7 +14194,7 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 
 		function defaultExtras() {
 			BugReporting.addFileSource('react_hierarchy.txt', function () {
-				return __inner_require__(97 /*Libraries/BugReporting/dumpReactTree.js*/)();
+				return __inner_require__(114 /*Libraries/BugReporting/dumpReactTree.js*/)();
 			});
 		}var BugReporting = function () {
 			function BugReporting() {
@@ -12274,7 +14248,7 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	}, // Libraries/BugReporting/dumpReactTree.js
 	function (__inner_require__, exports, module) {
 		var ReactNativeMount = require('react@15.3/lib/ReactNativeMount.js');
-		var getReactData = __inner_require__(98 /*Libraries/BugReporting/getReactData.js*/);
+		var getReactData = __inner_require__(115 /*Libraries/BugReporting/getReactData.js*/);
 
 		var INDENTATION_SIZE = 2;
 		var MAX_DEPTH = 2;
@@ -12567,7 +14541,7 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 
 		var invariant = require('fbjs@0.8/lib/invariant.js');
 
-		__inner_require__(100 /*Libraries/Utilities/BackAndroid.ios.js*/);
+		__inner_require__(117 /*Libraries/Utilities/BackAndroid.ios.js*/);
 
 		function renderApplication(RootComponent, initialProps, rootTag) {
 			invariant(rootTag, 'Expect to have a valid rootTag, instead got ', rootTag);
@@ -12590,6 +14564,79 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 			removeEventListener: emptyFunction };
 
 		module.exports = BackAndroid;
+	}, // Libraries/Performance/RCTRenderingPerf.js
+	function (__inner_require__, exports, module) {
+		var ReactDebugTool = require('react@15.3/lib/ReactDebugTool.js');
+		var ReactPerf = require('react@15.3/lib/ReactPerf.js');
+
+		var invariant = require('fbjs@0.8/lib/invariant.js');
+		var performanceNow = require('fbjs@0.8/lib/performanceNow.js');
+
+		var perfModules = [];
+		var enabled = false;
+		var lastRenderStartTime = 0;
+		var totalRenderDuration = 0;
+
+		var RCTRenderingPerfDevtool = {
+			onBeginLifeCycleTimer: function onBeginLifeCycleTimer(debugID, timerType) {
+				if (timerType === 'render') {
+					lastRenderStartTime = performanceNow();
+				}
+			},
+			onEndLifeCycleTimer: function onEndLifeCycleTimer(debugID, timerType) {
+				if (timerType === 'render') {
+					var lastRenderDuration = performanceNow() - lastRenderStartTime;
+					totalRenderDuration += lastRenderDuration;
+				}
+			} };
+
+		var RCTRenderingPerf = {
+
+			toggle: function toggle() {
+				console.log('Render perfomance measurements enabled');
+				enabled = true;
+			},
+
+			start: function start() {
+				if (!enabled) {
+					return;
+				}
+
+				ReactPerf.start();
+				ReactDebugTool.addDevtool(RCTRenderingPerfDevtool);
+				perfModules.forEach(function (module) {
+					return module.start();
+				});
+			},
+
+			stop: function stop() {
+				if (!enabled) {
+					return;
+				}
+
+				ReactPerf.stop();
+				ReactPerf.printInclusive();
+				ReactPerf.printWasted();
+				ReactDebugTool.removeDevtool(RCTRenderingPerfDevtool);
+
+				console.log('Total time spent in render(): ' + totalRenderDuration.toFixed(2) + ' ms');
+				lastRenderStartTime = 0;
+				totalRenderDuration = 0;
+
+				perfModules.forEach(function (module) {
+					return module.stop();
+				});
+			},
+
+			register: function register(module) {
+				invariant(typeof module.start === 'function', 'Perf module should have start() function');
+
+				invariant(typeof module.stop === 'function', 'Perf module should have stop() function');
+
+				perfModules.push(module);
+			} };
+
+		module.exports = RCTRenderingPerf;
 	}, // Libraries/Storage/AsyncStorage.js
 	function (__inner_require__, exports, module) {
 		var NativeModules = require('react-native@0.37/Libraries/BatchedBridge/NativeModules.js');
@@ -12886,11 +14933,22 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 					return RCTCameraRollManager.saveToCameraRoll(tag, mediaType);
 				} }, { key: 'getPhotos', value: function getPhotos(params) {
 					var _arguments = arguments;
-
+					if (__DEV__) {
+						getPhotosParamChecker({ params: params }, 'params', 'CameraRoll.getPhotos');
+					}
 					if (arguments.length > 1) {
 						console.warn('CameraRoll.getPhotos(tag, success, error) is deprecated.  Use the returned Promise instead');
 						var successCallback = arguments[1];
+						if (__DEV__) {
+							(function () {
+								var callback = _arguments[1];
+								successCallback = function successCallback(response) {
+									getPhotosReturnChecker({ response: response }, 'response', 'CameraRoll.getPhotos callback');
 
+									callback(response);
+								};
+							})();
+						}
 						var errorCallback = arguments[2] || function () {};
 						RCTCameraRollManager.getPhotos(params).then(successCallback, errorCallback);
 					}
@@ -12992,12 +15050,12 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 		module.exports = new Linking();
 	}, // Libraries/NavigationExperimental/NavigationExperimental.js
 	function (__inner_require__, exports, module) {
-		var NavigationCard = __inner_require__(108 /*Libraries/CustomComponents/NavigationExperimental/NavigationCard.js*/);
-		var NavigationCardStack = __inner_require__(117 /*Libraries/CustomComponents/NavigationExperimental/NavigationCardStack.js*/);
-		var NavigationHeader = __inner_require__(120 /*Libraries/CustomComponents/NavigationExperimental/NavigationHeader.js*/);
-		var NavigationPropTypes = __inner_require__(116 /*Libraries/NavigationExperimental/NavigationPropTypes.js*/);
-		var NavigationStateUtils = __inner_require__(124 /*Libraries/NavigationExperimental/NavigationStateUtils.js*/);
-		var NavigationTransitioner = __inner_require__(118 /*Libraries/NavigationExperimental/NavigationTransitioner.js*/);
+		var NavigationCard = __inner_require__(126 /*Libraries/CustomComponents/NavigationExperimental/NavigationCard.js*/);
+		var NavigationCardStack = __inner_require__(135 /*Libraries/CustomComponents/NavigationExperimental/NavigationCardStack.js*/);
+		var NavigationHeader = __inner_require__(138 /*Libraries/CustomComponents/NavigationExperimental/NavigationHeader.js*/);
+		var NavigationPropTypes = __inner_require__(134 /*Libraries/NavigationExperimental/NavigationPropTypes.js*/);
+		var NavigationStateUtils = __inner_require__(142 /*Libraries/NavigationExperimental/NavigationStateUtils.js*/);
+		var NavigationTransitioner = __inner_require__(136 /*Libraries/NavigationExperimental/NavigationTransitioner.js*/);
 
 		var NavigationExperimental = {
 
@@ -13015,12 +15073,12 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	}, // Libraries/CustomComponents/NavigationExperimental/NavigationCard.js
 	function (__inner_require__, exports, module) {
 		var Animated = __inner_require__(12 /*Libraries/Animated/src/Animated.js*/);
-		var NavigationCardStackPanResponder = __inner_require__(109 /*Libraries/CustomComponents/NavigationExperimental/NavigationCardStackPanResponder.js*/);
-		var NavigationCardStackStyleInterpolator = __inner_require__(111 /*Libraries/CustomComponents/NavigationExperimental/NavigationCardStackStyleInterpolator.js*/);
-		var NavigationPagerPanResponder = __inner_require__(112 /*Libraries/CustomComponents/NavigationExperimental/NavigationPagerPanResponder.js*/);
-		var NavigationPagerStyleInterpolator = __inner_require__(113 /*Libraries/CustomComponents/NavigationExperimental/NavigationPagerStyleInterpolator.js*/);
-		var NavigationPointerEventsContainer = __inner_require__(114 /*Libraries/CustomComponents/NavigationExperimental/NavigationPointerEventsContainer.js*/);
-		var NavigationPropTypes = __inner_require__(116 /*Libraries/NavigationExperimental/NavigationPropTypes.js*/);
+		var NavigationCardStackPanResponder = __inner_require__(127 /*Libraries/CustomComponents/NavigationExperimental/NavigationCardStackPanResponder.js*/);
+		var NavigationCardStackStyleInterpolator = __inner_require__(129 /*Libraries/CustomComponents/NavigationExperimental/NavigationCardStackStyleInterpolator.js*/);
+		var NavigationPagerPanResponder = __inner_require__(130 /*Libraries/CustomComponents/NavigationExperimental/NavigationPagerPanResponder.js*/);
+		var NavigationPagerStyleInterpolator = __inner_require__(131 /*Libraries/CustomComponents/NavigationExperimental/NavigationPagerStyleInterpolator.js*/);
+		var NavigationPointerEventsContainer = __inner_require__(132 /*Libraries/CustomComponents/NavigationExperimental/NavigationPointerEventsContainer.js*/);
+		var NavigationPropTypes = __inner_require__(134 /*Libraries/NavigationExperimental/NavigationPropTypes.js*/);
 		var React = require('react-native@0.37/Libraries/react-native/React.js');
 		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');var PropTypes = React.PropTypes;var NavigationCard = function (_React$Component) {
 			babelHelpers.inherits(NavigationCard, _React$Component);function NavigationCard() {
@@ -13069,10 +15127,10 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	}, // Libraries/CustomComponents/NavigationExperimental/NavigationCardStackPanResponder.js
 	function (__inner_require__, exports, module) {
 		var Animated = __inner_require__(12 /*Libraries/Animated/src/Animated.js*/);
-		var I18nManager = __inner_require__(45 /*Libraries/ReactNative/I18nManager.js*/);
-		var NavigationAbstractPanResponder = __inner_require__(110 /*Libraries/NavigationExperimental/NavigationAbstractPanResponder.js*/);
+		var I18nManager = __inner_require__(65 /*Libraries/ReactNative/I18nManager.js*/);
+		var NavigationAbstractPanResponder = __inner_require__(128 /*Libraries/NavigationExperimental/NavigationAbstractPanResponder.js*/);
 
-		var clamp = __inner_require__(60 /*Libraries/Utilities/clamp.js*/);
+		var clamp = __inner_require__(80 /*Libraries/Utilities/clamp.js*/);
 
 		var ANIMATION_DURATION = 250;
 
@@ -13200,7 +15258,7 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 			forVertical: forVertical };
 	}, // Libraries/NavigationExperimental/NavigationAbstractPanResponder.js
 	function (__inner_require__, exports, module) {
-		var PanResponder = __inner_require__(59 /*Libraries/Interaction/PanResponder.js*/);
+		var PanResponder = __inner_require__(79 /*Libraries/Interaction/PanResponder.js*/);
 
 		var invariant = require('fbjs@0.8/lib/invariant.js');
 
@@ -13226,7 +15284,7 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 		module.exports = NavigationAbstractPanResponder;
 	}, // Libraries/CustomComponents/NavigationExperimental/NavigationCardStackStyleInterpolator.js
 	function (__inner_require__, exports, module) {
-		var I18nManager = __inner_require__(45 /*Libraries/ReactNative/I18nManager.js*/);
+		var I18nManager = __inner_require__(65 /*Libraries/ReactNative/I18nManager.js*/);
 
 		function forInitial(props) {
 			var navigationState = props.navigationState,
@@ -13316,11 +15374,11 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	}, // Libraries/CustomComponents/NavigationExperimental/NavigationPagerPanResponder.js
 	function (__inner_require__, exports, module) {
 		var Animated = __inner_require__(12 /*Libraries/Animated/src/Animated.js*/);
-		var NavigationAbstractPanResponder = __inner_require__(110 /*Libraries/NavigationExperimental/NavigationAbstractPanResponder.js*/);
-		var NavigationCardStackPanResponder = __inner_require__(109 /*Libraries/CustomComponents/NavigationExperimental/NavigationCardStackPanResponder.js*/);
-		var I18nManager = __inner_require__(45 /*Libraries/ReactNative/I18nManager.js*/);
+		var NavigationAbstractPanResponder = __inner_require__(128 /*Libraries/NavigationExperimental/NavigationAbstractPanResponder.js*/);
+		var NavigationCardStackPanResponder = __inner_require__(127 /*Libraries/CustomComponents/NavigationExperimental/NavigationCardStackPanResponder.js*/);
+		var I18nManager = __inner_require__(65 /*Libraries/ReactNative/I18nManager.js*/);
 
-		var clamp = __inner_require__(60 /*Libraries/Utilities/clamp.js*/);var ANIMATION_DURATION = NavigationCardStackPanResponder.ANIMATION_DURATION,
+		var clamp = __inner_require__(80 /*Libraries/Utilities/clamp.js*/);var ANIMATION_DURATION = NavigationCardStackPanResponder.ANIMATION_DURATION,
 		    POSITION_THRESHOLD = NavigationCardStackPanResponder.POSITION_THRESHOLD,
 		    RESPOND_THRESHOLD = NavigationCardStackPanResponder.RESPOND_THRESHOLD,
 		    Directions = NavigationCardStackPanResponder.Directions;
@@ -13434,7 +15492,7 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 			forHorizontal: forHorizontal };
 	}, // Libraries/CustomComponents/NavigationExperimental/NavigationPagerStyleInterpolator.js
 	function (__inner_require__, exports, module) {
-		var I18nManager = __inner_require__(45 /*Libraries/ReactNative/I18nManager.js*/);
+		var I18nManager = __inner_require__(65 /*Libraries/ReactNative/I18nManager.js*/);
 
 		function forInitial(props) {
 			var navigationState = props.navigationState,
@@ -13480,7 +15538,7 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	}, // Libraries/CustomComponents/NavigationExperimental/NavigationPointerEventsContainer.js
 	function (__inner_require__, exports, module) {
 		var React = require('react-native@0.37/Libraries/react-native/React.js');
-		var NavigationAnimatedValueSubscription = __inner_require__(115 /*Libraries/CustomComponents/NavigationExperimental/NavigationAnimatedValueSubscription.js*/);
+		var NavigationAnimatedValueSubscription = __inner_require__(133 /*Libraries/CustomComponents/NavigationExperimental/NavigationAnimatedValueSubscription.js*/);
 
 		var invariant = require('fbjs@0.8/lib/invariant.js');
 
@@ -13642,11 +15700,11 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	}, // Libraries/CustomComponents/NavigationExperimental/NavigationCardStack.js
 	function (__inner_require__, exports, module) {
 		var NativeAnimatedModule = require('react-native@0.37/Libraries/BatchedBridge/NativeModules.js').NativeAnimatedModule;
-		var NavigationCard = __inner_require__(108 /*Libraries/CustomComponents/NavigationExperimental/NavigationCard.js*/);
-		var NavigationCardStackPanResponder = __inner_require__(109 /*Libraries/CustomComponents/NavigationExperimental/NavigationCardStackPanResponder.js*/);
-		var NavigationCardStackStyleInterpolator = __inner_require__(111 /*Libraries/CustomComponents/NavigationExperimental/NavigationCardStackStyleInterpolator.js*/);
-		var NavigationPropTypes = __inner_require__(116 /*Libraries/NavigationExperimental/NavigationPropTypes.js*/);
-		var NavigationTransitioner = __inner_require__(118 /*Libraries/NavigationExperimental/NavigationTransitioner.js*/);
+		var NavigationCard = __inner_require__(126 /*Libraries/CustomComponents/NavigationExperimental/NavigationCard.js*/);
+		var NavigationCardStackPanResponder = __inner_require__(127 /*Libraries/CustomComponents/NavigationExperimental/NavigationCardStackPanResponder.js*/);
+		var NavigationCardStackStyleInterpolator = __inner_require__(129 /*Libraries/CustomComponents/NavigationExperimental/NavigationCardStackStyleInterpolator.js*/);
+		var NavigationPropTypes = __inner_require__(134 /*Libraries/NavigationExperimental/NavigationPropTypes.js*/);
+		var NavigationTransitioner = __inner_require__(136 /*Libraries/NavigationExperimental/NavigationTransitioner.js*/);
 		var React = require('react-native@0.37/Libraries/react-native/React.js');
 		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
 		var View = require('react-native@0.37/Libraries/Components/View/View.js');var PropTypes = React.PropTypes;var Directions = NavigationCardStackPanResponder.Directions;var NavigationCardStack = function (_React$Component) {
@@ -13714,8 +15772,8 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	function (__inner_require__, exports, module) {
 		var Animated = __inner_require__(12 /*Libraries/Animated/src/Animated.js*/);
 		var Easing = __inner_require__(20 /*Libraries/Animated/src/Easing.js*/);
-		var NavigationPropTypes = __inner_require__(116 /*Libraries/NavigationExperimental/NavigationPropTypes.js*/);
-		var NavigationScenesReducer = __inner_require__(119 /*Libraries/NavigationExperimental/Reducer/NavigationScenesReducer.js*/);
+		var NavigationPropTypes = __inner_require__(134 /*Libraries/NavigationExperimental/NavigationPropTypes.js*/);
+		var NavigationScenesReducer = __inner_require__(137 /*Libraries/NavigationExperimental/Reducer/NavigationScenesReducer.js*/);
 		var React = require('react-native@0.37/Libraries/react-native/React.js');
 		var StyleSheet = require('react-native@0.37/Libraries/StyleSheet/StyleSheet.js');
 		var View = require('react-native@0.37/Libraries/Components/View/View.js');var PropTypes = React.PropTypes;
@@ -14000,10 +16058,10 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 	function (__inner_require__, exports, module) {
 		var React = require('react-native@0.37/Libraries/react-native/React.js');
 		var ReactNative = require('react-native@0.37/Libraries/react-native/react-native.js');
-		var NavigationHeaderTitle = __inner_require__(121 /*Libraries/CustomComponents/NavigationExperimental/NavigationHeaderTitle.js*/);
-		var NavigationHeaderBackButton = __inner_require__(122 /*Libraries/CustomComponents/NavigationExperimental/NavigationHeaderBackButton.js*/);
-		var NavigationPropTypes = __inner_require__(116 /*Libraries/NavigationExperimental/NavigationPropTypes.js*/);
-		var NavigationHeaderStyleInterpolator = __inner_require__(123 /*Libraries/CustomComponents/NavigationExperimental/NavigationHeaderStyleInterpolator.js*/);
+		var NavigationHeaderTitle = __inner_require__(139 /*Libraries/CustomComponents/NavigationExperimental/NavigationHeaderTitle.js*/);
+		var NavigationHeaderBackButton = __inner_require__(140 /*Libraries/CustomComponents/NavigationExperimental/NavigationHeaderBackButton.js*/);
+		var NavigationPropTypes = __inner_require__(134 /*Libraries/NavigationExperimental/NavigationPropTypes.js*/);
+		var NavigationHeaderStyleInterpolator = __inner_require__(141 /*Libraries/CustomComponents/NavigationExperimental/NavigationHeaderStyleInterpolator.js*/);
 		var ReactComponentWithPureRenderMixin = require('react@15.3/lib/ReactComponentWithPureRenderMixin.js');var Animated = ReactNative.Animated,
 		    Platform = ReactNative.Platform,
 		    StyleSheet = ReactNative.StyleSheet,
@@ -14169,7 +16227,7 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 		module.exports = NavigationHeaderBackButton;
 	}, // Libraries/CustomComponents/NavigationExperimental/NavigationHeaderStyleInterpolator.js
 	function (__inner_require__, exports, module) {
-		var I18nManager = __inner_require__(45 /*Libraries/ReactNative/I18nManager.js*/);
+		var I18nManager = __inner_require__(65 /*Libraries/ReactNative/I18nManager.js*/);
 
 		function forLeft(props) {
 			var position = props.position,
@@ -14811,5 +16869,12 @@ __d("react-native@0.37/Libraries/react-native/react-native.js", ["fbjs@0.8/lib/w
 			} };
 
 		module.exports = VibrationIOS;
+	}, // Libraries/Utilities/throwOnWrongReactAPI.js
+	function (__inner_require__, exports, module) {
+		function throwOnWrongReactAPI(key) {
+			throw new Error('Seems you\'re trying to access \'ReactNative.' + key + '\' from the \'react-native\' package. Perhaps you meant to access \'React.' + key + '\' from the \'react\' package instead?\n\nFor example, instead of:\n\n  import React, { Component, View } from \'react-native\';\n\nYou should now do:\n\n  import React, { Component } from \'react\';\n  import { View } from \'react-native\';\n\nCheck the release notes on how to upgrade your code - https://github.com/facebook/react-native/releases/tag/v0.25.1\n');
+		}
+
+		module.exports = throwOnWrongReactAPI;
 	}];
 });

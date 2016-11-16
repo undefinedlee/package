@@ -21,6 +21,9 @@ __d("react-native@0.37/Libraries/vendor/core/Map.js", ["react-native@0.37/Librar
 			var KEY_PREFIX = '$map_';
 
 			var SECRET_SIZE_PROP;
+			if (__DEV__) {
+				SECRET_SIZE_PROP = '$size' + guid();
+			}
 
 			var OLD_IE_HASH_PREFIX = 'IE_HASH_';var Map = function () {
 
@@ -55,7 +58,9 @@ __d("react-native@0.37/Libraries/vendor/core/Map.js", ["react-native@0.37/Librar
 						} else {
 							index = this._mapData.push([key, value]) - 1;
 							setIndex(this, key, index);
-							{
+							if (__DEV__) {
+								this[SECRET_SIZE_PROP] += 1;
+							} else {
 								this.size += 1;
 							}
 						}
@@ -73,7 +78,9 @@ __d("react-native@0.37/Libraries/vendor/core/Map.js", ["react-native@0.37/Librar
 						if (index != null && this._mapData[index]) {
 							setIndex(this, key, undefined);
 							this._mapData[index] = undefined;
-							{
+							if (__DEV__) {
+								this[SECRET_SIZE_PROP] -= 1;
+							} else {
 								this.size -= 1;
 							}
 							return true;
@@ -211,6 +218,31 @@ __d("react-native@0.37/Libraries/vendor/core/Map.js", ["react-native@0.37/Librar
 				map._stringIndex = {};
 
 				map._otherIndex = {};
+
+				if (__DEV__) {
+					if (isES5) {
+
+						if (map.hasOwnProperty(SECRET_SIZE_PROP)) {
+							map[SECRET_SIZE_PROP] = 0;
+						} else {
+							Object.defineProperty(map, SECRET_SIZE_PROP, {
+								value: 0,
+								writable: true });
+
+							Object.defineProperty(map, 'size', {
+								set: function set(v) {
+									console.error('PLEASE FIX ME: You are changing the map size property which ' + 'should not be writable and will break in production.');
+
+									throw new Error('The map size property is not writable.');
+								},
+								get: function get() {
+									return map[SECRET_SIZE_PROP];
+								} });
+						}
+
+						return;
+					}
+				}
 
 				map.size = 0;
 			}

@@ -127,39 +127,39 @@ code = babel.transform(code, {
 	plugins: [function({types: t}){
 		return {
 			visitor: {
-				// 移除__DEV__判断分支
-				IfStatement: {
-					enter(path){
-						let node = path.node;
-						if(node.test.type === "Identifier" &&
-							node.test.name === "__DEV__"){
-							if(node.alternate){
-								path.replaceWith(node.alternate);
-							}else{
-								path.remove();
-							}
-						}else if(node.test.type === "UnaryExpression" &&
-							node.test.operator === "!" &&
-							node.test.argument.type === "Identifier" &&
-							node.test.argument.name === "__DEV__"){
-							path.replaceWith(node.consequent);
-						}
-					}
-				},
-				// 移除__DEV__判断三元运算
-				ConditionalExpression: {
-					enter(path){
-						let node = path.node;
-						if(node.test.type === "Identifier" &&
-							node.test.name === "__DEV__"){
-							if(node.alternate){
-								path.replaceWith(node.alternate);
-							}else{
-								path.remove();
-							}
-						}
-					}
-				},
+				// // 移除__DEV__判断分支
+				// IfStatement: {
+				// 	enter(path){
+				// 		let node = path.node;
+				// 		if(node.test.type === "Identifier" &&
+				// 			node.test.name === "__DEV__"){
+				// 			if(node.alternate){
+				// 				path.replaceWith(node.alternate);
+				// 			}else{
+				// 				path.remove();
+				// 			}
+				// 		}else if(node.test.type === "UnaryExpression" &&
+				// 			node.test.operator === "!" &&
+				// 			node.test.argument.type === "Identifier" &&
+				// 			node.test.argument.name === "__DEV__"){
+				// 			path.replaceWith(node.consequent);
+				// 		}
+				// 	}
+				// },
+				// // 移除__DEV__判断三元运算
+				// ConditionalExpression: {
+				// 	enter(path){
+				// 		let node = path.node;
+				// 		if(node.test.type === "Identifier" &&
+				// 			node.test.name === "__DEV__"){
+				// 			if(node.alternate){
+				// 				path.replaceWith(node.alternate);
+				// 			}else{
+				// 				path.remove();
+				// 			}
+				// 		}
+				// 	}
+				// },
 				// 压缩非对外暴露模块的模块ID
 				CallExpression(path){
 					let node = path.node;
