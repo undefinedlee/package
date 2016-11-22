@@ -78,7 +78,7 @@ async function start(projectPath, output, packageJson, config, version, callback
 				extensionFileHash: extensionFileHash
 			}));
 
-			var imageSpriteModId = await createImageSprite(loader.base64Images, projectOutput, packageName);
+			var imageSpriteModId = await createImageSprite(loader.base64Images, projectOutput, packageName, config.useVersion, projectInfo, plugin);
 
 			await plugin.task("before-parse-single", Object.assign(projectInfo, {
 				entries: entries
