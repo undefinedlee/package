@@ -249,6 +249,7 @@ function updatePackageInfo(output, modId, version, entries){
  */
 var plugins = [];
 var presets;
+var extensions;
 var useVersion;
 export default function main(projectPath, version, output, callback, options){
 	options = options || {};
@@ -323,9 +324,13 @@ export default function main(projectPath, version, output, callback, options){
 		config.plugins = plugins;
 		config.useVersion = useVersion;
 		config.presets = presets;
+		if(!config.extensions){
+			config.extensions = extensions;
+		}
 	}else{
 		plugins = config.plugins;
 		presets = config.presets;
+		extensions = config.extensions;
 		useVersion = config.useVersion = config.useVersion === false ? false : true;
 	}
 
