@@ -26,6 +26,7 @@ function imageLoader(content){
 	}else{
 		defaultPixelRatio = 3;
 	}
+	filename = filename.replace(/@(\d+)x$/, "");
 
 	const limit = this.params.limit || 0;
 	const outputPath = this.output;

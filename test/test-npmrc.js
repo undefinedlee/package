@@ -3,7 +3,7 @@ import path from "path";
 
 const registryKey = "registry";
 const registryUrl = "https://registry.npm.taobao.org";
-const checkRegex = new RegExp(registryKey + "\\s*=\\s*" + registryUrl.replace(/([\/\.])/g, "\\$1"));
+const checkRegex = new RegExp("(^|\\n)\\s*" + registryKey + "\\s*=\\s*" + registryUrl.replace(/([\/\.])/g, "\\$1"));
 const multipleLine = /\n+/g;
 
 function checkRegistry(content){
@@ -38,7 +38,7 @@ function removeRegistry(file){
 
 if(process.env.HOME){
 	let file = path.join(process.env.HOME, ".npmrc");
-	let result = addRegistry(file);
-	console.log(result);
-	// removeRegistry(file);
+	// let result = addRegistry(file);
+	// console.log(result);
+	removeRegistry(file);
 }
