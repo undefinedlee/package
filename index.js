@@ -134,43 +134,50 @@ async function start(projectPath, output, packageJson, config, version, callback
 					versionHash: versionHash
 				}));
 
-				let depsProjects = {};
-				let currentProjectName = packageJson.name;
-				for(let key in depsHash){
-					depsHash[key].forEach(file => {
-						file = file.split("@");
+				var tasks = [];
 
-						let projectName = file[0];
+				// 打包依赖
+				if(config.packageDeps !== false){
+					let depsProjects = {};
+					let currentProjectName = packageJson.name;
+					for(let key in depsHash){
+						depsHash[key].forEach(file => {
+							file = file.split("@");
 
-						let path = file[1];
-						path = path.slice(path.indexOf("/") + 1);
+							let projectName = file[0];
 
-						if(projectName !== currentProjectName){
-							if(depsProjects[projectName]){
-								if(depsProjects[projectName].indexOf(path) === -1){
-									depsProjects[projectName].push(path);
+							let path = file[1];
+							path = path.slice(path.indexOf("/") + 1);
+
+							if(projectName !== currentProjectName){
+								if(depsProjects[projectName]){
+									if(depsProjects[projectName].indexOf(path) === -1){
+										depsProjects[projectName].push(path);
+									}
+								}else{
+									depsProjects[projectName] = [path];
 								}
-							}else{
-								depsProjects[projectName] = [path];
 							}
-						}
+						});
+					}
+
+					let ignoreProjects = config.ignoreProjects || [];
+
+					tasks = Object.keys(depsProjects).filter(projectName => ignoreProjects.indexOf(projectName) === -1).map(projectName => {
+						return function(callback){
+							var depProjectPath = findNodeModules(projectPath, projectName);
+							if(depProjectPath){
+								main(depProjectPath, projectDeps(packageJson)[projectName], output, callback, {
+									isInner: true,
+									entries: depsProjects[projectName]
+								});
+							}else{
+								console.warn(`从${projectPath}找不到依赖的模块${projectName}`);
+								callback();
+							}
+						};
 					});
 				}
-
-				var tasks = Object.keys(depsProjects).map(projectName => {
-					return function(callback){
-						var depProjectPath = findNodeModules(projectPath, projectName);
-						if(depProjectPath){
-							main(depProjectPath, projectDeps(packageJson)[projectName], output, callback, {
-								isInner: true,
-								entries: depsProjects[projectName]
-							});
-						}else{
-							console.warn(`从${projectPath}找不到依赖的模块${projectName}`);
-							callback();
-						}
-					};
-				});
 
 				if(config.useVersion){
 					tasks.push(function(callback){

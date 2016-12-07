@@ -18,7 +18,7 @@ function imageLoader(content){
 	const callback = this.async();
 	const dirname = path.dirname(this.file);
 	const ext = path.extname(this.file);
-	const filename = path.basename(this.file, ext);
+	var filename = path.basename(this.file, ext);
 
 	var defaultPixelRatio = filename.match(/@(\d+)x$/);
 	if(defaultPixelRatio){
