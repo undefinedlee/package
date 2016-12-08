@@ -48,7 +48,9 @@ const defaultLoaders = [{
 	loader: {
 		loader: "image",
 		params: {
-			limit: 8000
+			limit: 8000,
+			pixelRatios: [1, 2, 3],
+			defaultPixelRatios: 2
 		}
 	}
 }];

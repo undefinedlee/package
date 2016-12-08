@@ -11,10 +11,11 @@ const tpl = fs.readFileSync(path.resolve(__dirname, "index.tpl"), {
 				encoding: "utf8"
 			});
 
-// 目前支持加载1:1、1:2、1:3三种像素比的图片加载，高于1:3的设备，使用1:3的图片
-const pixelRatios = [1, 2, 3];
-
 function imageLoader(content){
+	const limit = this.params.limit || 0;
+	const pixelRatios = this.params.pixelRatios || [1, 2, 3];
+	const defaultPixelRatios = this.params.defaultPixelRatios || 2;
+
 	const callback = this.async();
 	const dirname = path.dirname(this.file);
 	const ext = path.extname(this.file);
@@ -24,14 +25,18 @@ function imageLoader(content){
 	if(defaultPixelRatio){
 		defaultPixelRatio = +defaultPixelRatio[1];
 	}else{
-		defaultPixelRatio = 3;
+		defaultPixelRatio = defaultPixelRatios;
 	}
 	filename = filename.replace(/@(\d+)x$/, "");
-
-	const limit = this.params.limit || 0;
 	const outputPath = this.output;
 	const base64ImageSpriteModId = constConfig.base64ImageSpriteModId;
 	var base64Images = this.base64Images;
+
+	pixelRatios.forEach(pixelRatio => {
+		if(!base64Images[pixelRatio]){
+			base64Images[pixelRatio] = {};
+		}
+	});
 
 	asyncList(pixelRatios.map(pixelRatio => {
 		return function(callback){
@@ -40,9 +45,6 @@ function imageLoader(content){
 					content = content.toString("base64");
 					let fileMd5Name = md5(content) + ext;
 
-					if(!base64Images[pixelRatio]){
-						base64Images[pixelRatio] = {};
-					}
 					base64Images[pixelRatio][fileMd5Name] = "data:image/" + ext.replace(".", "") + ";base64," + content;
 
 					callback({
