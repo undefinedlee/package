@@ -50,7 +50,7 @@ const defaultLoaders = [{
 		params: {
 			limit: 8000,
 			pixelRatios: [1, 2, 3],
-			defaultPixelRatios: 2
+			defaultPixelRatio: 2
 		}
 	}
 }];

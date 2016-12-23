@@ -14,7 +14,6 @@ const tpl = fs.readFileSync(path.resolve(__dirname, "index.tpl"), {
 function imageLoader(content){
 	const limit = this.params.limit || 0;
 	const pixelRatios = this.params.pixelRatios || [1, 2, 3];
-	const defaultPixelRatios = this.params.defaultPixelRatios || 2;
 
 	const callback = this.async();
 	const dirname = path.dirname(this.file);
@@ -25,7 +24,7 @@ function imageLoader(content){
 	if(defaultPixelRatio){
 		defaultPixelRatio = +defaultPixelRatio[1];
 	}else{
-		defaultPixelRatio = defaultPixelRatios;
+		defaultPixelRatio = this.params.defaultPixelRatio || pixelRatios[pixelRatios.length - 1];
 	}
 	filename = filename.replace(/@(\d+)x$/, "");
 	const outputPath = this.output;
