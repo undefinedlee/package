@@ -56,6 +56,10 @@ const defaultLoaders = [{
 }];
 
 export default async function(configLoaders, projectInfo, plugin){
+	var hooks = [];
+	if(projectInfo.config.hooks && projectInfo.config.hooks.file){
+		hooks = projectInfo.config.hooks.file;
+	}
 	// 当前可使用的所有加载器
 	// 用户自定义的加载器优先级高于默认加载器
 	var loaders = [].concat((configLoaders || []).reverse(), defaultLoaders.reverse());
@@ -182,13 +186,49 @@ export default async function(configLoaders, projectInfo, plugin){
 		}; 
 
 		if(fs.existsSync(file)){
-			fs.readFile(file, null, function(err, content){
-				if(err){
-					throw err;
-				}
+			let hook = hooks.find(hook => typeof hook.test === "string" ? file.indexOf(hook.test) !== -1 : hook.test.test(file));
+			if(hook){
+				if(typeof hook.content === "function"){
+					// 如果hook.content是一个函数，则采用依赖注入的方式传递参数
+					let args;
+					if(hook.params){
+						args = hook.params;
+					}else{
+						args = hook.content.toString().match(/^function\s*([^\(]+)?\(([^\)]*)\)/);
+						if(args && (args = args[2].trim())){
+							args = args[1].split(",").map(item => item.trim());
+						}else{
+							args = [];
+						}
+					}
 
-				loadFile(content);
-			});
+					args = args.map(item => {
+						switch(item){
+							case "file":
+								return file;
+							case "content":
+								if(hook.raw){
+									return fs.readFileSync(file);
+								}else{
+									return fs.readFileSync(file).toString("utf8");
+								}
+						}
+						return null;
+					});
+
+					loadFile(hook.content.apply(hook, args));
+				}else{
+					loadFile(hook.content);
+				}
+			}else{
+				fs.readFile(file, null, function(err, content){
+					if(err){
+						throw err;
+					}
+
+					loadFile(content);
+				});
+			}
 		}else{
 			if(/^\.(png|jpg|jpeg|gif)$/.test(path.extname(file))){
 				console.warn(`找不到文件${file}`);

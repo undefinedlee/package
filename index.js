@@ -258,6 +258,7 @@ var plugins = [];
 var presets;
 var extensions;
 var useVersion;
+var hooks;
 export default function main(projectPath, version, output, callback, options){
 	options = options || {};
 
@@ -334,11 +335,13 @@ export default function main(projectPath, version, output, callback, options){
 		if(!config.extensions){
 			config.extensions = extensions;
 		}
+		config.hooks = hooks;
 	}else{
 		plugins = config.plugins;
 		presets = config.presets;
 		extensions = config.extensions;
 		useVersion = config.useVersion = config.useVersion === false ? false : true;
+		hooks = config.hooks;
 	}
 
 	// 输出目录
