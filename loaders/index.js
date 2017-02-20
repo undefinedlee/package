@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import jsLoader from "./js-loader/index";
+import cssLoader from "./css-loader/index";
 import babelLoader from "./babel-loader/index";
 import enjoyCssLoader from "./enjoy-css-loader/index";
 import enjoyHtmlLoader from "./enjoy-html-loader/index";
@@ -12,6 +13,7 @@ import console from "../util/console";
 
 const defaultLoaderHash = {
 	"js": jsLoader,
+	"css": cssLoader,
 	"babel": babelLoader,
 	"enjoy-css": enjoyCssLoader,
 	"enjoy-html": enjoyHtmlLoader,
@@ -25,6 +27,22 @@ const defaultLoaders = [{
 	// 处理普通的JS文件
 	test: /\.js$/,
 	loader: ["babel", "js"]
+}, {
+	// 处理普通的CSS文件
+	test: /\.css$/,
+	loader: [{
+		loader: "css",
+		params: {
+			browsers: [
+				"ChromeAndroid >= 30"
+				,"iOS >= 6"
+				,"and_uc >= 10"
+				,"Samsung >= 3.3"
+				,"Android >= 4.0"
+				,"and_ff >= 6.0"
+			]
+		}
+	}]
 }, {
 	// 处理enjoy转换的css文件
 	test: /\-css\.js$/,
