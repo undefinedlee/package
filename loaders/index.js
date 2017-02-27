@@ -124,7 +124,8 @@ export default async function(configLoaders, projectInfo, plugin){
 
 	var base64Images = {};
 
-	function loader(file, callback){
+	function loader(file, options, callback){
+		options = options || {};
 		// 查找可处理file文件的第一个加载器配置
 		var loader = loaders.find(function(loader){
 			return loader.test.test(file);
@@ -137,6 +138,11 @@ export default async function(configLoaders, projectInfo, plugin){
 		}
 
 		var loadFile = async function(content){
+			if(options.raw){
+				callback(content);
+				return;
+			}
+
 			await plugin.task("before-loader", Object.assign({}, projectInfo, {
 				file: file,
 				content: content,

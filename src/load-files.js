@@ -50,9 +50,9 @@ export default function(files, extensions, loader, config, callback){
 					depChains: [depChain]
 				};
 
-				loader(file, function(content){
+				loader(file, null, function(content){
 					// 如果有预设信息，则移除在预设信息条件下不会执行到的条件分支
-					if(config.presets){
+					if(!process.env.SM && config.presets){
 						content = utils.removeInvalid(content, config.presets);
 					}
 

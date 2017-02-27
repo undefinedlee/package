@@ -8,7 +8,7 @@ import createVersion from "../create-version";
 import mkdirs from "../../util/mkdirs";
 import console from "../../util/console";
 import constConfig from "../const";
-import { overWriteJoin } from '../../util/source-map-generator';
+import { overWriteJoin as join } from 'enjoy-source-map';
 
 // 替换开头的分隔符
 var prefixSepReg = new RegExp("^\\" + path.sep);
@@ -185,7 +185,7 @@ export default async function(file, projectConfig, singleFiles, loadCache, exten
             project: packageName,
             path: file,
             version: "__mod_version_placeholder__",
-            mods: process.env.SM ? overWriteJoin(codes) : codes.join(",\n")
+            mods: join(codes)
         });
     }
 
