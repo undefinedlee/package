@@ -1,1 +1,0 @@
-loader.define("core-js@2","modules/_property-desc.js","d",function(e,r,n,o,t,u,c){"use strict";return[function(e,r,n){n.exports=function(e,r){return{enumerable:!(1&e),configurable:!(2&e),writable:!(4&e),value:r}}}]});

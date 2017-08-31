@@ -1,1 +1,0 @@
-loader.define("core-js@2","modules/_is-object.js","i",function(e,n,o,t,r,u,f){"use strict";return[function(e,n,o){o.exports=function(e){return"object"===("undefined"==typeof e?"undefined":babelHelpers.typeof(e))?null!==e:"function"==typeof e}}]});

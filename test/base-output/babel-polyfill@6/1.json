@@ -1,7 +1,0 @@
-{
-	"lib/index.js": [
-		"core-js@2/shim.js",
-		"regenerator-runtime@0.9/runtime.js",
-		"core-js@2/fn/regexp/escape.js"
-	]
-}

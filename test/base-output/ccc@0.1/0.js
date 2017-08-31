@@ -1,1 +1,0 @@
-loader.define("ccc@0.1","index.js","0",function(c,e,n,o,r,i,t){"use strict";return[function(c,e,n){n.exports="ccc"}]});

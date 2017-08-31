@@ -1,0 +1,1 @@
+{"files":[{"file":"enjoy-bundle-test-base-project@0.1.0/components/calendar/index.js","md5":"18b0986f9efa6e41b13baa7e9cc49925d1f3324f","deps":[],"asyncDeps":[]},{"file":"enjoy-bundle-test-base-project@0.1.0/views/home/index.js","md5":"0456aa37fd5039b6d7130b6f00f219e8000d4600","deps":[],"asyncDeps":["enjoy-bundle-test-base-project@0.1.0/components/calendar/index.js"]}]}

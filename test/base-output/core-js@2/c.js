@@ -1,1 +1,0 @@
-loader.define("core-js@2","modules/_fails.js","c",function(e,r,n,t,o,c,s){"use strict";return[function(e,r,n){n.exports=function(e){try{return!!e()}catch(e){return!0}}}]});

@@ -1,1 +1,0 @@
-loader.define("core-js@2","modules/_dom-create.js","j",function(e,o,r,t,s,c,n){"use strict";return[function(o,r,t){var s=e("core-js@2/modules/_is-object.js"),c=e("core-js@2/modules/_global.js").document,n=s(c)&&s(c.createElement);t.exports=function(e){return n?c.createElement(e):{}}}]});

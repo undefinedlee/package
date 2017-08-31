@@ -1,1 +1,0 @@
-loader.define("core-js@2","modules/_ie8-dom-define.js","f",function(e,o,r,s,n,t,d){"use strict";return[function(o,r,s){s.exports=!e("core-js@2/modules/_descriptors.js")&&!e("core-js@2/modules/_fails.js")(function(){return 7!=Object.defineProperty(e("core-js@2/modules/_dom-create.js")("div"),"a",{get:function(){return 7}}).a})}]});

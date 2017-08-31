@@ -1,8 +1,0 @@
-{
-	"core/path.js": [
-		"art@0.10/core/class.js"
-	],
-	"core/transform.js": [
-		"art@0.10/core/class.js"
-	]
-}

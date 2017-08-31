@@ -1,1 +1,0 @@
-loader.define("core-js@2","modules/_an-object.js","g",function(e,o,r,n,t,s,c){"use strict";return[function(o,r,n){var t=e("core-js@2/modules/_is-object.js");n.exports=function(e){if(!t(e))throw TypeError(e+" is not an object!");return e}}]});

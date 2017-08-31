@@ -1,1 +1,0 @@
-loader.define("aaa@6","index.js","0",function(e,a,n,o,r,i,t){"use strict";return[function(e,a,n){n.exports="aaa"}]});

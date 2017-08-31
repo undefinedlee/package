@@ -1,0 +1,11 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url(./pic/bg.jpeg);
+}
+.welcome{
+    font-size: 60px;
+    font-weight: 100;
+    color: #999;
+}

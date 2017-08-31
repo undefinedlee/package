@@ -1,1 +1,0 @@
-loader.define("core-js@2","modules/_core.js","2",function(e,o,r,_,n,s,t){"use strict";return[function(e,o,r){var _=r.exports={version:"2.4.0"};"number"==typeof __e&&(__e=_)}]});
