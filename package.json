@@ -1,21 +1,21 @@
 {
-  "name": "enjoy-bundle",
-  "version": "0.2.0-alpha.6",
+  "name": "bundle",
+  "version": "0.1.0",
   "description": "bundle",
   "main": "dist/index.js",
   "scripts": {
-    "prepublish": "node build.js"
+    "postinstall": "node build.js"
   },
   "repository": {
     "type": "git",
-    "url": "git@code.corp.elong.com:enjoy/bundle.git"
+    "url": "https://github.com/undefinedlee/package.git"
   },
-  "author": "fan.li@corp.elong.com",
+  "author": "0@00010101.com",
   "license": "ISC",
   "bugs": {
-    "url": "http://code.corp.elong.com/enjoy/bundle/issues"
+    "url": "https://github.com/undefinedlee/package/issues"
   },
-  "homepage": "http://code.corp.elong.com/enjoy/bundle#readme",
+  "homepage": "https://github.com/undefinedlee/package#readme",
   "dependencies": {
     "babel-core": "^6.26.0",
     "cli-console": "^0.1.0",
